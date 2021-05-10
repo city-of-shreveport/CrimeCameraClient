@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
-
+import { CamerasDataContext } from "./context";
 class CameraList1 extends Component {
+  
   constructor() {
     super();
     this.state = { cameras: [] };
   }
 
   componentDidMount() {
-    fetch('http://10.10.10.55:3001/cameras/cameraList')
+      fetch('http://10.10.10.55:3001/cameras/cameraList')
       .then((response) => response.json())
       .then((json) => this.setState({ cameras: json }));
   }
