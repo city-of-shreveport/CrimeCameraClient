@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+
+
+
 class CameraList2 extends Component {
   constructor() {
     super();
@@ -15,13 +18,15 @@ class CameraList2 extends Component {
   render() {
     return (
       <div>
-        <ul>
-          {this.state.cameras.map((camera) => (
-            <li key={camera.nodeName}>
-              {camera.lat} {camera.lng} {camera.camsOnlineStatus.cam1.toString()}
-            </li>
-          ))}
-        </ul>
+
+        
+            
+              
+         
+         
+        
+
+
       </div>
     );
   }

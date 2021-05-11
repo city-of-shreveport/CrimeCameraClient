@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
-import { CamerasDataContext } from "./context";
-
-
+import ListGroup from 'react-bootstrap/ListGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 class CameraList1 extends Component {
-  
   constructor() {
     super();
     this.state = { cameras: [] };
   }
 
   componentDidMount() {
-      fetch('http://10.10.10.55:3001/cameras/cameraList')
+    fetch('http://10.10.10.55:3001/cameras/cameraList')
       .then((response) => response.json())
       .then((json) => this.setState({ cameras: json }));
   }
@@ -19,12 +18,30 @@ class CameraList1 extends Component {
   render() {
     return (
       <div>
-        <ul>
           {this.state.cameras.map((camera) => (
-            <li key={camera.nodeName}>{<Moment format="MM/DD/YYYY @ HH:MM">{camera.lastCheckIn}</Moment>}</li>
+            <Dropdown>
+            <Dropdown.Toggle variant="" id="dropdown-basic" >
+              {camera.nodeName}
+            </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Card border="primary" style={{ width: '18rem' }}>
+                  <Card.Title> {camera.nodeName}</Card.Title>
+                  <Card.Body>
+                    
+                    <Card.Text>
+                       <p>IP: {camera.ip}</p>
+                       <p>Location:</p>
+                       <p>Notes:</p>
+
+                    </Card.Text>
+                    
+                  </Card.Body>
+                </Card>
+                </Dropdown.Menu>
+          </Dropdown>
           ))}
-        </ul>
-      </div>
+        </div >
     );
   }
 }
