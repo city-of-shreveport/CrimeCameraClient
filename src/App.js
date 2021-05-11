@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import CameraList1 from './CameraList1';
 import CameraList2 from './CameraList2';
 
-import { CamerasDataContext } from "./context";
 
 import './App.css';
+
+
+
 
 class App extends Component {
   constructor() {
@@ -13,10 +15,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    
     fetch('http://10.10.10.55:3001/cameras/cameraList')
       .then((response) => response.json())
-      .then((json) => this.State({ cameras: json }));
+      .then((json) => this.setState({ cameras: json }));
       
          
 
@@ -25,6 +26,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+     
         <CameraList1 />
         <CameraList2 />
       </React.Fragment>
