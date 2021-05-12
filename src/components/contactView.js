@@ -1,17 +1,15 @@
-import ContactForm from './contactForm';
-import ContactTable from './contactTable';
+import ContactForm from '../components/contactForm';
+import ContactTable from '../components/contactTable';
 import React from 'react';
-import { ContactContextProvider } from '../contexts/contactContext';
+
 import { Segment, Header } from 'semantic-ui-react';
 
-export default function Contacts() {
+export default function ContactView() {
   return (
-    <ContactContextProvider>
-      <Segment basic>
-        <Header as="h3">Contacts</Header>
-        <ContactForm />
-        <ContactTable />
-      </Segment>
-    </ContactContextProvider>
+    <Segment basic>
+      <Header as="h3">Contacts</Header>
+      <ContactForm />
+      <ContactTable />
+    </Segment>
   );
 }

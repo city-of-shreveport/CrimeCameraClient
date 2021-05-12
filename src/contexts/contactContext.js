@@ -3,7 +3,20 @@ import React, { useReducer, createContext } from 'react';
 export const ContactContext = createContext();
 
 const initialState = {
-  cameras: [],
+  todos: [
+    {
+      userId: 2,
+      id: 2,
+      title: 'delectus aut autem',
+      completed: false,
+    },
+    {
+      userId: 3,
+      id: 3,
+      title: 'delectus aut autem',
+      completed: false,
+    },
+  ],
   contacts: [
     {
       id: '098',
@@ -27,9 +40,9 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_CAMS':
+    case 'ADD_TODO':
       return {
-        cameras: [...state.cameras, action.payload],
+        todos: [...state.todos, action.payload],
       };
     case 'ADD_CONTACT':
       return {

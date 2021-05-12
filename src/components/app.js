@@ -1,28 +1,21 @@
-import '../css/app.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'video-react/dist/video-react.css';
-import CameraList1 from './cameraList1';
-import ContactView from './contactView';
-import React, { Component } from 'react';
+import 'fomantic-ui-css/semantic.min.css';
+import CameraList1 from '../components/cameraList1';
+import ContactView from '../components/contactView';
+import React from 'react';
+import { ContactContextProvider } from '../contexts/contactContext';
 import { Container } from 'semantic-ui-react';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  componentDidMount() {}
-
-  render() {
-    return (
-      <Container>
-        <h1>React Hooks Context Demo</h1>
+export default function App() {
+  return (
+    <Container>
+      <h1>React Hooks Context Demo</h1>
+      <ContactContextProvider>
         <ContactView />
-        <CameraList1 />
-      </Container>
-    );
-  }
-}
+      </ContactContextProvider>
 
-export default App;
+      <ContactContextProvider>
+        <CameraList1 />
+      </ContactContextProvider>
+    </Container>
+  );
+}

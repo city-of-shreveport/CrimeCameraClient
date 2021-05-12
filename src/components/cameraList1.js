@@ -3,32 +3,32 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ContactContext } from '../contexts/contactContext';
 
 export default function CameraList1() {
   const [state, dispatch] = useContext(ContactContext);
 
-  fetch('http://10.10.10.55:3001/cameras/cameraList')
-    .then((response) => response.json())
-    .then((json) => onSubmit(json));
-
-  const onSubmit = (data) => {
-    dispatch({
-      type: 'ADD_CAM',
-      payload: { data },
-    });
-  };
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: 'ADD_TODO',
+          payload: json,
+        });
+      });
+  }, []);
 
   return (
     <div>
       <Accordion defaultActiveKey="0">
-        {this.state.cameras.map((camera) => (
+        {state.todos.map((todo) => (
           <Card>
-            <Accordion.Toggle as={Card.Header} eventKey={camera.nodeName} variant="dark">
-              {camera.nodeName}
+            <Accordion.Toggle as={Card.Header} eventKey={todo.userId} variant="dark">
+              {todo.userId}
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey={camera.nodeName}>
+            <Accordion.Collapse eventKey={todo.userId}>
               <Card.Body>
                 <ListGroup>
                   <ListGroup.Item variant="dark">Camera Name:</ListGroup.Item>
