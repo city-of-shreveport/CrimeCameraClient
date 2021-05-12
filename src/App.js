@@ -1,4 +1,4 @@
-import React, { Component,useState, useContext,useEffect  } from 'react';
+import React, { Component } from 'react';
 
 import ContactView from "./views/contact-view";
 import { Container } from "semantic-ui-react";
