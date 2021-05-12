@@ -3,6 +3,7 @@ import React, { useReducer, createContext } from 'react';
 export const ContactContext = createContext();
 
 const initialState = {
+  cams:[],
   todos: [
     {
       userId: 2,
@@ -39,7 +40,12 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
+  
   switch (action.type) {
+    case 'ADD_CAMS':
+      return {
+        cams: action.payload,
+      };
     case 'ADD_TODO':
       return {
         todos: [...state.todos, action.payload],
