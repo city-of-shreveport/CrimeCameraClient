@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-
+import ListGroup from 'react-bootstrap/ListGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -18,16 +21,30 @@ class CameraList2 extends Component {
   render() {
     return (
       <div>
+          {this.state.cameras.map((camera) => (
+            <Dropdown>
+            <Dropdown.Toggle variant="" id="dropdown-basic" >
+              {camera.nodeName}
+            </Dropdown.Toggle>
 
-        
-            
-              
-         
-         
-        
+              <Dropdown.Menu>
+                <Card border="primary" style={{ width: '18rem' }}>
+                  <Card.Title> {camera.nodeName}</Card.Title>
+                  <Card.Body>
+                    
+                    <Card.Text>
+                       <p>IP: {camera.ip}</p>
+                       <p>Location:</p>
+                       <p>Notes:</p>
 
-
-      </div>
+                    </Card.Text>
+                    
+                  </Card.Body>
+                </Card>
+                </Dropdown.Menu>
+          </Dropdown>
+          ))}
+        </div >
     );
   }
 }

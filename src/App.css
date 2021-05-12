@@ -27,7 +27,13 @@
 .App-link {
   color: #61dafb;
 }
+.VMSPlayer{
+  width: 320px;
+  height: 200px;
+  background-color: #61dafb;
+margin: 5px;
 
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

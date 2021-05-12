@@ -1,49 +1,67 @@
-import React, { Component } from 'react';
+import React, { Component,useContext } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
+import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
-class CameraList1 extends Component {
-  constructor() {
-    super();
-    this.state = { cameras: [] };
-  }
+import { ContactContext } from "./context/contact-context";
 
-  componentDidMount() {
+
+export default function CameraList1()  {
+const [state, dispatch] = useContext(ContactContext);
+
+
     fetch('http://10.10.10.55:3001/cameras/cameraList')
       .then((response) => response.json())
-      .then((json) => this.setState({ cameras: json }));
-  }
+      .then((json) => onSubmit(json));
+ 
+const onSubmit = (data) => {
+    dispatch({
+      type: "ADD_CAM",
+      payload: { ...data }
+    });
+    // Reset Form
+ 
+  };
 
-  render() {
     return (
       <div>
-          {this.state.cameras.map((camera) => (
-            <Dropdown>
-            <Dropdown.Toggle variant="" id="dropdown-basic" >
-              {camera.nodeName}
-            </Dropdown.Toggle>
+        <Accordion defaultActiveKey="0">
+          
+           {this.state.cameras.map((camera) => (  
+            <Card >
+              <Accordion.Toggle as={Card.Header} eventKey={camera.nodeName} variant="dark">
+                {camera.nodeName}
+              </Accordion.Toggle>
+              <Accordion.Collapse  eventKey={camera.nodeName}>
+                <Card.Body > 
+                  <ListGroup >
+                    <ListGroup.Item variant="dark">Camera Name:</ListGroup.Item>
+                    <ListGroup.Item variant="dark">Status:</ListGroup.Item>
+                    <ListGroup.Item variant="dark">Cam 1: </ListGroup.Item>
+                    <ListGroup.Item variant="dark">Cam 2: </ListGroup.Item>
+                    <ListGroup.Item variant="dark">Cam 3:</ListGroup.Item>
+                  </ListGroup>
+              
+ 
 
-              <Dropdown.Menu>
-                <Card border="primary" style={{ width: '18rem' }}>
-                  <Card.Title> {camera.nodeName}</Card.Title>
-                  <Card.Body>
-                    
-                    <Card.Text>
-                       <p>IP: {camera.ip}</p>
-                       <p>Location:</p>
-                       <p>Notes:</p>
 
-                    </Card.Text>
-                    
-                  </Card.Body>
-                </Card>
-                </Dropdown.Menu>
-          </Dropdown>
-          ))}
+  <ButtonGroup size="sm">
+    <Button>Stream</Button>
+    <Button>Settings</Button>
+    <Button>VMS</Button>
+  </ButtonGroup>
+</Card.Body>
+              </Accordion.Collapse>
+              
+            </Card>
+           ))}
+
+        </Accordion>
+
+
         </div >
     );
   }
-}
 
-export default CameraList1;
+
