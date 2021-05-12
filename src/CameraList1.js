@@ -18,7 +18,7 @@ const [state, dispatch] = useContext(ContactContext);
 const onSubmit = (data) => {
     dispatch({
       type: "ADD_CAM",
-      payload: { ...data }
+      payload: {data }
     });
     // Reset Form
  
