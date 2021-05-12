@@ -1,20 +1,19 @@
-import React, { useState, useContext } from "react";
-import { Segment, Form, Input, Button } from "semantic-ui-react";
-import _ from "lodash";
-import { ContactContext } from "../context/contact-context";
+import React, { useState, useContext } from 'react';
+import _ from 'lodash';
+import { ContactContext } from '../contexts/contactContext';
+import { Segment, Form, Input, Button } from 'semantic-ui-react';
 
 export default function ContactForm() {
-  const name = useFormInput("");
-  const email = useFormInput("");
-  // eslint-disable-next-line no-unused-vars
+  const name = useFormInput('');
+  const email = useFormInput('');
   const [state, dispatch] = useContext(ContactContext);
 
   const onSubmit = () => {
     dispatch({
-      type: "ADD_CONTACT",
-      payload: { id: _.uniqueId(10), name: name.value, email: email.value }
+      type: 'ADD_CONTACT',
+      payload: { id: _.uniqueId(10), name: name.value, email: email.value },
     });
-    // Reset Form
+
     name.onReset();
     email.onReset();
   };
@@ -43,17 +42,17 @@ export default function ContactForm() {
 function useFormInput(initialValue) {
   const [value, setValue] = useState(initialValue);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setValue(e.target.value);
   };
 
   const handleReset = () => {
-    setValue("");
+    setValue('');
   };
 
   return {
     value,
     onChange: handleChange,
-    onReset: handleReset
+    onReset: handleReset,
   };
 }

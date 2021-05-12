@@ -7,4 +7,4 @@ const CamerasDataProvider = (props) => {
   return <CamerasDataContext.Provider value={[state, setState]}>{props.children}</CamerasDataContext.Provider>;
 };
 
- export { CamerasDataContext, CamerasDataProvider };
+export { CamerasDataContext, CamerasDataProvider };

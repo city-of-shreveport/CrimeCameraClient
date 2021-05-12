@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
-import { PrismCode } from 'react-prism';
-import { Player, ControlBar } from 'video-react';
 import Button from 'react-bootstrap/Button';
+import React, { Component } from 'react';
+import { Player, ControlBar } from 'video-react';
+import { PrismCode } from 'react-prism';
 
 const sources = {
   sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
   bunnyTrailer: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
   bunnyMovie: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-  test: 'http://media.w3.org/2010/05/video/movie_300.webm'
+  test: 'http://media.w3.org/2010/05/video/movie_300.webm',
 };
 
 export default class PlayerControlExample extends Component {
   constructor(props, context) {
     super(props, context);
 
-
     this.state = {
-      source: sources.bunnyMovie
+      source: sources.bunnyMovie,
     };
 
     this.play = this.play.bind(this);
@@ -30,11 +29,9 @@ export default class PlayerControlExample extends Component {
   }
 
   componentDidMount() {
-    // subscribe state change
     this.player.subscribeToStateChange(this.handleStateChange.bind(this));
     this.player2.subscribeToStateChange(this.handleStateChange.bind(this));
-        this.player3.subscribeToStateChange(this.handleStateChange.bind(this));
-
+    this.player3.subscribeToStateChange(this.handleStateChange.bind(this));
   }
 
   setMuted(muted) {
@@ -44,7 +41,6 @@ export default class PlayerControlExample extends Component {
   }
 
   handleStateChange(state) {
-    // copy player state to this component's state
     this.setState({
       player: state,
       player2: state,
@@ -106,7 +102,7 @@ export default class PlayerControlExample extends Component {
       this.setState({
         source: sources[name],
         source2: sources[name],
-        source3: sources[name]
+        source3: sources[name],
       });
       this.player.load();
       this.player2.load();
@@ -118,38 +114,29 @@ export default class PlayerControlExample extends Component {
     return (
       <div>
         <Player
-          ref={player => {
+          ref={(player) => {
             this.player = player;
-            
           }}
-          
           autoPlay
         >
-            
           <source src={this.state.source} />
           <ControlBar autoHide={false} />
         </Player>
         <Player
-          ref={player2 => {
+          ref={(player2) => {
             this.player2 = player2;
-            
           }}
-          
           autoPlay
         >
-            
           <source src={this.state.source3} />
           <ControlBar autoHide={false} />
         </Player>
         <Player
-          ref={player3 => {
+          ref={(player3) => {
             this.player3 = player3;
-            
           }}
-          
           autoPlay
         >
-            
           <source src={this.state.source2} />
           <ControlBar autoHide={false} />
         </Player>
@@ -217,9 +204,7 @@ export default class PlayerControlExample extends Component {
             Test movie
           </Button>
         </div>
-     
       </div>
     );
   }
 }
-
