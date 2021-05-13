@@ -6,10 +6,11 @@ import FormControl from 'react-bootstrap/FormControl';
 import Moment from 'react-moment';
 import React, { useContext, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
-import { ContactContext } from '../contexts/contactContext';
+import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContextProvider } from '../contexts/globalContext';
 
-export default function CameraList1() {
-  const [state, dispatch] = useContext(ContactContext);
+export default function CameraList() {
+  const [state, dispatch] = useContext(GlobalContext);
 
   useEffect(() => {
     function getCamerasAPI() {
@@ -21,15 +22,12 @@ export default function CameraList1() {
             payload: json,
           });
         });
-
-      console.log(state.perfmon);
     }
-
-    getCamerasAPI();
 
     setInterval(() => {
       getCamerasAPI();
-    }, 5000);
+      console.log(state);
+    }, 1000);
 
     // eslint-disable-next-line
   }, []);

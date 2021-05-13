@@ -2,12 +2,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './components/app';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ContactContextProvider } from './contexts/contactContext';
+import { GlobalContextProvider } from './contexts/globalContext';
 
 ReactDOM.render(
-  <ContactContextProvider>
+  <GlobalContextProvider>
     <App />
-  </ContactContextProvider>,
+  </GlobalContextProvider>,
   document.getElementById('root')
 );
 
