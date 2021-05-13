@@ -3,10 +3,12 @@ import App from './components/app';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-
+import { ContactContextProvider } from './contexts/contactContext';
 ReactDOM.render(
   <React.StrictMode>
+    <ContactContextProvider>
     <App />
+    </ContactContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

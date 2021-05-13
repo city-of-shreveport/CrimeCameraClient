@@ -14,6 +14,8 @@ export default function CameraList1() {
   const [state, dispatch] = useContext(ContactContext);
 
   useEffect(() => {
+
+    function getCamerasAPI(){
     fetch('http://10.10.10.55:3001/cameras/cameraList')
       .then((response) => response.json())
       .then((json) => {
@@ -22,8 +24,15 @@ export default function CameraList1() {
           payload: json,
         });
       });
+       console.log(state.perfmon)
+      }
+      getCamerasAPI()
+      setInterval(() => {
+        getCamerasAPI()
+      }, 5000);
+     
   }, []);
-console.log(state.cams)
+
   return ( 
     <div >
         <Card className="text-center">

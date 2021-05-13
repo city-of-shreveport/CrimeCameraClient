@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CameraList1 from '../components/cameraList1';
-import Map from './map';
+import PlayerControlExample from './videoPlayer';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { ContactContextProvider } from '../contexts/contactContext';
@@ -14,18 +14,11 @@ export default function VMS(){
 return (
 
 <Container>
-        <Row>
-            <Col xs={3}>      
+        
             <ContactContextProvider>
-              
-            </ContactContextProvider></Col>
-            <Col xs={8}>
-                <ContactContextProvider>
-                   
-                </ContactContextProvider>    
-            </Col>
-         
-        </Row>
+              <PlayerControlExample/>
+            </ContactContextProvider>
+            
     </Container>
 
 )

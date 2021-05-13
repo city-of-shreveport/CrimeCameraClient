@@ -3,6 +3,7 @@ import React, { useReducer, createContext } from 'react';
 export const ContactContext = createContext();
 
 const initialState = {
+  perfmon:[],
   cams:[],
   todos: [
     {
@@ -37,6 +38,9 @@ const initialState = {
   ],
   loading: false,
   error: null,
+  showHome: true,
+  showVMS: false,
+  showSettings: false
 };
 
 const reducer = (state, action) => {
@@ -45,6 +49,10 @@ const reducer = (state, action) => {
     case 'ADD_CAMS':
       return {
         cams: action.payload,
+      };
+      case 'ADD_PERFMON':
+      return {
+        perfmon: action.payload,
       };
     case 'ADD_TODO':
       return {
@@ -66,6 +74,27 @@ const reducer = (state, action) => {
       return {
         loading: false,
       };
+     case "showHideHome":
+        return {
+        showHome: true,
+        showVMS: false,
+        showSettings: false
+      };
+        
+        break;
+      case "showHideVMS":
+         return {
+        showVMS: true,
+        showHome: false,
+        showSettings: false
+      };
+       case "showHideSettings":
+         return {
+        showSettings: true,
+        showHome: false,
+        showVMS: false,
+      };
+        break;
     default:
       throw new Error();
   }
