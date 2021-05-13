@@ -4,33 +4,12 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Moment from 'react-moment';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
 import { GlobalContext } from '../contexts/globalContext';
-import { GlobalContextProvider } from '../contexts/globalContext';
 
 export default function CameraList() {
   const [state, dispatch] = useContext(GlobalContext);
-
-  useEffect(() => {
-    function getCamerasAPI() {
-      fetch('http://10.10.10.55:3001/cameras/cameraList')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'ADD_CAMS',
-            payload: json,
-          });
-        });
-    }
-
-    setInterval(() => {
-      getCamerasAPI();
-      console.log(state);
-    }, 1000);
-
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <div>

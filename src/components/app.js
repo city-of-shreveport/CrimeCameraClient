@@ -1,9 +1,7 @@
-import '../css/index.css';
-import '../css/videoplayer.css';
 import Home from './home';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Settings from './settings';
 import VMS from './vms';
 import { Container } from 'semantic-ui-react';
@@ -14,26 +12,42 @@ import { IoCameraOutline } from 'react-icons/io5';
 export default function App() {
   const [state, dispatch] = useContext(GlobalContext);
 
-  const showHome = () => {
+  function navigate(screen) {
     dispatch({
-      type: 'showHideHome',
+      type: screen,
       payload: true,
     });
-  };
+  }
 
-  const showVMS = () => {
-    dispatch({
-      type: 'showHideVMS',
-      payload: true,
-    });
-  };
+  useEffect(() => {
+    function refreshData() {
+      fetch('https://jsonplaceholder.typicode.com/users')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'UPDATE_USERS',
+            payload: json,
+          });
+        });
 
-  const showSettings = () => {
-    dispatch({
-      type: 'showHideSettings',
-      payload: true,
-    });
-  };
+      fetch('https://jsonplaceholder.typicode.com/todos')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'UPDATE_TODOS',
+            payload: json,
+          });
+        });
+    }
+
+    refreshData();
+
+    setInterval(() => {
+      refreshData();
+    }, 3000);
+
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Container>
@@ -46,9 +60,9 @@ export default function App() {
         </Navbar.Brand>
 
         <Nav className="mr-auto">
-          <Nav.Link onClick={() => showHome()}>Home</Nav.Link>
-          <Nav.Link onClick={() => showVMS()}>VMS</Nav.Link>
-          <Nav.Link onClick={() => showSettings()}>Setting</Nav.Link>
+          <Nav.Link onClick={() => navigate('showHome')}>Home</Nav.Link>
+          <Nav.Link onClick={() => navigate('showVMS')}>VMS</Nav.Link>
+          <Nav.Link onClick={() => navigate('showSettings')}>Setting</Nav.Link>
         </Nav>
 
         <Navbar.Collapse className="justify-content-end">

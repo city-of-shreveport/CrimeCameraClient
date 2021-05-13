@@ -3,42 +3,58 @@ import React, { useReducer, createContext } from 'react';
 export const GlobalContext = createContext();
 
 const initialState = {
-  perfmon: [],
   cams: [],
-  loading: false,
-  error: null,
+  perfmons: [],
+  todos: [],
+  users: [],
   showHome: true,
-  showVMS: false,
   showSettings: false,
+  showVMS: false,
 };
 
 const reducer = (state, action) => {
+  console.log(state);
+
   switch (action.type) {
-    case 'ADD_CAMS':
-      console.log(state);
+    case 'UPDATE_CAMS':
       return {
+        ...state,
         cams: action.payload,
       };
-    case 'ADD_PERFMON':
+    case 'UPDATE_PERFMONS':
       return {
+        ...state,
         perfmon: action.payload,
       };
-    case 'showHideHome':
+    case 'UPDATE_TODOS':
       return {
+        ...state,
+        todos: action.payload,
+      };
+    case 'UPDATE_USERS':
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case 'showHome':
+      return {
+        ...state,
         showHome: true,
+        showSettings: false,
         showVMS: false,
-        showSettings: false,
       };
-    case 'showHideVMS':
+    case 'showVMS':
       return {
+        ...state,
+        showHome: false,
+        showSettings: false,
         showVMS: true,
-        showHome: false,
-        showSettings: false,
       };
-    case 'showHideSettings':
+    case 'showSettings':
       return {
-        showSettings: true,
+        ...state,
         showHome: false,
+        showSettings: true,
         showVMS: false,
       };
     default:
