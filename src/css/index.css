@@ -5,9 +5,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.checkedInTime{
-font-size: 12px;
-
+.checkedInTime {
+  font-size: 12px;
 }
 
 code {

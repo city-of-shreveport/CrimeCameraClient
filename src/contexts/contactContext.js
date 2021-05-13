@@ -3,8 +3,8 @@ import React, { useReducer, createContext } from 'react';
 export const ContactContext = createContext();
 
 const initialState = {
-  perfmon:[],
-  cams:[],
+  perfmon: [],
+  cams: [],
   todos: [
     {
       userId: 2,
@@ -40,17 +40,16 @@ const initialState = {
   error: null,
   showHome: true,
   showVMS: false,
-  showSettings: false
+  showSettings: false,
 };
 
 const reducer = (state, action) => {
-  
   switch (action.type) {
     case 'ADD_CAMS':
       return {
         cams: action.payload,
       };
-      case 'ADD_PERFMON':
+    case 'ADD_PERFMON':
       return {
         perfmon: action.payload,
       };
@@ -74,27 +73,24 @@ const reducer = (state, action) => {
       return {
         loading: false,
       };
-     case "showHideHome":
-        return {
+    case 'showHideHome':
+      return {
         showHome: true,
         showVMS: false,
-        showSettings: false
+        showSettings: false,
       };
-        
-        break;
-      case "showHideVMS":
-         return {
+    case 'showHideVMS':
+      return {
         showVMS: true,
         showHome: false,
-        showSettings: false
+        showSettings: false,
       };
-       case "showHideSettings":
-         return {
+    case 'showHideSettings':
+      return {
         showSettings: true,
         showHome: false,
         showVMS: false,
       };
-        break;
     default:
       throw new Error();
   }

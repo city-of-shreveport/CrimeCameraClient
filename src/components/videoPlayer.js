@@ -1,12 +1,10 @@
 import Button from 'react-bootstrap/Button';
-import React, { Component } from 'react';
-import { Player } from 'video-react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
- 
-  
- 
+import Container from 'react-bootstrap/Container';
+import React, { Component } from 'react';
+import Row from 'react-bootstrap/Row';
+import { Player } from 'video-react';
+
 const sources = {
   sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
   bunnyTrailer: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
@@ -35,8 +33,7 @@ export default class PlayerControlExample extends Component {
     this.player.subscribeToStateChange(this.handleStateChange.bind(this));
     this.player2.subscribeToStateChange(this.handleStateChange.bind(this));
     this.player3.subscribeToStateChange(this.handleStateChange.bind(this));
-
-     this.player4.subscribeToStateChange(this.handleStateChange.bind(this));
+    this.player4.subscribeToStateChange(this.handleStateChange.bind(this));
     this.player5.subscribeToStateChange(this.handleStateChange.bind(this));
     this.player6.subscribeToStateChange(this.handleStateChange.bind(this));
   }
@@ -52,7 +49,7 @@ export default class PlayerControlExample extends Component {
       player: state,
       player2: state,
       player3: state,
-       player4: state,
+      player4: state,
       player5: state,
       player6: state,
     });
@@ -71,7 +68,7 @@ export default class PlayerControlExample extends Component {
     this.player.pause();
     this.player2.pause();
     this.player3.pause();
-     this.player4.pause();
+    this.player4.pause();
     this.player5.pause();
     this.player6.pause();
   }
@@ -91,7 +88,7 @@ export default class PlayerControlExample extends Component {
       this.player.seek(player.currentTime + seconds);
       this.player2.seek(player.currentTime + seconds);
       this.player3.seek(player.currentTime + seconds);
-       this.player4.seek(player.currentTime + seconds);
+      this.player4.seek(player.currentTime + seconds);
       this.player5.seek(player.currentTime + seconds);
       this.player6.seek(player.currentTime + seconds);
     };
@@ -102,7 +99,7 @@ export default class PlayerControlExample extends Component {
       this.player.seek(seconds);
       this.player2.seek(seconds);
       this.player3.seek(seconds);
-            this.player4.seek(seconds);
+      this.player4.seek(seconds);
       this.player5.seek(seconds);
       this.player6.seek(seconds);
     };
@@ -112,21 +109,23 @@ export default class PlayerControlExample extends Component {
     return () => {
       const { player } = this.player.getState();
       this.player.playbackRate = player.playbackRate + steps;
+      // eslint-disable-next-line
       const { player2 } = this.player2.getState();
       this.player2.playbackRate = player.playbackRate + steps;
+      // eslint-disable-next-line
       const { player3 } = this.player3.getState();
       this.player3.playbackRate = player.playbackRate + steps;
-
-            const { player4 } = this.player4.getState();
+      // eslint-disable-next-line
+      const { player4 } = this.player4.getState();
       this.player4.playbackRate = player.playbackRate + steps;
+      // eslint-disable-next-line
       const { player5 } = this.player5.getState();
       this.player5.playbackRate = player.playbackRate + steps;
+      // eslint-disable-next-line
       const { player6 } = this.player6.getState();
       this.player6.playbackRate = player.playbackRate + steps;
     };
   }
-
-
 
   changeSource(name) {
     return () => {
@@ -149,63 +148,66 @@ export default class PlayerControlExample extends Component {
     return (
       <div>
         <Container>
+          <Row>
+            <Col>
+              <Player
+                ref={(player) => {
+                  this.player = player;
+                }}
+              >
+                <source src={this.state.source} />
+              </Player>
+            </Col>
+            <Col>
+              <Player
+                ref={(player2) => {
+                  this.player2 = player2;
+                }}
+              >
+                <source src={this.state.source} />
+              </Player>
+            </Col>
+            <Col>
+              <Player
+                ref={(player3) => {
+                  this.player3 = player3;
+                }}
+              >
+                <source src={this.state.source} />
+              </Player>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col><Player
-          ref={(player) => {
-            this.player = player;
-          }}
-        >
-          <source src={this.state.source} />
-        </Player></Col>
-          <Col><Player
-          ref={(player2) => {
-            this.player2 = player2;
-          }}
-        >
-          <source src={this.state.source} />
-        </Player></Col>
-          <Col><Player
-          ref={(player3) => {
-            this.player3 = player3;
-          }}
-        >
-          <source src={this.state.source} />
-        </Player></Col>
-        </Row>
-
-
-                <Row>
-          <Col><Player
-          ref={(player4) => {
-            this.player4 = player4;
-          }}
-        >
-          <source src={this.state.source} />
-        </Player></Col>
-          <Col><Player
-          ref={(player5) => {
-            this.player5 = player5;
-          }}
-        >
-          <source src={this.state.source} />
-        </Player></Col>
-          <Col><Player
-          ref={(player6) => {
-            this.player6 = player6;
-          }}
-        >
-          <source src={this.state.source} />
-        </Player></Col>
-        </Row>
-      </Container>
-
-
-        
-
-        
-        
-
+          <Row>
+            <Col>
+              <Player
+                ref={(player4) => {
+                  this.player4 = player4;
+                }}
+              >
+                <source src={this.state.source} />
+              </Player>
+            </Col>
+            <Col>
+              <Player
+                ref={(player5) => {
+                  this.player5 = player5;
+                }}
+              >
+                <source src={this.state.source} />
+              </Player>
+            </Col>
+            <Col>
+              <Player
+                ref={(player6) => {
+                  this.player6 = player6;
+                }}
+              >
+                <source src={this.state.source} />
+              </Player>
+            </Col>
+          </Row>
+        </Container>
 
         <div className="py-3">
           <Button onClick={this.play} className="mr-3">
@@ -243,7 +245,7 @@ export default class PlayerControlExample extends Component {
             playbackRate-=0.1
           </Button>
         </div>
-        
+
         <div className="pb-3">
           <Button onClick={this.changeSource('sintelTrailer')} className="mr-3">
             Sintel teaser
