@@ -5,17 +5,88 @@ export const GlobalContext = createContext();
 const initialState = {
   cams: [],
   perfmons: [],
-  todos: [],
+  streamingstats: [],
+  streams: [],
   users: [],
   showHome: true,
   showSettings: false,
   showVMS: false,
+  vmsModal: false,
+  settingsModal: false,
+  selectedCamera:'NONE',
+  selectedVMSDate: new Date(),
+  selectedVMSTimeMin: '00',
+  selectedVMSTimeHour: '12',
+  vmsTimePM:false,
+  videoPlayer:{},
+  videoPlayersState:{}
 };
 
 const reducer = (state, action) => {
   console.log(state);
 
   switch (action.type) {
+    
+    case 'SETVIDEOPLAYERSTATE':
+      return {
+        ...state,
+        videoPlayersState: action.payload,
+        
+        
+      };
+    case 'SETVIDEOSTATE':
+      return {
+        ...state,
+        videoPlayer: action.payload,
+        
+        
+      };
+    case 'UPDATE_VMSTIMEAMPM':
+      return {
+        ...state,
+        vmsTimePM: action.payload,
+        
+        
+      };
+      case 'UPDATE_VMSTIMEHOURVALUE':
+      return {
+        ...state,
+        selectedVMSTimeHour: action.payload,
+        
+        
+      };
+     case 'UPDATE_VMSTIMEMINVALUE':
+      return {
+        ...state,
+        selectedVMSTimeMin: action.payload,
+        
+        
+      };
+     case 'UPDATE_VMSCALVALUE':
+      return {
+        ...state,
+        selectedVMSDate: action.payload,
+        
+        
+      };
+      case 'UPDATE_SELECTEDCAMERA':
+      return {
+        ...state,
+        selectedCamera: action.payload,
+        settingsModal: true
+        
+      };
+      
+      case 'UPDATE_VMSDateTimeMODAL':
+      return {
+        ...state,
+        vmsModal: action.payload,
+      };
+    case 'UPDATE_SETTINGSMODAL':
+      return {
+        ...state,
+        settingsModal: action.payload,
+      };
     case 'UPDATE_CAMS':
       return {
         ...state,
@@ -26,15 +97,15 @@ const reducer = (state, action) => {
         ...state,
         perfmon: action.payload,
       };
-    case 'UPDATE_TODOS':
+    case 'UPDATE_STREAMINGSTATS':
       return {
         ...state,
-        todos: action.payload,
+        streamingstats: {'restreamer01':action.payload, 'updated':new Date().toString() },
       };
-    case 'UPDATE_USERS':
+    case 'UPDATE_STREAMS':
       return {
         ...state,
-        users: action.payload,
+        streams: action.payload,
       };
     case 'showHome':
       return {

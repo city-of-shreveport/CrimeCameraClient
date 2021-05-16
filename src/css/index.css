@@ -8,7 +8,66 @@ body {
 .checkedInTime {
   font-size: 12px;
 }
+.videoPlayerDIV{
+max-height: 800px ;
+  
+}
+.videoPlayerCalendarCOL{
+min-height: 400px;
+ overflow:hidden
 
+}
+.homeContainer {
+  max-height: 800px;
+  overflow:hidden
+}
+.timePickerVideos {
+max-height: 600px;
+
+}
+.settingsDIV{
+max-height: 800px;
+min-width: 100%;
+}
+.timesListGroup{
+max-height: 350px;
+overflow-y: scroll;
+overflow-x:hidden
+}
+.react-calendar{
+  min-width: 100%;
+
+
+}
+.marginLogidIn{
+  margin-right: 10px;
+
+
+}
+.gmapsCard{
+  max-height: 600px;
+
+
+}
+
+.cameraListHomePage{
+max-height: 400px;
+overflow-y: scroll;
+}
+
+.chartBox{
+  height: 95%;
+width: 100%;
+
+}
+.text-left{
+  text-align: left  !important;;
+
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+.custom-modal {
+  min-width: 80%;
+  height: auto;
 }

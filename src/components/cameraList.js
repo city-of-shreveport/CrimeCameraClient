@@ -13,20 +13,21 @@ export default function CameraList() {
 
   return (
     <div>
-      <Card className="text-center">
+      <Card className="text-center ">
         <Card.Header>
           <h2>Cameras</h2>
-        </Card.Header>
-
-        <Card.Body>
           <Form inline>
             <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
             <Button type="submit">Submit</Button>
           </Form>
-        </Card.Body>
+        </Card.Header>
+
+        <Card.Body className='cameraListHomePage'>
+          
+      
         <Accordion defaultActiveKey="0">
           {state.cams.map((cam) => (
-            <Card className="text-center">
+            <Card className="text-cente ">
               <Accordion.Toggle as={Card.Header} eventKey={cam.nodeName} variant="dark">
                 <h5>{cam.nodeName}</h5>
               </Accordion.Toggle>
@@ -71,10 +72,7 @@ export default function CameraList() {
                   </Card.Text>
                   <Table striped variant="dark" size="sm">
                     <tbody>
-                      <tr>
-                        <td>OS:</td>
-                        <td>{cam.sysInfo.osInfo.distro}</td>
-                      </tr>
+                      
                       <tr>
                         <td>Status:</td>
                         <td>
@@ -90,36 +88,34 @@ export default function CameraList() {
                         </td>
                       </tr>
                       <tr>
-                        <td>Disk 1:</td>
+                        <td>Oldest Video:</td>
                         <td>
-                          <p>{Math.round((cam.sysInfo.diskLayout[0].size * 0.000001) / 1024)} GB</p>
+                          <p>5/10/2021 0630</p>
                         </td>
                       </tr>
                       <tr>
-                        <td>Disk 2:</td>
+                        <td>Newest Video:</td>
                         <td>
-                          <p>{Math.round((cam.sysInfo.diskLayout[1].size * 0.000001) / 1024)} GB</p>
+                          <p>5/14/2021 1130</p>
                         </td>
                       </tr>
-                      <tr>
-                        <td>Cores:</td>
-                        <td>
-                          <p>{cam.sysInfo.cpu.cores}</p>
-                        </td>
-                      </tr>
+                      
                     </tbody>
                   </Table>
 
                   <Card.Text>
-                    <Button size="sm">Stream</Button> <Button size="sm">Settings</Button>{' '}
-                    <Button size="sm">PerfMon</Button>
+                    <Button size="sm">Stream</Button> {' '}
+                    <Button size="sm">Settings</Button>{' '}
+                    <Button size="sm">View Videos</Button>
                   </Card.Text>
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
           ))}
-          <Card.Footer className="text-muted">Last updated 3 mins ago</Card.Footer>
+          
         </Accordion>
+          </Card.Body>
+          <Card.Footer className="text-muted">Last updated 3 mins ago</Card.Footer>
       </Card>
     </div>
   );

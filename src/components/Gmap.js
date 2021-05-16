@@ -83,7 +83,7 @@ const GMap = () => {
       },
     });
 
-  return <div ref={googleMapRef} style={{ width: '100%', height: 800 }} />;
+  return <div ref={googleMapRef} style={{ width: '100%', height:500 }} />;
 };
 
 export default GMap;

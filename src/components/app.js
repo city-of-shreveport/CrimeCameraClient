@@ -21,20 +21,28 @@ export default function App() {
 
   useEffect(() => {
     function refreshData() {
-      fetch('https://jsonplaceholder.typicode.com/users')
+      fetch('http://10.10.10.55:3001/cameras/cameraList')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'UPDATE_USERS',
+            type: 'UPDATE_CAMS',
             payload: json,
           });
         });
 
-      fetch('https://jsonplaceholder.typicode.com/todos')
+      fetch('http://cc-restreamer.shreveport-it.org/api/server')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'UPDATE_TODOS',
+            type: 'UPDATE_STREAMINGSTATS',
+            payload: json,
+          });
+        });
+         fetch('http://cc-restreamer.shreveport-it.org/api/streams')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'UPDATE_STREAMS',
             payload: json,
           });
         });
@@ -50,7 +58,7 @@ export default function App() {
   }, []);
 
   return (
-    <Container>
+<>
       <Navbar bg="primary" variant="dark">
         <Navbar.Brand href="#home">
           <IconContext.Provider value={{ size: 42 }}>
@@ -65,9 +73,9 @@ export default function App() {
           <Nav.Link onClick={() => navigate('showSettings')}>Setting</Nav.Link>
         </Nav>
 
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Collapse className="justify-content-end marginLogidIn">
           <Navbar.Text>
-            Signed in as: <a href="#login">Jack Swayze</a>
+            Signed in as: <a href="#login">Jack Swayze</a>{' '}
           </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
@@ -75,6 +83,6 @@ export default function App() {
       {state.showHome && <Home />}
       {state.showVMS && <VMS />}
       {state.showSettings && <Settings />}
-    </Container>
+ </>
   );
 }
