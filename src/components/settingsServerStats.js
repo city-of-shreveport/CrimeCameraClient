@@ -1,11 +1,8 @@
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import React, { useContext, useState } from 'react';
-import { GlobalContext } from '../contexts/globalContext';
+import React from 'react';
 
 export default function SettingsServerStats() {
-      const [state, dispatch] = useContext(GlobalContext);
-
   return (
     <>
         <CardGroup>

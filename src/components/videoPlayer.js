@@ -2,22 +2,18 @@ import { FaPlay } from "react-icons/fa";
 import { FaStop } from "react-icons/fa";
 import { FaFastForward } from "react-icons/fa"; 
 import { FaFastBackward } from "react-icons/fa";
- 
-import FormGroup from 'react-bootstrap/FormGroup';
-import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
- import Card from 'react-bootstrap/Card';
-  import CardGroup from 'react-bootstrap/CardGroup';
- 
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
 import Navbar from 'react-bootstrap/Navbar';
 import React, { Component } from 'react';
 import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 import Calendar from 'react-calendar'
-import { Player, ControlBar, ForwardControl } from 'video-react';
+import { Player } from 'video-react';
 
 
 const sources = {
@@ -26,20 +22,6 @@ const sources = {
   bunnyMovie: 'http://media.w3.org/2010/05/bunny/movie.mp4',
   test: 'http://media.w3.org/2010/05/video/movie_300.webm',
 };
-
-
-
-const getCams= () => {
-      fetch('http://10.10.10.55:3001/cameras/cameraList')
-        .then((response) => response.json())
-        .then((json) => {
-          return json
-          
-        });
-        
-     
-         
-    }
 
  
          
@@ -259,30 +241,20 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
 
  
     <div className='videoPlayerDIV'>
-    <Container fluid>
-       
+      <Container fluid>
           <Row className="justify-content-md-center">
-            
-            
             <Col sm={8} >
               <Card className="text-center">
-                <Card.Header as="h5">Video Player</Card.Header>
+                <Card.Header as="h5">Video Player
+                 </Card.Header>   
                 <Card.Body>
-                 
                     <br/>
                 <Row>
-  
                   <Col xs={2}>
-                                         <Card.Header> {this.state.selectedVMSDate.toDateString()}</Card.Header>
-                                          <Card.Header> {this.state.selectedVMSTimeHour}:  {this.state.selectedVMSTimeMin} {this.state.vmsTimePM ? 'PM' : 'AM'}</Card.Header>
-                   
-                    <Button variant="secondary" size="lg" onClick={() => this.setState({'modalOpen':true })}>
-                      Select Date
-                    </Button>
                     <br />
-                     <br />
-                     <Card.Header>Camera</Card.Header>
-                     <Card.Title>{this.state.selectedCam1}</Card.Title>
+                    <br />
+                    <Card.Header>Camera</Card.Header>
+                    <Card.Title>{this.state.selectedCam1}</Card.Title>
                     <Button variant="secondary" size="sm" onClick={() => this.setState({'modalCameraOpen':true, 'camButtonSelected': 'selectedCam1'})}>
                       Change
                     </Button>
@@ -290,7 +262,6 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
                   <Col xs={3}>
                     <Player ref={(player0) => {this.player0 = player0; }} >
                       <source src={this.state.source} />
-                      <controls true/>
                       </Player>
                   </Col>
                   <Col xs={3}>
@@ -306,7 +277,6 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
                 </Row>
                 <br />
                 <Row >
-                  
                   <Col xs={2}>
                     <br />
                      <br />
@@ -367,22 +337,21 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
               
                 </Card.Body>
                 <Card.Footer className="text-muted">
-               <Navbar expand="lg" variant="light" bg="light">
-                    <Navbar.Brand href="#">Video Time: {this.state.videoTime >= 0 && this.state.videoTime}</Navbar.Brand>   
-                    <FaFastBackward size= '28'  className="amber-text pr-3" onClick={this.changeCurrentTime(-10)}/> {' '}
+                  <Navbar expand="lg" variant="light" bg="light">
+                      <Navbar.Brand href="#">Video Time: {this.state.videoTime >= 0 && this.state.videoTime}</Navbar.Brand>   
+                      <FaFastBackward size= '28'  className="amber-text pr-3" onClick={this.changeCurrentTime(-10)}/> {' '}
                       <FaPlay size= '28'  className="amber-text pr-3" onClick={this.play}/>{' '}
-                    <FaStop size= '28'  className="amber-text pr-3" onClick={this.pause}/>{' '}
-                    <FaFastForward size= '28'  className="amber-text pr-3" onClick={this.changeCurrentTime(10)}/>
-                    <Form>
-            <FormGroup> 
-              <Form.Control size="lg" type="range"  onChange={(e) => {this.seek(e.target.value)}  } name="inputVideoUrl"
-                id="inputVideoUrl"/>
-            
-            </FormGroup>
-            
-          </Form>
+                      <FaStop size= '28'  className="amber-text pr-3" onClick={this.pause}/>{' '}
+                      <FaFastForward size= '28'  className="amber-text pr-3" onClick={this.changeCurrentTime(10)}/>{' '}
+                      <Navbar.Collapse className="justify-content-end marginLogidIn">
+                        <Button variant="secondary" size="sm" onClick={() => this.setState({'modalOpen':true })}>
+                          Select Date Time
+                        </Button>{' '}
+                        <>Selected Time:  {this.state.selectedVMSDate.toDateString()} {this.state.selectedVMSTimeHour}:{this.state.selectedVMSTimeMin} {this.state.vmsTimePM ? 'PM' : 'AM'}{' '}
+                        </>
+                      </Navbar.Collapse>
                     </Navbar>
-                    </Card.Footer>
+                </Card.Footer>
             </Card>
             </Col>
             
@@ -391,7 +360,7 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
            <Modal show={this.state.modalOpen} onHide={() => this.setState({'modalOpen':false})} centered  size="lg">
                 
                 <Card className="text-center">
-                  <Card.Header as='h5'>Time and Date</Card.Header>
+                  <Card.Header as='h5'>{this.state.selectedVMSDate.toDateString()}</Card.Header>
               <Card>
                     <Card.Header as='h6'> </Card.Header>
                     <Card.Body>
@@ -402,10 +371,11 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
                 <CardGroup>
                     
                     <Card>
-                        <Card.Header as='h6'>Hours</Card.Header>
+                        <Card.Header as='h6'>{this.state.selectedVMSTimeHour}</Card.Header>
                         <Card.Body>
                         <div className='timesListGroup'>
-                            <ListGroup>   selectedVMSDate: new Date(),
+                          
+                            <ListGroup>   
 
                                 <ListGroup.Item action  onClick={() => this.setState({'selectedVMSTimeHour':'1'})}>1</ListGroup.Item>
                                 <ListGroup.Item action onClick={() => this.setState({'selectedVMSTimeHour':'2'})}>2</ListGroup.Item>
@@ -424,9 +394,10 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
                         </Card.Body>
                     </Card>
                     <Card>
-                        <Card.Header as='h6'>Minutes</Card.Header>
+                        <Card.Header as='h6'>{this.state.selectedVMSTimeMin}</Card.Header>
                         <Card.Body>
                         <div className='timesListGroup'>
+                          
                              <ListGroup>
                                 <ListGroup.Item onClick={() => this.setState({'selectedVMSTimeMin':'00'})}>00</ListGroup.Item>
                                 <ListGroup.Item onClick={() => this.setState({'selectedVMSTimeMin':'15'})}>15</ListGroup.Item>
@@ -441,6 +412,7 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
                         <Card.Header as='h6'>AM/PM</Card.Header>
                         <Card.Body>
                         <div className='timesListGroup'>
+                          {this.state.vmsTimePM ? 'PM' : 'AM'}
                               <ListGroup>
                             <ListGroup.Item onClick={() => this.setState({'vmsTimePM':false})}>AM</ListGroup.Item>
                             <ListGroup.Item onClick={() => this.setState({'vmsTimePM':true})}>PM</ListGroup.Item>

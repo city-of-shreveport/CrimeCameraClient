@@ -4,11 +4,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import React, { useContext, useEffect } from 'react';
 import Settings from './settings';
 import VMS from './vms';
-import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
 import { IoCameraOutline } from 'react-icons/io5';
-
 export default function App() {
   const [state, dispatch] = useContext(GlobalContext);
 
@@ -18,7 +16,6 @@ export default function App() {
       payload: true,
     });
   }
-
   useEffect(() => {
     function refreshData() {
       fetch('http://10.10.10.55:3001/cameras/cameraList')
@@ -29,7 +26,6 @@ export default function App() {
             payload: json,
           });
         });
-
       fetch('http://cc-restreamer.shreveport-it.org/api/server')
         .then((response) => response.json())
         .then((json) => {
@@ -47,18 +43,16 @@ export default function App() {
           });
         });
     }
-
     refreshData();
-
     setInterval(() => {
       refreshData();
-    }, 3000);
+    }, 10000);
 
     // eslint-disable-next-line
   }, []);
 
   return (
-<>
+    <>
       <Navbar bg="primary" variant="dark">
         <Navbar.Brand href="#home">
           <IconContext.Provider value={{ size: 42 }}>
@@ -66,23 +60,20 @@ export default function App() {
           </IconContext.Provider>{' '}
           Shreveport Crime Cameras
         </Navbar.Brand>
-
         <Nav className="mr-auto">
           <Nav.Link onClick={() => navigate('showHome')}>Home</Nav.Link>
           <Nav.Link onClick={() => navigate('showVMS')}>VMS</Nav.Link>
           <Nav.Link onClick={() => navigate('showSettings')}>Setting</Nav.Link>
         </Nav>
-
         <Navbar.Collapse className="justify-content-end marginLogidIn">
           <Navbar.Text>
-            Signed in as: <a href="#login">Jack Swayze</a>{' '}
+            Signed in as: Jack Swayze{' '}
           </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
-
       {state.showHome && <Home />}
       {state.showVMS && <VMS />}
       {state.showSettings && <Settings />}
- </>
+    </>
   );
 }

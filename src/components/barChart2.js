@@ -3,10 +3,10 @@ import { Bar } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
 defaults.animation = false;
 const data = {
-    labels: ['Root', 'Video', 'Buddy'],
+    labels: ['Memory', 'CPU avgLoad', 'CPU currentLoad', 'CPU currentLoadUser'],
   datasets: [
     {
-      data: [20,95, 82],
+      data: [75,50, 34,65],
       backgroundColor: [
         'Red',
         'Blue',
@@ -42,11 +42,11 @@ const options = {
         }
 };
 
-const HorizontalBarChart2 = () => (
+const HorizontalBarChart = () => (
   <>
 
     <Bar data={data} options={options} />
   </>
 );
 
-export default HorizontalBarChart2;
+export default HorizontalBarChart;

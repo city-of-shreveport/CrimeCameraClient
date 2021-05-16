@@ -30,7 +30,7 @@ max-height: 800px;
 min-width: 100%;
 }
 .timesListGroup{
-max-height: 350px;
+max-height: 280px;
 overflow-y: scroll;
 overflow-x:hidden
 }

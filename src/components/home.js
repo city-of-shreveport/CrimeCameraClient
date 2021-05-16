@@ -8,25 +8,26 @@ import Container from 'react-bootstrap/Container';
 
 export default function Home() {
   return (
-  <><br/>
-<Container fluid className='homeContainer'>
-      <Row className="justify-content-md-center">
-      
-        <Col xs={3}>
-          <Card>
-  <Card.Body><CameraList /></Card.Body>
-</Card>
+    <><br/>
+      <Container fluid className='homeContainer'>
+        <Row className="justify-content-md-center">
+          <Col xs={3}>
+            <Card>
+              <Card.Body>
+                <CameraList />
+                </Card.Body>
+            </Card>
           
-        </Col>
-        
-        <Col >
-         <Card className="text-center gmapsCard"><Card.Body>
-          <Map isMarkerShown />
-          </Card.Body></Card>
-        </Col>
-
-      </Row>
-     </Container>
+          </Col>
+          <Col >
+            <Card className="text-center gmapsCard">
+              <Card.Body>
+                <Map isMarkerShown />
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
    </>
   );
 }

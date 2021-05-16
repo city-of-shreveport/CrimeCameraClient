@@ -1,10 +1,9 @@
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import Row from 'react-bootstrap/Row';
 import SettingsModal from './settingsModal'
 import { Container } from 'semantic-ui-react';
-import { GlobalContext } from '../contexts/globalContext';
 import SettingsCameraList from './settingsCameraList'
 import SettingsRestreaming from './settingsRestreaming'
 import SettingsServerStats from './settingsServerStats'
@@ -12,7 +11,6 @@ import SettingsRestreamerStats from './settingsRestreamerStats'
 
 export default function Settings() {
 
-  const [state, dispatch] = useContext(GlobalContext);
 
   return (
     <Container fluid className='settingsDIV'>
