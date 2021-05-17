@@ -44,11 +44,7 @@ overflow-x:hidden
 
 
 }
-.gmapsCard{
-  max-height: 600px;
 
-
-}
 
 .cameraListHomePage{
 max-height: 400px;
@@ -68,6 +64,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 .custom-modal {
-  min-width: 80%;
+  min-width: 95%;
   height: auto;
 }

@@ -14,6 +14,9 @@ import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 import Calendar from 'react-calendar'
 import { Player } from 'video-react';
+import Map from './map';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
 
 
 const sources = {
@@ -44,12 +47,14 @@ export default class PlayerControlExample extends Component {
       vmsTimePM:false,
       selectedVMSDate: new Date(),
     };
-fetch('http://10.10.10.55:3001/cameras/cameraList')
+      fetch('http://10.10.10.55:3001/cameras/cameraList')
         .then((response) => response.json())
         .then((json) => {
       
           this.setState({'cameras':json})
         });
+
+        
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
     this.load = this.load.bind(this);
@@ -58,6 +63,15 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
     this.changePlaybackRateRate = this.changePlaybackRateRate.bind(this);
     this.setMuted = this.setMuted.bind(this);
   }
+
+
+
+
+
+
+
+
+
 
   componentDidMount() {
     this.player0.subscribeToStateChange(this.handleStateChange.bind(this));
@@ -434,13 +448,21 @@ fetch('http://10.10.10.55:3001/cameras/cameraList')
             <Modal show={this.state.modalCameraOpen} onHide={() => this.setState({'modalCameraOpen':false})} centered  size="lg">
                 
                 <Card className="text-center">
-                  <Card.Header as='h5'>Time and Date</Card.Header>
-              {this.state.cameras.map((cam) => (
-                    <ListGroup.Item onClick={() => upDateSelectedCam(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
-                  ))}
-                  
-                
-              
+                  <Card.Header as='h5'>Selecet Camera</Card.Header>
+                    <CardGroup>
+                      <Card>
+                        <Map isMarkerShown />
+                      </Card>
+                      <Card> 
+                        <Form inline>
+                          <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
+                          <Button type="submit">Submit</Button>
+                        </Form>
+                        {this.state.cameras.map((cam) => (
+                          <ListGroup.Item onClick={() => upDateSelectedCam(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
+                        ))}
+                      </Card>
+                    </CardGroup>
                 </Card>
         
                 <Card.Footer className="text-muted">

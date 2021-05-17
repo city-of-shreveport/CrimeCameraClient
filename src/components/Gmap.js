@@ -1,6 +1,19 @@
-import React, { useEffect, useRef } from 'react';
-
+import React, { useEffect, useRef,useContext } from 'react';
+import { GlobalContext } from '../contexts/globalContext'
 const GMap = () => {
+    const [state, dispatch] = useContext(GlobalContext);
+const getCameraInfo = (node) =>{
+   fetch('http://10.10.10.55:3001/cameras/getCameraInfo/'+node)
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'UPDATECURRENTCAMINFO',
+            payload: json,
+          })
+        });
+
+  
+}
   const googleMapRef = useRef(null);
   let googleMap = null;
 
@@ -26,9 +39,10 @@ const GMap = () => {
     track14: 'http://earth.google.com/images/kml-icons/track-directional/track-14.png',
     track15: 'http://earth.google.com/images/kml-icons/track-directional/track-15.png',
   };
+  let markerList = []
 
   // list of the marker object along with icon
-  const markerList = [
+  const markerList2 = [
     { lat: 32.517774, lng: -93.734555, icon: iconList.pinGreen },
     { lat: 32.444771, lng: -93.844588, icon: iconList.pinGreen },
     { lat: 32.422505, lng: -93.751248, icon: iconList.pinRed },
@@ -50,16 +64,31 @@ const GMap = () => {
   ];
 
   useEffect(() => {
+     googleMap = initGoogleMap();
+    function getCams(){
+    fetch('http://10.10.10.55:3001/cameras/cameraList')
+        .then((response) => response.json())
+        .then((json) => {
+          markerList = json
+        
     // eslint-disable-next-line
-    googleMap = initGoogleMap();
-    var bounds = new window.google.maps.LatLngBounds();
-
+   
+    //var bounds = new window.google.maps.LatLngBounds();
     // eslint-disable-next-line
-    markerList.map((x) => {
-      const marker = createMarker(x);
-      bounds.extend(marker.position);
+    json.map((cam) => {
+      const marker = createMarker({ lat: cam.location.lat, lng: cam.location.lng, icon: cam.systemOK ? iconList.pinGreen : iconList.pinRed} , cam);
+      //bounds.extend(marker.position);
+      marker.addListener("click", () => {
+        getCameraInfo(cam.nodeName)
+     console.log(marker.nodeName)
     });
-
+  });
+  })
+}
+getCams()
+setInterval(() => {
+  getCams()
+}, 30000);
     //googleMap.fitBounds(bounds); // the map to contain all markers
   }, []);
 
@@ -72,10 +101,12 @@ const GMap = () => {
   };
 
   // create marker on google map
-  const createMarker = (markerObj) =>
+  const createMarker = (markerObj, cam) =>
+  
     new window.google.maps.Marker({
       position: { lat: markerObj.lat, lng: markerObj.lng },
       map: googleMap,
+      nodeName:cam.nodeName,
       icon: {
         url: markerObj.icon,
         // set marker width and height
@@ -83,7 +114,7 @@ const GMap = () => {
       },
     });
 
-  return <div ref={googleMapRef} style={{ width: '100%', height:500 }} />;
+  return <div ref={googleMapRef} style={{ width: '100%', height:600 }} />;
 };
 
 export default GMap;

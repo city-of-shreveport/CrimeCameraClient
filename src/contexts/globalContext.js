@@ -28,11 +28,18 @@ const initialState = {
   homeVideoTimePM: false,
   homeVideoTimeHour: '00',
   homeVideoTimeMin: '00',
-  cameraSettingsComponent: false
+  cameraSettingsComponent: false,
+  currentCamInfo: null
 };
 const reducer = (state, action) => {
-  console.log(state);
+  console.log(action.payload);
   switch (action.type) {
+    
+    case 'UPDATECURRENTCAMINFO':
+      return {
+        ...state,
+        currentCamInfo: action.payload,
+      };
   case 'UPDATE_CAMERASYSCOMPONENT':
       return {
         ...state,
