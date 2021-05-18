@@ -1,12 +1,9 @@
-import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import Moment from 'react-moment';
 import React, { useContext } from 'react';
-import Table from 'react-bootstrap/Table';
 import { GlobalContext } from '../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
 import { Player} from 'video-react';
@@ -34,35 +31,15 @@ export default function CameraList() {
     type: 'UPDATEHOMEVIDEODATE',
     payload: e,
   });
-  const updateHomeSelectedCamera = (e) => dispatch({
-    type: 'UPDATE_HOMESELECTEDCAM',
-    payload: e,
-  });
-  const handleSettingsModal = () => dispatch({
-    type: 'HOMESETTINGSMODAL',
-    payload: true,
-  });
-  const handleSettingsModalClose = () => dispatch({
-    type: 'HOMESETTINGSMODAL',
-    payload: false,
-  });
-  const handleViewVideosModal = () => dispatch({
-    type: 'HOMEVIEWVIDEOSMODAL',
-    payload: true,
-  });
   const handleViewVideosModalClose = () => dispatch({
     type: 'HOMEVIEWVIDEOSMODAL',
     payload: false,
-  });
-  const handleHomeStreamingModal = () => dispatch({
-    type: 'HOMESTREAMINGMODAL',
-    payload: true,
   });
   const handleStreamModalClose = () => dispatch({
     type: 'HOMESTREAMINGMODAL',
     payload: false,
   });
-  let camInfo = {}
+  // eslint-disable-next-lineclear
 const getCameraInfo = (node) =>{
    fetch('http://10.10.10.55:3001/cameras/getCameraInfo/'+node)
         .then((response) => response.json())
@@ -119,26 +96,6 @@ const getCameraInfo = (node) =>{
                 </Card>
               </CardGroup>
             </Card.Body>
-        </Card>
-        <Card.Footer className="text-muted">
-        </Card.Footer>
-      </Modal>
-      <Modal show={state.homeSettingsModal} onHide={() => handleSettingsModalClose()} centered  size="lg">
-        <Card className="text-center">
-          <Card.Header as='h5'>Settings</Card.Header>
-          <Container>
-            <Row>
-              <Col>
-                sdfg
-              </Col>
-              <Col>
-                sdf
-              </Col>
-              <Col>
-                sdf
-              </Col>
-            </Row>
-          </Container>
         </Card>
         <Card.Footer className="text-muted">
         </Card.Footer>

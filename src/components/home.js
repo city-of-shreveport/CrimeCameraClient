@@ -16,10 +16,6 @@ export default function Home() {
     type: 'HOMESTREAMINGMODAL',
     payload: true,
   });
-  const handleSettingsModal = () => dispatch({
-    type: 'HOMESETTINGSMODAL',
-    payload: true,
-  });
     const handleViewVideosModal = () => dispatch({
     type: 'HOMEVIEWVIDEOSMODAL',
     payload: true,
@@ -103,7 +99,6 @@ export default function Home() {
                   </Table>
                   <Card.Text>
                     <Button size="sm" onClick={() => handleHomeStreamingModal()}>Stream</Button> {' '}
-                    <Button size="sm" onClick={() => handleSettingsModal()}>Settings</Button>{' '}
                     <Button size="sm" onClick={() => handleViewVideosModal()}>View Videos</Button>
                   </Card.Text>
                 </Card.Body>

@@ -8,7 +8,8 @@ import SettingsCameraList from './settingsCameraList'
 import SettingsRestreaming from './settingsRestreaming'
 import SettingsServerStats from './settingsServerStats'
 import SettingsRestreamerStats from './settingsRestreamerStats'
-
+import SettingsBackEndServers from './settingsBackEndServers'
+import SettingsFrontEndServers from './settingsFrontEndServers'
 export default function Settings() {
 
 
@@ -24,13 +25,18 @@ export default function Settings() {
         </Col>
 
         <Col xs={4} >
+                      <Card.Header as='h4' className="text-center">Server Stats</Card.Header>
+
           <SettingsServerStats/>
           <br/>
           <Card >
             <Card.Header as='h4' className="text-center">Restreamers</Card.Header>
             <SettingsRestreamerStats/>
             <Card.Body>
+              <Card.Header as='h4' className="text-center">Servers</Card.Header>
               <SettingsRestreaming/>
+              <SettingsBackEndServers/>
+              <SettingsFrontEndServers/>
             </Card.Body>
           </Card>
         </Col>

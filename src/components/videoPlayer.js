@@ -198,6 +198,7 @@ export default class PlayerControlExample extends Component {
       // eslint-disable-next-line
       const { player6 } = this.player6.getState();
       this.player6.playbackRate = player0.playbackRate + steps;
+      // eslint-disable-next-line
       const { player7 } = this.player7.getState();
       this.player7.playbackRate = player0.playbackRate + steps;
       // eslint-disable-next-line

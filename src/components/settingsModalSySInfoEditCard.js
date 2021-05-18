@@ -6,7 +6,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import { GlobalContext } from '../contexts/globalContext';
 
 export default function SettingsSysInfoEditCard() {
-    const [state, dispatch] = useContext(GlobalContext);
+    const [, dispatch] = useContext(GlobalContext);
     const handleSysConfigModal = () =>  dispatch({
         type: 'UPDATE_CAMERASYSCOMPONENT',
         payload: false,

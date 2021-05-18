@@ -1,7 +1,7 @@
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 
 export default function SettingsCameraList() {
@@ -10,11 +10,6 @@ export default function SettingsCameraList() {
     dispatch({
       type: 'UPDATE_SETTINGSMODAL',
       payload: false,
-    });
-  const handleShow = () => 
-    dispatch({
-      type: 'UPDATE_SETTINGSMODAL',
-      payload: true,
     });
 
   const upDateSelectedCam = (param) => 

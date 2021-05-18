@@ -4,16 +4,16 @@ import React, { useContext } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import { GlobalContext } from '../contexts/globalContext';
 
-export default function SettingsRestreaming() {
+export default function SettingsBackEndServers() {
     const [state] = useContext(GlobalContext);
   return (
   <>
     <Accordion >
           <Card className='text-right'>
-            <Accordion.Toggle as='Restreamer001' eventKey="Restreamer001">
-              <Card.Header as='h5' className="text-center">Restreamer001 </Card.Header>
+            <Accordion.Toggle as='BackEnd001' eventKey="BackEnd001">
+              <Card.Header as='h5' className="text-center">BackEnd001 </Card.Header>
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey="Restreamer001">
+            <Accordion.Collapse eventKey="BackEnd001">
               <CardGroup>
                 <Card>
                   <Card.Header>Server</Card.Header>
@@ -35,24 +35,18 @@ export default function SettingsRestreaming() {
                   </Card.Body>
                 </Card>
                 <Card>
-                  <Card.Header>Clients</Card.Header>
+                  <Card.Header>Actions</Card.Header>
                   <Card.Body>
-                    <li>Accepted: {state.streamingstats.restreamer01.clients.accepted }</li>
-                    <li>Active: {state.streamingstats.restreamer01.clients.active }</li>
-                    <li>Idle: {state.streamingstats.restreamer01.clients.idle }</li>
-                    <li>RTMP: {state.streamingstats.restreamer01.clients.rtmp }</li>
-                    <li>HTTP: {state.streamingstats.restreamer01.clients.http }</li>
-                    <li>WS: {state.streamingstats.restreamer01.clients.ws}</li>
                   </Card.Body>
                 </Card>
               </CardGroup>
             </Accordion.Collapse>
           </Card>
           <Card className='text-right'>
-            <Accordion.Toggle as='Restreamer002' eventKey="Restreamer002">
-              <Card.Header as='h5' className="text-center">Restreamer002 </Card.Header>
+            <Accordion.Toggle as='BackEnd002' eventKey="BackEnd002">
+              <Card.Header as='h5' className="text-center">BackEnd002 </Card.Header>
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey="Restreamer002">
+            <Accordion.Collapse eventKey="BackEnd002">
               <CardGroup>
                 <Card >
                   <Card.Header>Server</Card.Header>
@@ -74,34 +68,23 @@ export default function SettingsRestreaming() {
                   </Card.Body>
                 </Card>
                 <Card> 
-                  <Card.Header>Clients</Card.Header>
+                  <Card.Header>Actions</Card.Header>
                   <Card.Body>
-                    <li>Accepted: {state.streamingstats.restreamer01.clients.accepted }</li>
-                    <li>Active: {state.streamingstats.restreamer01.clients.active }</li>
-                    <li>Idle: {state.streamingstats.restreamer01.clients.idle }</li>
-                    <li>RTMP: {state.streamingstats.restreamer01.clients.rtmp }</li>
-                    <li>HTTP: {state.streamingstats.restreamer01.clients.http }</li>
-                    <li>WS: {state.streamingstats.restreamer01.clients.ws}</li>
                   </Card.Body>
                 </Card>
               </CardGroup>
             </Accordion.Collapse>
           </Card>
           <Card className='text-right'>
-            <Accordion.Toggle as='Restreamer003' eventKey="Restreamer003">
-              <Card.Header as='h5' className="text-center">Restreamer003</Card.Header>
+            <Accordion.Toggle as='BackEnd003' eventKey="BackEnd003">
+              <Card.Header as='h5' className="text-center">BackEnd003</Card.Header>
             </Accordion.Toggle>
-            <Accordion.Collapse eventKey="Restreamer003">
+            <Accordion.Collapse eventKey="BackEnd003">
               <CardGroup>
                 <Card>
-                  <Card.Header>Server</Card.Header>
-                    <Card.Body >
-                      <li>Arch: {state.streamingstats.restreamer01.os.arch }</li>
-                      <li>Platform: {state.streamingstats.restreamer01.os.platform }</li>
-                      <li>CPUs: {state.streamingstats.restreamer01.cpu.num }</li>
-                      <li>UpTime: {parseInt((state.streamingstats.restreamer01.nodejs.uptime)/60) } min</li>
-                      <li>Node: {state.streamingstats.restreamer01.nodejs.version}</li>
-                    </Card.Body>
+                  <Card.Header>Actions</Card.Header>
+                  <Card.Body>
+                  </Card.Body>
                 </Card>
                 <Card>
                   <Card.Header>Perf</Card.Header>
@@ -113,14 +96,8 @@ export default function SettingsRestreaming() {
                   </Card.Body>
                 </Card>
                 <Card>
-                  <Card.Header>Clients</Card.Header>
+                  <Card.Header>Actions</Card.Header>
                   <Card.Body>
-                    <li>Accepted: {state.streamingstats.restreamer01.clients.accepted }</li>
-                    <li>Active: {state.streamingstats.restreamer01.clients.active }</li>
-                    <li>Idle: {state.streamingstats.restreamer01.clients.idle }</li>
-                    <li>RTMP: {state.streamingstats.restreamer01.clients.rtmp }</li>
-                    <li>HTTP: {state.streamingstats.restreamer01.clients.http }</li>
-                    <li>WS: {state.streamingstats.restreamer01.clients.ws}</li>
                   </Card.Body>
                 </Card>
               </CardGroup>

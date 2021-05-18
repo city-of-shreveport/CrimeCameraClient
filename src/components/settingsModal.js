@@ -1,5 +1,4 @@
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
@@ -9,6 +8,7 @@ import LineChart from './lineChart'
 import SettingsCamerasCard from './settingsModalCamerasCard'
 import SettingsSysInfoCard from './settingsModalSySInfoCard'
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard'
+import SettingsCamerasSettingsCard from './settingsModalCameraSettingsCard'
 
 import { GlobalContext } from '../contexts/globalContext';
 
@@ -49,10 +49,11 @@ export default function SettingsModal() {
                         <Card>
                             <Card.Header>Cameras</Card.Header>
                             <Card.Header>
-                                <Button variant="primary" size="sm">Configure</Button>
                             </Card.Header>
                             <Card.Body>
-                                <SettingsCamerasCard/>
+                                {state.cameraSettingsCameraComponent ? <SettingsCamerasSettingsCard/>:<SettingsCamerasCard/> }
+                                
+                                
                             </Card.Body>
                         </Card>
                         <Card>

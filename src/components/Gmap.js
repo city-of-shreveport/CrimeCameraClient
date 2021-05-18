@@ -1,7 +1,7 @@
 import React, { useEffect, useRef,useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext'
 const GMap = () => {
-    const [state, dispatch] = useContext(GlobalContext);
+    const [ , dispatch] = useContext(GlobalContext);
 const getCameraInfo = (node) =>{
    fetch('http://10.10.10.55:3001/cameras/getCameraInfo/'+node)
         .then((response) => response.json())
@@ -39,36 +39,19 @@ const getCameraInfo = (node) =>{
     track14: 'http://earth.google.com/images/kml-icons/track-directional/track-14.png',
     track15: 'http://earth.google.com/images/kml-icons/track-directional/track-15.png',
   };
+  // eslint-disable-next-line
   let markerList = []
 
   // list of the marker object along with icon
-  const markerList2 = [
-    { lat: 32.517774, lng: -93.734555, icon: iconList.pinGreen },
-    { lat: 32.444771, lng: -93.844588, icon: iconList.pinGreen },
-    { lat: 32.422505, lng: -93.751248, icon: iconList.pinRed },
-
-    { lat: 32.567774, lng: -93.834555, icon: iconList.pinGreen },
-    { lat: 32.445771, lng: -93.849458, icon: iconList.pinGreen },
-    { lat: 32.422345, lng: -93.778648, icon: iconList.pinRed },
-
-    { lat: 32.497203, lng: -93.740114, icon: iconList.pinGreen },
-    { lat: 32.504922, lng: -93.731213, icon: iconList.pinGreen },
-    { lat: 32.51933, lng: -93.751967, icon: iconList.pinRed },
-    { lat: 32.567774, lng: -93.834555, icon: iconList.pinGreen },
-    { lat: 32.508242, lng: -93.709439, icon: iconList.pinGreen },
-    { lat: 32.509113, lng: -93.747541, icon: iconList.pinRed },
-
-    { lat: 32.47466, lng: -93.767096, icon: iconList.pinGreen },
-    { lat: 32.492902, lng: -93.726603, icon: iconList.pinGreen },
-    { lat: 32.531687, lng: -93.772609, icon: iconList.pinRed },
-  ];
 
   useEffect(() => {
+    // eslint-disable-next-line
      googleMap = initGoogleMap();
     function getCams(){
     fetch('http://10.10.10.55:3001/cameras/cameraList')
         .then((response) => response.json())
         .then((json) => {
+          // eslint-disable-next-line
           markerList = json
         
     // eslint-disable-next-line

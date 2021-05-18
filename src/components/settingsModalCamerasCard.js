@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import CardGroup from 'react-bootstrap/CardGroup';
+import { GlobalContext } from '../contexts/globalContext';
+
+import Button from 'react-bootstrap/Button';
 
 export default function SettingsCamerasCard() {
+         const [ , dispatch] = useContext(GlobalContext);
+    const handleSysConfigCameraModal = () =>  dispatch({
+        type: 'UPDATE_CAMERASYSCAMERACOMPONENT',
+        payload: true,
+    });
+
     return (
-        <>
+        <>        <Button variant="primary" size="sm" onClick={() => handleSysConfigCameraModal()}>Configure</Button>
+
             <CardGroup>
                 <Card className="text-center">
                     <Card.Header>Camera 1</Card.Header>
