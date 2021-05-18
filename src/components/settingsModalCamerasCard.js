@@ -24,19 +24,19 @@ export default function SettingsCamerasCard() {
                             <tbody>
                                 <tr>
                                     <td>Status</td>
-                                    <td>OnLine</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>Direction </td>
-                                    <td>345</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>Type</td>
-                                    <td>Stationary</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>IP</td>
-                                    <td>10.10.5.2</td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </Table>
@@ -51,19 +51,19 @@ export default function SettingsCamerasCard() {
                                 <tbody>
                                     <tr>
                                     <td>Status</td>
-                                    <td>OnLine</td>
+                                    <td></td>
                                     </tr>
                                     <tr>
                                     <td>Direction </td>
-                                    <td>90</td>
+                                    <td></td>
                                     </tr>
                                     <tr>
                                     <td>Type</td>
-                                    <td>Stationary</td>
+                                    <td></td>
                                     </tr>
                                     <tr>
                                     <td>IP</td>
-                                    <td>10.10.5.3</td>
+                                    <td></td>
                                     </tr>
                                 </tbody>
                                 </Table>
@@ -78,19 +78,19 @@ export default function SettingsCamerasCard() {
                                 <tbody>
                                     <tr>
                                         <td>Status</td>
-                                        <td>OnLine</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Direction </td>
-                                        <td>122</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Type</td>
-                                        <td>Stationary</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>IP</td>
-                                        <td>10.10.5.4</td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </Table>

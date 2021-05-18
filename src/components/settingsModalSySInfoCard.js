@@ -28,19 +28,19 @@ export default function SettingsSysInfoCard() {
                             </tr>
                             <tr>
                                 <td>IP</td>
-                                <td>10.10.10.203</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>Location</td>
-                                <td>38.65456,-77.435076</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>Video Drive</td>
-                                <td>2TB  /dev/sda</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>Buddy 1</td>
-                                <td>Camera003</td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </Table>
@@ -52,27 +52,27 @@ export default function SettingsSysInfoCard() {
                             <tbody>
                                 <tr>
                                     <td>OS </td>
-                                    <td>Debian GNU/Linux</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>CodeName</td>
-                                    <td>buster</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>Kernel</td>
-                                    <td>5.4.42-v8+</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>Arch</td>
-                                    <td>arm64</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>Buddy Drive</td>
-                                    <td>4TB  /dev/sdb</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>Buddy 2</td>
-                                    <td>Camera005</td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </Table>
