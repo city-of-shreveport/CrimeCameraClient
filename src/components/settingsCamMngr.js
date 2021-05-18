@@ -5,14 +5,7 @@ import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CardGroup from 'react-bootstrap/CardGroup';
 
-import SettingsModal from './settingsModal'
 import { Container } from 'semantic-ui-react';
-import SettingsCameraList from './settingsCameraList'
-import SettingsServerStats from './settingsServerStats'
-import SettingsRestreamerStats from './settingsRestreamerStats'
-import SettingsBackEndServers from './settingsBackEndServers'
-import SettingsFrontEndServers from './settingsFrontEndServers'
-import SettingsRestreaming from './settingsRestreaming'
 import { GlobalContext } from '../contexts/globalContext';
 import HorizontalBarChart from './barChart2'
 import HorizontalBarChart2 from './barChart'

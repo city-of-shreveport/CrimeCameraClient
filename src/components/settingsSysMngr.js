@@ -3,11 +3,7 @@ import Col from 'react-bootstrap/Col';
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import CardGroup from 'react-bootstrap/CardGroup'
-import SettingsModal from './settingsModal'
 import { Container } from 'semantic-ui-react';
-import SettingsCameraList from './settingsCameraList'
-import SettingsServerStats from './settingsServerStats'
-import SettingsRestreamerStats from './settingsRestreamerStats'
 import SettingsBackEndServers from './settingsBackEndServers'
 import SettingsFrontEndServers from './settingsFrontEndServers'
 import SettingsRestreaming from './settingsRestreaming'
