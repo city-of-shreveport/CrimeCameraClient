@@ -2,7 +2,8 @@ import Home from './home';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import React, { useContext, useEffect } from 'react';
-import Settings from './settings';
+import CamMngr from './settingsCamMngr.js';
+import SysMngr from './settingsSysMngr.js';
 import VMS from './vms';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
@@ -63,7 +64,9 @@ export default function App() {
         <Nav className="mr-auto">
           <Nav.Link onClick={() => navigate('showHome')}>Home</Nav.Link>
           <Nav.Link onClick={() => navigate('showVMS')}>VMS</Nav.Link>
-          <Nav.Link onClick={() => navigate('showSettings')}>Setting</Nav.Link>
+          <Nav.Link onClick={() => navigate('showCamMngr')}>Camera Manager</Nav.Link>
+          <Nav.Link onClick={() => navigate('showSysMngr')}>System Manager</Nav.Link>
+
         </Nav>
         <Navbar.Collapse className="justify-content-end marginLogidIn">
           <Navbar.Text>
@@ -73,7 +76,10 @@ export default function App() {
       </Navbar>
       {state.showHome && <Home />}
       {state.showVMS && <VMS />}
-      {state.showSettings && <Settings />}
+      {state.showCamMngr && <CamMngr />}
+      {state.showSysMngr && <SysMngr />}
+
+      
     </>
   );
 }

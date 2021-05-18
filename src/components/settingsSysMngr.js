@@ -19,13 +19,17 @@ export default function SysMngr() {
     <Container fluid className='settingsDIV'>
       <br/>
       <Row className="justify-content-md-center">
-        <Col xs={3}>
+
+
+        <Col xs={3} >
+          <SettingsRestreaming/>
+          <SettingsBackEndServers/>
+          <SettingsFrontEndServers/>
+          
+
         </Col>
 
-        <Col xs={5} >
-        </Col>
-
-        <Col xs={4} >
+        <Col xs={6} >
         </Col>
       </Row>
     </Container>

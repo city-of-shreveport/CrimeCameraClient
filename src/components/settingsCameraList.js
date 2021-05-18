@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
-
 export default function SettingsCameraList() {
   const [state, dispatch] = useContext(GlobalContext);
   const handleClose = () =>  
@@ -20,45 +19,23 @@ export default function SettingsCameraList() {
   return (
     <>
       <br/>
-      <CardGroup>
+    
         <Card className="text-center">
-          <Card.Header as='h4'>Configured Cameras</Card.Header>
-          <Card.Body>
+          <Card.Header as='h3'>Cameras
+          <Card.Text as='h6'>45 Online / 2 Problems</Card.Text>
+          </Card.Header>
+          
+          <Card.Text>
             <ListGroup>
               {state.cams.map((cam) => (
                 <ListGroup.Item onClick={() => upDateSelectedCam(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
               ))}
             </ListGroup>
-          </Card.Body>
+          </Card.Text>
           <Card.Footer className="text-muted">42 Cameras</Card.Footer>
         </Card>
-        <Card className="text-center">
-          <Card.Header as='h4'>Problem Cameras</Card.Header>
-          <Card.Body>
-            <Card.Text>
-              <ListGroup >
-                {state.cams.map((cam) => (
-                  <ListGroup.Item onClick={handleClose}>{cam.nodeName}</ListGroup.Item>
-                ))}
-              </ListGroup>
-            </Card.Text>
-          </Card.Body>
-          <Card.Footer className="text-muted">2 days ago</Card.Footer>
-        </Card>
-        <Card className="text-center">
-          <Card.Header as='h4'>New Cameras</Card.Header>
-          <Card.Body>
-            <Card.Text>
-              <ListGroup >
-                {state.cams.map((cam) => (
-                  <ListGroup.Item onClick={() => handleClose(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
-                ))}
-              </ListGroup>
-            </Card.Text>
-          </Card.Body>
-          <Card.Footer className="text-muted">2 days ago</Card.Footer>
-        </Card>
-      </CardGroup>
+    
+    
     </>
   );
 }

@@ -168,23 +168,39 @@ const reducer = (state, action) => {
       return {
         ...state,
         showHome: true,
-        showSettings: false,
+        showCamMngr: false,
         showVMS: false,
+        showSysMngr: false
       };
     case 'showVMS':
       return {
         ...state,
         showHome: false,
-        showSettings: false,
+        showCamMngr: false,
         showVMS: true,
+        showSysMngr: false
+
       };
-    case 'showSettings':
+    case 'showCamMngr':
       return {
         ...state,
         showHome: false,
-        showSettings: true,
+        showCamMngr: true,
         showVMS: false,
+        showSysMngr: false
+
       };
+          case 'showSysMngr':
+      return {
+        ...state,
+        showHome: false,
+        showCamMngr: false,
+        showVMS: false,
+        showSysMngr: true
+
+      };
+
+
     default:
       throw new Error();
   }
