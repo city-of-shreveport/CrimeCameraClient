@@ -1,15 +1,9 @@
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 export default function SettingsCameraList() {
   const [state, dispatch] = useContext(GlobalContext);
-  const handleClose = () =>  
-    dispatch({
-      type: 'UPDATE_SETTINGSMODAL',
-      payload: false,
-    });
 
   const upDateSelectedCam = (param) => 
       dispatch({
