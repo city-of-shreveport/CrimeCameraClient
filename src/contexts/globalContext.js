@@ -30,10 +30,44 @@ const initialState = {
   homeVideoTimeMin: '00',
   cameraSettingsComponent: false,
   cameraSettingsCameraComponent: false,
-  currentCamInfo: null
+  currentCamInfo: [{
+     location:{
+          lat:'2',
+          lng:'3'
+        },
+      sysInfo:{
+        osInfo:{
+          arch:'',
+          kernel:'',
+          codename:"",
+          distro:''
+        },
+        
+        diskLayout: [
+          {
+            device:'',
+          },
+          { 
+            device:'',
+          }
+        ],
+       
+        },
+        
+        IP:'',
+        nodeName:'',
+        camsOnlineStatus:[{
+          cam1:false,
+          cam2:false,
+          cam3:false,
+}
+
+
+        ]
+  }]
 };
 const reducer = (state, action) => {
-  console.log(action.payload);
+  console.log(state);
   switch (action.type) {
     
         case 'UPDATE_CAMERASYSCAMERACOMPONENT':

@@ -18,12 +18,27 @@ import SettingsCamerasSettingsCard from './settingsModalCameraSettingsCard'
 
 export default function Settings() {
  const [state, dispatch] = useContext(GlobalContext);
-  const upDateSelectedCam = (param) => 
+ const getCameraInfo = (node) =>{
+   fetch('http://10.10.10.55:3001/cameras/getCameraInfo/'+node)
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'UPDATECURRENTCAMINFO',
+            payload: json,
+          })
+        });
+
+
+}
+  const upDateSelectedCam = (param) => {
+
+getCameraInfo(param)
+ 
       dispatch({
       type: 'UPDATE_SELECTEDCAMERA',
       payload: param
     })
-
+ }
   return (
     <Container fluid className='settingsDIV'>
       <br/>

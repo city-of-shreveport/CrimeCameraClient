@@ -16,34 +16,34 @@ export default function SettingsSysInfoCard() {
             <CardGroup>
                 <Card border="light">
                     <Card.Text>
-                        <Table striped bordered hover size="sm" variant="dark">
+                        {state.currentCamInfo && <Table striped bordered hover size="sm" variant="dark">
                             <tbody>
                             <tr>
                                 <td>Host Name</td>
-                                <td>{state.selectedCamera}</td>
+                                <td>{state.currentCamInfo[0].nodeName}</td>
                             </tr>
                             <tr>
                                 <td>FQDN</td>
-                                <td>{state.selectedCamera}.local</td>
+                                <td>{state.currentCamInfo[0].nodeName}.local</td>
                             </tr>
                             <tr>
                                 <td>IP</td>
-                                <td></td>
+                                <td>{state.currentCamInfo[0].IP}</td>
                             </tr>
                             <tr>
                                 <td>Location</td>
-                                <td></td>
+                                <td>{state.currentCamInfo[0].location.lat},{state.currentCamInfo[0].location.lng}</td>
                             </tr>
                             <tr>
                                 <td>Video Drive</td>
-                                <td></td>
+                                <td>{state.currentCamInfo[0].sysInfo.diskLayout[1].device}</td>
                             </tr>
                             <tr>
-                                <td>Buddy 1</td>
-                                <td></td>
+                                <td>Buddy Drive</td>
+                                <td>{state.currentCamInfo[0].sysInfo.diskLayout[0].device}</td>
                             </tr>
                             </tbody>
-                        </Table>
+                        </Table>}
                     </Card.Text>
                 </Card>
                 <Card border="light">
@@ -52,22 +52,22 @@ export default function SettingsSysInfoCard() {
                             <tbody>
                                 <tr>
                                     <td>OS </td>
-                                    <td></td>
+                                    <td>{state.currentCamInfo[0].sysInfo.osInfo.distro}</td>
                                 </tr>
                                 <tr>
                                     <td>CodeName</td>
-                                    <td></td>
+                                    <td>{state.currentCamInfo[0].sysInfo.osInfo.codename}</td>
                                 </tr>
                                 <tr>
                                     <td>Kernel</td>
-                                    <td></td>
+                                    <td>{state.currentCamInfo[0].sysInfo.osInfo.kernel}</td>
                                 </tr>
                                 <tr>
                                     <td>Arch</td>
-                                    <td></td>
+                                    <td>{state.currentCamInfo[0].sysInfo.osInfo.arch}</td>
                                 </tr>
                                 <tr>
-                                    <td>Buddy Drive</td>
+                                    <td>Buddy 1</td>
                                     <td></td>
                                 </tr>
                                 <tr>
