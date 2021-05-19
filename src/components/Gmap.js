@@ -39,10 +39,10 @@ const getCameraInfo = (node) =>{
     track14: 'http://earth.google.com/images/kml-icons/track-directional/track-14.png',
     track15: 'http://earth.google.com/images/kml-icons/track-directional/track-15.png',
   };
-  
+
   // eslint-disable-next-line
   let markerList = []
-
+//YA
   // list of the marker object along with icon
 
   useEffect(() => {
