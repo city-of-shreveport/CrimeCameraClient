@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 //
 
 const options = {
@@ -23,7 +23,7 @@ const options = {
     'gridLeft',
     'gridRight',
     'gridCenter',
-    'pointer'
+    'pointer',
   ],
   tooltipAlign: [
     'auto',
@@ -35,12 +35,12 @@ const options = {
     'topRight',
     'bottomLeft',
     'bottomRight',
-    'center'
+    'center',
   ],
-  snapCursor: [true, false]
-}
+  snapCursor: [true, false],
+};
 
-const optionKeys = Object.keys(options)
+const optionKeys = Object.keys(options);
 
 export default function useChartConfig({
   series,
@@ -63,7 +63,7 @@ export default function useChartConfig({
   tooltipAlign = 'auto',
   grouping = 'primary',
   snapCursor = true,
-  datums = 10
+  datums = 10,
 }) {
   const [state, setState] = React.useState({
     count,
@@ -84,40 +84,37 @@ export default function useChartConfig({
     grouping,
     snapCursor,
     datums,
-    data: makeDataFrom(dataType, series, useR, datums)
-  })
+    data: makeDataFrom(dataType, series, useR, datums),
+  });
 
   React.useEffect(() => {
-    setState(old => ({
+    setState((old) => ({
       ...old,
-      data: makeDataFrom(dataType, series, useR, datums)
-    }))
-  }, [count, dataType, datums, series, useR])
+      data: makeDataFrom(dataType, series, useR, datums),
+    }));
+  }, [count, dataType, datums, series, useR]);
 
   const randomizeData = () =>
-    setState(old => ({
+    setState((old) => ({
       ...old,
-      data: makeDataFrom(dataType, series, useR, datums)
-    }))
+      data: makeDataFrom(dataType, series, useR, datums),
+    }));
 
   const Options = optionKeys
-    .filter(option => show.indexOf(option) > -1)
-    .map(option => (
+    .filter((option) => show.indexOf(option) > -1)
+    .map((option) => (
       <div key={option}>
         {option}: &nbsp;
         <select
           value={state[option]}
           onChange={({ target: { value } }) =>
-            setState(old => ({
+            setState((old) => ({
               ...old,
-              [option]:
-                typeof options[option][0] === 'boolean'
-                  ? value === 'true'
-                  : value
+              [option]: typeof options[option][0] === 'boolean' ? value === 'true' : value,
             }))
           }
         >
-          {options[option].map(d => (
+          {options[option].map((d) => (
             <option value={d} key={d.toString()}>
               {d.toString()}
             </option>
@@ -125,67 +122,57 @@ export default function useChartConfig({
         </select>
         <br />
       </div>
-    ))
+    ));
 
   return {
     ...state,
     randomizeData,
-    Options
-  }
+    Options,
+  };
 }
 
 function makeDataFrom(dataType, series, useR, datums) {
-  return [
-    ...new Array(series || Math.max(Math.round(Math.random() * 5), 1))
-  ].map((d, i) => makeSeries(i, dataType, useR, datums))
+  return [...new Array(series || Math.max(Math.round(Math.random() * 5), 1))].map((d, i) =>
+    makeSeries(i, dataType, useR, datums)
+  );
 }
 
 function makeSeries(i, dataType, useR, datums) {
-  const start = 0
-  const startDate = new Date()
-  startDate.setMinutes(0)
-  startDate.setSeconds(0)
-  startDate.setMilliseconds(0)
+  const start = 0;
+  const startDate = new Date();
+  startDate.setMinutes(0);
+  startDate.setSeconds(0);
+  startDate.setMilliseconds(0);
   // const length = 5 + Math.round(Math.random() * 15)
-  const length = datums
-  const min = 0
-  const max = 100
-  const rMin = 2
-  const rMax = 20
-  const nullChance = 0
+  const length = datums;
+  const min = 0;
+  const max = 100;
+  const rMin = 2;
+  const rMax = 20;
+  const nullChance = 0;
   return {
     label: `Series ${i + 1}`,
     datums: [...new Array(length)].map((_, i) => {
-      let x = start + i
+      let x = start + i;
       if (dataType === 'ordinal') {
-        x = `Ordinal Group ${x}`
+        x = `Ordinal Group ${x}`;
       }
       if (dataType === 'time') {
-        x = new Date(startDate.getTime() + 60 * 1000 * 30 * i)
+        x = new Date(startDate.getTime() + 60 * 1000 * 30 * i);
       }
       if (dataType === 'linear') {
-        x =
-          Math.random() < nullChance
-            ? null
-            : min + Math.round(Math.random() * (max - min))
+        x = Math.random() < nullChance ? null : min + Math.round(Math.random() * (max - min));
       }
-      const distribution = 1.1
-      const y =
-        Math.random() < nullChance
-          ? null
-          : min + Math.round(Math.random() * (max - min))
+      const distribution = 1.1;
+      const y = Math.random() < nullChance ? null : min + Math.round(Math.random() * (max - min));
       const r = !useR
         ? undefined
-        : rMax -
-          Math.floor(
-            Math.log(Math.random() * (distribution ** rMax - rMin) + rMin) /
-              Math.log(distribution)
-          )
+        : rMax - Math.floor(Math.log(Math.random() * (distribution ** rMax - rMin) + rMin) / Math.log(distribution));
       return {
         x,
         y,
-        r
-      }
-    })
-  }
+        r,
+      };
+    }),
+  };
 }

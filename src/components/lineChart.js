@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
 defaults.animation = false;
 const data = {
-  labels: ['11:00', '11:15', '11:30', '11:45', '12:00', '12:15', '12:30','12:45'],
+  labels: ['11:00', '11:15', '11:30', '11:45', '12:00', '12:15', '12:30', '12:45'],
   datasets: [
     {
       label: 'CPU',
@@ -12,7 +12,7 @@ const data = {
       backgroundColor: 'Blue',
       borderColor: 'Blue',
     },
-        {
+    {
       label: 'Memory',
       data: [30, 35, 32, 36, 34, 40, 43, 42],
       fill: false,
@@ -28,7 +28,7 @@ const data = {
     },
     {
       label: 'CPU Current User',
-      data: [34, 65, 67, 68, 65, 55, 53,20],
+      data: [34, 65, 67, 68, 65, 55, 53, 20],
       fill: false,
       backgroundColor: 'Purple',
       borderColor: 'Purple',
@@ -50,7 +50,6 @@ const options = {
 
 const LineChart = () => (
   <>
-
     <Line data={data} options={options} />
   </>
 );

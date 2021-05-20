@@ -3,7 +3,7 @@ import React, { useReducer, createContext } from 'react';
 export const GlobalContext = createContext();
 
 const initialState = {
-  cams: [],
+  nodes: [],
   perfmons: [],
   streamingstats: [],
   streams: [],
@@ -13,14 +13,14 @@ const initialState = {
   showVMS: false,
   vmsModal: false,
   settingsModal: false,
-  selectedCamera:'NONE',
+  selectedNode: 'NONE',
   selectedVMSDate: new Date(),
   selectedVMSTimeMin: '00',
   selectedVMSTimeHour: '12',
-  vmsTimePM:false,
-  videoPlayer:{},
-  videoPlayersState:{},
-  homeSelectedCamera: 'NONE',
+  vmsTimePM: false,
+  videoPlayer: {},
+  videoPlayersState: {},
+  homeSelectedNode: 'NONE',
   homeStreamingModal: false,
   homeViewVideosModal: false,
   homeSettingsModal: false,
@@ -28,49 +28,49 @@ const initialState = {
   homeVideoTimePM: false,
   homeVideoTimeHour: '00',
   homeVideoTimeMin: '00',
-  cameraSettingsComponent: false,
-  cameraSettingsCameraComponent: false,
-  currentCamInfo: [{
-     location:{
-          lat:'2',
-          lng:'3'
+  nodeSettingsComponent: false,
+  nodeSettingsNodeComponent: false,
+  currentCamInfo: [
+    {
+      location: {
+        lat: '2',
+        lng: '3',
+      },
+      sysInfo: {
+        osInfo: {
+          arch: '',
+          kernel: '',
+          codename: '',
+          distro: '',
         },
-      sysInfo:{
-        osInfo:{
-          arch:'',
-          kernel:'',
-          codename:"",
-          distro:''
-        },
-        
+
         diskLayout: [
           {
-            device:'',
+            device: '',
           },
-          { 
-            device:'',
-          }
+          {
+            device: '',
+          },
         ],
-       
+      },
+
+      IP: '',
+      nodeName: '',
+      nodesOnlineStatus: [
+        {
+          cam1: false,
+          cam2: false,
+          cam3: false,
         },
-        
-        IP:'',
-        nodeName:'',
-        camsOnlineStatus:[{
-          cam1:false,
-          cam2:false,
-          cam3:false,
-}
-
-
-        ]
-  }]
+      ],
+    },
+  ],
 };
+
 const reducer = (state, action) => {
   console.log(state);
   switch (action.type) {
-    
-        case 'UPDATE_CAMERASYSCAMERACOMPONENT':
+    case 'UPDATE_NODESYSNODECOMPONENT':
       return {
         ...state,
         cameraSettingsCameraComponent: action.payload,
@@ -80,33 +80,33 @@ const reducer = (state, action) => {
         ...state,
         currentCamInfo: action.payload,
       };
-  case 'UPDATE_CAMERASYSCOMPONENT':
+    case 'UPDATE_CAMERASYSCOMPONENT':
       return {
         ...state,
         cameraSettingsComponent: action.payload,
       };
-     case 'UPDATE_CAMERASETTINGSMODAL':
+    case 'UPDATE_CAMERASETTINGSMODAL':
       return {
         ...state,
         cameraSettingsModal: action.payload,
       };
-       case 'UPDATEHOMEVIDEOTIMEHOUR':
+    case 'UPDATEHOMEVIDEOTIMEHOUR':
       return {
         ...state,
         homeVideoTimeHour: action.payload,
       };
-       case 'UPDATEHOMEVIDEOTIMEMIN':
+    case 'UPDATEHOMEVIDEOTIMEMIN':
       return {
         ...state,
         homeVideoTimeMin: action.payload,
       };
-       case 'UPDATEHOMEVIDEOTIMEPM':
+    case 'UPDATEHOMEVIDEOTIMEPM':
       return {
         ...state,
         homeVideoTimePM: action.payload,
       };
 
-       case 'UPDATEHOMEVIDEODATE':
+    case 'UPDATEHOMEVIDEODATE':
       return {
         ...state,
         homeVideoDate: action.payload,
@@ -116,13 +116,13 @@ const reducer = (state, action) => {
         ...state,
         homeSettingsModal: action.payload,
       };
-      case 'HOMEVIEWVIDEOSMODAL':
+    case 'HOMEVIEWVIDEOSMODAL':
       return {
         ...state,
         homeViewVideosModal: action.payload,
       };
 
-   case 'HOMESTREAMINGMODAL':
+    case 'HOMESTREAMINGMODAL':
       return {
         ...state,
         homeStreamingModal: action.payload,
@@ -147,28 +147,28 @@ const reducer = (state, action) => {
         ...state,
         vmsTimePM: action.payload,
       };
-      case 'UPDATE_VMSTIMEHOURVALUE':
+    case 'UPDATE_VMSTIMEHOURVALUE':
       return {
         ...state,
         selectedVMSTimeHour: action.payload,
       };
-     case 'UPDATE_VMSTIMEMINVALUE':
+    case 'UPDATE_VMSTIMEMINVALUE':
       return {
         ...state,
         selectedVMSTimeMin: action.payload,
       };
-     case 'UPDATE_VMSCALVALUE':
+    case 'UPDATE_VMSCALVALUE':
       return {
         ...state,
         selectedVMSDate: action.payload,
       };
-      case 'UPDATE_SELECTEDCAMERA':
+    case 'UPDATE_SELECTEDCAMERA':
       return {
         ...state,
         selectedCamera: action.payload,
-        settingsModal: true
+        settingsModal: true,
       };
-      case 'UPDATE_VMSDateTimeMODAL':
+    case 'UPDATE_VMSDateTimeMODAL':
       return {
         ...state,
         vmsModal: action.payload,
@@ -178,10 +178,10 @@ const reducer = (state, action) => {
         ...state,
         settingsModal: action.payload,
       };
-    case 'UPDATE_CAMS':
+    case 'UPDATE_NODES':
       return {
         ...state,
-        cams: action.payload,
+        nodes: action.payload,
       };
     case 'UPDATE_PERFMONS':
       return {
@@ -191,7 +191,7 @@ const reducer = (state, action) => {
     case 'UPDATE_STREAMINGSTATS':
       return {
         ...state,
-        streamingstats: {'restreamer01':action.payload, 'updated':new Date().toString() },
+        streamingstats: { restreamer01: action.payload, updated: new Date().toString() },
       };
     case 'UPDATE_STREAMS':
       return {
@@ -204,7 +204,7 @@ const reducer = (state, action) => {
         showHome: true,
         showCamMngr: false,
         showVMS: false,
-        showSysMngr: false
+        showSysMngr: false,
       };
     case 'showVMS':
       return {
@@ -212,8 +212,7 @@ const reducer = (state, action) => {
         showHome: false,
         showCamMngr: false,
         showVMS: true,
-        showSysMngr: false
-
+        showSysMngr: false,
       };
     case 'showCamMngr':
       return {
@@ -221,19 +220,16 @@ const reducer = (state, action) => {
         showHome: false,
         showCamMngr: true,
         showVMS: false,
-        showSysMngr: false
-
+        showSysMngr: false,
       };
-          case 'showSysMngr':
+    case 'showSysMngr':
       return {
         ...state,
         showHome: false,
         showCamMngr: false,
         showVMS: false,
-        showSysMngr: true
-
+        showSysMngr: true,
       };
-
 
     default:
       throw new Error();

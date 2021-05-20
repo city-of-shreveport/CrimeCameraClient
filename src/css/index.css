@@ -8,57 +8,47 @@ body {
 .checkedInTime {
   font-size: 12px;
 }
-.videoPlayerDIV{
-max-height: 800px ;
-  
+.videoPlayerDIV {
+  max-height: 800px;
 }
-.videoPlayerCalendarCOL{
-min-height: 400px;
- overflow:hidden
-
+.videoPlayerCalendarCOL {
+  min-height: 400px;
+  overflow: hidden;
 }
 .homeContainer {
   max-height: 800px;
-  overflow:hidden
+  overflow: hidden;
 }
 .timePickerVideos {
-max-height: 600px;
-
+  max-height: 600px;
 }
-.settingsDIV{
-max-height: 800px;
-min-width: 100%;
-}
-.timesListGroup{
-max-height: 280px;
-overflow-y: scroll;
-overflow-x:hidden
-}
-.react-calendar{
+.settingsDIV {
+  max-height: 800px;
   min-width: 100%;
-
-
 }
-.marginLogidIn{
+.timesListGroup {
+  max-height: 280px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.react-calendar {
+  min-width: 100%;
+}
+.marginLogidIn {
   margin-right: 10px;
-
-
 }
 
-
-.cameraListHomePage{
-max-height: 400px;
-overflow-y: scroll;
+.cameraListHomePage {
+  max-height: 400px;
+  overflow-y: scroll;
 }
 
-.chartBox{
+.chartBox {
   height: 95%;
-width: 100%;
-
+  width: 100%;
 }
-.text-left{
-  text-align: left  !important;;
-
+.text-left {
+  text-align: left !important;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
@@ -67,8 +57,6 @@ code {
   min-width: 95%;
   height: auto;
 }
-.SystemLineChart{
+.SystemLineChart {
   height: 200px;
-
-
 }

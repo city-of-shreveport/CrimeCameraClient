@@ -5,14 +5,7 @@ import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CardGroup from 'react-bootstrap/CardGroup';
 
-import SettingsModal from './settingsModal';
 import { Container } from 'semantic-ui-react';
-import SettingsCameraList from './settingsCameraList';
-import SettingsServerStats from './settingsServerStats';
-import SettingsRestreamerStats from './settingsRestreamerStats';
-import SettingsBackEndServers from './settingsBackEndServers';
-import SettingsFrontEndServers from './settingsFrontEndServers';
-import SettingsRestreaming from './settingsRestreaming';
 import { GlobalContext } from '../contexts/globalContext';
 import HorizontalBarChart from './barChart2';
 import HorizontalBarChart2 from './barChart';
@@ -24,12 +17,24 @@ import SettingsCamerasSettingsCard from './settingsModalCameraSettingsCard';
 
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
-  const upDateSelectedCam = (param) =>
+  const getCameraInfo = (node) => {
+    fetch('http://10.10.10.55:3001/cameras/getCameraInfo/' + node)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: 'UPDATECURRENTCAMINFO',
+          payload: json,
+        });
+      });
+  };
+  const upDateSelectedCam = (param) => {
+    getCameraInfo(param);
+
     dispatch({
       type: 'UPDATE_SELECTEDCAMERA',
       payload: param,
     });
-
+  };
   return (
     <Container fluid className="settingsDIV">
       <br />
@@ -48,7 +53,7 @@ export default function Settings() {
           </Card>
         </Col>
 
-        <Col xs={8}>
+        <Col>
           <Card.Header as="h4">{state.selectedCamera}</Card.Header>
           <CardGroup>
             <Card>

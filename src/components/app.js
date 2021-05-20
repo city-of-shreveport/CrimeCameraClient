@@ -19,11 +19,11 @@ export default function App() {
   }
   useEffect(() => {
     function refreshData() {
-      fetch('http://10.10.10.55:3001/cameras/cameraList')
+      fetch('http://localhost:3001/nodes/list')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'UPDATE_CAMS',
+            type: 'UPDATE_NODES',
             payload: json,
           });
         });
@@ -35,7 +35,7 @@ export default function App() {
             payload: json,
           });
         });
-         fetch('http://cc-restreamer.shreveport-it.org/api/streams')
+      fetch('http://cc-restreamer.shreveport-it.org/api/streams')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -66,20 +66,15 @@ export default function App() {
           <Nav.Link onClick={() => navigate('showVMS')}>VMS</Nav.Link>
           <Nav.Link onClick={() => navigate('showCamMngr')}>Camera Manager</Nav.Link>
           <Nav.Link onClick={() => navigate('showSysMngr')}>System Manager</Nav.Link>
-
         </Nav>
         <Navbar.Collapse className="justify-content-end marginLogidIn">
-          <Navbar.Text>
-            Signed in as: Jack Swayze{' '}
-          </Navbar.Text>
+          <Navbar.Text>Signed in as: Jack Swayze </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
       {state.showHome && <Home />}
       {state.showVMS && <VMS />}
       {state.showCamMngr && <CamMngr />}
       {state.showSysMngr && <SysMngr />}
-
-      
     </>
   );
 }

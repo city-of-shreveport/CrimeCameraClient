@@ -3,19 +3,12 @@ import { Bar } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
 defaults.animation = false;
 const data = {
-    labels: ['Memory', 'CPU avgLoad', 'CPU currentLoad', 'CPU currentLoadUser'],
+  labels: ['Memory', 'CPU avgLoad', 'CPU currentLoad', 'CPU currentLoadUser'],
   datasets: [
     {
-      data: [75,50, 34,65],
-      backgroundColor: [
-        'Red',
-        'Blue',
-        'Green',
-        'Purple'
-      ],
-      borderColor: [
-        'rgba(255, 255, 255, 1)',
-      ],
+      data: [75, 50, 34, 65],
+      backgroundColor: ['Red', 'Blue', 'Green', 'Purple'],
+      borderColor: ['rgba(255, 255, 255, 1)'],
       borderWidth: 1,
     },
   ],
@@ -32,19 +25,18 @@ const options = {
   },
   responsive: true,
   plugins: {
-    legend:{display: false}
+    legend: { display: false },
   },
   scales: {
-            y: {
-                min: 0,
-                max: 100
-            }
-        }
+    y: {
+      min: 0,
+      max: 100,
+    },
+  },
 };
 
 const HorizontalBarChart = () => (
   <>
-
     <Bar data={data} options={options} />
   </>
 );
