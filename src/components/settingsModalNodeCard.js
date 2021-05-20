@@ -6,7 +6,7 @@ import { GlobalContext } from '../contexts/globalContext';
 
 import Button from 'react-bootstrap/Button';
 
-export default function SettingsCamerasCard() {
+export default function SettingsNodeCard() {
   const [, dispatch] = useContext(GlobalContext);
   const handleSysConfigCameraModal = () =>
     dispatch({

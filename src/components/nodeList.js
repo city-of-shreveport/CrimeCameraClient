@@ -13,7 +13,7 @@ import Row from 'react-bootstrap/Row';
 import Calendar from 'react-calendar';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-export default function CameraList() {
+export default function NodeList() {
   const [state, dispatch] = useContext(GlobalContext);
   const updateHomeTimeHour = (e) =>
     dispatch({
@@ -46,12 +46,12 @@ export default function CameraList() {
       payload: false,
     });
   // eslint-disable-next-lineclear
-  const getCameraInfo = (node) => {
-    fetch('http://10.10.10.55:3001/cameras/getCameraInfo/' + node)
+  const getNodeInfo = (node) => {
+    fetch('http://10.10.10.55:3001/cameras/getNodeInfo/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
-          type: 'UPDATECURRENTCAMINFO',
+          type: 'UPDATE_CURRENT_NODE_INFO',
           payload: json,
         });
       });
@@ -66,10 +66,10 @@ export default function CameraList() {
             <Button type="submit">Submit</Button>
           </Form>
         </Card.Header>
-        <Card.Body className="cameraListHomePage">
+        <Card.Body className="nodeListHomePage">
           <ListGroup>
-            {state.cams.map((cam) => (
-              <ListGroup.Item onClick={() => getCameraInfo(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
+            {state.nodes.map((node) => (
+              <ListGroup.Item onClick={() => getNodeInfo(node.name)}>{node.name}</ListGroup.Item>
             ))}
           </ListGroup>
         </Card.Body>

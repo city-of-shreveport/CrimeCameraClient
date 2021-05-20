@@ -30,41 +30,7 @@ const initialState = {
   homeVideoTimeMin: '00',
   nodeSettingsComponent: false,
   nodeSettingsNodeComponent: false,
-  currentCamInfo: [
-    {
-      location: {
-        lat: '2',
-        lng: '3',
-      },
-      sysInfo: {
-        osInfo: {
-          arch: '',
-          kernel: '',
-          codename: '',
-          distro: '',
-        },
-
-        diskLayout: [
-          {
-            device: '',
-          },
-          {
-            device: '',
-          },
-        ],
-      },
-
-      IP: '',
-      nodeName: '',
-      nodesOnlineStatus: [
-        {
-          cam1: false,
-          cam2: false,
-          cam3: false,
-        },
-      ],
-    },
-  ],
+  currentNodeInfo: {},
 };
 
 const reducer = (state, action) => {
@@ -75,10 +41,10 @@ const reducer = (state, action) => {
         ...state,
         cameraSettingsCameraComponent: action.payload,
       };
-    case 'UPDATECURRENTCAMINFO':
+    case 'UPDATE_CURRENT_NODE_INFO':
       return {
         ...state,
-        currentCamInfo: action.payload,
+        currentNodeInfo: action.payload,
       };
     case 'UPDATE_CAMERASYSCOMPONENT':
       return {
@@ -202,33 +168,33 @@ const reducer = (state, action) => {
       return {
         ...state,
         showHome: true,
-        showCamMngr: false,
+        showNodeManager: false,
         showVMS: false,
-        showSysMngr: false,
+        showSystemManager: false,
       };
     case 'showVMS':
       return {
         ...state,
         showHome: false,
-        showCamMngr: false,
+        showNodeManager: false,
         showVMS: true,
-        showSysMngr: false,
+        showSystemManager: false,
       };
-    case 'showCamMngr':
+    case 'showNodeManager':
       return {
         ...state,
         showHome: false,
-        showCamMngr: true,
+        showNodeManager: true,
         showVMS: false,
-        showSysMngr: false,
+        showSystemManager: false,
       };
-    case 'showSysMngr':
+    case 'showSystemManager':
       return {
         ...state,
         showHome: false,
-        showCamMngr: false,
+        showNodeManager: false,
         showVMS: false,
-        showSysMngr: true,
+        showSystemManager: true,
       };
 
     default:

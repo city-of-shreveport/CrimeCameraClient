@@ -5,10 +5,10 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import HorizontalBarChart from './barChart2';
 import HorizontalBarChart2 from './barChart';
 import LineChart from './lineChart';
-import SettingsCamerasCard from './settingsModalCamerasCard';
+import SettingsNodeCard from './settingsModalNodeCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
-import SettingsCamerasSettingsCard from './settingsModalCameraSettingsCard';
+import SettingsNodesSettingsCard from './settingsModalNodeSettingsCard';
 
 import { GlobalContext } from '../contexts/globalContext';
 
@@ -49,7 +49,7 @@ export default function SettingsModal() {
             <Card.Header>Cameras</Card.Header>
             <Card.Header></Card.Header>
             <Card.Body>
-              {state.cameraSettingsCameraComponent ? <SettingsCamerasSettingsCard /> : <SettingsCamerasCard />}
+              {state.cameraSettingsCameraComponent ? <SettingsNodesSettingsCard /> : <SettingsNodeCard />}
             </Card.Body>
           </Card>
           <Card>

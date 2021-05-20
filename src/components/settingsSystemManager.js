@@ -14,7 +14,7 @@ import BarChart from './SystemBarChart';
 import BarChart2 from './SystemServersBarChart';
 import BarChart3 from './SystemServers2BarChart';
 
-export default function SysMngr() {
+export default function SystemManager() {
   return (
     <Container fluid className="settingsDIV">
       <br />

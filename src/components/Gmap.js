@@ -47,7 +47,7 @@ const GMap = () => {
     // eslint-disable-next-line
     googleMap = initGoogleMap();
     function getCams() {
-      fetch('http://10.10.10.55:3001/cameras/cameraList')
+      fetch('http://3.136.163.132:3001/cameras/nodeList')
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line

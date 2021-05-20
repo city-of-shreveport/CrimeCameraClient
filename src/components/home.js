@@ -1,4 +1,4 @@
-import CameraList from '../components/cameraList';
+import NodeList from '../components/nodeList';
 import Col from 'react-bootstrap/Col';
 import Map from './map';
 import React, { useContext } from 'react';
@@ -33,7 +33,7 @@ export default function Home() {
           <Col xs={3}>
             <Card>
               <Card.Body>
-                <CameraList />
+                <NodeList />
               </Card.Body>
             </Card>
           </Col>

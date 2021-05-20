@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 
 import { Player } from 'video-react';
 
-export default function SettingsCamerasSettingsCard() {
+export default function SettingsNodesSettingsCard() {
   const [, dispatch] = useContext(GlobalContext);
   const handleSysConfigCameraModal = () =>
     dispatch({

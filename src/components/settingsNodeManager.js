@@ -4,16 +4,15 @@ import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CardGroup from 'react-bootstrap/CardGroup';
-
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../contexts/globalContext';
 import HorizontalBarChart from './barChart2';
 import HorizontalBarChart2 from './barChart';
 import LineChart from './lineChart';
-import SettingsCamerasCard from './settingsModalCamerasCard';
+import SettingsNodeCard from './settingsModalNodeCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
-import SettingsCamerasSettingsCard from './settingsModalCameraSettingsCard';
+import SettingsNodesSettingsCard from './settingsModalNodesSettingsCard';
 
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
@@ -46,7 +45,7 @@ export default function Settings() {
               <Card.Text as="h6">45 Online / 2 Problems</Card.Text>
             </Card.Header>
             <ListGroup>
-              {state.cams.map((cam) => (
+              {state.nodes.map((cam) => (
                 <ListGroup.Item onClick={() => upDateSelectedCam(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
               ))}
             </ListGroup>
@@ -81,7 +80,7 @@ export default function Settings() {
               <Card.Header>Cameras</Card.Header>
               <Card.Header></Card.Header>
               <Card.Body>
-                {state.cameraSettingsCameraComponent ? <SettingsCamerasSettingsCard /> : <SettingsCamerasCard />}
+                {state.cameraSettingsCameraComponent ? <SettingsNodesSettingsCard /> : <SettingsNodeCard />}
               </Card.Body>
             </Card>
             <Card>

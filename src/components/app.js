@@ -2,12 +2,13 @@ import Home from './home';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import React, { useContext, useEffect } from 'react';
-import CamMngr from './settingsCamMngr.js';
-import SysMngr from './settingsSysMngr.js';
+import NodeManager from './settingsNodeManager';
+import SystemManager from './settingsSystemManager';
 import VMS from './vms';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
 import { IoCameraOutline } from 'react-icons/io5';
+
 export default function App() {
   const [state, dispatch] = useContext(GlobalContext);
 
@@ -17,9 +18,10 @@ export default function App() {
       payload: true,
     });
   }
+
   useEffect(() => {
     function refreshData() {
-      fetch('http://localhost:3001/nodes/list')
+      fetch('http://3.136.163.132:3001/nodes/list?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -27,24 +29,28 @@ export default function App() {
             payload: json,
           });
         });
-      fetch('http://cc-restreamer.shreveport-it.org/api/server')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'UPDATE_STREAMINGSTATS',
-            payload: json,
-          });
-        });
-      fetch('http://cc-restreamer.shreveport-it.org/api/streams')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'UPDATE_STREAMS',
-            payload: json,
-          });
-        });
+
+      // fetch('http://cc-restreamer.shreveport-it.org/api/server')
+      //   .then((response) => response.json())
+      //   .then((json) => {
+      //     dispatch({
+      //       type: 'UPDATE_STREAMINGSTATS',
+      //       payload: json,
+      //     });
+      //   });
+
+      // fetch('http://cc-restreamer.shreveport-it.org/api/streams')
+      //   .then((response) => response.json())
+      //   .then((json) => {
+      //     dispatch({
+      //       type: 'UPDATE_STREAMS',
+      //       payload: json,
+      //     });
+      //   });
     }
+
     refreshData();
+
     setInterval(() => {
       refreshData();
     }, 10000);
@@ -64,8 +70,8 @@ export default function App() {
         <Nav className="mr-auto">
           <Nav.Link onClick={() => navigate('showHome')}>Home</Nav.Link>
           <Nav.Link onClick={() => navigate('showVMS')}>VMS</Nav.Link>
-          <Nav.Link onClick={() => navigate('showCamMngr')}>Camera Manager</Nav.Link>
-          <Nav.Link onClick={() => navigate('showSysMngr')}>System Manager</Nav.Link>
+          <Nav.Link onClick={() => navigate('showNodeManager')}>Camera Manager</Nav.Link>
+          <Nav.Link onClick={() => navigate('showSystemManager')}>System Manager</Nav.Link>
         </Nav>
         <Navbar.Collapse className="justify-content-end marginLogidIn">
           <Navbar.Text>Signed in as: Jack Swayze </Navbar.Text>
@@ -73,8 +79,8 @@ export default function App() {
       </Navbar>
       {state.showHome && <Home />}
       {state.showVMS && <VMS />}
-      {state.showCamMngr && <CamMngr />}
-      {state.showSysMngr && <SysMngr />}
+      {state.showNodeManager && <NodeManager />}
+      {state.showSystemManager && <SystemManager />}
     </>
   );
 }

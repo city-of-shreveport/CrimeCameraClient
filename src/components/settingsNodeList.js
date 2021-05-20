@@ -2,7 +2,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
-export default function SettingsCameraList() {
+export default function SettingsnodeList() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const upDateSelectedCam = (param) =>
@@ -22,7 +22,7 @@ export default function SettingsCameraList() {
 
         <Card.Text>
           <ListGroup>
-            {state.cams.map((cam) => (
+            {state.nodes.map((cam) => (
               <ListGroup.Item onClick={() => upDateSelectedCam(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
             ))}
           </ListGroup>
