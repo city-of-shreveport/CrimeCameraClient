@@ -47,7 +47,7 @@ const GMap = () => {
     // eslint-disable-next-line
     googleMap = initGoogleMap();
     function getCams() {
-      fetch('https://crime-camera-system-api.shreveport-it.org/cameras/nodeList')
+      fetch('https://crime-camera-system-api.shreveport-it.org1/cameras/nodeList')
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line
