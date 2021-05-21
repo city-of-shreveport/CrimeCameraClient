@@ -1,9 +1,6 @@
 *.log
 .DS_Store
-.env.development.local
-.env.local
-.env.production.local
-.env.test.local
+.env*
 .pnp.js
 /.pnp
 /.vscode
