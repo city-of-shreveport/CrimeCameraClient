@@ -37,8 +37,7 @@ export default function Home() {
               </Card.Body>
             </Card>
           </Col>
-          <Col xs={3}>
-          </Col>
+          <Col xs={3}></Col>
           <Col>
             <Card className="text-center gmapsCard">
               <Card.Body>
