@@ -47,7 +47,7 @@ export default function NodeList() {
     });
   // eslint-disable-next-lineclear
   const getNodeInfo = (node) => {
-    fetch('http://10.10.10.55:3001/cameras/getNodeInfo/' + node)
+    fetch('http://3.136.163.132:3001/cameras/getNodeInfo/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -77,7 +77,7 @@ export default function NodeList() {
       </Card>
       <Modal show={state.homeStreamingModal} onHide={() => handleStreamModalClose()} centered size="lg">
         <Card className="text-center">
-          <Card.Header as="h5">Streaming {state.homeSelectedCamera}</Card.Header>
+          <Card.Header as="h5">Streaming {state.homeSelectedNode}</Card.Header>
           <Card.Body>
             <CardGroup>
               <Card>
@@ -102,7 +102,7 @@ export default function NodeList() {
       </Modal>
       <Modal show={state.homeViewVideosModal} onHide={() => handleViewVideosModalClose()} centered size="lg">
         <Card className="text-center">
-          <Card.Header as="h5">Video Player {state.homeSelectedCamera}</Card.Header>
+          <Card.Header as="h5">Video Player {state.homeSelectedNode}</Card.Header>
           <Container>
             <Row>
               <Col>

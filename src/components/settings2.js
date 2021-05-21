@@ -48,13 +48,13 @@ export default function Settings() {
         </Col>
 
         <Col xs={8}>
-          <Card.Header as="h4">{state.selectedCamera}</Card.Header>
+          <Card.Header as="h4">{state.selectedNode}</Card.Header>
           <CardGroup>
             <Card>
               <Card.Header>System Information</Card.Header>
               <Card.Text></Card.Text>
               <Card.Body>
-                {state.cameraSettingsComponent ? <SettingsSysInfoEditCard /> : <SettingsSysInfoCard />}
+                {state.nodeSettingsComponent ? <SettingsSysInfoEditCard /> : <SettingsSysInfoCard />}
               </Card.Body>
             </Card>
             <Card>
@@ -75,7 +75,7 @@ export default function Settings() {
               <Card.Header>Cameras</Card.Header>
               <Card.Header></Card.Header>
               <Card.Body>
-                {state.cameraSettingsCameraComponent ? <SettingsNodesSettingsCard /> : <SettingsNodeCard />}
+                {state.nodeSettingsCameraComponent ? <SettingsNodesSettingsCard /> : <SettingsNodeCard />}
               </Card.Body>
             </Card>
             <Card>

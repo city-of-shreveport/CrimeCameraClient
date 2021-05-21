@@ -21,7 +21,7 @@ export default function App() {
 
   useEffect(() => {
     function refreshData() {
-      fetch('http://3.136.163.132:3001/nodes/list?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+      fetch('https://3.136.163.132:3001/nodes/list?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
         .then((response) => response.json())
         .then((json) => {
           dispatch({

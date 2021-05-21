@@ -487,7 +487,7 @@ export default class PlayerControlExample extends Component {
             size="lg"
           >
             <Card className="text-center">
-              <Card.Header as="h5">Selecet Camera</Card.Header>
+              <Card.Header as="h5">Selecet Node</Card.Header>
               <CardGroup>
                 <Card>
                   <Map isMarkerShown />
@@ -497,7 +497,7 @@ export default class PlayerControlExample extends Component {
                     <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
                     <Button type="submit">Submit</Button>
                   </Form>
-                  {this.state.cameras.map((cam) => (
+                  {this.state.nodes.map((cam) => (
                     <ListGroup.Item onClick={() => upDateSelectedCam(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
                   ))}
                 </Card>

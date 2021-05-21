@@ -48,7 +48,7 @@ export default function Home() {
                 </Card.Subtitle>
                 <Card.Text>
                   <Card.Title>Node</Card.Title>
-                  {state.currentNodeInfo[0].onlineStatus.camera1 ? (
+                  {state.currentNodeInfo.onlineStatus.camera1 ? (
                     <Button variant="success" size="sm">
                       Cam 1
                     </Button>
@@ -57,7 +57,7 @@ export default function Home() {
                       Cam 1
                     </Button>
                   )}{' '}
-                  {state.currentNodeInfo[0].onlineStatus.camera2 ? (
+                  {state.currentNodeInfo.onlineStatus.camera2 ? (
                     <Button variant="success" size="sm">
                       {' '}
                       Cam 2
@@ -68,7 +68,7 @@ export default function Home() {
                       Cam 2
                     </Button>
                   )}{' '}
-                  {state.currentNodeInfo[0].onlineStatus.camera3 ? (
+                  {state.currentNodeInfo.onlineStatus.camera3 ? (
                     <Button variant="success" size="sm">
                       Cam 3
                     </Button>
@@ -83,7 +83,7 @@ export default function Home() {
                     <tr>
                       <td>Status:</td>
                       <td>
-                        {state.currentNodeInfo[0].systemOK ? (
+                        {state.currentNodeInfo.systemOK ? (
                           <Button variant="success" size="sm">
                             Good
                           </Button>
