@@ -21,9 +21,10 @@ export default function App() {
 
   useEffect(() => {
     function refreshData() {
-      fetch('https://3.136.163.132:3001/nodes/list?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+      fetch('https://crime-camera-system-API.shreveport-it.org/nodes/list?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
         .then((response) => response.json())
         .then((json) => {
+          console.log(json)
           dispatch({
             type: 'UPDATE_NODES',
             payload: json,
@@ -53,6 +54,7 @@ export default function App() {
 
     setInterval(() => {
       refreshData();
+      console.log(state)
     }, 10000);
 
     // eslint-disable-next-line

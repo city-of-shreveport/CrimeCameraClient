@@ -102,7 +102,7 @@ export default function NodeList() {
       </Modal>
       <Modal show={state.homeViewVideosModal} onHide={() => handleViewVideosModalClose()} centered size="lg">
         <Card className="text-center">
-          <Card.Header as="h5">Video Player {state.homeSelectedNode}</Card.Header>
+          <Card.Header as="h5">Video Player {state.homeSelectedCamera}</Card.Header>
           <Container>
             <Row>
               <Col>

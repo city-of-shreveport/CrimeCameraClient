@@ -1,4 +1,4 @@
-import GMap from './Gmap';
+import GMap from './gmap';
 import React, { useState, useEffect } from 'react';
 
 // API key of the google map
