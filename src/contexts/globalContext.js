@@ -31,11 +31,25 @@ const initialState = {
   nodeSettingsComponent: false,
   nodeSettingsNodeComponent: false,
   currentNodeInfo: {},
+  newNodeForm: {}
 };
 
 const reducer = (state, action) => {
   console.log(state);
   switch (action.type) {
+   
+    case 'UPDATE_NEW_NODE_FORM':
+      return {
+        ...state,
+        newNodeForm: { newNodeForm: action.payload}
+      };
+
+    case 'SETTINGS_NEW_NODE_MODAL':
+      return {
+        ...state,
+        newNodeModal: action.payload,
+      };
+
     case 'UPDATE_NODESYSNODECOMPONENT':
       return {
         ...state,

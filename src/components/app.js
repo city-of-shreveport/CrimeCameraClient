@@ -21,7 +21,7 @@ export default function App() {
 
   useEffect(() => {
     function refreshData() {
-      fetch('https://crime-camera-system-API.shreveport-it.org/nodes/list?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+      fetch('https://crime-camera-system-API.shreveport-it.org/nodes/index?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
         .then((response) => response.json())
         .then((json) => {
           console.log(json)
@@ -72,7 +72,7 @@ export default function App() {
         <Nav className="mr-auto">
           <Nav.Link onClick={() => navigate('showHome')}>Home</Nav.Link>
           <Nav.Link onClick={() => navigate('showVMS')}>VMS</Nav.Link>
-          <Nav.Link onClick={() => navigate('showNodeManager')}>Camera Manager</Nav.Link>
+          <Nav.Link onClick={() => navigate('showNodeManager')}>Node Manager</Nav.Link>
           <Nav.Link onClick={() => navigate('showSystemManager')}>System Manager</Nav.Link>
         </Nav>
         <Navbar.Collapse className="justify-content-end marginLogidIn">

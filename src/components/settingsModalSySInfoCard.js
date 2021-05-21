@@ -19,38 +19,38 @@ export default function SettingsSysInfoCard() {
       <CardGroup>
         <Card border="light">
           <Card.Text>
-            {state.currentCamInfo && (
+           
               <Table striped bordered hover size="sm" variant="dark">
                 <tbody>
                   <tr>
                     <td>Host Name</td>
-                    <td>{state.currentCamInfo[0].nodeName}</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>FQDN</td>
-                    <td>{state.currentCamInfo[0].nodeName}.local</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>IP</td>
-                    <td>{state.currentCamInfo[0].IP}</td>
+                    <td>{}</td>
                   </tr>
                   <tr>
                     <td>Location</td>
                     <td>
-                      {state.currentCamInfo[0].location.lat},{state.currentCamInfo[0].location.lng}
+                      
                     </td>
                   </tr>
                   <tr>
                     <td>Video Drive</td>
-                    <td>{state.currentCamInfo[0].sysInfo.diskLayout[1].device}</td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td>Buddy Drive</td>
-                    <td>{state.currentCamInfo[0].sysInfo.diskLayout[0].device}</td>
+                    <td></td>
                   </tr>
                 </tbody>
               </Table>
-            )}
+            
           </Card.Text>
         </Card>
         <Card border="light">
@@ -59,19 +59,19 @@ export default function SettingsSysInfoCard() {
               <tbody>
                 <tr>
                   <td>OS </td>
-                  <td>{state.currentCamInfo[0].sysInfo.osInfo.distro}</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>CodeName</td>
-                  <td>{state.currentCamInfo[0].sysInfo.osInfo.codename}</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>Kernel</td>
-                  <td>{state.currentCamInfo[0].sysInfo.osInfo.kernel}</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>Arch</td>
-                  <td>{state.currentCamInfo[0].sysInfo.osInfo.arch}</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>Buddy 1</td>
