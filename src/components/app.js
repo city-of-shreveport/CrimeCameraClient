@@ -21,12 +21,13 @@ export default function App() {
 
   useEffect(() => {
     function refreshData() {
-      fetch('https://crime-camera-system-API.shreveport-it.org/nodes/index?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+      console.log(state)
+      fetch('https://crime-camera-system-API.shreveport-it.org/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
           dispatch({
-            type: 'UPDATE_NODES',
+            type: 'UPDATENODES',
             payload: json,
           });
         });

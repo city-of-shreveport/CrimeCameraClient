@@ -31,16 +31,17 @@ const initialState = {
   nodeSettingsComponent: false,
   nodeSettingsNodeComponent: false,
   currentNodeInfo: {},
-  newNodeForm: {}
+  nodeForm:{}
 };
 
 const reducer = (state, action) => {
+  console.log(action)
   switch (action.type) {
    
     case 'NEW_NODE_FORM':
       return {
         ...state,
-        newNodeForm: action.payload,
+        nodeForm: {data:"hgfghfg"},
       };
 
     case 'SETTINGS_NEW_NODE_MODAL':
@@ -84,7 +85,6 @@ const reducer = (state, action) => {
         ...state,
         homeVideoTimePM: action.payload,
       };
-
     case 'UPDATEHOMEVIDEODATE':
       return {
         ...state,
@@ -157,7 +157,7 @@ const reducer = (state, action) => {
         ...state,
         settingsModal: action.payload,
       };
-    case 'UPDATE_NODES':
+    case 'UPDATENODES':
       return {
         ...state,
         nodes: action.payload,

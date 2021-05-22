@@ -57,6 +57,12 @@ code {
   min-width: 95%;
   height: auto;
 }
+.customModalNewNode{
+  min-width: 40%;
+  height: auto;
+
+
+}
 .SystemLineChart {
   height: 200px;
 }
