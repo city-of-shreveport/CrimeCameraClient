@@ -35,13 +35,12 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-  console.log(state);
   switch (action.type) {
    
-    case 'UPDATE_NEW_NODE_FORM':
+    case 'NEW_NODE_FORM':
       return {
         ...state,
-        newNodeForm: { newNodeForm: action.payload}
+        newNodeForm: action.payload,
       };
 
     case 'SETTINGS_NEW_NODE_MODAL':
