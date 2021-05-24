@@ -43,11 +43,11 @@ export default class PlayerControlExample extends Component {
       vmsTimePM: false,
       selectedVMSDate: new Date(),
     };
-    fetch('http://3.136.163.132:3001/cameras/nodeList')
-      .then((response) => response.json())
-      .then((json) => {
-        this.setState({ cameras: json });
-      });
+    //etch('http://3.136.163.132:3001/cameras/nodeList')
+     // .then((response) => response.json())
+    // .then((json) => {
+     //   this.setState({ cameras: json });
+     // });
 
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);

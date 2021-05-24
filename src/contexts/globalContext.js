@@ -35,21 +35,17 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-  console.log(action)
-  switch (action.type) {
-   
-    case 'NEW_NODE_FORM':
+  switch (action.type) { 
+        case 'UPDATENODES':
       return {
         ...state,
-        nodeForm: {data:"hgfghfg"},
+        nodes: action.payload,
       };
-
     case 'SETTINGS_NEW_NODE_MODAL':
       return {
         ...state,
         newNodeModal: action.payload,
       };
-
     case 'UPDATE_NODESYSNODECOMPONENT':
       return {
         ...state,
@@ -141,12 +137,6 @@ const reducer = (state, action) => {
         ...state,
         selectedVMSDate: action.payload,
       };
-    case 'UPDATE_SELECTEDCAMERA':
-      return {
-        ...state,
-        selectedCamera: action.payload,
-        settingsModal: true,
-      };
     case 'UPDATE_VMSDateTimeMODAL':
       return {
         ...state,
@@ -157,11 +147,7 @@ const reducer = (state, action) => {
         ...state,
         settingsModal: action.payload,
       };
-    case 'UPDATENODES':
-      return {
-        ...state,
-        nodes: action.payload,
-      };
+
     case 'UPDATE_PERFMONS':
       return {
         ...state,

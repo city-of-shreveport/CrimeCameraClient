@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 const GMap = () => {
-  const [, dispatch] = useContext(GlobalContext);
-  const getCameraInfo = (node) => {
-    fetch('http://10.10.10.55:3001/cameras/getCameraInfo/' + node)
+  const [state, dispatch] = useContext(GlobalContext);
+  const getCameraInfo = (node) => {console.log(node)
+    fetch("https://crime-camera-system-api.shreveport-it.org/api/nodes/" + node+"/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5")
       .then((response) => response.json())
-      .then((json) => {
+      .then((json) => {console.log(json)
         dispatch({
-          type: 'UPDATECURRENTCAMINFO',
-          payload: json,
-        });
+            type: 'UPDATE_CURRENT_NODE_INFO',
+            payload: json,
+          });
       });
   };
   const googleMapRef = useRef(null);
@@ -47,7 +47,7 @@ const GMap = () => {
     // eslint-disable-next-line
     googleMap = initGoogleMap();
     function getCams() {
-      fetch('https://crime-camera-system-API.shreveport-it.org/nodes/index?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+      fetch('https://crime-camera-system-API.shreveport-it.org/api/nodes/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line
@@ -57,18 +57,19 @@ const GMap = () => {
 
           //var bounds = new window.google.maps.LatLngBounds();
           // eslint-disable-next-line
-          json.map((cam) => {
+          json.map((node) => {
+              
             const marker = createMarker(
               {
-                lat: cam.location.lat,
-                lng: cam.location.lng,
-                icon: cam.systemOK ? iconList.pinGreen : iconList.pinRed,
+                lat: node.config.locationLat,
+                lng: node.config.locationLong,
+                icon: node.systemOK ? iconList.pinGreen : iconList.pinRed,
               },
-              cam
+              node
             );
             //bounds.extend(marker.position);
             marker.addListener('click', () => {
-              getCameraInfo(cam.nodeName);
+              getCameraInfo(marker.nodeName);
               console.log(marker.nodeName);
             });
           });
@@ -90,11 +91,12 @@ const GMap = () => {
   };
 
   // create marker on google map
-  const createMarker = (markerObj, cam) =>
+  const createMarker = (markerObj, node) =>
+  
     new window.google.maps.Marker({
       position: { lat: markerObj.lat, lng: markerObj.lng },
       map: googleMap,
-      nodeName: cam.nodeName,
+      nodeName: node.name,
       icon: {
         url: markerObj.icon,
         // set marker width and height

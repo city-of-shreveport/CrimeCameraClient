@@ -47,9 +47,9 @@ export default function NodeList() {
     });
   // eslint-disable-next-lineclear
   const getNodeInfo = (node) => {
-    fetch('http://3.136.163.132:3001/cameras/getNodeInfo/' + node)
+    fetch('https://crime-camera-system-api.shreveport-it.org/api/nodes/' + node+'/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
       .then((response) => response.json())
-      .then((json) => {
+      .then((json) => {console.log(state)
         dispatch({
           type: 'UPDATE_CURRENT_NODE_INFO',
           payload: json,
@@ -69,7 +69,7 @@ export default function NodeList() {
         <Card.Body className="nodeListHomePage">
           <ListGroup>
             {state.nodes.map((node) => (
-              <ListGroup.Item onClick={() => getNodeInfo(node.name)}>{node.name}</ListGroup.Item>
+              <ListGroup.Item key={node.name} onClick={() => getNodeInfo(node.name)}>{node.name}</ListGroup.Item>
             ))}
           </ListGroup>
         </Card.Body>

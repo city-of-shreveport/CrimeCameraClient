@@ -1,4 +1,4 @@
-import GMap from './gmap';
+import GoogleMapComponent from './shreveportMap';
 import React, { useState, useEffect } from 'react';
 
 // API key of the google map
@@ -25,7 +25,7 @@ const Map = () => {
     });
   }, []);
 
-  return <div className="App">{!loadMap ? <div>Loading...</div> : <GMap />}</div>;
+  return <div className="App">{!loadMap ? <div>Loading...</div> : <GoogleMapComponent />}</div>;
 };
 
 export default Map;
