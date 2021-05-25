@@ -54,7 +54,7 @@ export default function App() {
     refreshData();
 
     setInterval(() => {
-     
+      refreshData();
     }, 10000);
 
     // eslint-disable-next-line
