@@ -60,7 +60,7 @@ export default function NodeList() {
     <div>
       <Card className="text-center ">
         <Card.Header>
-          <h2>Cameras</h2>
+          <h2>Nodes</h2>
           <Form inline>
             <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
             <Button type="submit">Submit</Button>

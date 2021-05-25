@@ -31,29 +31,29 @@ export default function App() {
           });
         });
 
-      // fetch('http://cc-restreamer.shreveport-it.org/api/server')
-      //   .then((response) => response.json())
-      //   .then((json) => {
-      //     dispatch({
-      //       type: 'UPDATE_STREAMINGSTATS',
-      //       payload: json,
-      //     });
-      //   });
+       fetch('https://crime-camera-system-restreamer.shreveport-it.org/api/server')
+         .then((response) => response.json())
+         .then((json) => {
+           dispatch({
+            type: 'UPDATE_STREAMINGSTATS',
+             payload: json,
+           });
+         });
 
-      // fetch('http://cc-restreamer.shreveport-it.org/api/streams')
-      //   .then((response) => response.json())
-      //   .then((json) => {
-      //     dispatch({
-      //       type: 'UPDATE_STREAMS',
-      //       payload: json,
-      //     });
-      //   });
+       fetch('https://crime-camera-system-restreamer.shreveport-it.org/api/streams')
+         .then((response) => response.json())
+         .then((json) => {
+          dispatch({
+            type: 'UPDATE_STREAMS',
+            payload: json,
+          });
+        });
     }
 
     refreshData();
 
     setInterval(() => {
-      //refreshData();
+      refreshData();
     }, 10000);
 
     // eslint-disable-next-line

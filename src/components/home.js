@@ -37,7 +37,45 @@ export default function Home() {
               </Card.Body>
             </Card>
           </Col>
-          <Col xs={3}></Col>
+          <Col xs={4}>
+            <Card className="text-center ">
+              <Card.Header><h4>Node Info</h4></Card.Header>
+              <Card.Body>
+              <Table striped bordered hover variant="dark">
+                  <tbody>
+                    <tr>
+                      <td colSpan="2"> Name</td>
+                      <td colSpan="3">Houston and First</td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">Status</td>
+                      <td colSpan="3"> OnLine</td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">Checked In</td>
+                      <td colSpan="3">5 Min ago</td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">Buddies</td>
+                      <td>Buddy 1 OK</td>
+                      <td>Buddy 2 OK</td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                      <td>Cameras</td>
+                      <td>Cam1 OK</td>
+                      <td>Cam2 OK</td>
+                      <td>Cam3 OK</td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2"><Button>Stream</Button></td>
+                      <td colSpan="3"><Button>Videos</Button></td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Card.Body>
+            </Card>
+          </Col>
           <Col>
             <Card className="text-center gmapsCard">
               <Card.Body>

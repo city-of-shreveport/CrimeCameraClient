@@ -43,11 +43,12 @@ export default class PlayerControlExample extends Component {
       vmsTimePM: false,
       selectedVMSDate: new Date(),
     };
-    //etch('http://3.136.163.132:3001/cameras/nodeList')
-     // .then((response) => response.json())
-    // .then((json) => {
-     //   this.setState({ cameras: json });
-     // });
+    fetch('https://crime-camera-system-API.shreveport-it.org/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+    .then((response) => response.json())
+     .then((json) => {
+        this.setState({ nodes: json });
+        this.setState({nodesReceived: true})
+      });
 
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
@@ -129,7 +130,7 @@ export default class PlayerControlExample extends Component {
   changeCurrentTime(seconds) {
     return () => {
       console.log(seconds);
-      const { player } = this.player.getState();
+      const { player } = this.player0.getState();
       this.player0.seek(player.currentTime + seconds);
       this.player2.seek(player.currentTime + seconds);
       this.player3.seek(player.currentTime + seconds);
@@ -497,9 +498,11 @@ export default class PlayerControlExample extends Component {
                     <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
                     <Button type="submit">Submit</Button>
                   </Form>
-                  {this.state.nodes.map((cam) => (
-                    <ListGroup.Item onClick={() => upDateSelectedCam(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
-                  ))}
+                  {this.state.nodesReceived && 
+                  this.state.nodes.map((node) => (
+                    <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
+                  ))
+                }
                 </Card>
               </CardGroup>
             </Card>
