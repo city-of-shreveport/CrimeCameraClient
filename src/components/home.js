@@ -68,8 +68,8 @@ export default function Home() {
                       <td>Cam3 OK</td>
                     </tr>
                     <tr>
-                      <td colSpan="2"><Button>Stream</Button></td>
-                      <td colSpan="3"><Button>Videos</Button></td>
+                      <td colSpan="2"><Button onClick={() => handleHomeStreamingModal()}>Stream</Button></td>
+                      <td colSpan="3"><Button onClick={() => handleViewVideosModal()}>Videos</Button></td>
                     </tr>
                   </tbody>
                 </Table>
