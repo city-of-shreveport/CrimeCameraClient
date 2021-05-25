@@ -41,6 +41,11 @@ const reducer = (state, action) => {
         ...state,
         nodes: action.payload,
       };
+      case 'UPDATE_SELECTEDNODE':
+      return {
+        ...state,
+        selectedNode: action.payload,
+      };
     case 'SETTINGS_NEW_NODE_MODAL':
       return {
         ...state,

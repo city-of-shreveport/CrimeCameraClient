@@ -24,9 +24,9 @@ export default function Home() {
       type: 'HOMEVIEWVIDEOSMODAL',
       payload: true,
     });
-
   return (
     <>
+    
       <br />
       <Container fluid className="homeContainer">
         <Row className="justify-content-md-center">
@@ -45,7 +45,7 @@ export default function Home() {
                   <tbody>
                     <tr>
                       <td colSpan="2"> Name</td>
-                      <td colSpan="3">Houston and First</td>
+                      <td colSpan="3">{state.currentNodeInfo.name}</td>
                     </tr>
                     <tr>
                       <td colSpan="2">Status</td>
@@ -53,7 +53,7 @@ export default function Home() {
                     </tr>
                     <tr>
                       <td colSpan="2">Checked In</td>
-                      <td colSpan="3">5 Min ago</td>
+                        <td colSpan="3"><Moment fromNow>{state.currentNodeInfo.createdAt}</Moment></td>
                     </tr>
                     <tr>
                       <td colSpan="2">Buddies</td>

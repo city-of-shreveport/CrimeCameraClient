@@ -7,7 +7,7 @@ import { GlobalContext } from '../contexts/globalContext';
 import Button from 'react-bootstrap/Button';
 
 export default function SettingsNodeCard() {
-  const [, dispatch] = useContext(GlobalContext);
+  const [state, dispatch] = useContext(GlobalContext);
   const handleSysConfigCameraModal = () =>
     dispatch({
       type: 'UPDATE_CAMERASYSCAMERACOMPONENT',
@@ -28,19 +28,19 @@ export default function SettingsNodeCard() {
               <tbody>
                 <tr>
                   <td>Status</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Direction </td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Type</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>IP</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
               </tbody>
             </Table>
@@ -54,19 +54,19 @@ export default function SettingsNodeCard() {
               <tbody>
                 <tr>
                   <td>Status</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Direction </td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Type</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>IP</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
               </tbody>
             </Table>
@@ -80,19 +80,19 @@ export default function SettingsNodeCard() {
               <tbody>
                 <tr>
                   <td>Status</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Direction </td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Type</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>IP</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
               </tbody>
             </Table>

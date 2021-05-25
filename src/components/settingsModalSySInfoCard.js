@@ -24,29 +24,29 @@ export default function SettingsSysInfoCard() {
                 <tbody>
                   <tr>
                     <td>Host Name</td>
-                    <td></td>
+                    <td>{state.currentNodeInfo.name}</td>
                   </tr>
                   <tr>
                     <td>FQDN</td>
-                    <td></td>
+                    <td>{state.currentNodeInfo.name}</td>
                   </tr>
                   <tr>
                     <td>IP</td>
-                    <td>{}</td>
+                    <td>{state.currentNodeInfo.name}</td>
                   </tr>
                   <tr>
                     <td>Location</td>
                     <td>
-                      
+                    {state.currentNodeInfo.name}
                     </td>
                   </tr>
                   <tr>
                     <td>Video Drive</td>
-                    <td></td>
+                    <td>{state.currentNodeInfo.name}</td>
                   </tr>
                   <tr>
                     <td>Buddy Drive</td>
-                    <td></td>
+                    <td>{state.currentNodeInfo.name}</td>
                   </tr>
                 </tbody>
               </Table>
@@ -59,27 +59,27 @@ export default function SettingsSysInfoCard() {
               <tbody>
                 <tr>
                   <td>OS </td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>CodeName</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Kernel</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Arch</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Buddy 1</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
                 <tr>
                   <td>Buddy 2</td>
-                  <td></td>
+                  <td>{state.currentNodeInfo.name}</td>
                 </tr>
               </tbody>
             </Table>
