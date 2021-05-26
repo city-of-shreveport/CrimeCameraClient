@@ -30,12 +30,72 @@ const initialState = {
   homeVideoTimeMin: '00',
   nodeSettingsComponent: false,
   nodeSettingsNodeComponent: false,
-  currentNodeInfo: {},
+  editNodeModal: false,
+  currentNodeInfo: {
+    createdAt: ' ',
+    ip: ' ',
+    lastCheckIn: ' ',
+    name: ' ',
+    config: {
+    buddyDriveDevicePath: ' ',
+    buddyDriveEncryptionKey: ' ',
+    buddyDriveMountPath: ' ',
+    buddyDrives: [{
+      hostName: ' ',
+      sshfsMountPath: ' ',
+      },{hostName: ' ',
+      sshfsMountPath: ' ',
+      }],
+      cameras:[{
+        direction: 0,
+        folderName: " ",
+        ip: "10.10.5.2",
+        onlineStatus: false,
+        password: " ",
+        type: " ",
+        username: " ",
+      },
+      {
+        direction: 0,
+        folderName: " ",
+        ip: "10.10.5.3",
+        onlineStatus: false,
+        password: " ",
+        type: " ",
+        username: " ",
+      },
+      {
+        direction: 0,
+        folderName: " ",
+        ip: "10.10.5.4",
+        onlineStatus: false,
+        password: " ",
+        type: " ",
+        username: " ",
+      }],
+    hostName: ' ',
+    locationLat: ' ',
+    locationLong:' ',
+    serverURL: ' ',
+    videoDriveDevicePath: ' ',
+    videoDriveEncryptionKey: ' ',
+    videoDriveMountPath: ' ',
+    zeroTierIP: ' ',
+    zeroTierNetworkID: ' ',
+    },
+
+    },
   nodeForm:{}
 };
 
 const reducer = (state, action) => {
   switch (action.type) { 
+    
+    case 'SETTINGS_EDIT_NODE_MODAL':
+      return {
+        ...state,
+        editNodeModal: action.payload,
+      };
         case 'UPDATENODES':
       return {
         ...state,
@@ -51,10 +111,10 @@ const reducer = (state, action) => {
         ...state,
         newNodeModal: action.payload,
       };
-    case 'UPDATE_NODESYSNODECOMPONENT':
+    case 'UPDATE_NODESYSCAMERACOMPONENT':
       return {
         ...state,
-        cameraSettingsCameraComponent: action.payload,
+        nodeSettingsCameraComponent: action.payload,
       };
     case 'UPDATE_CURRENT_NODE_INFO':
       return {

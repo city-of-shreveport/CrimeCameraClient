@@ -8,16 +8,16 @@ import Button from 'react-bootstrap/Button';
 
 export default function SettingsNodeCard() {
   const [state, dispatch] = useContext(GlobalContext);
-  const handleSysConfigCameraModal = () =>
+  const handleSysConfigNodeModal = () =>
     dispatch({
-      type: 'UPDATE_CAMERASYSCAMERACOMPONENT',
+      type: 'UPDATE_NODESYSCAMERACOMPONENT',
       payload: true,
     });
 
   return (
     <>
       {' '}
-      <Button variant="primary" size="sm" onClick={() => handleSysConfigCameraModal()}>
+      <Button variant="primary" size="sm" onClick={() => handleSysConfigNodeModal()}>
         Configure
       </Button>
       <CardGroup>
@@ -27,20 +27,21 @@ export default function SettingsNodeCard() {
             <Table striped bordered hover size="sm" variant="dark">
               <tbody>
                 <tr>
+
                   <td>Status</td>
-                  <td>{state.currentNodeInfo.name}</td>
+                  <td>{state.currentNodeInfo.config.cameras[0].onlineStatus}</td>
                 </tr>
                 <tr>
                   <td>Direction </td>
-                  <td>{state.currentNodeInfo.name}</td>
+                  <td>{state.currentNodeInfo.config.cameras[0].direction}</td>
                 </tr>
                 <tr>
                   <td>Type</td>
-                  <td>{state.currentNodeInfo.name}</td>
+                  <td>{state.currentNodeInfo.config.cameras[0].type}</td>
                 </tr>
                 <tr>
                   <td>IP</td>
-                  <td>{state.currentNodeInfo.name}</td>
+                  <td>{state.currentNodeInfo.config.cameras[0].ip}</td>
                 </tr>
               </tbody>
             </Table>
@@ -52,23 +53,23 @@ export default function SettingsNodeCard() {
           <Card.Text>
             <Table striped bordered hover size="sm" variant="dark">
               <tbody>
-                <tr>
-                  <td>Status</td>
-                  <td>{state.currentNodeInfo.name}</td>
+              <tr>
+                <td>Status</td>
+                <td>{state.currentNodeInfo.config.cameras[1].onlineStatus}</td>
                 </tr>
                 <tr>
-                  <td>Direction </td>
-                  <td>{state.currentNodeInfo.name}</td>
+                <td>Direction </td>
+                <td>{state.currentNodeInfo.config.cameras[1].direction}</td>
                 </tr>
                 <tr>
-                  <td>Type</td>
-                  <td>{state.currentNodeInfo.name}</td>
+                <td>Type</td>
+                <td>{state.currentNodeInfo.config.cameras[1].type}</td>
                 </tr>
                 <tr>
-                  <td>IP</td>
-                  <td>{state.currentNodeInfo.name}</td>
+                <td>IP</td>
+                <td>{state.currentNodeInfo.config.cameras[1].ip}</td>
                 </tr>
-              </tbody>
+                </tbody>
             </Table>
           </Card.Text>
           <Card.Footer></Card.Footer>
@@ -78,23 +79,23 @@ export default function SettingsNodeCard() {
           <Card.Text>
             <Table striped bordered hover size="sm" variant="dark">
               <tbody>
-                <tr>
-                  <td>Status</td>
-                  <td>{state.currentNodeInfo.name}</td>
+              <tr>
+                <td>Status</td>
+                <td>{state.currentNodeInfo.config.cameras[2].onlineStatus}</td>
                 </tr>
                 <tr>
-                  <td>Direction </td>
-                  <td>{state.currentNodeInfo.name}</td>
+                <td>Direction </td>
+                <td>{state.currentNodeInfo.config.cameras[2].direction}</td>
                 </tr>
                 <tr>
-                  <td>Type</td>
-                  <td>{state.currentNodeInfo.name}</td>
+                <td>Type</td>
+                <td>{state.currentNodeInfo.config.cameras[2].type}</td>
                 </tr>
                 <tr>
-                  <td>IP</td>
-                  <td>{state.currentNodeInfo.name}</td>
+                <td>IP</td>
+                <td>{state.currentNodeInfo.config.cameras[2].ip}</td>
                 </tr>
-              </tbody>
+                </tbody>
             </Table>
           </Card.Text>
           <Card.Footer></Card.Footer>

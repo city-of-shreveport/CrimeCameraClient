@@ -11,7 +11,7 @@ export default function SettingsNodesSettingsCard() {
   const [, dispatch] = useContext(GlobalContext);
   const handleSysConfigCameraModal = () =>
     dispatch({
-      type: 'UPDATE_CAMERASYSCAMERACOMPONENT',
+      type: 'UPDATE_NODESYSCAMERACOMPONENT',
       payload: false,
     });
   return (

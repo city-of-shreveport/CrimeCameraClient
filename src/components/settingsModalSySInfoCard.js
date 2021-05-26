@@ -2,20 +2,26 @@ import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
 import CardGroup from 'react-bootstrap/CardGroup';
 import { GlobalContext } from '../contexts/globalContext';
 export default function SettingsSysInfoCard() {
   const [state, dispatch] = useContext(GlobalContext);
-  const handleSysConfigModal = () =>
+  const handleEditNodeModal = () =>
     dispatch({
-      type: 'UPDATE_CAMERASYSCOMPONENT',
+      type: 'SETTINGS_EDIT_NODE_MODAL',
       payload: true,
     });
   return (
     <>
-      <Button variant="primary" size="sm" onClick={() => handleSysConfigModal()}>
-        Configure
-      </Button>
+    <ButtonGroup className="mb-2">
+    <Button variant="primary" size="sm"  onClick={() => handleEditNodeModal()}>Configure</Button>
+    <Button variant="primary" size="sm" >Update</Button>
+    <Button variant="primary" size="sm" >Reboot</Button>
+    <Button variant="primary" size="sm" >Change Keys</Button>
+  </ButtonGroup>
+      
       <CardGroup>
         <Card border="light">
           <Card.Text>

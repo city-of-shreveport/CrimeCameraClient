@@ -9,7 +9,6 @@ import SettingsNodeCard from './settingsModalNodeCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
 import SettingsNodesSettingsCard from './settingsModalNodeSettingsCard';
-
 import { GlobalContext } from '../contexts/globalContext';
 
 export default function SettingsModal() {
@@ -58,6 +57,7 @@ export default function SettingsModal() {
         </CardGroup>
         <Card.Footer className="text-muted"></Card.Footer>
       </Modal>
+      
     </>
   );
 }

@@ -22,8 +22,8 @@ export default function SettingsnodeList() {
 
         <Card.Text>
           <ListGroup>
-            {state.nodes.map((cam) => (
-              <ListGroup.Item onClick={() => upDateSelectedCam(cam.nodeName)}>{cam.nodeName}</ListGroup.Item>
+            {state.nodes.map((node) => (
+              <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
             ))}
           </ListGroup>
         </Card.Text>

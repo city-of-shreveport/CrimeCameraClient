@@ -15,6 +15,8 @@ import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
 import SettingsNodesSettingsCard from './settingsModalNodesSettingsCard';
 import NodeManagerNewNodeModal from "./nodeManagerNewNodeModal"
+import NodeManagerEditNodeModal from './nodeManagerEditNodeModal'
+
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
   
@@ -91,7 +93,7 @@ export default function Settings() {
               <Card.Header>Cameras</Card.Header>
               <Card.Header></Card.Header>
               <Card.Body>
-                {state.cameraSettingsCameraComponent ? <SettingsNodesSettingsCard /> : <SettingsNodeCard />}
+                {state.nodeSettingsCameraComponent ? <SettingsNodesSettingsCard />: <SettingsNodeCard /> }
               </Card.Body>
             </Card>
             <Card>
@@ -102,6 +104,7 @@ export default function Settings() {
         </Col>
       </Row>
          <NodeManagerNewNodeModal/>
+         <NodeManagerEditNodeModal/>
             </Container>
     
       );
