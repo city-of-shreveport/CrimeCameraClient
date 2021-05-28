@@ -1218,6 +1218,16 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
+"@cycjimmy/awesome-js-funcs@^1.0.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@cycjimmy/awesome-js-funcs/-/awesome-js-funcs-1.1.1.tgz#a4d4fdc8ebf55f5f1a723b45276feea41f9af454"
+  integrity sha512-3e9BFAW8SWZ69frWE9a/QkKWM1+rcqiDsVwr1e0eVqVt5Fet1JtpMD4A+reCb6PUBCvFiSVrHDtDyB+Rxoxm0Q==
+
+"@cycjimmy/sass-lib@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@cycjimmy/sass-lib/-/sass-lib-0.1.0.tgz#4b534ce1ba2e61f0efb184c42a64e74dd60fe952"
+  integrity sha512-Oli6KvYFIpvRxrD8ntfETMi+YtRQEgrZkFv6JPs9PING/B1kr8AhBNbcw9MklA2HapSX70/3dn3BmsVfLBzEjg==
+
 "@eslint/eslintrc@^0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.1.tgz#442763b88cecbe3ee0ec7ca6d6dd6168550cbf14"
@@ -6867,6 +6877,14 @@ jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
   integrity sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=
+
+jsmpeg-player@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/jsmpeg-player/-/jsmpeg-player-3.0.3.tgz#ed7ee46197cd749729c237359685f02566fac227"
+  integrity sha512-23lQWpf9lWOVCibVevQRqRXKex++QTB/JPcJCdCGf3AzdcJVB7L4io5EXfST80RMOGt9p1dcAvJDOKhqOUYl+Q==
+  dependencies:
+    "@cycjimmy/awesome-js-funcs" "^1.0.1"
+    "@cycjimmy/sass-lib" "^0.1.0"
 
 json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   version "1.0.2"

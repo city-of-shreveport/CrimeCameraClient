@@ -9,6 +9,7 @@
     "bootstrap": "^5.0.0",
     "chart.js": "^3.2.1",
     "fomantic-ui-css": "^2.8.7",
+    "jsmpeg-player": "^3.0.3",
     "moment": "^2.29.1",
     "react": "^17.0.0",
     "react-bootstrap": "^1.5.2",
