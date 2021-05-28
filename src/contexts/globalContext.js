@@ -41,6 +41,38 @@ const initialState = {
     buddyDriveDevicePath: ' ',
     buddyDriveEncryptionKey: ' ',
     buddyDriveMountPath: ' ',
+    sysInfo:{
+      cpu:{
+        brand:' ',
+        cores:' ',
+        vendor:' ',
+      },
+      diskLayout:[
+        {
+          device:' ',
+          type: ' ',
+          vendor: ' ',
+          size: 0
+        }
+
+      ],
+      memLayout:[{
+        clockSpeed:0,
+        size:0,
+        type:' ',
+
+      }],
+      osInfo:{
+        arch:' ',
+        codename:' ',
+        distro:' ',
+        kernel:' ',
+        release:' ',
+
+      }
+
+
+    },
     buddyDrives: [{
       hostName: ' ',
       sshfsMountPath: ' ',

@@ -20,6 +20,9 @@ export default function SettingsSysInfoCard() {
       payload: true,
     });  return (
     <>
+    
+    {state.currentNodeInfo.name == ' ' ? <div></div>:
+  <div>
     <ButtonGroup className="mb-2">
     <Button variant="primary" size="sm"  onClick={() => handleEditNodeModal()}>Configure</Button>
     <Button variant="primary" size="sm" onClick={() => handleSystemInfoNodeModal()}>System Info</Button>
@@ -27,13 +30,13 @@ export default function SettingsSysInfoCard() {
     <Button variant="primary" size="sm" >Reboot</Button>
     <Button variant="primary" size="sm" >Change Keys</Button>
   </ButtonGroup>
-      
+
       <CardGroup>
         <Card border="light">
           <Card.Text>
            
               <Table striped bordered hover size="sm" variant="dark">
-              {state.currentNodeInfo.name == ' ' ? <div>select a camera</div>:
+              
                 <tbody>
                   <tr>
                     <td>Host Name</td>
@@ -57,7 +60,7 @@ export default function SettingsSysInfoCard() {
                     <td>Buddy Drive</td>
                     <td>{state.currentNodeInfo.config.buddyDriveDevicePath}</td>
                   </tr>
-                </tbody> }
+                </tbody> 
               </Table>
             
           </Card.Text>
@@ -65,7 +68,6 @@ export default function SettingsSysInfoCard() {
         <Card border="light">
           <Card.Text>
             <Table striped bordered hover size="sm" variant="dark">
-            {state.currentNodeInfo.name == ' ' ? <div>select a camera</div>:
               <tbody>
                 <tr>
                   <td>OS </td>
@@ -92,13 +94,14 @@ export default function SettingsSysInfoCard() {
                   <td></td>
                 </tr>
               </tbody>
-}
+       
             </Table>
           </Card.Text>
         </Card>
         <NodeManagerSystemInfoModal/>
-
-      </CardGroup>
+       
+      </CardGroup>    </div>}
+      
     </>
   );
 }

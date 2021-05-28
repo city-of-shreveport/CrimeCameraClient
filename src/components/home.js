@@ -38,8 +38,11 @@ export default function Home() {
             </Card>
           </Col>
           <Col xs={4}>
+
             <Card className="text-center ">
               <Card.Header><h4>Node Info</h4></Card.Header>
+              {state.currentNodeInfo.name == ' ' ? <div></div>:<div>
+
               <Card.Body>
               <Table striped bordered hover variant="dark">
                   <tbody>
@@ -74,7 +77,10 @@ export default function Home() {
                   </tbody>
                 </Table>
               </Card.Body>
+              </div>
+      }
             </Card>
+            
           </Col>
           <Col>
             <Card className="text-center gmapsCard">

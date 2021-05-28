@@ -17,6 +17,10 @@ export default function SettingsNodeCard() {
   return (
     <>
       {' '}
+      
+
+      
+      {state.currentNodeInfo.name == ' ' ? <div></div>:<div>
       <Button variant="primary" size="sm" onClick={() => handleSysConfigNodeModal()}>
         Configure
       </Button>
@@ -25,7 +29,6 @@ export default function SettingsNodeCard() {
           <Card.Header>Camera 1</Card.Header>
           <Card.Text>
             <Table striped bordered hover size="sm" variant="dark">
-            {state.currentNodeInfo.name == ' ' ? <div>SELECT A CAMERA FIRST</div>:
               <tbody>
                 <tr>
 
@@ -45,7 +48,7 @@ export default function SettingsNodeCard() {
                   <td>{state.currentNodeInfo.config.cameras[0].ip}</td>
                 </tr>
               </tbody>
-              }
+              
             </Table>
           </Card.Text>
           <Card.Footer></Card.Footer>
@@ -54,7 +57,6 @@ export default function SettingsNodeCard() {
           <Card.Header>Camera 2</Card.Header>
           <Card.Text>
             <Table striped bordered hover size="sm" variant="dark">
-            {state.currentNodeInfo.name == ' ' ?<div>SELECT A CAMERA FIRST</div>:
               <tbody>
               <tr>
                 <td>Status</td>
@@ -73,7 +75,7 @@ export default function SettingsNodeCard() {
                 <td>{state.currentNodeInfo.config.cameras[1].ip}</td>
                 </tr>
                 </tbody>
-                }
+                
             </Table>
           </Card.Text>
           <Card.Footer></Card.Footer>
@@ -82,7 +84,6 @@ export default function SettingsNodeCard() {
           <Card.Header>Camera 3</Card.Header>
           <Card.Text>
             <Table striped bordered hover size="sm" variant="dark">
-            {state.currentNodeInfo.name == ' ' ? <div>SELECT A CAMERA FIRST</div>:
               <tbody>
               <tr>
                 <td>Status</td>
@@ -101,12 +102,14 @@ export default function SettingsNodeCard() {
                 <td>{state.currentNodeInfo.config.cameras[2].ip}</td>
                 </tr>
                 </tbody>
-                 }
+                 
             </Table>
           </Card.Text>
           <Card.Footer></Card.Footer>
         </Card>
       </CardGroup>
+      </div>
+      }
     </>
   );
 }
