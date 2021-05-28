@@ -120,7 +120,18 @@ const initialState = {
     },
   nodeForm:{},
   systemInfoModal: false,
-  currentNodePerfmon:[{}],
+  currentNodePerfmon:{ 
+    mem:{
+      used:0,total:0
+    },
+    currentLoad:{
+      avgLoad: 0,
+      currentLoad:0,
+      currentLoadUser:0,
+      currentLoadSystem:0
+    }
+
+  },
   currentNodePerfmonAdded: false
 };
 

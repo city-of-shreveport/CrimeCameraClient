@@ -8,7 +8,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../contexts/globalContext';
 import HorizontalBarChart from './barChart2';
-import HorizontalBarChart2 from './barChart';
+import Dynamic from './barChart';
 import LineChart from './lineChart';
 import SettingsNodeCard from './settingsModalNodeCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
@@ -20,7 +20,22 @@ import NodeManagerEditNodeModal from './nodeManagerEditNodeModal'
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
   
- 
+
+
+  const getPerfmonData = (node) =>
+  fetch('https://crime-camera-system-api.shreveport-it.org/api/perfmons/' + node+'/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+      .then((response) => response.json())
+      .then((json) => {
+        const rowLen = json.length;
+        json.map((perfmon, i) => ( 
+        ((rowLen === i + 2) ?  
+        dispatch({
+          type: 'UPDATE_CURRENT_NODE_PERFMON',
+           payload: perfmon,
+         }): '')
+
+  ))
+      })
 
   const getCameraInfo = (node) => {
     fetch('https://crime-camera-system-api.shreveport-it.org/api/nodes/' + node+'/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
@@ -30,7 +45,11 @@ export default function Settings() {
           type: 'UPDATE_CURRENT_NODE_INFO',
           payload: json,
         });
-      });
+      });getPerfmonData(node)
+      setInterval(() => {
+        getPerfmonData(node)
+      }, 5000);
+       
   };
 
   const handleNewNodeModalOpen = () =>
@@ -79,11 +98,12 @@ export default function Settings() {
               <CardGroup>
                 <Card>
                   <Card.Header>System</Card.Header>
-                  <HorizontalBarChart />
+                  {state.currentNodeInfo.name === ' ' ? <div>SELECT A CAMERA FIRST</div>:<HorizontalBarChart />
+                  }
                 </Card>
                 <Card>
                   <Card.Header>Drives</Card.Header>
-                  <HorizontalBarChart2 />
+                  <Dynamic />
                 </Card>
               </CardGroup>
             </Card>

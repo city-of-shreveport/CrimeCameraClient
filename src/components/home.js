@@ -12,15 +12,7 @@ import Table from 'react-bootstrap/Table';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-  const getNodes = () =>
-  fetch('https://crime-camera-system-API.shreveport-it.org/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
-  .then((response) => response.json())
-  .then((json) => {
-    dispatch({
-      type: 'UPDATENODES',
-      payload: json,
-    });
-  });
+
   const handleHomeStreamingModal = () =>
     dispatch({
       type: 'HOMESTREAMINGMODAL',
@@ -32,10 +24,7 @@ export default function Home() {
       type: 'HOMEVIEWVIDEOSMODAL',
       payload: true,
     });
-    getNodes()
-    setInterval(() => {
-      getNodes()
-    }, 50000);
+    
   return (
     <>
     
