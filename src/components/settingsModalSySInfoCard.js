@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import NodeManagerSystemInfoModal from "./nodeManagerSystemInfoModal"
 
 import CardGroup from 'react-bootstrap/CardGroup';
 import { GlobalContext } from '../contexts/globalContext';
@@ -13,10 +14,15 @@ export default function SettingsSysInfoCard() {
       type: 'SETTINGS_EDIT_NODE_MODAL',
       payload: true,
     });
-  return (
+  const handleSystemInfoNodeModal = () =>
+    dispatch({
+      type: 'SETTINGS_SYSTEMINFO_NODE_MODAL',
+      payload: true,
+    });  return (
     <>
     <ButtonGroup className="mb-2">
     <Button variant="primary" size="sm"  onClick={() => handleEditNodeModal()}>Configure</Button>
+    <Button variant="primary" size="sm" onClick={() => handleSystemInfoNodeModal()}>System Info</Button>
     <Button variant="primary" size="sm" >Update</Button>
     <Button variant="primary" size="sm" >Reboot</Button>
     <Button variant="primary" size="sm" >Change Keys</Button>
@@ -27,6 +33,7 @@ export default function SettingsSysInfoCard() {
           <Card.Text>
            
               <Table striped bordered hover size="sm" variant="dark">
+              {state.currentNodeInfo.name == ' ' ? <div>select a camera</div>:
                 <tbody>
                   <tr>
                     <td>Host Name</td>
@@ -50,7 +57,7 @@ export default function SettingsSysInfoCard() {
                     <td>Buddy Drive</td>
                     <td>{state.currentNodeInfo.config.buddyDriveDevicePath}</td>
                   </tr>
-                </tbody>
+                </tbody> }
               </Table>
             
           </Card.Text>
@@ -58,6 +65,7 @@ export default function SettingsSysInfoCard() {
         <Card border="light">
           <Card.Text>
             <Table striped bordered hover size="sm" variant="dark">
+            {state.currentNodeInfo.name == ' ' ? <div>select a camera</div>:
               <tbody>
                 <tr>
                   <td>OS </td>
@@ -84,9 +92,12 @@ export default function SettingsSysInfoCard() {
                   <td></td>
                 </tr>
               </tbody>
+}
             </Table>
           </Card.Text>
         </Card>
+        <NodeManagerSystemInfoModal/>
+
       </CardGroup>
     </>
   );

@@ -31,6 +31,7 @@ const initialState = {
   nodeSettingsComponent: false,
   nodeSettingsNodeComponent: false,
   editNodeModal: false,
+  nodeSelected: false,
   currentNodeInfo: {
     createdAt: ' ',
     ip: ' ',
@@ -85,12 +86,18 @@ const initialState = {
     },
 
     },
-  nodeForm:{}
+  nodeForm:{},
+  systemInfoModal: false,
 };
 
 const reducer = (state, action) => {
   switch (action.type) { 
     
+    case 'SETTINGS_SYSTEMINFO_NODE_MODAL':
+      return {
+        ...state,
+        systemInfoModal: action.payload,
+      };
     case 'SETTINGS_EDIT_NODE_MODAL':
       return {
         ...state,
@@ -105,6 +112,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedNode: action.payload,
+        nodeSelected: true
       };
     case 'SETTINGS_NEW_NODE_MODAL':
       return {
