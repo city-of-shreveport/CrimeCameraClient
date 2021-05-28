@@ -12,7 +12,7 @@ export default function NodeList() {
 
   // eslint-disable-next-lineclear
   const getNodeInfo = (node) => {
-    fetch('http://10.105.44.56:3001/api/nodes/' + node)
+    fetch('http://10.10.10.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         console.log(state);

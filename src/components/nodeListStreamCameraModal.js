@@ -14,13 +14,13 @@ export default function NodeListStreamCameraModal() {
       payload: false,
     });
   let checkSum1 = md5('/' + state.currentNodeInfo.name + '/camera1-9999999999-nodemedia2017privatekey');
-  let rtmpURL1 = 'http://10.105.44.56:8000/' + state.currentNodeInfo.name + '/camera1.flv?sign=9999999999-' + checkSum1;
+  let rtmpURL1 = 'http://10.10.10.10:8000/' + state.currentNodeInfo.name + '/camera1.flv?sign=9999999999-' + checkSum1;
 
   let checkSum2 = md5('/' + state.currentNodeInfo.name + '/camera2-9999999999-nodemedia2017privatekey');
-  let rtmpURL2 = 'http://10.105.44.56:8000/' + state.currentNodeInfo.name + '/camera2.flv?sign=9999999999-' + checkSum2;
+  let rtmpURL2 = 'http://10.10.10.10:8000/' + state.currentNodeInfo.name + '/camera2.flv?sign=9999999999-' + checkSum2;
 
   let checkSum3 = md5('/' + state.currentNodeInfo.name + '/camera3-9999999999-nodemedia2017privatekey');
-  let rtmpURL3 = 'http://10.105.44.56:8000/' + state.currentNodeInfo.name + '/camera3.flv?sign=9999999999-' + checkSum3;
+  let rtmpURL3 = 'http://10.10.10.10:8000/' + state.currentNodeInfo.name + '/camera3.flv?sign=9999999999-' + checkSum3;
   return (
     <Modal show={state.homeStreamingModal} onHide={() => handleStreamModalClose()} centered size="lg">
       <Card className="text-center">

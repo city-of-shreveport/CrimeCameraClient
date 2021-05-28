@@ -21,7 +21,7 @@ export default function App() {
 
   useEffect(() => {
     function refreshData() {
-      fetch('http://10.105.44.56:3001/api/nodes')
+      fetch('http://10.10.10.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -30,7 +30,7 @@ export default function App() {
           });
         });
 
-      fetch('http://10.105.44.56:8000/api/server')
+      fetch('http://10.10.10.10:8000/api/server')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -39,7 +39,7 @@ export default function App() {
           });
         });
 
-      fetch('http://10.105.44.56:8000/api/streams')
+      fetch('http://10.10.10.10:8000/api/streams')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
