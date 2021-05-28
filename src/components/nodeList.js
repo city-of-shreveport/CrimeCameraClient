@@ -19,7 +19,8 @@ export default function NodeList() {
           type: 'UPDATE_CURRENT_NODE_INFO',
           payload: json,
         });
-      });
+      })
+      
   };
   return (
     <div>

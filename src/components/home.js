@@ -12,7 +12,15 @@ import Table from 'react-bootstrap/Table';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-
+  const getNodes = () =>
+  fetch('https://crime-camera-system-API.shreveport-it.org/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+  .then((response) => response.json())
+  .then((json) => {
+    dispatch({
+      type: 'UPDATENODES',
+      payload: json,
+    });
+  });
   const handleHomeStreamingModal = () =>
     dispatch({
       type: 'HOMESTREAMINGMODAL',
@@ -24,6 +32,10 @@ export default function Home() {
       type: 'HOMEVIEWVIDEOSMODAL',
       payload: true,
     });
+    getNodes()
+    setInterval(() => {
+      getNodes()
+    }, 50000);
   return (
     <>
     
@@ -41,7 +53,7 @@ export default function Home() {
 
             <Card className="text-center ">
               <Card.Header><h4>Node Info</h4></Card.Header>
-              {state.currentNodeInfo.name == ' ' ? <div></div>:<div>
+              {state.currentNodeInfo.name === ' ' ? <div></div>:<div>
 
               <Card.Body>
               <Table striped bordered hover variant="dark">

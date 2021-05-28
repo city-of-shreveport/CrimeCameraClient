@@ -21,16 +21,7 @@ export default function App() {
 
   useEffect(() => {
     function refreshData() {
-      console.log(state)
-      fetch('https://crime-camera-system-API.shreveport-it.org/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
-        .then((response) => response.json())
-        .then((json) => {
-          console.log(json)
-          dispatch({
-            type: 'UPDATENODES',
-            payload: json,
-          });
-        });
+      
 
        fetch('https://crime-camera-system-restreamer.shreveport-it.org/api/server')
          .then((response) => response.json())
@@ -55,7 +46,7 @@ export default function App() {
 
     setInterval(() => {
       refreshData();
-    }, 10000);
+    }, 360000);
 
     // eslint-disable-next-line
   }, []);

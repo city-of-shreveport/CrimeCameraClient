@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { GlobalContext } from '../contexts/globalContext';
+
 import { Bar } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
 defaults.animation = false;
@@ -35,10 +37,31 @@ const options = {
   },
 };
 
-const HorizontalBarChart = () => (
-  <>
-    <Bar data={data} options={options} />
-  </>
-);
 
-export default HorizontalBarChart;
+export default function HorizontalBarChart() {
+  const [state,] = useContext(GlobalContext);
+  const getPerfmonData = () =>
+  fetch('https://crime-camera-system-api.shreveport-it.org/api/perfmons/' + state.currentNodeInfo.name+'/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+      .then((response) => response.json())
+      .then((json) => {
+        const rowLen = json.length;
+        json.map((perfmon, i) => (
+        ((rowLen === i + 1) ? console.log(perfmon.cpuTemperature.main): '')
+
+  ))
+      })
+      getPerfmonData()
+  setInterval(() => {
+    getPerfmonData()
+  }, 10000);
+return(
+  <>
+      <Bar data={data} options={options} />
+    </>
+
+)
+
+
+}
+
+

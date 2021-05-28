@@ -21,7 +21,7 @@ export default function SettingsSysInfoCard() {
     });  return (
     <>
     
-    {state.currentNodeInfo.name == ' ' ? <div></div>:
+    {state.currentNodeInfo.name === ' ' ? <div></div>:
   <div>
     <ButtonGroup className="mb-2">
     <Button variant="primary" size="sm"  onClick={() => handleEditNodeModal()}>Configure</Button>

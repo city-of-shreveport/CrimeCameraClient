@@ -120,11 +120,19 @@ const initialState = {
     },
   nodeForm:{},
   systemInfoModal: false,
+  currentNodePerfmon:[{}],
+  currentNodePerfmonAdded: false
 };
 
 const reducer = (state, action) => {
   switch (action.type) { 
     
+    case 'UPDATE_CURRENT_NODE_PERFMON':
+      return {
+        ...state,
+        currentNodePerfmon: action.payload,
+        currentNodePerfmonAdded: true,
+      };
     case 'SETTINGS_SYSTEMINFO_NODE_MODAL':
       return {
         ...state,

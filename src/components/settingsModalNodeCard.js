@@ -20,7 +20,7 @@ export default function SettingsNodeCard() {
       
 
       
-      {state.currentNodeInfo.name == ' ' ? <div></div>:<div>
+      {state.currentNodeInfo.name === ' ' ? <div></div>:<div>
       <Button variant="primary" size="sm" onClick={() => handleSysConfigNodeModal()}>
         Configure
       </Button>

@@ -19,7 +19,7 @@ export default function NodeManagerSystemInfoModal() {
               
     return (
         <Modal  dialogClassName="custom-modal-sysInfo" show={state.systemInfoModal} onHide={() => handleSystemInfoNodeModalClose()} centered size="lg" >
-            {state.currentNodeInfo.name == ' ' ? <div>SELECT A CAMERA FIRST</div>:
+            {state.currentNodeInfo.name === ' ' ? <div>SELECT A CAMERA FIRST</div>:
             
             <Card className="text-center">
                 <Card.Header>Featured</Card.Header>
