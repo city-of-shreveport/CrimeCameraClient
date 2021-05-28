@@ -24,10 +24,9 @@ export default function Home() {
       type: 'HOMEVIEWVIDEOSMODAL',
       payload: true,
     });
-    
+
   return (
     <>
-    
       <br />
       <Container fluid className="homeContainer">
         <Row className="justify-content-md-center">
@@ -39,49 +38,57 @@ export default function Home() {
             </Card>
           </Col>
           <Col xs={4}>
-
             <Card className="text-center ">
-              <Card.Header><h4>Node Info</h4></Card.Header>
-              {state.currentNodeInfo.name === ' ' ? <div></div>:<div>
-
-              <Card.Body>
-              <Table striped bordered hover variant="dark">
-                  <tbody>
-                    <tr>
-                      <td colSpan="2"> Name</td>
-                      <td colSpan="3">{state.currentNodeInfo.name}</td>
-                    </tr>
-                    <tr>
-                      <td colSpan="2">Status</td>
-                      <td colSpan="3"> OnLine</td>
-                    </tr>
-                    <tr>
-                      <td colSpan="2">Checked In</td>
-                        <td colSpan="3"><Moment fromNow>{state.currentNodeInfo.createdAt}</Moment></td>
-                    </tr>
-                    <tr>
-                      <td colSpan="2">Buddies</td>
-                      <td>Buddy 1 OK</td>
-                      <td>Buddy 2 OK</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                      <td>Cameras</td>
-                      <td>Cam1 OK</td>
-                      <td>Cam2 OK</td>
-                      <td>Cam3 OK</td>
-                    </tr>
-                    <tr>
-                      <td colSpan="2"><Button onClick={() => handleHomeStreamingModal()}>Stream</Button></td>
-                      <td colSpan="3"><Button onClick={() => handleViewVideosModal()}>Videos</Button></td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card.Body>
-              </div>
-      }
+              <Card.Header>
+                <h4>Node Info</h4>
+              </Card.Header>
+              {state.currentNodeInfo.name === ' ' ? (
+                <div></div>
+              ) : (
+                <div>
+                  <Card.Body>
+                    <Table striped bordered hover variant="dark">
+                      <tbody>
+                        <tr>
+                          <td colSpan="2"> Name</td>
+                          <td colSpan="3">{state.currentNodeInfo.name}</td>
+                        </tr>
+                        <tr>
+                          <td colSpan="2">Status</td>
+                          <td colSpan="3"> OnLine</td>
+                        </tr>
+                        <tr>
+                          <td colSpan="2">Checked In</td>
+                          <td colSpan="3">
+                            <Moment fromNow>{state.currentNodeInfo.createdAt}</Moment>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colSpan="2">Buddies</td>
+                          <td>Buddy 1 OK</td>
+                          <td>Buddy 2 OK</td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                          <td>Cameras</td>
+                          <td>Cam1 OK</td>
+                          <td>Cam2 OK</td>
+                          <td>Cam3 OK</td>
+                        </tr>
+                        <tr>
+                          <td colSpan="2">
+                            <Button onClick={() => handleHomeStreamingModal()}>Stream</Button>
+                          </td>
+                          <td colSpan="3">
+                            <Button onClick={() => handleViewVideosModal()}>Videos</Button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Card.Body>
+                </div>
+              )}
             </Card>
-            
           </Col>
           <Col>
             <Card className="text-center gmapsCard">

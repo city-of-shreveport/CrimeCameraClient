@@ -38,106 +38,104 @@ const initialState = {
     lastCheckIn: ' ',
     name: ' ',
     config: {
-    buddyDriveDevicePath: ' ',
-    buddyDriveEncryptionKey: ' ',
-    buddyDriveMountPath: ' ',
-    sysInfo:{
-      cpu:{
-        brand:' ',
-        cores:' ',
-        vendor:' ',
-      },
-      diskLayout:[
-        {
-          device:' ',
-          type: ' ',
+      buddyDriveDevicePath: ' ',
+      buddyDriveEncryptionKey: ' ',
+      buddyDriveMountPath: ' ',
+      sysInfo: {
+        cpu: {
+          brand: ' ',
+          cores: ' ',
           vendor: ' ',
-          size: 0
-        }
-
+        },
+        diskLayout: [
+          {
+            device: ' ',
+            type: ' ',
+            vendor: ' ',
+            size: 0,
+          },
+        ],
+        memLayout: [
+          {
+            clockSpeed: 0,
+            size: 0,
+            type: ' ',
+          },
+        ],
+        osInfo: {
+          arch: ' ',
+          codename: ' ',
+          distro: ' ',
+          kernel: ' ',
+          release: ' ',
+        },
+      },
+      buddyDrives: [
+        {
+          hostName: ' ',
+          sshfsMountPath: ' ',
+        },
+        { hostName: ' ', sshfsMountPath: ' ' },
       ],
-      memLayout:[{
-        clockSpeed:0,
-        size:0,
-        type:' ',
-
-      }],
-      osInfo:{
-        arch:' ',
-        codename:' ',
-        distro:' ',
-        kernel:' ',
-        release:' ',
-
-      }
-
-
-    },
-    buddyDrives: [{
+      cameras: [
+        {
+          direction: 0,
+          folderName: ' ',
+          ip: '10.10.5.2',
+          onlineStatus: false,
+          password: ' ',
+          type: ' ',
+          username: ' ',
+        },
+        {
+          direction: 0,
+          folderName: ' ',
+          ip: '10.10.5.3',
+          onlineStatus: false,
+          password: ' ',
+          type: ' ',
+          username: ' ',
+        },
+        {
+          direction: 0,
+          folderName: ' ',
+          ip: '10.10.5.4',
+          onlineStatus: false,
+          password: ' ',
+          type: ' ',
+          username: ' ',
+        },
+      ],
       hostName: ' ',
-      sshfsMountPath: ' ',
-      },{hostName: ' ',
-      sshfsMountPath: ' ',
-      }],
-      cameras:[{
-        direction: 0,
-        folderName: " ",
-        ip: "10.10.5.2",
-        onlineStatus: false,
-        password: " ",
-        type: " ",
-        username: " ",
-      },
-      {
-        direction: 0,
-        folderName: " ",
-        ip: "10.10.5.3",
-        onlineStatus: false,
-        password: " ",
-        type: " ",
-        username: " ",
-      },
-      {
-        direction: 0,
-        folderName: " ",
-        ip: "10.10.5.4",
-        onlineStatus: false,
-        password: " ",
-        type: " ",
-        username: " ",
-      }],
-    hostName: ' ',
-    locationLat: ' ',
-    locationLong:' ',
-    serverURL: ' ',
-    videoDriveDevicePath: ' ',
-    videoDriveEncryptionKey: ' ',
-    videoDriveMountPath: ' ',
-    zeroTierIP: ' ',
-    zeroTierNetworkID: ' ',
+      locationLat: ' ',
+      locationLong: ' ',
+      serverURL: ' ',
+      videoDriveDevicePath: ' ',
+      videoDriveEncryptionKey: ' ',
+      videoDriveMountPath: ' ',
+      zeroTierIP: ' ',
+      zeroTierNetworkID: ' ',
     },
-
-    },
-  nodeForm:{},
-  systemInfoModal: false,
-  currentNodePerfmon:{ 
-    mem:{
-      used:0,total:0
-    },
-    currentLoad:{
-      avgLoad: 0,
-      currentLoad:0,
-      currentLoadUser:0,
-      currentLoadSystem:0
-    }
-
   },
-  currentNodePerfmonAdded: false
+  nodeForm: {},
+  systemInfoModal: false,
+  currentNodePerfmon: {
+    mem: {
+      used: 0,
+      total: 0,
+    },
+    currentLoad: {
+      avgLoad: 0,
+      currentLoad: 0,
+      currentLoadUser: 0,
+      currentLoadSystem: 0,
+    },
+  },
+  currentNodePerfmonAdded: false,
 };
 
 const reducer = (state, action) => {
-  switch (action.type) { 
-    
+  switch (action.type) {
     case 'UPDATE_CURRENT_NODE_PERFMON':
       return {
         ...state,
@@ -154,16 +152,16 @@ const reducer = (state, action) => {
         ...state,
         editNodeModal: action.payload,
       };
-        case 'UPDATENODES':
+    case 'UPDATENODES':
       return {
         ...state,
         nodes: action.payload,
       };
-      case 'UPDATE_SELECTEDNODE':
+    case 'UPDATE_SELECTEDNODE':
       return {
         ...state,
         selectedNode: action.payload,
-        nodeSelected: true
+        nodeSelected: true,
       };
     case 'SETTINGS_NEW_NODE_MODAL':
       return {

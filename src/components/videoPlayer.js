@@ -43,11 +43,11 @@ export default class PlayerControlExample extends Component {
       vmsTimePM: false,
       selectedVMSDate: new Date(),
     };
-    fetch('https://crime-camera-system-API.shreveport-it.org/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
-    .then((response) => response.json())
-     .then((json) => {
+    fetch('http://10.105.44.56:3001.shreveport-it.org/api/nodes')
+      .then((response) => response.json())
+      .then((json) => {
         this.setState({ nodes: json });
-        this.setState({nodesReceived: true})
+        this.setState({ nodesReceived: true });
       });
 
     this.play = this.play.bind(this);
@@ -498,11 +498,10 @@ export default class PlayerControlExample extends Component {
                     <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
                     <Button type="submit">Submit</Button>
                   </Form>
-                  {this.state.nodesReceived && 
-                  this.state.nodes.map((node) => (
-                    <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
-                  ))
-                }
+                  {this.state.nodesReceived &&
+                    this.state.nodes.map((node) => (
+                      <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
+                    ))}
                 </Card>
               </CardGroup>
             </Card>

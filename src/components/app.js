@@ -21,27 +21,27 @@ export default function App() {
 
   useEffect(() => {
     function refreshData() {
-      fetch('https://crime-camera-system-API.shreveport-it.org/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch({
-          type: 'UPDATENODES',
-          payload: json,
+      fetch('http://10.105.44.56:3001/api/nodes')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'UPDATENODES',
+            payload: json,
+          });
         });
-      });
 
-       fetch('https://crime-camera-system-restreamer.shreveport-it.org/api/server')
-         .then((response) => response.json())
-         .then((json) => {
-           dispatch({
+      fetch('http://10.105.44.56:8000.shreveport-it.org/api/server')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
             type: 'UPDATE_STREAMINGSTATS',
-             payload: json,
-           });
-         });
+            payload: json,
+          });
+        });
 
-       fetch('https://crime-camera-system-restreamer.shreveport-it.org/api/streams')
-         .then((response) => response.json())
-         .then((json) => {
+      fetch('http://10.105.44.56:8000.shreveport-it.org/api/streams')
+        .then((response) => response.json())
+        .then((json) => {
           dispatch({
             type: 'UPDATE_STREAMS',
             payload: json,

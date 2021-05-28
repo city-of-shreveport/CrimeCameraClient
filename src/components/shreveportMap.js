@@ -5,9 +5,7 @@ const GMap = () => {
   const [dispatch] = useContext(GlobalContext);
   const getCameraInfo = (node) => {
     console.log(node);
-    fetch(
-      'https://crime-camera-system-api.shreveport-it.org/api/nodes/' + node + '/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5'
-    )
+    fetch('http://10.105.44.56:3001.shreveport-it.org/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);

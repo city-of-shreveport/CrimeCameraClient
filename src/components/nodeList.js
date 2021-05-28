@@ -5,22 +5,22 @@ import FormControl from 'react-bootstrap/FormControl';
 import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 import ListGroup from 'react-bootstrap/ListGroup';
-import NodeListVideoPlayerModal from "./nodeListVideoPlayModal"
-import NodeListStreamCameraModal from "./nodeListStreamCameraModal"
+import NodeListVideoPlayerModal from './nodeListVideoPlayModal';
+import NodeListStreamCameraModal from './nodeListStreamCameraModal';
 export default function NodeList() {
   const [state, dispatch] = useContext(GlobalContext);
-  
+
   // eslint-disable-next-lineclear
   const getNodeInfo = (node) => {
-    fetch('https://crime-camera-system-api.shreveport-it.org/api/nodes/' + node+'/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+    fetch('http://10.105.44.56:3001/api/nodes/' + node)
       .then((response) => response.json())
-      .then((json) => {console.log(state)
+      .then((json) => {
+        console.log(state);
         dispatch({
           type: 'UPDATE_CURRENT_NODE_INFO',
           payload: json,
         });
-      })
-      
+      });
   };
   return (
     <div>
@@ -35,14 +35,16 @@ export default function NodeList() {
         <Card.Body className="nodeListHomePage">
           <ListGroup>
             {state.nodes.map((node) => (
-              <ListGroup.Item key={node.name} onClick={() => getNodeInfo(node.name)}>{node.name}</ListGroup.Item>
+              <ListGroup.Item key={node.name} onClick={() => getNodeInfo(node.name)}>
+                {node.name}
+              </ListGroup.Item>
             ))}
           </ListGroup>
         </Card.Body>
         <Card.Footer className="text-muted">Last updated 3 mins ago</Card.Footer>
       </Card>
-      <NodeListVideoPlayerModal/>
-      <NodeListStreamCameraModal/>
+      <NodeListVideoPlayerModal />
+      <NodeListStreamCameraModal />
     </div>
   );
 }
