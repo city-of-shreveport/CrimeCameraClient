@@ -50,7 +50,7 @@ const GMap = () => {
     // eslint-disable-next-line
     googleMap = initGoogleMap();
     function getCams() {
-      fetch('https://crime-camera-system-API/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+      fetch('https://crime-camera-system-API/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line

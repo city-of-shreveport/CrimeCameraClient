@@ -26,12 +26,7 @@ export default function NodeManagerEditNodeModal() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch(
-      'http://10.105.44.56:3001/api/editNodeInfo/' +
-        state.currentNodeInfo.name +
-        '?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5',
-      requestOptions
-    )
+    fetch('http://10.105.44.56:3001/api/editNodeInfo/' + state.currentNodeInfo.name, requestOptions)
       .then((response) => response.json())
       .then((data) => handleEditNodeModalClose());
   };

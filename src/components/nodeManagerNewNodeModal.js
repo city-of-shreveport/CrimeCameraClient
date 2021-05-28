@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import { GlobalContext } from '../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+
 let formDataObject = {};
 
 export default function NodeManagerNewNodeModal() {
@@ -18,16 +19,18 @@ export default function NodeManagerNewNodeModal() {
     formDataObject[objectKey[0]] = objectVal[0];
     console.log(formDataObject);
   };
+
   const UpDateFormState = () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch('http://10.105.44.56:3001/api/newNode', requestOptions)
+    fetch('http://10.105.44.56:3001/api/nodes', requestOptions)
       .then((response) => response.json())
       .then((data) => console.log(data));
   };
+
   const handleNewNodeModalClose = () =>
     dispatch({
       type: 'SETTINGS_NEW_NODE_MODAL',
