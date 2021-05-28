@@ -1,15 +1,20 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
+
 const GMap = () => {
-  const [state, dispatch] = useContext(GlobalContext);
-  const getCameraInfo = (node) => {console.log(node)
-    fetch("https://crime-camera-system-api.shreveport-it.org/api/nodes/" + node+"/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5")
+  const [dispatch] = useContext(GlobalContext);
+  const getCameraInfo = (node) => {
+    console.log(node);
+    fetch(
+      'https://crime-camera-system-api.shreveport-it.org/api/nodes/' + node + '/?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5'
+    )
       .then((response) => response.json())
-      .then((json) => {console.log(json)
+      .then((json) => {
+        console.log(json);
         dispatch({
-            type: 'UPDATE_CURRENT_NODE_INFO',
-            payload: json,
-          });
+          type: 'UPDATE_CURRENT_NODE_INFO',
+          payload: json,
+        });
       });
   };
   const googleMapRef = useRef(null);
@@ -58,7 +63,6 @@ const GMap = () => {
           //var bounds = new window.google.maps.LatLngBounds();
           // eslint-disable-next-line
           json.map((node) => {
-              
             const marker = createMarker(
               {
                 lat: node.config.locationLat,
@@ -92,7 +96,6 @@ const GMap = () => {
 
   // create marker on google map
   const createMarker = (markerObj, node) =>
-  
     new window.google.maps.Marker({
       position: { lat: markerObj.lat, lng: markerObj.lng },
       map: googleMap,
