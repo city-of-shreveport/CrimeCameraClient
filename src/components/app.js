@@ -30,7 +30,7 @@ export default function App() {
           });
         });
 
-      fetch('http://10.105.44.56:8000.shreveport-it.org/api/server')
+      fetch('http://10.105.44.56:8000/api/server')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -39,7 +39,7 @@ export default function App() {
           });
         });
 
-      fetch('http://10.105.44.56:8000.shreveport-it.org/api/streams')
+      fetch('http://10.105.44.56:8000/api/streams')
         .then((response) => response.json())
         .then((json) => {
           dispatch({

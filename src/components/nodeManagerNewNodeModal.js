@@ -24,7 +24,7 @@ export default function NodeManagerNewNodeModal() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch('http://10.105.44.56:3001.shreveport-it.org/api/newNode', requestOptions)
+    fetch('http://10.105.44.56:3001/api/newNode', requestOptions)
       .then((response) => response.json())
       .then((data) => console.log(data));
   };

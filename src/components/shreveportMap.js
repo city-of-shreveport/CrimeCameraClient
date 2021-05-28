@@ -5,7 +5,7 @@ const GMap = () => {
   const [dispatch] = useContext(GlobalContext);
   const getCameraInfo = (node) => {
     console.log(node);
-    fetch('http://10.105.44.56:3001.shreveport-it.org/api/nodes/' + node)
+    fetch('http://10.105.44.56:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -50,7 +50,7 @@ const GMap = () => {
     // eslint-disable-next-line
     googleMap = initGoogleMap();
     function getCams() {
-      fetch('https://crime-camera-system-API.shreveport-it.org/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
+      fetch('https://crime-camera-system-API/api/nodes?token=IgyJtHFsZbQdLY5Cy26HRkn7HOqcJx5')
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line
