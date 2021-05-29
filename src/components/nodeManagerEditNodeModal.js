@@ -44,6 +44,9 @@ export default function NodeManagerEditNodeModal() {
       centered
       size="lg"
     >
+      {state.currentNodeInfo.config.cameras != undefined ? (
+        <div></div>
+      ) :
       <Card className="text-center">
         <Card.Header as="h5">Edit Node</Card.Header>
         <CardGroup>
@@ -422,6 +425,7 @@ export default function NodeManagerEditNodeModal() {
           </Card>
         </CardGroup>
       </Card>
+}
     </Modal>
   );
 }

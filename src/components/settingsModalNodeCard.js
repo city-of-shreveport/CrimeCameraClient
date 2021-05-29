@@ -17,7 +17,7 @@ export default function SettingsNodeCard() {
   return (
     <>
       {' '}
-      {state.currentNodeInfo.name === ' ' ? (
+      {state.currentNodeInfo.config.cameras != undefined ? (
         <div></div>
       ) : (
         <div>
