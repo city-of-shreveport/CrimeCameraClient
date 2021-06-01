@@ -33,8 +33,10 @@ export default function SettingsNodesSettingsCard() {
               <option>Camera 3</option>
             </Form.Control>
           </Form.Group>
-          <Form.Control size="sm" type="text" placeholder="Direction" />
-
+          <Form.Control size="sm" type="number" placeholder="Direction" />
+          <Form.Control size="sm" type="text" placeholder="UserName" />
+          <Form.Control size="sm" type="text" placeholder="Password" />
+          <Form.Control size="sm" type="text" placeholder="FolderName" />
           <Card.Footer></Card.Footer>
         </Card>
         <Card className="text-center">

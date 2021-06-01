@@ -96,7 +96,7 @@ export default function Settings() {
               <CardGroup>
                 <Card>
                   <Card.Header>System</Card.Header>
-                  {state.currentNodeInfo.name === ' ' ? <div>SELECT A CAMERA FIRST</div> : <HorizontalBarChart />}
+                  {state.currentNodeInfo.name === ' ' ? <div>SELECT A NODE FIRST</div> : <HorizontalBarChart />}
                 </Card>
                 <Card>
                   <Card.Header>Drives</Card.Header>
@@ -110,7 +110,9 @@ export default function Settings() {
               <Card.Header>Cameras</Card.Header>
               <Card.Header></Card.Header>
               <Card.Body>
-                {state.nodeSettingsCameraComponent ? <SettingsNodesSettingsCard /> : <SettingsNodeCard />}
+              {state.currentNodeInfo.name === ' ' ? <div></div> : 
+                state.nodeSettingsCameraComponent ? <SettingsNodesSettingsCard /> :<SettingsNodeCard /> 
+              }
               </Card.Body>
             </Card>
             <Card>

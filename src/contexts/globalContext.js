@@ -30,6 +30,7 @@ const initialState = {
   homeVideoTimeMin: '00',
   nodeSettingsComponent: false,
   nodeSettingsNodeComponent: false,
+  nodeSettingsCameraComponent: false,
   editNodeModal: false,
   nodeSelected: false,
   currentNodeInfo: {
@@ -75,7 +76,10 @@ const initialState = {
           hostName: ' ',
           sshfsMountPath: ' ',
         },
-        { hostName: ' ', sshfsMountPath: ' ' },
+        { 
+          hostName: ' ', 
+          sshfsMountPath: ' ' 
+        },
       ],
       cameras: [
         {

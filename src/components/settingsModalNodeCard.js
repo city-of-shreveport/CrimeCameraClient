@@ -5,6 +5,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import { GlobalContext } from '../contexts/globalContext';
 
 import Button from 'react-bootstrap/Button';
+import tryValue  from '../helperFunctions' 
 
 export default function SettingsNodeCard() {
   const [state, dispatch] = useContext(GlobalContext);
@@ -17,9 +18,7 @@ export default function SettingsNodeCard() {
   return (
     <>
       {' '}
-      {state.currentNodeInfo.config.cameras != undefined ? (
-        <div></div>
-      ) : (
+   
         <div>
           <Button variant="primary" size="sm" onClick={() => handleSysConfigNodeModal()}>
             Configure
@@ -32,19 +31,19 @@ export default function SettingsNodeCard() {
                   <tbody>
                     <tr>
                       <td>Status</td>
-                      <td>{state.currentNodeInfo.config.cameras[0].onlineStatus}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[0].onlineStatus})}</td>
                     </tr>
                     <tr>
                       <td>Direction </td>
-                      <td>{state.currentNodeInfo.config.cameras[0].direction}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[0].direction})}</td>
                     </tr>
                     <tr>
                       <td>Type</td>
-                      <td>{state.currentNodeInfo.config.cameras[0].type}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[0].type})}</td>
                     </tr>
                     <tr>
                       <td>IP</td>
-                      <td>{state.currentNodeInfo.config.cameras[0].ip}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[0].ip})}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -58,19 +57,19 @@ export default function SettingsNodeCard() {
                   <tbody>
                     <tr>
                       <td>Status</td>
-                      <td>{state.currentNodeInfo.config.cameras[1].onlineStatus}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[1].onlineStatus})}</td>
                     </tr>
                     <tr>
                       <td>Direction </td>
-                      <td>{state.currentNodeInfo.config.cameras[1].direction}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[1].direction})}</td>
                     </tr>
                     <tr>
                       <td>Type</td>
-                      <td>{state.currentNodeInfo.config.cameras[1].type}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[1].type})}</td>
                     </tr>
                     <tr>
                       <td>IP</td>
-                      <td>{state.currentNodeInfo.config.cameras[1].ip}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[1].ip})}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -84,19 +83,19 @@ export default function SettingsNodeCard() {
                   <tbody>
                     <tr>
                       <td>Status</td>
-                      <td>{state.currentNodeInfo.config.cameras[2].onlineStatus}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[2].onlineStatus})}</td>
                     </tr>
                     <tr>
                       <td>Direction </td>
-                      <td>{state.currentNodeInfo.config.cameras[2].direction}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[2].direction})}</td>
                     </tr>
                     <tr>
                       <td>Type</td>
-                      <td>{state.currentNodeInfo.config.cameras[2].type}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[2].type})}</td>
                     </tr>
                     <tr>
                       <td>IP</td>
-                      <td>{state.currentNodeInfo.config.cameras[2].ip}</td>
+                      <td>{tryValue( ()=>{ return state.currentNodeInfo.config.cameras[2].ip})}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -105,7 +104,7 @@ export default function SettingsNodeCard() {
             </Card>
           </CardGroup>
         </div>
-      )}
+      
     </>
   );
 }
