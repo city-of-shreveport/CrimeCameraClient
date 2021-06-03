@@ -21,7 +21,7 @@ export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
   let perfMonTimerJob = null;
   const getPerfmonData = (node) =>
-    fetch('http://10.10.10.10:3001/api/perfmons/' + node)
+    fetch('http://10.10.200.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
         const rowLen = json.length;
@@ -36,7 +36,7 @@ export default function Settings() {
       });
 
   const getCameraInfo = (node) => {
-    fetch('http://10.10.10.10:3001/api/nodes/' + node)
+    fetch('http://10.10.200.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({

@@ -43,7 +43,7 @@ export default class PlayerControlExample extends Component {
       vmsTimePM: false,
       selectedVMSDate: new Date(),
     };
-    fetch('http://10.10.10.10:3001/api/nodes')
+    fetch('http://10.10.200.10:3001/api/nodes')
       .then((response) => response.json())
       .then((json) => {
         this.setState({ nodes: json });

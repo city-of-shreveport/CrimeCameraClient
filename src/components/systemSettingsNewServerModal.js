@@ -21,13 +21,13 @@ export default function SystemSettingsNewServerFormModal() {
   };
 
   const UpDateFormState = () => {
-      console.log(formDataObject)
+    console.log(formDataObject);
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch('http://10.10.10.10:3001/api/servers', requestOptions)
+    fetch('http://10.10.200.10:3001/api/servers', requestOptions)
       .then((response) => response.json())
       .then((data) => console.log(data));
   };
@@ -62,40 +62,38 @@ export default function SystemSettingsNewServerFormModal() {
                             <Form.Label>Host Name</Form.Label>
                             <Form.Control type="text" onChange={(e) => handleSubmit({ name: e.target.value })} />
                           </Form.Group>
-                          </Row>
-                        <br/>
+                        </Row>
+                        <br />
                         <Row>
                           <Form.Group controlId="exampleForm.ControlSelect2">
                             <Form.Label>Server Type</Form.Label>
                             <Form.Control as="select" onChange={(e) => handleSubmit({ service: e.target.value })}>
-                            <option>Restreamer</option>
-                            <option>Client</option>
-                            <option>Server</option>
-                            <option>MongoDB</option>
+                              <option>Restreamer</option>
+                              <option>Client</option>
+                              <option>Server</option>
+                              <option>MongoDB</option>
                             </Form.Control>
-                            </Form.Group>
+                          </Form.Group>
                         </Row>
-                        <br/>
+                        <br />
                         <Row>
                           <Form.Group as={Col} controlId="formGridZeroTierID">
                             <Form.Label>ZeroTier ID</Form.Label>
                             <Form.Control
-                              type="text" onChange={(e) => handleSubmit({ zeroTierNetworkID: e.target.value })} />
+                              type="text"
+                              onChange={(e) => handleSubmit({ zeroTierNetworkID: e.target.value })}
+                            />
                           </Form.Group>
                           <Form.Group as={Col} controlId="formGridZeroTierIP">
                             <Form.Label>ZeroTier IP</Form.Label>
                             <Form.Control type="text" onChange={(e) => handleSubmit({ zeroTierIP: e.target.value })} />
                           </Form.Group>
                         </Row>
-                       
-                      
                       </Card.Body>
                     </Card>
                   </CardGroup>
-              
                 </Card>
               </CardGroup>
-        
             </Form>
             <Button onClick={UpDateFormState}>Save</Button>
           </Card>

@@ -5,7 +5,7 @@ const GMap = () => {
   const [state, dispatch] = useContext(GlobalContext);
   const getCameraInfo = (node) => {
     console.log(node);
-    fetch('http://10.10.10.10:3001/api/nodes/' + node)
+    fetch('http://10.10.200.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -49,7 +49,7 @@ const GMap = () => {
     // eslint-disable-next-line
     googleMap = initGoogleMap();
     function getCams() {
-      fetch('http://10.10.10.10:3001/api/nodes')
+      fetch('http://10.10.200.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line
