@@ -1,3 +1,4 @@
+import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
@@ -58,11 +59,11 @@ export default function SystemManager() {
 
               <Card.Body>
                 <LineChart />
-                <BarChart />
 
                 {Restreamers.map((restreamer) => (
                   <ListGroup.Item key={restreamer.name} variant="dark">
                     {restreamer.name}
+                    <Badge variant="danger">Danger</Badge>{' '}
                   </ListGroup.Item>
                 ))}
               </Card.Body>
@@ -73,7 +74,6 @@ export default function SystemManager() {
 
               <Card.Body>
                 <LineChart2 />
-                <BarChart2 />
 
                 {Servers.map((server) => (
                   <ListGroup.Item key={server.name} variant="dark">
@@ -88,7 +88,6 @@ export default function SystemManager() {
 
               <Card.Body>
                 <LineChart3 />
-                <BarChart3 />
 
                 {Mongos.map((mongo) => (
                   <ListGroup.Item key={mongo.name} variant="dark">
@@ -103,7 +102,6 @@ export default function SystemManager() {
 
               <Card.Body>
                 <LineChart2 />
-                <BarChart2 />
 
                 {Clients.map((client) => (
                   <ListGroup.Item key={client.name} variant="dark">
