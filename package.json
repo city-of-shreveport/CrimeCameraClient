@@ -24,6 +24,7 @@
     "react-moment": "^1.1.1",
     "react-scripts": "4.0.3",
     "semantic-ui-react": "^2.0.3",
+    "systeminformation": "^5.7.4",
     "video-react": "*",
     "web-vitals": "^1.1.2"
   },
