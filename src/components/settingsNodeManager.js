@@ -21,7 +21,7 @@ export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const getPerfmonData = (node) =>
-    fetch('http://10.200.1.176:3001/api/perfmons/' + node)
+    fetch('http://10.10.10.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
         const rowLen = json.length;
@@ -36,7 +36,7 @@ export default function Settings() {
       });
 
   const getCameraInfo = (node) => {
-    fetch('http://10.200.1.176:3001/api/nodes/' + node)
+    fetch('http://10.10.10.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -110,9 +110,13 @@ export default function Settings() {
               <Card.Header>Cameras</Card.Header>
               <Card.Header></Card.Header>
               <Card.Body>
-              {state.currentNodeInfo.name === ' ' ? <div></div> : 
-                state.nodeSettingsCameraComponent ? <SettingsNodesSettingsCard /> :<SettingsNodeCard /> 
-              }
+                {state.currentNodeInfo.name === ' ' ? (
+                  <div></div>
+                ) : state.nodeSettingsCameraComponent ? (
+                  <SettingsNodesSettingsCard />
+                ) : (
+                  <SettingsNodeCard />
+                )}
               </Card.Body>
             </Card>
             <Card>
