@@ -27,7 +27,7 @@ console.log(formDataObject)
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch('http://10.10.10.10:3001/api/nodes/' + state.currentNodeInfo.name, requestOptions)
+    fetch('http://10.200.1.176:3001/api/nodes/' + state.currentNodeInfo.name, requestOptions)
       .then((response) => response.json())
       .then((data) => handleEditNodeModalClose());
   };
