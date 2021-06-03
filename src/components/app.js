@@ -21,6 +21,15 @@ export default function App() {
 
   useEffect(() => {
     function refreshData() {
+   
+        fetch('http://10.10.10.10:3001/api/servers')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'UPDATESERVERS',
+            payload: json,
+          });
+        });
       fetch('http://10.10.10.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
@@ -53,7 +62,7 @@ export default function App() {
 
     setInterval(() => {
       refreshData();
-    }, 360000);
+    }, 365000);
 
     // eslint-disable-next-line
   }, []);

@@ -80,7 +80,7 @@ const GMap = () => {
     getCams();
     setInterval(() => {
       getCams();
-    }, 30000);
+    }, 360000);
     //googleMap.fitBounds(bounds); // the map to contain all markers
   }, []);
 

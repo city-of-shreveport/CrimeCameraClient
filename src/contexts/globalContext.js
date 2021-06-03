@@ -4,6 +4,7 @@ export const GlobalContext = createContext();
 
 const initialState = {
   nodes: [],
+  servers:[],
   perfmons: [],
   streamingstats: [],
   streams: [],
@@ -136,10 +137,20 @@ const initialState = {
     },
   },
   currentNodePerfmonAdded: false,
+  systemSettingsNewServerFormModal: false,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+
+
+    
+    case 'UPDATE_SYSTEMSETTINGSSERVERFORM':
+      return {
+        ...state,
+        systemSettingsNewServerFormModal: action.payload,
+
+      };
     case 'UPDATE_CURRENT_NODE_PERFMON':
       return {
         ...state,
@@ -156,6 +167,13 @@ const reducer = (state, action) => {
         ...state,
         editNodeModal: action.payload,
       };
+      
+      case 'UPDATESERVERS':
+        return {
+          ...state,
+          servers: action.payload,
+        };
+  
     case 'UPDATENODES':
       return {
         ...state,
