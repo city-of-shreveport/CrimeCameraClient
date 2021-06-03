@@ -19,7 +19,7 @@ import NodeManagerEditNodeModal from './nodeManagerEditNodeModal';
 
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
-
+  let perfMonTimerJob = null;
   const getPerfmonData = (node) =>
     fetch('http://10.10.10.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
@@ -45,9 +45,9 @@ export default function Settings() {
         });
       });
     getPerfmonData(node);
-    setInterval(() => {
+    perfMonTimerJob = setInterval(() => {
       getPerfmonData(node);
-    }, 5000);
+    }, 60000);
   };
 
   const handleNewNodeModalOpen = () =>
@@ -57,7 +57,7 @@ export default function Settings() {
     });
   const upDateSelectedNode = (param) => {
     getCameraInfo(param);
-
+    clearInterval(perfMonTimerJob);
     dispatch({
       type: 'UPDATE_SELECTEDNODE',
       payload: param,

@@ -2,13 +2,12 @@ import React, { useEffect, useRef, useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 
 const GMap = () => {
-  const [dispatch] = useContext(GlobalContext);
+  const [state, dispatch] = useContext(GlobalContext);
   const getCameraInfo = (node) => {
     console.log(node);
     fetch('http://10.10.10.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         dispatch({
           type: 'UPDATE_CURRENT_NODE_INFO',
           payload: json,
