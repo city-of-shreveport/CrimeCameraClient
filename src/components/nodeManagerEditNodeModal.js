@@ -8,8 +8,9 @@ import { GlobalContext } from '../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import tryValue from '../helperFunctions';
+
 let formDataObject = {};
-let cameras = [];
+
 export default function NodeManagerEditNodeModal() {
   const [state, dispatch] = useContext(GlobalContext);
 

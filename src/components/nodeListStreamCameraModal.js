@@ -3,9 +3,8 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
-import JsmpegPlayer from './jsmpegPlayer';
 import ReactPlayer from 'react-player';
-import md5 from 'md5';
+
 export default function NodeListStreamCameraModal() {
   const [state, dispatch] = useContext(GlobalContext);
 

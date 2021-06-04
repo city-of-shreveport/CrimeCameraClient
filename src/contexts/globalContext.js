@@ -4,7 +4,7 @@ export const GlobalContext = createContext();
 
 const initialState = {
   nodes: [],
-  servers:[],
+  servers: [],
   perfmons: [],
   streamingstats: [],
   streams: [],
@@ -77,9 +77,9 @@ const initialState = {
           hostName: ' ',
           sshfsMountPath: ' ',
         },
-        { 
-          hostName: ' ', 
-          sshfsMountPath: ' ' 
+        {
+          hostName: ' ',
+          sshfsMountPath: ' ',
         },
       ],
       cameras: [
@@ -142,14 +142,10 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-
-
-    
     case 'UPDATE_SYSTEMSETTINGSSERVERFORM':
       return {
         ...state,
         systemSettingsNewServerFormModal: action.payload,
-
       };
     case 'UPDATE_CURRENT_NODE_PERFMON':
       return {
@@ -167,13 +163,13 @@ const reducer = (state, action) => {
         ...state,
         editNodeModal: action.payload,
       };
-      
-      case 'UPDATESERVERS':
-        return {
-          ...state,
-          servers: action.payload,
-        };
-  
+
+    case 'UPDATESERVERS':
+      return {
+        ...state,
+        servers: action.payload,
+      };
+
     case 'UPDATENODES':
       return {
         ...state,

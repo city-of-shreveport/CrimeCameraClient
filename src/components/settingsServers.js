@@ -1,16 +1,16 @@
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
-import React, { useContext, useEffect } from 'react';
-import Accordion from 'react-bootstrap/Accordion';
+import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 
 export default function SettingsRestreaming() {
-  const [state, dispatch] = useContext(GlobalContext);
+  const [state] = useContext(GlobalContext);
+
   let Mongos = [];
   let Restreamers = [];
   let Clients = [];
   let Servers = [];
+
   {
     state.servers.map(
       (server) => (
@@ -21,6 +21,7 @@ export default function SettingsRestreaming() {
       )
     );
   }
+
   return (
     <>
       <Card.Title>MongoDBs</Card.Title>

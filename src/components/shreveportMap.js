@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 
 const GMap = () => {
-  const [state, dispatch] = useContext(GlobalContext);
+  const [dispatch] = useContext(GlobalContext);
+
   const getCameraInfo = (node) => {
     console.log(node);
     fetch('http://10.10.200.10:3001/api/nodes/' + node)
@@ -14,6 +15,7 @@ const GMap = () => {
         });
       });
   };
+
   const googleMapRef = useRef(null);
   let googleMap = null;
 
