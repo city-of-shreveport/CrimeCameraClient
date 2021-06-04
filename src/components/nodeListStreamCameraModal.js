@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
 import JsmpegPlayer from './jsmpegPlayer';
+import ReactPlayer from 'react-player';
 import md5 from 'md5';
 export default function NodeListStreamCameraModal() {
   const [state, dispatch] = useContext(GlobalContext);
@@ -19,11 +20,11 @@ export default function NodeListStreamCameraModal() {
       console.log('steeam started');
     });
 
-  let rtmpURL1 = 'http://10.10.200.41:8000/' + state.currentNodeInfo.name + '/camera1.flv';
+  let rtmpURL1 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera1.flv';
 
-  let rtmpURL2 = 'http://10.10.200.41:8000/' + state.currentNodeInfo.name + '/camera2.flv';
+  let rtmpURL2 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera2.flv';
 
-  let rtmpURL3 = 'http://10.10.200.41:8000/' + state.currentNodeInfo.name + '/camera3.flv';
+  let rtmpURL3 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera3.flv';
   return (
     <Modal show={state.homeStreamingModal} onHide={() => handleStreamModalClose()} centered size="lg">
       <Card className="text-center">
@@ -31,13 +32,30 @@ export default function NodeListStreamCameraModal() {
         <Card.Body>
           <CardGroup>
             <Card>
-              <JsmpegPlayer wrapperClassName="video-wrapper" videoUrl={rtmpURL1} />
+              <ReactPlayer
+                url={rtmpURL1}
+                config={{
+                  file: {},
+                }}
+              />
             </Card>
             <Card>
-              <JsmpegPlayer wrapperClassName="video-wrapper" videoUrl={rtmpURL2} />
+              {' '}
+              <ReactPlayer
+                url={rtmpURL2}
+                config={{
+                  file: {},
+                }}
+              />
             </Card>
             <Card>
-              <JsmpegPlayer wrapperClassName="video-wrapper" videoUrl={rtmpURL3} />
+              {' '}
+              <ReactPlayer
+                url={rtmpURL3}
+                config={{
+                  file: {},
+                }}
+              />
             </Card>
           </CardGroup>
         </Card.Body>
