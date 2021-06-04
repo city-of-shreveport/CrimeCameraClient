@@ -34,6 +34,7 @@ export default class PlayerControlExample extends Component {
       modalOpen: false,
       modalCameraOpen: false,
       cameras: [],
+      videos: [],
       camButtonSelected: '',
       selectedCam1: '',
       selectedCam2: '',
@@ -43,6 +44,7 @@ export default class PlayerControlExample extends Component {
       vmsTimePM: false,
       selectedVMSDate: new Date(),
     };
+
     fetch('http://10.10.200.10:3001/api/nodes')
       .then((response) => response.json())
       .then((json) => {
@@ -60,7 +62,7 @@ export default class PlayerControlExample extends Component {
   }
 
   componentDidMount() {
-    this.player0.subscribeToStateChange(this.handleStateChange.bind(this));
+    this.player1.subscribeToStateChange(this.handleStateChange.bind(this));
     this.player2.subscribeToStateChange(this.handleStateChange.bind(this));
     this.player3.subscribeToStateChange(this.handleStateChange.bind(this));
     this.player4.subscribeToStateChange(this.handleStateChange.bind(this));
@@ -71,15 +73,24 @@ export default class PlayerControlExample extends Component {
     this.player9.subscribeToStateChange(this.handleStateChange.bind(this));
   }
 
+  async fetchVideos() {
+    console.log('Fetching videos...');
+    fetch('http://10.10.200.10:3001/api/videos')
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({ videos: json });
+      });
+  }
+
   setMuted(muted) {
     return () => {
-      this.player0.muted = muted;
+      this.player1.muted = muted;
     };
   }
 
   handleStateChange(state) {
     this.setState({
-      player0: state,
+      player1: state,
       player2: state,
       player3: state,
       player4: state,
@@ -92,7 +103,7 @@ export default class PlayerControlExample extends Component {
   }
 
   play() {
-    this.player0.play();
+    this.player1.play();
     this.player2.play();
     this.player3.play();
     this.player4.play();
@@ -104,7 +115,7 @@ export default class PlayerControlExample extends Component {
   }
 
   pause() {
-    this.player0.pause();
+    this.player1.pause();
     this.player2.pause();
     this.player3.pause();
     this.player4.pause();
@@ -116,7 +127,7 @@ export default class PlayerControlExample extends Component {
   }
 
   load() {
-    this.player0.load();
+    this.player1.load();
     this.player2.load();
     this.player3.load();
     this.player4.load();
@@ -129,9 +140,8 @@ export default class PlayerControlExample extends Component {
 
   changeCurrentTime(seconds) {
     return () => {
-      console.log(seconds);
-      const { player } = this.player0.getState();
-      this.player0.seek(player.currentTime + seconds);
+      const { player } = this.player1.getState();
+      this.player1.seek(player.currentTime + seconds);
       this.player2.seek(player.currentTime + seconds);
       this.player3.seek(player.currentTime + seconds);
       this.player4.seek(player.currentTime + seconds);
@@ -144,9 +154,8 @@ export default class PlayerControlExample extends Component {
   }
 
   seek(seconds) {
-    console.log('Seconds:  ' + seconds);
     return () => {
-      this.player0.seek(seconds);
+      this.player1.seek(seconds);
       this.player2.seek(seconds);
       this.player3.seek(seconds);
       this.player4.seek(seconds);
@@ -160,50 +169,33 @@ export default class PlayerControlExample extends Component {
 
   changePlaybackRateRate(steps) {
     return () => {
-      const { player0 } = this.player.getState();
-      this.player0.playbackRate = player0.playbackRate + steps;
-      // eslint-disable-next-line
-      const { player2 } = this.player2.getState();
-      this.player2.playbackRate = player0.playbackRate + steps;
-      // eslint-disable-next-line
-      const { player3 } = this.player3.getState();
-      this.player3.playbackRate = player0.playbackRate + steps;
-      // eslint-disable-next-line
-      const { player4 } = this.player4.getState();
-      this.player4.playbackRate = player0.playbackRate + steps;
-      // eslint-disable-next-line
-      const { player5 } = this.player5.getState();
-      this.player5.playbackRate = player0.playbackRate + steps;
-      // eslint-disable-next-line
-      const { player6 } = this.player6.getState();
-      this.player6.playbackRate = player0.playbackRate + steps;
-      // eslint-disable-next-line
-      const { player7 } = this.player7.getState();
-      this.player7.playbackRate = player0.playbackRate + steps;
-      // eslint-disable-next-line
-      const { player8 } = this.player8.getState();
-      this.player8.playbackRate = player0.playbackRate + steps;
-      // eslint-disable-next-line
-      const { player9 } = this.player9.getState();
-      this.player9.playbackRate = player0.playbackRate + steps;
+      const { player1 } = this.player1.getState();
+      this.player1.playbackRate = player1.playbackRate + steps;
+      this.player2.playbackRate = player1.playbackRate + steps;
+      this.player3.playbackRate = player1.playbackRate + steps;
+      this.player4.playbackRate = player1.playbackRate + steps;
+      this.player5.playbackRate = player1.playbackRate + steps;
+      this.player6.playbackRate = player1.playbackRate + steps;
+      this.player7.playbackRate = player1.playbackRate + steps;
+      this.player8.playbackRate = player1.playbackRate + steps;
+      this.player9.playbackRate = player1.playbackRate + steps;
     };
   }
 
   changeSource(name) {
     return () => {
       this.setState({
-        source: sources[name],
+        source1: sources[name],
         source2: sources[name],
         source3: sources[name],
       });
-      this.player0.load();
+
+      this.player1.load();
       this.player2.load();
       this.player3.load();
-
       this.player4.load();
       this.player5.load();
       this.player6.load();
-
       this.player7.load();
       this.player8.load();
       this.player9.load();
@@ -253,8 +245,8 @@ export default class PlayerControlExample extends Component {
                     </Col>
                     <Col xs={3}>
                       <Player
-                        ref={(player0) => {
-                          this.player0 = player0;
+                        ref={(player1) => {
+                          this.player1 = player1;
                         }}
                       >
                         <source src={this.state.source} />
@@ -393,7 +385,15 @@ export default class PlayerControlExample extends Component {
             </Col>
           </Row>
 
-          <Modal show={this.state.modalOpen} onHide={() => this.setState({ modalOpen: false })} centered size="lg">
+          <Modal
+            show={this.state.modalOpen}
+            onHide={() => {
+              this.fetchVideos();
+              this.setState({ modalOpen: false });
+            }}
+            centered
+            size="lg"
+          >
             <Card className="text-center">
               <Card.Header as="h5">{this.state.selectedVMSDate.toDateString()}</Card.Header>
               <Card>
