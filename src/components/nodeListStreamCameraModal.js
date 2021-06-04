@@ -13,14 +13,17 @@ export default function NodeListStreamCameraModal() {
       type: 'HOMESTREAMINGMODAL',
       payload: false,
     });
-  let checkSum1 = md5('/' + state.currentNodeInfo.name + '/camera1-9999999999-nodemedia2017privatekey');
-  let rtmpURL1 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera1.flv?sign=9999999999-' + checkSum1;
+  fetch('http://10.10.200.10:4000/streams/start/' + state.currentNodeInfo.name + '/' + state.currentNodeInfo.ip)
+    .then((response) => response.json())
+    .then((json) => {
+      console.log('steeam started');
+    });
 
-  let checkSum2 = md5('/' + state.currentNodeInfo.name + '/camera2-9999999999-nodemedia2017privatekey');
-  let rtmpURL2 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera2.flv?sign=9999999999-' + checkSum2;
+  let rtmpURL1 = 'http://10.10.200.41:8000/' + state.currentNodeInfo.name + '/camera1.flv';
 
-  let checkSum3 = md5('/' + state.currentNodeInfo.name + '/camera3-9999999999-nodemedia2017privatekey');
-  let rtmpURL3 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera3.flv?sign=9999999999-' + checkSum3;
+  let rtmpURL2 = 'http://10.10.200.41:8000/' + state.currentNodeInfo.name + '/camera2.flv';
+
+  let rtmpURL3 = 'http://10.10.200.41:8000/' + state.currentNodeInfo.name + '/camera3.flv';
   return (
     <Modal show={state.homeStreamingModal} onHide={() => handleStreamModalClose()} centered size="lg">
       <Card className="text-center">
