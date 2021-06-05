@@ -16,7 +16,7 @@ export default function NodeListStreamCameraModal() {
 
   let rtmpURL1 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera1.flv';
 
-  let rtmpURL2 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera2.flv';
+  let rtmpURL2 = 'http://10.10.200.163:8000/Camera01/camera1.flv';
 
   let rtmpURL3 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera3.flv';
   return (
@@ -27,7 +27,7 @@ export default function NodeListStreamCameraModal() {
           <CardGroup>
             <Card>
               <ReactPlayer
-                url={'http://10.10.200.163:8000/live/STREAM_NAME.flv'}
+                url={rtmpURL2}
                 config={{
                   file: {},
                 }}
