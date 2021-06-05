@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
 import ReactPlayer from 'react-player';
-
+import Image from 'react-bootstrap/Image';
 export default function NodeListStreamCameraModal() {
   const [state, dispatch] = useContext(GlobalContext);
 
@@ -12,11 +12,6 @@ export default function NodeListStreamCameraModal() {
     dispatch({
       type: 'HOMESTREAMINGMODAL',
       payload: false,
-    });
-  fetch('http://10.10.200.10:4000/streams/start/' + state.currentNodeInfo.name + '/' + state.currentNodeInfo.ip)
-    .then((response) => response.json())
-    .then((json) => {
-      console.log('steeam started');
     });
 
   let rtmpURL1 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera1.flv';
@@ -32,25 +27,7 @@ export default function NodeListStreamCameraModal() {
           <CardGroup>
             <Card>
               <ReactPlayer
-                url={rtmpURL1}
-                config={{
-                  file: {},
-                }}
-              />
-            </Card>
-            <Card>
-              {' '}
-              <ReactPlayer
-                url={rtmpURL2}
-                config={{
-                  file: {},
-                }}
-              />
-            </Card>
-            <Card>
-              {' '}
-              <ReactPlayer
-                url={rtmpURL3}
+                url={'http://10.10.200.163:8000/live/STREAM_NAME.flv'}
                 config={{
                   file: {},
                 }}
