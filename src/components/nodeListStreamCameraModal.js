@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
 import ReactPlayer from 'react-player';
+import JsmpegPlayer from './jsmpegPlayer';
 import Image from 'react-bootstrap/Image';
 export default function NodeListStreamCameraModal() {
   const [state, dispatch] = useContext(GlobalContext);
@@ -19,6 +20,7 @@ export default function NodeListStreamCameraModal() {
   let rtmpURL2 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera2.flv';
 
   let rtmpURL3 = 'http://10.10.200.10:8000/' + state.currentNodeInfo.name + '/camera3.flv';
+
   return (
     <Modal show={state.homeStreamingModal} onHide={() => handleStreamModalClose()} centered size="lg">
       <Card className="text-center">
@@ -26,12 +28,7 @@ export default function NodeListStreamCameraModal() {
         <Card.Body>
           <CardGroup>
             <Card>
-              <ReactPlayer
-                url={'http://10.10.200.163:8000/live/STREAM_NAME.flv'}
-                config={{
-                  file: {},
-                }}
-              />
+              <JsmpegPlayer wrapperClassName="video-wrapper" videoUrl="ws:10.10.200.10:9999" />
             </Card>
           </CardGroup>
         </Card.Body>
