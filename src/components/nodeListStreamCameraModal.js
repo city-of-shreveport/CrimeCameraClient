@@ -3,8 +3,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
 import { GlobalContext } from '../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
-import ReactPlayer from 'react-player';
-import JsmpegPlayer from './jsmpegPlayer';
+import ReactHlsPlayer from 'react-hls-player';
 import Image from 'react-bootstrap/Image';
 export default function NodeListStreamCameraModal() {
   const [state, dispatch] = useContext(GlobalContext);
@@ -28,7 +27,14 @@ export default function NodeListStreamCameraModal() {
         <Card.Body>
           <CardGroup>
             <Card>
-              <JsmpegPlayer wrapperClassName="video-wrapper" videoUrl="ws:10.10.200.10:9999" />
+              <ReactHlsPlayer
+                src="http://10.10.200.10:8000/live/STREAM_NAME/index.m3u8"
+                autoPlay={true}
+                controls={true}
+                width="100%"
+                height="auto"
+              />
+              ,{' '}
             </Card>
           </CardGroup>
         </Card.Body>
