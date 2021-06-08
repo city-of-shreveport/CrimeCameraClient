@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Table from 'react-bootstrap/Table';
 import React, { useContext } from 'react';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
 
 export default function NodeManagerSystemInfoModal() {

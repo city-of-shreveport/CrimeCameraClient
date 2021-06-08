@@ -1,11 +1,11 @@
-import NodeList from '../components/nodeList';
+import NodeList from '../Home/nodeList';
 import Col from 'react-bootstrap/Col';
-import Map from './map';
+import Map from '../Home/map';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 import Button from 'react-bootstrap/Button';
 import Moment from 'react-moment';
 import Table from 'react-bootstrap/Table';
@@ -13,11 +13,12 @@ import Table from 'react-bootstrap/Table';
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
 
-  const handleHomeStreamingModal = () =>
+  const handleHomeStreamingModal = () => {
     dispatch({
       type: 'HOMESTREAMINGMODAL',
       payload: true,
     });
+  };
 
   const handleViewVideosModal = () =>
     dispatch({

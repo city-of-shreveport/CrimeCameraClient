@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import CardGroup from 'react-bootstrap/CardGroup';
 import { Container } from 'semantic-ui-react';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 import HorizontalBarChart from './barChart2';
 import Dynamic from './barChart';
 import LineChart from './lineChart';

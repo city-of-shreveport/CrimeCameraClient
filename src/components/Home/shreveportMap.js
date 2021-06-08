@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useContext } from 'react';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 
 const GMap = () => {
   const [dispatch] = useContext(GlobalContext);

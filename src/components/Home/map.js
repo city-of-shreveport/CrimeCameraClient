@@ -1,4 +1,4 @@
-import GoogleMapComponent from './shreveportMap';
+import GoogleMapComponent from '../Home/shreveportMap';
 import React, { useState, useEffect } from 'react';
 
 // API key of the google map

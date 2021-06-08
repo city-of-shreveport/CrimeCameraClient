@@ -1,10 +1,10 @@
-import Home from './home';
+import Home from './Home/home';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import React, { useContext, useEffect } from 'react';
-import NodeManager from './settingsNodeManager';
-import SystemManager from './settingsSystemManager';
-import VMS from './vms';
+import NodeManager from './NodeManager/settingsNodeManager';
+import SystemManager from './SystemSettings/settingsSystemManager';
+import VMS from './VMS/vms';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
 import { IoCameraOutline } from 'react-icons/io5';

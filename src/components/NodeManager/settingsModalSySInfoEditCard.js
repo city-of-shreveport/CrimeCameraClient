@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 import CardGroup from 'react-bootstrap/CardGroup';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SettingsSysInfoEditCard() {
   const [, dispatch] = useContext(GlobalContext);

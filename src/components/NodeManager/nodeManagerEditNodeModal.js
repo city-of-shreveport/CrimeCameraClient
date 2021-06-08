@@ -4,10 +4,10 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import tryValue from '../helperFunctions';
+import tryValue from '../../helperFunctions';
 
 let formDataObject = {};
 

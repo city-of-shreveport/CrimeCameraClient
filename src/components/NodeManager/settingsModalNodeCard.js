@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 
 import Button from 'react-bootstrap/Button';
-import tryValue from '../helperFunctions';
+import tryValue from '../../helperFunctions';
 
 export default function SettingsNodeCard() {
   const [state, dispatch] = useContext(GlobalContext);

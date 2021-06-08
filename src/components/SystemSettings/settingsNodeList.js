@@ -1,7 +1,7 @@
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import React, { useContext } from 'react';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 export default function SettingsnodeList() {
   const [state, dispatch] = useContext(GlobalContext);
 

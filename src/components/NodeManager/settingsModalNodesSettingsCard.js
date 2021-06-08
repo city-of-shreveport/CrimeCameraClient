@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 

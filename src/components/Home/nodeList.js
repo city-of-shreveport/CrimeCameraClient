@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import React, { useContext } from 'react';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 import ListGroup from 'react-bootstrap/ListGroup';
 import NodeListVideoPlayerModal from './nodeListVideoPlayModal';
 import NodeListStreamCameraModal from './nodeListStreamCameraModal';

@@ -3,7 +3,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import ListGroup from 'react-bootstrap/ListGroup';
 import React, { useContext, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SettingsRestreaming() {
   const [state, dispatch] = useContext(GlobalContext);

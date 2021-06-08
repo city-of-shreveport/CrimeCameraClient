@@ -2,20 +2,20 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 
-export default function SettingsBackEndServers() {
+export default function SettingsFrontEndServers() {
   const [state] = useContext(GlobalContext);
   return (
     <>
       <Accordion>
         <Card className="text-right">
-          <Accordion.Toggle as="BackEnd001" eventKey="BackEnd001">
+          <Accordion.Toggle as="FrontEnd001" eventKey="FrontEnd001">
             <Card.Header as="h5" className="text-center">
-              BackEnd001{' '}
+              FrontEnd001{' '}
             </Card.Header>
           </Accordion.Toggle>
-          <Accordion.Collapse eventKey="BackEnd001">
+          <Accordion.Collapse eventKey="FrontEnd001">
             <CardGroup>
               <Card>
                 <Card.Header>Server</Card.Header>
@@ -50,12 +50,12 @@ export default function SettingsBackEndServers() {
           </Accordion.Collapse>
         </Card>
         <Card className="text-right">
-          <Accordion.Toggle as="BackEnd002" eventKey="BackEnd002">
+          <Accordion.Toggle as="FrontEnd002" eventKey="FrontEnd002">
             <Card.Header as="h5" className="text-center">
-              BackEnd002{' '}
+              FrontEnd002{' '}
             </Card.Header>
           </Accordion.Toggle>
-          <Accordion.Collapse eventKey="BackEnd002">
+          <Accordion.Collapse eventKey="FrontEnd002">
             <CardGroup>
               <Card>
                 <Card.Header>Server</Card.Header>
@@ -90,12 +90,12 @@ export default function SettingsBackEndServers() {
           </Accordion.Collapse>
         </Card>
         <Card className="text-right">
-          <Accordion.Toggle as="BackEnd003" eventKey="BackEnd003">
+          <Accordion.Toggle as="FrontEnd003" eventKey="FrontEnd003">
             <Card.Header as="h5" className="text-center">
-              BackEnd003
+              FrontEnd003
             </Card.Header>
           </Accordion.Toggle>
-          <Accordion.Collapse eventKey="BackEnd003">
+          <Accordion.Collapse eventKey="FrontEnd003">
             <CardGroup>
               <Card>
                 <Card.Header>Actions</Card.Header>
@@ -122,7 +122,7 @@ export default function SettingsBackEndServers() {
               </Card>
             </CardGroup>
           </Accordion.Collapse>
-          <Card.Footer> </Card.Footer>
+          <Card.Footer>Updated: {state.streamingstats.updated}</Card.Footer>
         </Card>
       </Accordion>
     </>

@@ -9,7 +9,7 @@ import SettingsNodeCard from './settingsModalNodeCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
 import SettingsNodesSettingsCard from './settingsModalNodeSettingsCard';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SettingsModal() {
   const [state, dispatch] = useContext(GlobalContext);

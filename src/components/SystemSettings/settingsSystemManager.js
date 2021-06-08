@@ -12,7 +12,7 @@ import SystemSettingsNewServerFormModal from './systemSettingsNewServerModal';
 import LineChart from './SystemLineChart';
 import LineChart2 from './SystemServersLineChart';
 import LineChart3 from './SystemServers2LineChart';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SystemManager() {
   const [state, dispatch] = useContext(GlobalContext);

@@ -6,7 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NodeManagerSystemInfoModal from './nodeManagerSystemInfoModal';
 
 import CardGroup from 'react-bootstrap/CardGroup';
-import { GlobalContext } from '../contexts/globalContext';
+import { GlobalContext } from '../../contexts/globalContext';
 export default function SettingsSysInfoCard() {
   const [state, dispatch] = useContext(GlobalContext);
   const handleEditNodeModal = () =>

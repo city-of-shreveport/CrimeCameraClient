@@ -14,7 +14,7 @@ import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
 import Calendar from 'react-calendar';
 import { Player } from 'video-react';
-import Map from './map';
+import Map from '../Home/map';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 
