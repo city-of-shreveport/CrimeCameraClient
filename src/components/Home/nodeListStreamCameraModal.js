@@ -28,7 +28,7 @@ export default function NodeListStreamCameraModal() {
           <CardGroup>
             <Card>
               <ReactHlsPlayer
-                src="http://10.10.200.10:8000/live/test/index.m3u8"
+                src="http://10.10.200.41:8000/cameras/test/index.m3u8"
                 autoPlay={true}
                 controls={true}
                 width="100%"
