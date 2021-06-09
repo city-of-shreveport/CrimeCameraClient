@@ -7,21 +7,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
 import Table from 'react-bootstrap/Table';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Badge from 'react-bootstrap/Badge';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
-import HorizontalBarChart from './barChart2';
-import Dynamic from './barChart';
-import LineChart from './lineChart';
 import SettingsNodeCard from './settingsModalNodeCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
 import SettingsNodesSettingsCard from './settingsModalNodesSettingsCard';
 import NodeManagerNewNodeModal from './nodeManagerNewNodeModal';
 import NodeManagerEditNodeModal from './nodeManagerEditNodeModal';
-import SingleItemBarChart from './singleItemBarChart';
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
 

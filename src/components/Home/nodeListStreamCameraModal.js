@@ -1,13 +1,9 @@
 import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
 import ReactHlsPlayer from 'react-hls-player';
-import Image from 'react-bootstrap/Image';
 export default function NodeListStreamCameraModal() {
   const [state, dispatch] = useContext(GlobalContext);
 

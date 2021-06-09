@@ -1,24 +1,11 @@
 import React, { useContext } from 'react';
-import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import NodeManagerSystemInfoModal from './nodeManagerSystemInfoModal';
 
 import CardGroup from 'react-bootstrap/CardGroup';
 import { GlobalContext } from '../../contexts/globalContext';
 export default function SettingsSysInfoCard() {
   const [state, dispatch] = useContext(GlobalContext);
-  const handleEditNodeModal = () =>
-    dispatch({
-      type: 'SETTINGS_EDIT_NODE_MODAL',
-      payload: true,
-    });
-  const handleSystemInfoNodeModal = () =>
-    dispatch({
-      type: 'SETTINGS_SYSTEMINFO_NODE_MODAL',
-      payload: true,
-    });
   return (
     <>
       <div>
