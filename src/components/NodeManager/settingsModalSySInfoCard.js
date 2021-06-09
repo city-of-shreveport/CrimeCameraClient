@@ -21,94 +21,62 @@ export default function SettingsSysInfoCard() {
     });
   return (
     <>
-      {state.currentNodeInfo.name === ' ' ? (
-        <div></div>
-      ) : (
-        <div>
-          <ButtonGroup className="mb-2">
-            <Button variant="primary" size="sm" onClick={() => handleEditNodeModal()}>
-              Configure
-            </Button>
-            <Button variant="primary" size="sm" onClick={() => handleSystemInfoNodeModal()}>
-              System Info
-            </Button>
-            <Button variant="primary" size="sm">
-              Update
-            </Button>
-            <Button variant="primary" size="sm">
-              Reboot
-            </Button>
-            <Button variant="primary" size="sm">
-              Change Keys
-            </Button>
-          </ButtonGroup>
-          <CardGroup>
-            <Card border="light">
-              <Card.Text>
-                <Table striped bordered hover size="sm" variant="dark">
-                  <tbody>
-                    <tr>
-                      <td>Host Name</td>
-                      <td>{state.currentNodeInfo.name}</td>
-                    </tr>
-                    <tr>
-                      <td>IP</td>
-                      <td>{state.currentNodeInfo.config.zeroTierIP}</td>
-                    </tr>
-                    <tr>
-                      <td>Location</td>
-                      <td>
-                        {state.currentNodeInfo.config.locationLat}, {state.currentNodeInfo.config.locationLong}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Video Drive</td>
-                      <td>{state.currentNodeInfo.config.videoDriveDevicePath}</td>
-                    </tr>
-                    <tr>
-                      <td>Buddy Drive</td>
-                      <td>{state.currentNodeInfo.config.buddyDriveDevicePath}</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card.Text>
-            </Card>
-            <Card border="light">
-              <Card.Text>
-                <Table striped bordered hover size="sm" variant="dark">
-                  <tbody>
-                    <tr>
-                      <td>OS </td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>CodeName</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Kernel</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Arch</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Buddy 1</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Buddy 2</td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card.Text>
-            </Card>
-            <NodeManagerSystemInfoModal />
-          </CardGroup>{' '}
-        </div>
-      )}
+      <div>
+        <CardGroup>
+          <Table striped bordered hover size="sm" variant="dark">
+            <tbody>
+              <tr>
+                <td>Host Name</td>
+                <td>{state.currentNodeInfo.name}</td>
+              </tr>
+              <tr>
+                <td>IP</td>
+                <td>{state.currentNodeInfo.config.ip}</td>
+              </tr>
+              <tr>
+                <td>Location</td>
+                <td>
+                  {state.currentNodeInfo.config.locationLat}, {state.currentNodeInfo.config.locationLong}
+                </td>
+              </tr>
+              <tr>
+                <td>Video Drive</td>
+                <td>{state.currentNodeInfo.config.videoDriveDevicePath}</td>
+              </tr>
+              <tr>
+                <td>Buddy Drive</td>
+                <td>{state.currentNodeInfo.config.buddyDriveDevicePath}</td>
+              </tr>
+              <tr>
+                <td>OS </td>
+                <td>{state.currentNodeInfo.sysInfo.osInfo.distro}</td>
+              </tr>
+              <tr>
+                <td>CodeName</td>
+                <td>{state.currentNodeInfo.sysInfo.osInfo.codename}</td>
+              </tr>
+              <tr>
+                <td>Kernel</td>
+                <td>{state.currentNodeInfo.sysInfo.osInfo.kernel}</td>
+              </tr>
+              <tr>
+                <td>Arch</td>
+                <td>{state.currentNodeInfo.sysInfo.osInfo.arch}</td>
+              </tr>
+              <tr>
+                <td>Buddy 1</td>
+                <td>{state.currentNodeInfo.config.buddyDriveDevicePath}</td>
+              </tr>
+              <tr>
+                <td>Buddy 2</td>
+                <td>{state.currentNodeInfo.config.buddyDriveDevicePath}</td>
+              </tr>
+            </tbody>
+          </Table>
+
+          <NodeManagerSystemInfoModal />
+        </CardGroup>{' '}
+      </div>
     </>
   );
 }

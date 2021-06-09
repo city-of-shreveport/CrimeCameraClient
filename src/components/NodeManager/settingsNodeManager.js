@@ -24,7 +24,21 @@ import NodeManagerEditNodeModal from './nodeManagerEditNodeModal';
 import SingleItemBarChart from './singleItemBarChart';
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
+
+  const handleEditNodeModal = (node) =>
+    dispatch({
+      type: 'SETTINGS_EDIT_NODE_MODAL',
+      payload: true,
+    });
+
+  const handleSystemInfoNodeModal = () =>
+    dispatch({
+      type: 'SETTINGS_SYSTEMINFO_NODE_MODAL',
+      payload: true,
+    });
+
   let perfMonTimerJob = null;
+
   const getPerfmonData = (node) =>
     fetch('http://10.10.200.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
@@ -60,6 +74,7 @@ export default function Settings() {
       type: 'SETTINGS_NEW_NODE_MODAL',
       payload: true,
     });
+
   const upDateSelectedNode = (param) => {
     getNodeInfo(param);
     clearInterval(perfMonTimerJob);
@@ -72,6 +87,7 @@ export default function Settings() {
       payload: false,
     });
   };
+
   const cameraInformation = () => {
     return (
       <Card bg="dark" text="light">
@@ -134,7 +150,7 @@ export default function Settings() {
                 <tbody>
                   {state.nodes.map((node) => (
                     <tr>
-                      <td>{node.name}</td>
+                      <td onClick={() => upDateSelectedNode(node.name)}>{node.name}</td>
                       <td>
                         <ProgressBar variant="danger" now={55} label={`20%`} />
                       </td>
@@ -143,7 +159,7 @@ export default function Settings() {
                       </td>
                       <td>145</td>
                       <td>
-                        <Button variant="outline-success" size="sm" onClick={() => upDateSelectedNode(node.name)}>
+                        <Button variant="outline-success" size="sm">
                           Camera 1
                         </Button>{' '}
                         <Button variant="outline-success" size="sm">
@@ -165,11 +181,11 @@ export default function Settings() {
                         </Button>{' '}
                       </td>
                       <td>
-                        <Button variant="outline-primary" size="sm">
+                        <Button variant="outline-primary" size="sm" onClick={() => handleEditNodeModal(node.name)}>
                           Configure
                         </Button>{' '}
-                        <Button variant="outline-primary" size="sm">
-                          Update
+                        <Button variant="outline-primary" size="sm" onClick={() => handleSystemInfoNodeModal()}>
+                          Information
                         </Button>{' '}
                         <Button variant="outline-primary" size="sm">
                           Reboot
@@ -182,16 +198,20 @@ export default function Settings() {
             </div>
           </Card>
         </Col>
-        <Col xs={2}>
-          <systemInformation />
-          <Card bg="dark" text="light">
-            <Card.Header>System Information</Card.Header>
-            <Card.Text></Card.Text>
-            <Card.Body>
-              {state.cameraSettingsComponent ? <SettingsSysInfoEditCard /> : <SettingsSysInfoCard />}
-            </Card.Body>
-          </Card>
-        </Col>
+        {state.currentNodeInfo.name === ' ' ? (
+          <div></div>
+        ) : (
+          <Col xs={2}>
+            <systemInformation />
+            <Card bg="dark" text="light">
+              <Card.Header>System Information</Card.Header>
+              <Card.Text></Card.Text>
+              <Card.Body>
+                {state.cameraSettingsComponent ? <SettingsSysInfoEditCard /> : <SettingsSysInfoCard />}
+              </Card.Body>
+            </Card>
+          </Col>
+        )}
       </Row>
 
       <NodeManagerNewNodeModal />

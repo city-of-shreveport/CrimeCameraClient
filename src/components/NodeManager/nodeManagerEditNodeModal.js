@@ -183,10 +183,10 @@ export default function NodeManagerEditNodeModal() {
                             <Form.Label>Buddy 1 Host Name</Form.Label>
                             <Form.Control
                               placeholder={tryValue(() => {
-                                return state.currentNodeInfo.config.buddyDrives[0].hostName;
+                                return state.currentNodeInfo.config.buddyDrives.buddy1.hostName;
                               })}
                               type="text"
-                              onChange={(e) => handleSubmit({ 'config.BuddyDrive[0].HostName': e.target.value })}
+                              onChange={(e) => handleSubmit({ 'config.BuddyDrive.buddy1.HostName': e.target.value })}
                               size="sm"
                             />
                           </Form.Group>
@@ -195,10 +195,10 @@ export default function NodeManagerEditNodeModal() {
                             <Form.Label>Buddy 1 Mount Path</Form.Label>
                             <Form.Control
                               placeholder={tryValue(() => {
-                                return state.currentNodeInfo.config.buddyDrives[0].sshfsMountPath;
+                                return state.currentNodeInfo.config.buddyDrives.buddy1.sshfsMountPath;
                               })}
                               type="text"
-                              onChange={(e) => handleSubmit({ 'config.BuddyDrive[0].MountPath': e.target.value })}
+                              onChange={(e) => handleSubmit({ 'config.BuddyDrive.buddy1.MountPath': e.target.value })}
                               size="sm"
                             />
                           </Form.Group>
@@ -208,10 +208,10 @@ export default function NodeManagerEditNodeModal() {
                             <Form.Label>Buddy 2 Host Name</Form.Label>
                             <Form.Control
                               placeholder={tryValue(() => {
-                                return state.currentNodeInfo.config.buddyDrives[1].hostName;
+                                return state.currentNodeInfo.config.buddyDrives.buddy2.hostName;
                               })}
                               type="text"
-                              onChange={(e) => handleSubmit({ 'config.BuddyDrive[1].HostName': e.target.value })}
+                              onChange={(e) => handleSubmit({ 'config.BuddyDrive.buddy2.HostName': e.target.value })}
                               size="sm"
                             />
                           </Form.Group>
@@ -220,10 +220,10 @@ export default function NodeManagerEditNodeModal() {
                             <Form.Label>Buddy 2 Mount Path</Form.Label>
                             <Form.Control
                               placeholder={tryValue(() => {
-                                return state.currentNodeInfo.config.buddyDrives[1].sshfsMountPath;
+                                return state.currentNodeInfo.config.buddyDrives.buddy2.sshfsMountPath;
                               })}
                               type="text"
-                              onChange={(e) => handleSubmit({ 'config.BuddyDrive[1].MountPath': e.target.value })}
+                              onChange={(e) => handleSubmit({ 'config.BuddyDrive.buddy2.MountPath': e.target.value })}
                               size="sm"
                             />
                           </Form.Group>
