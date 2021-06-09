@@ -75,9 +75,10 @@ export default class PlayerControlExample extends Component {
 
   async fetchVideos() {
     console.log('Fetching videos...');
-    fetch('http://10.10.200.10:3001/api/videos')
+    fetch(`http://10.10.200.10:3001/api/videos/CrimeCamera001/1613248535/1623248535`)
       .then((response) => response.json())
       .then((json) => {
+        console.log(this.state.videos);
         this.setState({ videos: json });
       });
   }
