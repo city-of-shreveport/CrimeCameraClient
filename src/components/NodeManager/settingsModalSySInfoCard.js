@@ -1,11 +1,13 @@
+import CardGroup from 'react-bootstrap/CardGroup';
+import NodeManagerSystemInfoModal from './nodeManagerSystemInfoModal';
 import React, { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
-import NodeManagerSystemInfoModal from './nodeManagerSystemInfoModal';
-
-import CardGroup from 'react-bootstrap/CardGroup';
 import { GlobalContext } from '../../contexts/globalContext';
+
 export default function SettingsSysInfoCard() {
+  // eslint-disable-next-line
   const [state, dispatch] = useContext(GlobalContext);
+
   return (
     <>
       <div>

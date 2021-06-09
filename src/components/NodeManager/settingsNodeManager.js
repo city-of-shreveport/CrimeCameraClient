@@ -1,21 +1,21 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NodeManagerEditNodeModal from './nodeManagerEditNodeModal';
+import NodeManagerNewNodeModal from './nodeManagerNewNodeModal';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-
-import Table from 'react-bootstrap/Table';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import { Container } from 'semantic-ui-react';
-import { GlobalContext } from '../../contexts/globalContext';
 import SettingsNodeCard from './settingsModalNodeCard';
+import SettingsNodesSettingsCard from './settingsModalNodesSettingsCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
-import SettingsNodesSettingsCard from './settingsModalNodesSettingsCard';
-import NodeManagerNewNodeModal from './nodeManagerNewNodeModal';
-import NodeManagerEditNodeModal from './nodeManagerEditNodeModal';
+import Table from 'react-bootstrap/Table';
+import { Container } from 'semantic-ui-react';
+import { GlobalContext } from '../../contexts/globalContext';
+
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
 
@@ -82,6 +82,7 @@ export default function Settings() {
     });
   };
 
+  // eslint-disable-next-line
   const cameraInformation = () => {
     return (
       <Card bg="dark" text="light">
