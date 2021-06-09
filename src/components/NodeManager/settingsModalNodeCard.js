@@ -32,7 +32,7 @@ export default function SettingsNodeCard() {
                     <td>Status</td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[0].onlineStatus;
+                        return state.currentNodeInfo.config.cameras.camera1.onlineStatus;
                       })}
                     </td>
                   </tr>
@@ -40,7 +40,7 @@ export default function SettingsNodeCard() {
                     <td>Direction </td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[0].direction;
+                        return state.currentNodeInfo.config.cameras.camera1.direction;
                       })}
                     </td>
                   </tr>
@@ -48,7 +48,7 @@ export default function SettingsNodeCard() {
                     <td>Type</td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[0].type;
+                        return state.currentNodeInfo.config.cameras.camera1.type;
                       })}
                     </td>
                   </tr>
@@ -56,7 +56,7 @@ export default function SettingsNodeCard() {
                     <td>IP</td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[0].ip;
+                        return state.currentNodeInfo.config.cameras.camera1.ip;
                       })}
                     </td>
                   </tr>
@@ -74,7 +74,7 @@ export default function SettingsNodeCard() {
                     <td>Status</td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[1].onlineStatus;
+                        return state.currentNodeInfo.config.cameras.camera2.onlineStatus;
                       })}
                     </td>
                   </tr>
@@ -82,7 +82,7 @@ export default function SettingsNodeCard() {
                     <td>Direction </td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[1].direction;
+                        return state.currentNodeInfo.config.cameras.camera2.direction;
                       })}
                     </td>
                   </tr>
@@ -90,7 +90,7 @@ export default function SettingsNodeCard() {
                     <td>Type</td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[1].type;
+                        return state.currentNodeInfo.config.cameras.camera2.type;
                       })}
                     </td>
                   </tr>
@@ -98,7 +98,7 @@ export default function SettingsNodeCard() {
                     <td>IP</td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[1].ip;
+                        return state.currentNodeInfo.config.cameras.camera2.ip;
                       })}
                     </td>
                   </tr>
@@ -116,7 +116,7 @@ export default function SettingsNodeCard() {
                     <td>Status</td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[2].onlineStatus;
+                        return state.currentNodeInfo.config.cameras.camera3.onlineStatus ? 'UP' : 'DOWN';
                       })}
                     </td>
                   </tr>
@@ -124,7 +124,7 @@ export default function SettingsNodeCard() {
                     <td>Direction </td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[2].direction;
+                        return state.currentNodeInfo.config.cameras.camera3.direction;
                       })}
                     </td>
                   </tr>
@@ -132,7 +132,7 @@ export default function SettingsNodeCard() {
                     <td>Type</td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[2].type;
+                        return state.currentNodeInfo.config.cameras.camera3.type;
                       })}
                     </td>
                   </tr>
@@ -140,7 +140,7 @@ export default function SettingsNodeCard() {
                     <td>IP</td>
                     <td>
                       {tryValue(() => {
-                        return state.currentNodeInfo.config.cameras[2].ip;
+                        return state.currentNodeInfo.config.cameras.camera3.ip;
                       })}
                     </td>
                   </tr>

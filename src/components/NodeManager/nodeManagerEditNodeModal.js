@@ -46,15 +46,15 @@ export default function NodeManagerEditNodeModal() {
       centered
       size="lg"
     >
-      <Card className="text-center">
+      <Card className="text-center" bg="dark" text="light">
         <Card.Header as="h5">Edit Node</Card.Header>
         <CardGroup>
           <Card>
             <Form>
               <CardGroup>
-                <Card>
+                <Card bg="dark" text="light">
                   <CardGroup>
-                    <Card className="text-left">
+                    <Card className="text-left" bg="dark" text="light">
                       <Card.Title>Node Information</Card.Title>
                       <Card.Body>
                         <Row>
@@ -140,7 +140,7 @@ export default function NodeManagerEditNodeModal() {
                   </CardGroup>
                   <br />
                   <CardGroup>
-                    <Card className="text-left">
+                    <Card className="text-left" bg="dark" text="light">
                       <Card.Title>Buddy Configuration</Card.Title>
                       <Card.Body>
                         <Row>
@@ -230,7 +230,7 @@ export default function NodeManagerEditNodeModal() {
                         </Row>
                       </Card.Body>
                     </Card>
-                    <Card className="text-left">
+                    <Card className="text-left" bg="dark" text="light">
                       <Card.Title>Video Drive</Card.Title>
                       <Card.Body>
                         <Row>

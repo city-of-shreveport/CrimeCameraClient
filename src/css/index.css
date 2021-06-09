@@ -4,6 +4,7 @@ body {
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
 }
 .checkedInTime {
   font-size: 12px;
@@ -23,8 +24,8 @@ body {
   max-height: 600px;
 }
 .settingsDIV {
-  max-height: 800px;
   min-width: 100%;
+  min-height: 1000px;
 }
 .timesListGroup {
   max-height: 280px;
@@ -42,7 +43,10 @@ body {
   max-height: 400px;
   overflow-y: scroll;
 }
-
+.nodeTableOverflow {
+  max-height: 90%px;
+  overflow-y: scroll;
+}
 .chartBox {
   height: 95%;
   width: 100%;
@@ -54,8 +58,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 .custom-modal {
-  min-width: 95%;
+  min-width: 100% !important;
   height: auto;
+}
+.custom-modal-streaming {
+  min-width: 95% !important;
+  height: auto;
+}
+.modal-content {
+  min-width: 100% !important;
 }
 .customModalNewNode {
   min-width: 40%;

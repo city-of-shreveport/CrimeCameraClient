@@ -9,13 +9,18 @@ import NodeListVideoPlayerModal from './nodeListVideoPlayModal';
 import NodeListStreamCameraModal from './nodeListStreamCameraModal';
 export default function NodeList() {
   const [state, dispatch] = useContext(GlobalContext);
+  const startStream = (json) => {
+    fetch('http://10.10.200.10:3001/api/streams/start/' + json.name + '/' + json.ip).then((response) =>
+      console.log(response)
+    );
+  };
 
   // eslint-disable-next-lineclear
   const getNodeInfo = (node) => {
     fetch('http://10.10.200.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
-        console.log(state);
+        startStream(json);
         dispatch({
           type: 'UPDATE_CURRENT_NODE_INFO',
           payload: json,

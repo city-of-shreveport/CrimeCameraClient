@@ -4,16 +4,35 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import { GlobalContext } from '../../contexts/globalContext';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import tryValue from '../../helperFunctions';
 
 import { Player } from 'video-react';
-
+let formDataObject = {};
 export default function SettingsNodesSettingsCard() {
-  const [, dispatch] = useContext(GlobalContext);
+  const [state, dispatch] = useContext(GlobalContext);
   const handleSysConfigCameraModal = () =>
     dispatch({
       type: 'UPDATE_NODESYSCAMERACOMPONENT',
       payload: false,
     });
+  const handleSubmit = (event) => {
+    let objectKey = Object.keys(event);
+    let objectVal = Object.values(event);
+    formDataObject[objectKey[0]] = objectVal[0];
+    console.log(formDataObject);
+  };
+  const UpDateFormState = () => {
+    //SEND FORM TO SERVER
+    console.log(formDataObject);
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formDataObject),
+    };
+    fetch('http://10.10.200.10:3001/api/nodes/' + state.currentNodeInfo.name, requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log('updated'));
+  };
   return (
     <>
       <Button variant="primary" size="sm" onClick={() => handleSysConfigCameraModal()}>
@@ -33,10 +52,38 @@ export default function SettingsNodesSettingsCard() {
               <option>Camera 3</option>
             </Form.Control>
           </Form.Group>
-          <Form.Control size="sm" type="number" placeholder="Direction" />
-          <Form.Control size="sm" type="text" placeholder="UserName" />
-          <Form.Control size="sm" type="text" placeholder="Password" />
-          <Form.Control size="sm" type="text" placeholder="FolderName" />
+          <Form.Control
+            size="sm"
+            type="number"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera1.direction': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera1.direction;
+            })}
+          />
+          <Form.Control
+            size="sm"
+            type="text"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera1.username': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera1.username;
+            })}
+          />
+          <Form.Control
+            size="sm"
+            type="text"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera1.password': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera1.password;
+            })}
+          />
+          <Form.Control
+            size="sm"
+            type="text"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera1.foldername': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera1.foldername;
+            })}
+          />
           <Card.Footer></Card.Footer>
         </Card>
         <Card className="text-center">
@@ -52,7 +99,38 @@ export default function SettingsNodesSettingsCard() {
               <option>Camera 3</option>
             </Form.Control>
           </Form.Group>
-          <Form.Control size="sm" type="text" placeholder="Direction" />
+          <Form.Control
+            size="sm"
+            type="number"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera2.direction': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera2.direction;
+            })}
+          />
+          <Form.Control
+            size="sm"
+            type="text"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera2.username': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera2.username;
+            })}
+          />
+          <Form.Control
+            size="sm"
+            type="text"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera2.password': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera2.password;
+            })}
+          />
+          <Form.Control
+            size="sm"
+            type="text"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera2.foldername': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera2.foldername;
+            })}
+          />
           <Card.Footer></Card.Footer>
         </Card>
         <Card className="text-center">
@@ -68,11 +146,45 @@ export default function SettingsNodesSettingsCard() {
               <option>Camera 2</option>
             </Form.Control>
           </Form.Group>
-          <Form.Control size="sm" type="text" placeholder="Direction" />
+          <Form.Control
+            size="sm"
+            type="number"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera3.direction': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera3.direction;
+            })}
+          />
+          <Form.Control
+            size="sm"
+            type="text"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera3.username': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera3.username;
+            })}
+          />
+          <Form.Control
+            size="sm"
+            type="text"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera3.password': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera3.password;
+            })}
+          />
+          <Form.Control
+            size="sm"
+            type="text"
+            onChange={(e) => handleSubmit({ 'config.cameras.camera3.foldername': e.target.value })}
+            placeholder={tryValue(() => {
+              return state.currentNodeInfo.config.cameras.camera3.foldername;
+            })}
+          />
 
           <Card.Footer></Card.Footer>
         </Card>
       </CardGroup>
+      <Button variant="primary" size="sm" onClick={() => UpDateFormState()}>
+        Update
+      </Button>
     </>
   );
 }

@@ -34,6 +34,7 @@ const initialState = {
   nodeSettingsCameraComponent: false,
   editNodeModal: false,
   nodeSelected: false,
+  previousNode: ' ',
   currentNodeInfo: {
     createdAt: ' ',
     ip: ' ',
@@ -192,8 +193,10 @@ const reducer = (state, action) => {
         nodeSettingsCameraComponent: action.payload,
       };
     case 'UPDATE_CURRENT_NODE_INFO':
+      let previousNodeInfo = state.currentNodeInfo.name;
       return {
         ...state,
+        previousNode: previousNodeInfo,
         currentNodeInfo: action.payload,
       };
     case 'UPDATE_CAMERASYSCOMPONENT':
