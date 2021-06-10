@@ -1,7 +1,9 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
+
 defaults.animation = false;
+
 const data = {
   labels: ['Active Streams', 'Idle Streams', 'RTMP Connection', 'WS Connection'],
   datasets: [

@@ -2,18 +2,11 @@ import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Card from 'react-bootstrap/Card';
-import Table from 'react-bootstrap/Table';
-
-import Col from 'react-bootstrap/Col';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
-import CardGroup from 'react-bootstrap/CardGroup';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { Container } from 'semantic-ui-react';
 import SystemSettingsNewServerFormModal from './systemSettingsNewServerModal';
-import LineChart from './SystemLineChart';
-import LineChart2 from './SystemServersLineChart';
-import LineChart3 from './SystemServers2LineChart';
+import Table from 'react-bootstrap/Table';
+import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SystemManager() {

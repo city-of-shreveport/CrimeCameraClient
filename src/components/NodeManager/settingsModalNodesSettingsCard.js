@@ -1,38 +1,42 @@
-import React, { useContext } from 'react';
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { GlobalContext } from '../../contexts/globalContext';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import React, { useContext } from 'react';
 import tryValue from '../../helperFunctions';
-
+import { GlobalContext } from '../../contexts/globalContext';
 import { Player } from 'video-react';
+
 let formDataObject = {};
+
 export default function SettingsNodesSettingsCard() {
   const [state, dispatch] = useContext(GlobalContext);
+
   const handleSysConfigCameraModal = () =>
     dispatch({
       type: 'UPDATE_NODESYSCAMERACOMPONENT',
       payload: false,
     });
+
   const handleSubmit = (event) => {
     let objectKey = Object.keys(event);
     let objectVal = Object.values(event);
     formDataObject[objectKey[0]] = objectVal[0];
     console.log(formDataObject);
   };
+
   const UpDateFormState = () => {
-    //SEND FORM TO SERVER
-    console.log(formDataObject);
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
+
     fetch('http://10.10.200.10:3001/api/nodes/' + state.currentNodeInfo.name, requestOptions)
       .then((response) => response.json())
       .then((data) => console.log('updated'));
   };
+
   return (
     <>
       <Button variant="primary" size="sm" onClick={() => handleSysConfigCameraModal()}>

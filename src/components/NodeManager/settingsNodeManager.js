@@ -13,12 +13,13 @@ import SettingsNodesSettingsCard from './settingsModalNodesSettingsCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
 import Table from 'react-bootstrap/Table';
+import tryValue from '../../helperFunctions';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
-import tryValue from '../../helperFunctions';
 
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
+
   const handleEditNodeModal = (node) =>
     dispatch({
       type: 'SETTINGS_EDIT_NODE_MODAL',

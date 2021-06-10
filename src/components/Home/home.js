@@ -1,42 +1,47 @@
-import NodeList from '../Home/nodeList';
-import Col from 'react-bootstrap/Col';
-import Map from '../Home/map';
-import React, { useContext } from 'react';
-import Row from 'react-bootstrap/Row';
-import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
-import { GlobalContext } from '../../contexts/globalContext';
-import ReactHlsPlayer from 'react-hls-player';
-import CardGroup from 'react-bootstrap/CardGroup';
-import { Player } from 'video-react';
 import Calendar from 'react-calendar';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
+import Map from '../Home/map';
+import NodeList from '../Home/nodeList';
+import React, { useContext } from 'react';
+import ReactHlsPlayer from 'react-hls-player';
+import Row from 'react-bootstrap/Row';
+import { GlobalContext } from '../../contexts/globalContext';
+import { Player } from 'video-react';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-  let rtmpURL1 = 'http://10.10.200.10:8000/live/' + state.currentNodeInfo.name + 'camera1/index.m3u8';
-  let rtmpURL2 = 'http://10.10.200.10:8000/live/' + state.currentNodeInfo.name + 'camera2/index.m3u8';
-  let rtmpURL3 = 'http://10.10.200.10:8000/live/' + state.currentNodeInfo.name + 'camera3/index.m3u8';
+  let rtmpURL1 = 'http://10.10.200.10:8000/streams/' + state.currentNodeInfo.name + 'camera1/index.m3u8';
+  let rtmpURL2 = 'http://10.10.200.10:8000/streams/' + state.currentNodeInfo.name + 'camera2/index.m3u8';
+  let rtmpURL3 = 'http://10.10.200.10:8000/streams/' + state.currentNodeInfo.name + 'camera3/index.m3u8';
+
   const updateHomeVideoDate = (e) =>
     dispatch({
       type: 'UPDATEHOMEVIDEODATE',
       payload: e,
     });
+
   const updateHomeTimeHour = (e) =>
     dispatch({
       type: 'UPDATEHOMEVIDEOTIMEHOUR',
       payload: e,
     });
+
   const updateHomeTimeMin = (e) =>
     dispatch({
       type: 'UPDATEHOMEVIDEOTIMEMIN',
       payload: e,
     });
+
   const updateHomeTimeAMPM = (e) =>
     dispatch({
       type: 'UPDATEHOMEVIDEOTIMEPM',
       payload: e,
     });
+
   return (
     <>
       <Container fluid className="homeContainer bg-dark">

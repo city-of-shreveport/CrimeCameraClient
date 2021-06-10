@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { GlobalContext } from '../../contexts/globalContext';
 import { Bar } from 'react-chartjs-2';
+import { GlobalContext } from '../../contexts/globalContext';
 import { defaults } from 'react-chartjs-2';
 
 defaults.animation = false;

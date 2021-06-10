@@ -1,9 +1,9 @@
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import Table from 'react-bootstrap/Table';
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
+import React, { useContext } from 'react';
+import Table from 'react-bootstrap/Table';
+import { GlobalContext } from '../../contexts/globalContext';
 
 export default function NodeManagerSystemInfoModal() {
   const [state, dispatch] = useContext(GlobalContext);

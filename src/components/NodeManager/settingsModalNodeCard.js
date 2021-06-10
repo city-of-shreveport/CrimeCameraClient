@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
-import Card from 'react-bootstrap/Card';
-import Table from 'react-bootstrap/Table';
-import CardGroup from 'react-bootstrap/CardGroup';
-import { GlobalContext } from '../../contexts/globalContext';
-
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import React, { useContext } from 'react';
+import Table from 'react-bootstrap/Table';
 import tryValue from '../../helperFunctions';
+import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SettingsNodeCard() {
   const [state, dispatch] = useContext(GlobalContext);
+
   const handleSysConfigNodeModal = () =>
     dispatch({
       type: 'UPDATE_NODESYSCAMERACOMPONENT',

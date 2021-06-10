@@ -1,11 +1,12 @@
+import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
-import Accordion from 'react-bootstrap/Accordion';
 import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SettingsFrontEndServers() {
   const [state] = useContext(GlobalContext);
+
   return (
     <>
       <Accordion>

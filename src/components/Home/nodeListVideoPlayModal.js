@@ -1,32 +1,36 @@
 import Button from 'react-bootstrap/Button';
+import Calendar from 'react-calendar';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import React, { useContext } from 'react';
-import { GlobalContext } from '../../contexts/globalContext';
-import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Calendar from 'react-calendar';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Modal from 'react-bootstrap/Modal';
+import React, { useContext } from 'react';
+import Row from 'react-bootstrap/Row';
+import { GlobalContext } from '../../contexts/globalContext';
 
 export default function NodeListVideoPlayerModal() {
   const [state, dispatch] = useContext(GlobalContext);
+
   const updateHomeTimeHour = (e) =>
     dispatch({
       type: 'UPDATEHOMEVIDEOTIMEHOUR',
       payload: e,
     });
+
   const updateHomeTimeMin = (e) =>
     dispatch({
       type: 'UPDATEHOMEVIDEOTIMEMIN',
       payload: e,
     });
+
   const updateHomeTimePM = (e) =>
     dispatch({
       type: 'UPDATEHOMEVIDEOTIMEPM',
       payload: e,
     });
+
   const updateHomeVideoDate = (e) =>
     dispatch({
       type: 'UPDATEHOMEVIDEODATE',

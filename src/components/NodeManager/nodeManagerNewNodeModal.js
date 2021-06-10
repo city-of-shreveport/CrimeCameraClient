@@ -2,11 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import { GlobalContext } from '../../contexts/globalContext';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
 
 let formDataObject = {};
 

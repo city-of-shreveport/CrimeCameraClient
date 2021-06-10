@@ -1,18 +1,18 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React, { useContext } from 'react';
-import { GlobalContext } from '../../contexts/globalContext';
-import NodeListVideoPlayerModal from './nodeListVideoPlayModal';
-import NodeListStreamCameraModal from './nodeListStreamCameraModal';
 import Table from 'react-bootstrap/Table';
+import { GlobalContext } from '../../contexts/globalContext';
 
 export default function NodeList() {
   const [state, dispatch] = useContext(GlobalContext);
+
   const startStream = (json) => {
     fetch('http://10.10.200.10:3001/api/streams/start/' + json.name + '/' + json.ip).then((response) =>
       console.log(response)
     );
   };
+
   const stopStream = () => {
     fetch('http://10.10.200.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) =>
       console.log(response)
@@ -46,6 +46,7 @@ export default function NodeList() {
         startStream(json);
       });
   };
+
   const upDateSelectedNode = (param) => {
     stopStream();
     getNodeInfo(param);
@@ -67,6 +68,7 @@ export default function NodeList() {
       payload: false,
     });
   };
+
   return (
     <div>
       <Card className="text-center " bg="dark" text="light">

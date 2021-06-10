@@ -1,23 +1,25 @@
-import Modal from 'react-bootstrap/Modal';
-import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import HorizontalBarChart from './barChart2';
 import HorizontalBarChart2 from './barChart';
 import LineChart from './lineChart';
+import Modal from 'react-bootstrap/Modal';
+import React, { useContext } from 'react';
 import SettingsNodeCard from './settingsModalNodeCard';
+import SettingsNodesSettingsCard from './settingsModalNodeSettingsCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
-import SettingsNodesSettingsCard from './settingsModalNodeSettingsCard';
 import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SettingsModal() {
   const [state, dispatch] = useContext(GlobalContext);
+
   const handleClose = () =>
     dispatch({
       type: 'UPDATE_SETTINGSMODAL',
       payload: false,
     });
+
   return (
     <>
       <Modal show={state.settingsModal} onHide={handleClose} dialogClassName="custom-modal">
