@@ -15,6 +15,7 @@ import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
 import Table from 'react-bootstrap/Table';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
+import tryValue from '../../helperFunctions';
 
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
@@ -144,11 +145,38 @@ export default function Settings() {
                   {state.nodes.map((node, i) => (
                     <tr>
                       <td onClick={() => upDateSelectedNode(node.name)}>{node.name}</td>
-                      <td onClick={() => console.log(node.perfmon.cpuTemperature.main)}></td>
                       <td>
-                        <ProgressBar variant="danger" now={65} label={`65%`} />
+                        <ProgressBar
+                          variant="danger"
+                          now={tryValue(() => {
+                            return node.perfmon.currentLoad.currentLoadUser.toFixed(2) * 100;
+                          })}
+                          label={
+                            tryValue(() => {
+                              return node.perfmon.currentLoad.currentLoadUser.toFixed(2) * 100;
+                            }) + `%`
+                          }
+                        />
                       </td>
-                      <td>145</td>
+                      <td>
+                        <ProgressBar
+                          variant="danger"
+                          now={tryValue(() => {
+                            return (node.perfmon.mem.used / node.perfmon.mem.total).toFixed(2) * 100;
+                          })}
+                          label={
+                            tryValue(() => {
+                              return (node.perfmon.mem.used / node.perfmon.mem.total).toFixed(2) * 100;
+                            }) + `%`
+                          }
+                        />
+                      </td>
+                      <td>
+                        {tryValue(() => {
+                          return (node.perfmon.cpuTemperature.main * 1.8 + 32).toFixed(0);
+                        })}{' '}
+                        F
+                      </td>
                       <td>
                         <Button variant="outline-success" size="sm">
                           Camera 1
