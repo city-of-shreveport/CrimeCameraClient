@@ -8,15 +8,11 @@ export default function NodeList() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const startStream = (json) => {
-    fetch('http://10.10.200.10:3001/api/streams/start/' + json.name + '/' + json.ip).then((response) =>
-      console.log(response)
-    );
+    fetch('http://10.10.200.10:3001/api/streams/start/' + json.name + '/' + json.ip).then((response) => {});
   };
 
   const stopStream = () => {
-    fetch('http://10.10.200.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) =>
-      console.log(response)
-    );
+    fetch('http://10.10.200.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
   };
 
   const handleViewVideosComponent = () => {

@@ -17,11 +17,9 @@ export default function SystemSettingsNewServerFormModal() {
     let objectKey = Object.keys(event);
     let objectVal = Object.values(event);
     formDataObject[objectKey[0]] = objectVal[0];
-    console.log(formDataObject);
   };
 
   const UpDateFormState = () => {
-    console.log(formDataObject);
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -29,7 +27,7 @@ export default function SystemSettingsNewServerFormModal() {
     };
     fetch('http://10.10.200.10:3001/api/servers', requestOptions)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {});
   };
 
   const handleAddServer = () =>

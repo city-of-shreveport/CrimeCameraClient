@@ -22,7 +22,6 @@ export default function SettingsNodesSettingsCard() {
     let objectKey = Object.keys(event);
     let objectVal = Object.values(event);
     formDataObject[objectKey[0]] = objectVal[0];
-    console.log(formDataObject);
   };
 
   const UpDateFormState = () => {
@@ -34,7 +33,7 @@ export default function SettingsNodesSettingsCard() {
 
     fetch('http://10.10.200.10:3001/api/nodes/' + state.currentNodeInfo.name, requestOptions)
       .then((response) => response.json())
-      .then((data) => console.log('updated'));
+      .then((data) => {});
   };
 
   return (

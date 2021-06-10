@@ -27,7 +27,6 @@ export default function App() {
           let nodeDataPerfMon = nodedata[i];
           nodeDataPerfMon.perfmon = json[0];
           nodeArray.push(nodeDataPerfMon);
-          console.log(nodeDataPerfMon);
         })
         .then(() => {
           dispatch({

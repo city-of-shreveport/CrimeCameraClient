@@ -14,9 +14,9 @@ import { Player } from 'video-react';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-  let rtmpURL1 = 'http://10.10.200.10:8000/streams/' + state.currentNodeInfo.name + 'camera1/index.m3u8';
-  let rtmpURL2 = 'http://10.10.200.10:8000/streams/' + state.currentNodeInfo.name + 'camera2/index.m3u8';
-  let rtmpURL3 = 'http://10.10.200.10:8000/streams/' + state.currentNodeInfo.name + 'camera3/index.m3u8';
+  let rtmpURL1 = 'http://10.10.200.10:8000/streams/' + state.currentNodeInfo.name + '-camera1/index.m3u8';
+  let rtmpURL2 = 'http://10.10.200.10:8000/streams/' + state.currentNodeInfo.name + '-camera2/index.m3u8';
+  let rtmpURL3 = 'http://10.10.200.10:8000/streams/' + state.currentNodeInfo.name + '-camera3/index.m3u8';
 
   const updateHomeVideoDate = (e) =>
     dispatch({

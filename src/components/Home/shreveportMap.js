@@ -5,7 +5,6 @@ const GMap = () => {
   const [dispatch] = useContext(GlobalContext);
 
   const getCameraInfo = (node) => {
-    console.log(node);
     fetch('http://10.10.200.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
@@ -73,7 +72,6 @@ const GMap = () => {
             //bounds.extend(marker.position);
             marker.addListener('click', () => {
               getCameraInfo(marker.nodeName);
-              console.log(marker.nodeName);
             });
           });
         });

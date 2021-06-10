@@ -129,7 +129,7 @@ export default function NodeListVideoPlayerModal() {
         </Container>
       </Card>
       <Card.Footer className="text-muted">
-        <Button size="sm" onClick={() => console.log('yup')}>
+        <Button size="sm" onClick={() => {}}>
           Load Videos
         </Button>
       </Card.Footer>

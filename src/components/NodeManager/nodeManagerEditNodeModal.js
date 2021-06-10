@@ -18,7 +18,6 @@ export default function NodeManagerEditNodeModal() {
     let objectKey = Object.keys(event);
     let objectVal = Object.values(event);
     formDataObject[objectKey[0]] = objectVal[0];
-    console.log(formDataObject);
   };
 
   const UpDateFormState = () => {
