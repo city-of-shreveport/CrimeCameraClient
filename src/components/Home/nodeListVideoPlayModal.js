@@ -4,7 +4,6 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
 import Modal from 'react-bootstrap/Modal';
-import { Player } from 'video-react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -125,23 +124,6 @@ export default function NodeListVideoPlayerModal() {
           </Row>
         </Container>
       </Card>
-      <CardGroup>
-        <Card>
-          <Player>
-            <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-          </Player>
-        </Card>
-        <Card>
-          <Player>
-            <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-          </Player>
-        </Card>
-        <Card>
-          <Player>
-            <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-          </Player>
-        </Card>
-      </CardGroup>
       <Card.Footer className="text-muted">
         <Button size="sm" onClick={() => console.log('yup')}>
           Load Videos

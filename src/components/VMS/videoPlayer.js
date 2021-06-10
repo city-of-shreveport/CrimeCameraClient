@@ -222,295 +222,291 @@ export default class PlayerControlExample extends Component {
     };
 
     return (
-      <div className="videoPlayerDIV">
-        <Container fluid>
-          <Row className="justify-content-md-center">
-            <Col sm={8}>
-              <Card className="text-center">
-                <Card.Header as="h5">Video Player</Card.Header>
+      <Container fluid className="homeContainer bg-dark">
+        <Row className="justify-content-md-center">
+          <Col sm={12}>
+            <Card className="text-center" bg="dark" text="light">
+              <Card.Header as="h5">Video Player</Card.Header>
+              <Card.Body>
+                <br />
+                <Row>
+                  <Col xs={2}>
+                    <br />
+                    <br />
+                    <Card.Header>Camera</Card.Header>
+                    <Card.Title>{this.state.selectedCam1}</Card.Title>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => this.setState({ modalCameraOpen: true, camButtonSelected: 'selectedCam1' })}
+                    >
+                      Change
+                    </Button>
+                  </Col>
+                  <Col xs={3}>
+                    <Player
+                      ref={(player1) => {
+                        this.player1 = player1;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+                  <Col xs={3}>
+                    <Player
+                      ref={(player2) => {
+                        this.player2 = player2;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+                  <Col xs={3}>
+                    <Player
+                      ref={(player3) => {
+                        this.player3 = player3;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col xs={2}>
+                    <br />
+                    <br />
+                    <Card.Header>Camera</Card.Header>
+                    <Card.Title>{this.state.selectedCam2}</Card.Title>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => this.setState({ modalCameraOpen: true, camButtonSelected: 'selectedCam2' })}
+                    >
+                      Camera
+                    </Button>
+                  </Col>
+                  <Col xs={3}>
+                    <Player
+                      ref={(player4) => {
+                        this.player4 = player4;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+
+                  <Col xs={3}>
+                    <Player
+                      ref={(player5) => {
+                        this.player5 = player5;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+                  <Col xs={3}>
+                    <Player
+                      ref={(player6) => {
+                        this.player6 = player6;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col xs={2}>
+                    <br />
+                    <br />
+                    <Card.Header>Camera</Card.Header>
+                    <Card.Title>{this.state.selectedCam3}</Card.Title>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => this.setState({ modalCameraOpen: true, camButtonSelected: 'selectedCam3' })}
+                    >
+                      Camera
+                    </Button>
+                  </Col>
+                  <Col xs={3}>
+                    <Player
+                      ref={(player7) => {
+                        this.player7 = player7;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+
+                  <Col xs={3}>
+                    <Player
+                      ref={(player8) => {
+                        this.player8 = player8;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+
+                  <Col xs={3}>
+                    <Player
+                      ref={(player9) => {
+                        this.player9 = player9;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+                </Row>
+              </Card.Body>
+              <Card.Footer className="text-muted">
+                <Navbar expand="lg" variant="light" bg="light">
+                  <Navbar.Brand href="#">Video Time: {this.state.videoTime >= 0 && this.state.videoTime}</Navbar.Brand>
+                  <FaFastBackward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(-10)} />{' '}
+                  <FaPlay size="28" className="amber-text pr-3" onClick={this.play} />{' '}
+                  <FaStop size="28" className="amber-text pr-3" onClick={this.pause} />{' '}
+                  <FaFastForward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(10)} />{' '}
+                  <Navbar.Collapse className="justify-content-end marginLogidIn">
+                    <Button variant="secondary" size="sm" onClick={() => this.setState({ modalOpen: true })}>
+                      Select Date Time
+                    </Button>{' '}
+                    <>
+                      Selected Time: {this.state.selectedVMSDate.toDateString()} {this.state.selectedVMSTimeHour}:
+                      {this.state.selectedVMSTimeMin} {this.state.vmsTimePM ? 'PM' : 'AM'}{' '}
+                    </>
+                  </Navbar.Collapse>
+                </Navbar>
+              </Card.Footer>
+            </Card>
+          </Col>
+        </Row>
+
+        <Modal
+          show={this.state.modalOpen}
+          onHide={() => {
+            this.fetchVideos();
+            this.setState({ modalOpen: false });
+          }}
+          centered
+          size="lg"
+        >
+          <Card className="text-center" bg="dark" text="light">
+            <Card.Header as="h5">{this.state.selectedVMSDate.toDateString()}</Card.Header>
+            <Card bg="dark" text="light">
+              <Card.Header as="h6"> </Card.Header>
+              <Card.Body>
+                <Calendar
+                  onClickDay={(e) => this.setState({ selectedVMSDate: e })}
+                  value={this.state.selectedVMSDate}
+                />
+              </Card.Body>
+            </Card>
+            <CardGroup>
+              <Card bg="dark" text="light">
+                <Card.Header as="h6">{this.state.selectedVMSTimeHour}</Card.Header>
                 <Card.Body>
-                  <br />
-                  <Row>
-                    <Col xs={2}>
-                      <br />
-                      <br />
-                      <Card.Header>Camera</Card.Header>
-                      <Card.Title>{this.state.selectedCam1}</Card.Title>
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => this.setState({ modalCameraOpen: true, camButtonSelected: 'selectedCam1' })}
-                      >
-                        Change
-                      </Button>
-                    </Col>
-                    <Col xs={3}>
-                      <Player
-                        ref={(player1) => {
-                          this.player1 = player1;
-                        }}
-                      >
-                        <source src={this.state.source} />
-                      </Player>
-                    </Col>
-                    <Col xs={3}>
-                      <Player
-                        ref={(player2) => {
-                          this.player2 = player2;
-                        }}
-                      >
-                        <source src={this.state.source} />
-                      </Player>
-                    </Col>
-                    <Col xs={3}>
-                      <Player
-                        ref={(player3) => {
-                          this.player3 = player3;
-                        }}
-                      >
-                        <source src={this.state.source} />
-                      </Player>
-                    </Col>
-                  </Row>
-                  <br />
-                  <Row>
-                    <Col xs={2}>
-                      <br />
-                      <br />
-                      <Card.Header>Camera</Card.Header>
-                      <Card.Title>{this.state.selectedCam2}</Card.Title>
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => this.setState({ modalCameraOpen: true, camButtonSelected: 'selectedCam2' })}
-                      >
-                        Camera
-                      </Button>
-                    </Col>
-                    <Col xs={3}>
-                      <Player
-                        ref={(player4) => {
-                          this.player4 = player4;
-                        }}
-                      >
-                        <source src={this.state.source} />
-                      </Player>
-                    </Col>
-
-                    <Col xs={3}>
-                      <Player
-                        ref={(player5) => {
-                          this.player5 = player5;
-                        }}
-                      >
-                        <source src={this.state.source} />
-                      </Player>
-                    </Col>
-                    <Col xs={3}>
-                      <Player
-                        ref={(player6) => {
-                          this.player6 = player6;
-                        }}
-                      >
-                        <source src={this.state.source} />
-                      </Player>
-                    </Col>
-                  </Row>
-                  <br />
-                  <Row>
-                    <Col xs={2}>
-                      <br />
-                      <br />
-                      <Card.Header>Camera</Card.Header>
-                      <Card.Title>{this.state.selectedCam3}</Card.Title>
-                      <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => this.setState({ modalCameraOpen: true, camButtonSelected: 'selectedCam3' })}
-                      >
-                        Camera
-                      </Button>
-                    </Col>
-                    <Col xs={3}>
-                      <Player
-                        ref={(player7) => {
-                          this.player7 = player7;
-                        }}
-                      >
-                        <source src={this.state.source} />
-                      </Player>
-                    </Col>
-
-                    <Col xs={3}>
-                      <Player
-                        ref={(player8) => {
-                          this.player8 = player8;
-                        }}
-                      >
-                        <source src={this.state.source} />
-                      </Player>
-                    </Col>
-
-                    <Col xs={3}>
-                      <Player
-                        ref={(player9) => {
-                          this.player9 = player9;
-                        }}
-                      >
-                        <source src={this.state.source} />
-                      </Player>
-                    </Col>
-                  </Row>
+                  <div className="timesListGroup">
+                    <ListGroup>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '1' })}>
+                        1
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '2' })}>
+                        2
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '3' })}>
+                        3
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '4' })}>
+                        4
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '5' })}>
+                        5
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '6' })}>
+                        6
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '7' })}>
+                        7
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '8' })}>
+                        4
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '9' })}>
+                        5
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '10' })}>
+                        6
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '11' })}>
+                        7
+                      </ListGroup.Item>
+                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '12' })}>
+                        12
+                      </ListGroup.Item>
+                    </ListGroup>
+                  </div>
                 </Card.Body>
-                <Card.Footer className="text-muted">
-                  <Navbar expand="lg" variant="light" bg="light">
-                    <Navbar.Brand href="#">
-                      Video Time: {this.state.videoTime >= 0 && this.state.videoTime}
-                    </Navbar.Brand>
-                    <FaFastBackward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(-10)} />{' '}
-                    <FaPlay size="28" className="amber-text pr-3" onClick={this.play} />{' '}
-                    <FaStop size="28" className="amber-text pr-3" onClick={this.pause} />{' '}
-                    <FaFastForward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(10)} />{' '}
-                    <Navbar.Collapse className="justify-content-end marginLogidIn">
-                      <Button variant="secondary" size="sm" onClick={() => this.setState({ modalOpen: true })}>
-                        Select Date Time
-                      </Button>{' '}
-                      <>
-                        Selected Time: {this.state.selectedVMSDate.toDateString()} {this.state.selectedVMSTimeHour}:
-                        {this.state.selectedVMSTimeMin} {this.state.vmsTimePM ? 'PM' : 'AM'}{' '}
-                      </>
-                    </Navbar.Collapse>
-                  </Navbar>
-                </Card.Footer>
               </Card>
-            </Col>
-          </Row>
+              <Card bg="dark" text="light">
+                <Card.Header as="h6">{this.state.selectedVMSTimeMin}</Card.Header>
+                <Card.Body>
+                  <div className="timesListGroup">
+                    <ListGroup>
+                      <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '00' })}>00</ListGroup.Item>
+                      <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '15' })}>15</ListGroup.Item>
+                      <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '30' })}>30</ListGroup.Item>
+                      <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '45' })}>45</ListGroup.Item>
+                    </ListGroup>
+                  </div>
+                </Card.Body>
+              </Card>
+              <Card bg="dark" text="light">
+                <Card.Header as="h6">AM/PM</Card.Header>
+                <Card.Body>
+                  <div className="timesListGroup">
+                    {this.state.vmsTimePM ? 'PM' : 'AM'}
+                    <ListGroup>
+                      <ListGroup.Item onClick={() => this.setState({ vmsTimePM: false })}>AM</ListGroup.Item>
+                      <ListGroup.Item onClick={() => this.setState({ vmsTimePM: true })}>PM</ListGroup.Item>
+                    </ListGroup>
+                  </div>
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          </Card>
 
-          <Modal
-            show={this.state.modalOpen}
-            onHide={() => {
-              this.fetchVideos();
-              this.setState({ modalOpen: false });
-            }}
-            centered
-            size="lg"
-          >
-            <Card className="text-center">
-              <Card.Header as="h5">{this.state.selectedVMSDate.toDateString()}</Card.Header>
+          <Card.Footer className="text-muted"></Card.Footer>
+        </Modal>
+        <Modal
+          show={this.state.modalCameraOpen}
+          onHide={() => this.setState({ modalCameraOpen: false })}
+          centered
+          size="lg"
+        >
+          <Card className="text-center" bg="dark" text="light">
+            <Card.Header as="h5">Selecet Node</Card.Header>
+            <CardGroup>
               <Card>
-                <Card.Header as="h6"> </Card.Header>
-                <Card.Body>
-                  <Calendar
-                    onClickDay={(e) => this.setState({ selectedVMSDate: e })}
-                    value={this.state.selectedVMSDate}
-                  />
-                </Card.Body>
+                <Map isMarkerShown />
               </Card>
-              <CardGroup>
-                <Card>
-                  <Card.Header as="h6">{this.state.selectedVMSTimeHour}</Card.Header>
-                  <Card.Body>
-                    <div className="timesListGroup">
-                      <ListGroup>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '1' })}>
-                          1
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '2' })}>
-                          2
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '3' })}>
-                          3
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '4' })}>
-                          4
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '5' })}>
-                          5
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '6' })}>
-                          6
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '7' })}>
-                          7
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '8' })}>
-                          4
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '9' })}>
-                          5
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '10' })}>
-                          6
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '11' })}>
-                          7
-                        </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '12' })}>
-                          12
-                        </ListGroup.Item>
-                      </ListGroup>
-                    </div>
-                  </Card.Body>
-                </Card>
-                <Card>
-                  <Card.Header as="h6">{this.state.selectedVMSTimeMin}</Card.Header>
-                  <Card.Body>
-                    <div className="timesListGroup">
-                      <ListGroup>
-                        <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '00' })}>00</ListGroup.Item>
-                        <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '15' })}>15</ListGroup.Item>
-                        <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '30' })}>30</ListGroup.Item>
-                        <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '45' })}>45</ListGroup.Item>
-                      </ListGroup>
-                    </div>
-                  </Card.Body>
-                </Card>
-                <Card>
-                  <Card.Header as="h6">AM/PM</Card.Header>
-                  <Card.Body>
-                    <div className="timesListGroup">
-                      {this.state.vmsTimePM ? 'PM' : 'AM'}
-                      <ListGroup>
-                        <ListGroup.Item onClick={() => this.setState({ vmsTimePM: false })}>AM</ListGroup.Item>
-                        <ListGroup.Item onClick={() => this.setState({ vmsTimePM: true })}>PM</ListGroup.Item>
-                      </ListGroup>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </CardGroup>
-            </Card>
+              <Card>
+                <Form inline>
+                  <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
+                  <Button type="submit">Submit</Button>
+                </Form>
+                {this.state.nodesReceived &&
+                  this.state.nodes.map((node) => (
+                    <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
+                  ))}
+              </Card>
+            </CardGroup>
+          </Card>
 
-            <Card.Footer className="text-muted"></Card.Footer>
-          </Modal>
-          <Modal
-            show={this.state.modalCameraOpen}
-            onHide={() => this.setState({ modalCameraOpen: false })}
-            centered
-            size="lg"
-          >
-            <Card className="text-center">
-              <Card.Header as="h5">Selecet Node</Card.Header>
-              <CardGroup>
-                <Card>
-                  <Map isMarkerShown />
-                </Card>
-                <Card>
-                  <Form inline>
-                    <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
-                    <Button type="submit">Submit</Button>
-                  </Form>
-                  {this.state.nodesReceived &&
-                    this.state.nodes.map((node) => (
-                      <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
-                    ))}
-                </Card>
-              </CardGroup>
-            </Card>
-
-            <Card.Footer className="text-muted"></Card.Footer>
-          </Modal>
-        </Container>
-      </div>
+          <Card.Footer className="text-muted"></Card.Footer>
+        </Modal>
+      </Container>
     );
   }
 }

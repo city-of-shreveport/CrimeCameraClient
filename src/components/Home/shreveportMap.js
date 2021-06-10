@@ -106,7 +106,7 @@ const GMap = () => {
       },
     });
 
-  return <div ref={googleMapRef} style={{ width: '100%', height: 600 }} />;
+  return <div ref={googleMapRef} style={{ width: '100%', height: '400px' }} />;
 };
 
 export default GMap;

@@ -18,7 +18,25 @@ export default function App() {
       payload: true,
     });
   }
-
+  function fetchCurrentPerfMonData(nodedata) {
+    var nodeArray = [];
+    for (let i = 0; i < nodedata.length; i++) {
+      fetch('http://10.10.200.10:3001/api/perfmons/' + nodedata[i].name)
+        .then((response) => response.json())
+        .then((json) => {
+          let nodeDataPerfMon = nodedata[i];
+          nodeDataPerfMon.perfmon = json[0];
+          nodeArray.push(nodeDataPerfMon);
+          console.log(nodeDataPerfMon);
+        })
+        .then(() => {
+          dispatch({
+            type: 'UPDATENODES',
+            payload: nodeArray,
+          });
+        });
+    }
+  }
   useEffect(() => {
     function refreshData() {
       fetch('http://10.10.200.10:3001/api/servers')
@@ -32,10 +50,7 @@ export default function App() {
       fetch('http://10.10.200.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
-          dispatch({
-            type: 'UPDATENODES',
-            payload: json,
-          });
+          fetchCurrentPerfMonData(json);
         });
 
       fetch('http://10.10.200.10:8000/api/server')

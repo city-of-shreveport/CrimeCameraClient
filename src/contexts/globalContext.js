@@ -8,6 +8,8 @@ const initialState = {
   perfmons: [],
   streamingstats: [],
   streams: [],
+  liveStreamingActive: false,
+  videoPlayerActive: false,
   users: [],
   showHome: true,
   showSettings: false,
@@ -18,7 +20,7 @@ const initialState = {
   selectedVMSDate: new Date(),
   selectedVMSTimeMin: '00',
   selectedVMSTimeHour: '12',
-  vmsTimePM: false,
+  vmsTimeAMPM: 'AM',
   videoPlayer: {},
   videoPlayersState: {},
   homeSelectedNode: 'NONE',
@@ -143,6 +145,16 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'UPDATE_VIDEOPLAYERACTIVE':
+      return {
+        ...state,
+        videoPlayerActive: action.payload,
+      };
+    case 'UPDATE_LIVESTREAMINGACTIVE':
+      return {
+        ...state,
+        liveStreamingActive: action.payload,
+      };
     case 'UPDATE_SYSTEMSETTINGSSERVERFORM':
       return {
         ...state,
@@ -222,7 +234,7 @@ const reducer = (state, action) => {
     case 'UPDATEHOMEVIDEOTIMEPM':
       return {
         ...state,
-        homeVideoTimePM: action.payload,
+        vmsTimeAMPM: action.payload,
       };
     case 'UPDATEHOMEVIDEODATE':
       return {

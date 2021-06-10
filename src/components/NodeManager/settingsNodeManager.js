@@ -18,7 +18,6 @@ import { GlobalContext } from '../../contexts/globalContext';
 
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
-
   const handleEditNodeModal = (node) =>
     dispatch({
       type: 'SETTINGS_EDIT_NODE_MODAL',
@@ -100,7 +99,6 @@ export default function Settings() {
       </Card>
     );
   };
-
   return (
     <Container fluid className="settingsDIV bg-dark">
       <br />
@@ -143,12 +141,10 @@ export default function Settings() {
                   </tr>
                 </thead>
                 <tbody>
-                  {state.nodes.map((node) => (
+                  {state.nodes.map((node, i) => (
                     <tr>
                       <td onClick={() => upDateSelectedNode(node.name)}>{node.name}</td>
-                      <td>
-                        <ProgressBar variant="danger" now={55} label={`20%`} />
-                      </td>
+                      <td onClick={() => console.log(node.perfmon.cpuTemperature.main)}></td>
                       <td>
                         <ProgressBar variant="danger" now={65} label={`65%`} />
                       </td>

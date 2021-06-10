@@ -6,99 +6,172 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import { GlobalContext } from '../../contexts/globalContext';
-import Button from 'react-bootstrap/Button';
-import Moment from 'react-moment';
-import Table from 'react-bootstrap/Table';
+import ReactHlsPlayer from 'react-hls-player';
+import CardGroup from 'react-bootstrap/CardGroup';
+import { Player } from 'video-react';
+import Calendar from 'react-calendar';
+import Form from 'react-bootstrap/Form';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-
-  const handleHomeStreamingModal = () => {
+  let rtmpURL1 = 'http://10.10.200.10:8000/live/' + state.currentNodeInfo.name + 'camera1/index.m3u8';
+  let rtmpURL2 = 'http://10.10.200.10:8000/live/' + state.currentNodeInfo.name + 'camera2/index.m3u8';
+  let rtmpURL3 = 'http://10.10.200.10:8000/live/' + state.currentNodeInfo.name + 'camera3/index.m3u8';
+  const updateHomeVideoDate = (e) =>
     dispatch({
-      type: 'HOMESTREAMINGMODAL',
-      payload: true,
+      type: 'UPDATEHOMEVIDEODATE',
+      payload: e,
     });
-  };
-
-  const handleViewVideosModal = () =>
+  const updateHomeTimeHour = (e) =>
     dispatch({
-      type: 'HOMEVIEWVIDEOSMODAL',
-      payload: true,
+      type: 'UPDATEHOMEVIDEOTIMEHOUR',
+      payload: e,
     });
-
+  const updateHomeTimeMin = (e) =>
+    dispatch({
+      type: 'UPDATEHOMEVIDEOTIMEMIN',
+      payload: e,
+    });
+  const updateHomeTimeAMPM = (e) =>
+    dispatch({
+      type: 'UPDATEHOMEVIDEOTIMEPM',
+      payload: e,
+    });
   return (
     <>
-      <br />
-      <Container fluid className="homeContainer">
+      <Container fluid className="homeContainer bg-dark">
         <Row className="justify-content-md-center">
-          <Col xs={3}>
-            <Card>
-              <Card.Body>
-                <NodeList />
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={4}>
-            <Card className="text-center ">
-              <Card.Header>
-                <h4>Node Info</h4>
-              </Card.Header>
-              {state.currentNodeInfo.name === ' ' ? (
-                <div></div>
-              ) : (
-                <div>
-                  <Card.Body>
-                    <Table striped bordered hover variant="dark">
-                      <tbody>
-                        <tr>
-                          <td colSpan="2"> Name</td>
-                          <td colSpan="3">{state.currentNodeInfo.name}</td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">Status</td>
-                          <td colSpan="3"> OnLine</td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">Checked In</td>
-                          <td colSpan="3">
-                            <Moment fromNow>{state.currentNodeInfo.createdAt}</Moment>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">Buddies</td>
-                          <td>Buddy 1 OK</td>
-                          <td>Buddy 2 OK</td>
-                        </tr>
-                        <tr></tr>
-                        <tr>
-                          <td>Cameras</td>
-                          <td>Cam1 OK</td>
-                          <td>Cam2 OK</td>
-                          <td>Cam3 OK</td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <Button onClick={() => handleHomeStreamingModal()}>Stream</Button>
-                          </td>
-                          <td colSpan="3">
-                            <Button onClick={() => handleViewVideosModal()}>Videos</Button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Card.Body>
-                </div>
-              )}
-            </Card>
-          </Col>
           <Col>
-            <Card className="text-center gmapsCard">
+            <Card className="text-center gmapsCard" bg="dark" text="light">
               <Card.Body>
                 <Map isMarkerShown />
+                <br />
+                {state.videoPlayerActive ? (
+                  <CardGroup>
+                    <Card bg="dark" text="light">
+                      <Player>
+                        <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                      </Player>
+                    </Card>
+                    <Card bg="dark" text="light">
+                      <Player>
+                        <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                      </Player>
+                    </Card>
+                    <Card bg="dark" text="light">
+                      <Player>
+                        <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                      </Player>
+                    </Card>
+                  </CardGroup>
+                ) : (
+                  <div></div>
+                )}
+                {state.liveStreamingActive ? (
+                  <CardGroup>
+                    <Card bg="dark" text="light">
+                      <ReactHlsPlayer
+                        src={rtmpURL1}
+                        hlsConfig={{
+                          maxLoadingDelay: 4,
+                          minAutoBitrate: 0,
+                          lowLatencyMode: true,
+                        }}
+                        autoPlay={true}
+                        controls={true}
+                        width="100%"
+                        height="auto"
+                      />
+                    </Card>
+                    <Card bg="dark" text="light">
+                      <ReactHlsPlayer
+                        src={rtmpURL2}
+                        hlsConfig={{
+                          maxLoadingDelay: 4,
+                          minAutoBitrate: 0,
+                          lowLatencyMode: true,
+                        }}
+                        autoPlay={true}
+                        controls={true}
+                        width="100%"
+                        height="auto"
+                      />
+                    </Card>
+                    <Card bg="dark" text="light">
+                      <ReactHlsPlayer
+                        src={rtmpURL3}
+                        hlsConfig={{
+                          maxLoadingDelay: 4,
+                          minAutoBitrate: 0,
+                          lowLatencyMode: true,
+                        }}
+                        autoPlay={true}
+                        controls={true}
+                        width="100%"
+                        height="auto"
+                      />
+                    </Card>
+                  </CardGroup>
+                ) : (
+                  <div></div>
+                )}
               </Card.Body>
             </Card>
           </Col>
+          {state.videoPlayerActive ? (
+            <Col xs={4} bg="dark" text="light">
+              <Card className="text-center" bg="dark" text="light">
+                <Card.Header>Featured</Card.Header>
+                <Card.Body>
+                  <Calendar onClickDay={(e) => updateHomeVideoDate(e)} value={state.homeVideoDate} />
+                  <Form>
+                    <Row>
+                      <Col>
+                        <Form.Label>Hour</Form.Label>
+                        <Form.Control as="select" onChange={(e) => updateHomeTimeHour(e.target.value)}>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                          <option>11</option>
+                          <option>12</option>
+                        </Form.Control>
+                      </Col>
+                      <Col>
+                        {' '}
+                        <Form.Label>Minutes</Form.Label>
+                        <Form.Control as="select" onChange={(e) => updateHomeTimeMin(e.target.value)}>
+                          <option>00</option>
+                          <option>15</option>
+                          <option>30</option>
+                          <option>45</option>
+                        </Form.Control>
+                      </Col>
+                      <Col>
+                        {' '}
+                        <Form.Label>AM/PM</Form.Label>
+                        <Form.Control as="select" onChange={(e) => updateHomeTimeAMPM(e.target.value)}>
+                          <option>AM</option>
+                          <option>PM</option>
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Card.Body>
+                <Card.Footer className="text-muted">2 days ago</Card.Footer>
+              </Card>
+            </Col>
+          ) : (
+            <div></div>
+          )}
         </Row>
+        <NodeList />
       </Container>
     </>
   );

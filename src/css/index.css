@@ -11,13 +11,14 @@ body {
 }
 .videoPlayerDIV {
   max-height: 800px;
+  width: 100%;
 }
 .videoPlayerCalendarCOL {
   min-height: 400px;
   overflow: hidden;
 }
 .homeContainer {
-  max-height: 800px;
+  height: auto;
   overflow: hidden;
 }
 .timePickerVideos {
