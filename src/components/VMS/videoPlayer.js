@@ -12,11 +12,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import React, { Component } from 'react';
 import Row from 'react-bootstrap/Row';
 import Modal from 'react-bootstrap/Modal';
+import Nav from 'react-bootstrap/Nav';
 import Calendar from 'react-calendar';
 import { Player } from 'video-react';
 import Map from '../Home/map';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const sources = {
   sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
@@ -218,14 +220,28 @@ export default class PlayerControlExample extends Component {
           break;
       }
     };
+    const updateHomeVideoDate = (e) => {};
+
+    const updateHomeTimeHour = (e) => {};
+
+    const updateHomeTimeMin = (e) => {};
+
+    const updateHomeTimeAMPM = (e) => {};
 
     return (
       <Container fluid className="homeContainer bg-dark">
+        <Card className="text-center" bg="dark" text="light">
+          <Nav className="justify-content-center" activeKey="/home">
+            <FaFastBackward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(-10)} />{' '}
+            <FaPlay size="28" className="amber-text pr-3" onClick={this.play} />{' '}
+            <FaStop size="28" className="amber-text pr-3" onClick={this.pause} />{' '}
+            <FaFastForward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(10)} />{' '}
+          </Nav>
+        </Card>
         <Row className="justify-content-md-center">
-          <Col sm={12}>
+          <Col sm={14}>
             <Card className="text-center" bg="dark" text="light">
               <Card.Body>
-                <br />
                 <Row>
                   <Col xs={3}>
                     <Player
@@ -249,6 +265,15 @@ export default class PlayerControlExample extends Component {
                     <Player
                       ref={(player3) => {
                         this.player3 = player3;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+                  <Col xs={3}>
+                    <Player
+                      ref={(player12) => {
+                        this.player12 = player12;
                       }}
                     >
                       <source src={this.state.source} />
@@ -280,6 +305,15 @@ export default class PlayerControlExample extends Component {
                     <Player
                       ref={(player6) => {
                         this.player6 = player6;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
+                  <Col xs={3}>
+                    <Player
+                      ref={(player11) => {
+                        this.player11 = player11;
                       }}
                     >
                       <source src={this.state.source} />
@@ -317,153 +351,21 @@ export default class PlayerControlExample extends Component {
                       <source src={this.state.source} />
                     </Player>
                   </Col>
+                  <Col xs={3}>
+                    <Player
+                      ref={(player10) => {
+                        this.player10 = player10;
+                      }}
+                    >
+                      <source src={this.state.source} />
+                    </Player>
+                  </Col>
                 </Row>
               </Card.Body>
-              <Card.Footer className="text-muted">
-                <Navbar expand="lg" variant="light" bg="light">
-                  <Navbar.Brand href="#">Video Time: {this.state.videoTime >= 0 && this.state.videoTime}</Navbar.Brand>
-                  <FaFastBackward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(-10)} />{' '}
-                  <FaPlay size="28" className="amber-text pr-3" onClick={this.play} />{' '}
-                  <FaStop size="28" className="amber-text pr-3" onClick={this.pause} />{' '}
-                  <FaFastForward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(10)} />{' '}
-                  <Navbar.Collapse className="justify-content-end marginLogidIn">
-                    <Button variant="secondary" size="sm" onClick={() => this.setState({ modalOpen: true })}>
-                      Select Date Time
-                    </Button>{' '}
-                    <>
-                      Selected Time: {this.state.selectedVMSDate.toDateString()} {this.state.selectedVMSTimeHour}:
-                      {this.state.selectedVMSTimeMin} {this.state.vmsTimePM ? 'PM' : 'AM'}{' '}
-                    </>
-                  </Navbar.Collapse>
-                </Navbar>
-              </Card.Footer>
+              <Card.Footer className="text-muted"></Card.Footer>
             </Card>
           </Col>
         </Row>
-
-        <Modal
-          show={this.state.modalOpen}
-          onHide={() => {
-            this.fetchVideos();
-            this.setState({ modalOpen: false });
-          }}
-          centered
-          size="lg"
-        >
-          <Card className="text-center" bg="dark" text="light">
-            <Card.Header as="h5">{this.state.selectedVMSDate.toDateString()}</Card.Header>
-            <Card bg="dark" text="light">
-              <Card.Header as="h6"> </Card.Header>
-              <Card.Body>
-                <Calendar
-                  onClickDay={(e) => this.setState({ selectedVMSDate: e })}
-                  value={this.state.selectedVMSDate}
-                />
-              </Card.Body>
-            </Card>
-            <CardGroup>
-              <Card bg="dark" text="light">
-                <Card.Header as="h6">{this.state.selectedVMSTimeHour}</Card.Header>
-                <Card.Body>
-                  <div className="timesListGroup">
-                    <ListGroup>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '1' })}>
-                        1
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '2' })}>
-                        2
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '3' })}>
-                        3
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '4' })}>
-                        4
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '5' })}>
-                        5
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '6' })}>
-                        6
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '7' })}>
-                        7
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '8' })}>
-                        4
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '9' })}>
-                        5
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '10' })}>
-                        6
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '11' })}>
-                        7
-                      </ListGroup.Item>
-                      <ListGroup.Item action onClick={() => this.setState({ selectedVMSTimeHour: '12' })}>
-                        12
-                      </ListGroup.Item>
-                    </ListGroup>
-                  </div>
-                </Card.Body>
-              </Card>
-              <Card bg="dark" text="light">
-                <Card.Header as="h6">{this.state.selectedVMSTimeMin}</Card.Header>
-                <Card.Body>
-                  <div className="timesListGroup">
-                    <ListGroup>
-                      <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '00' })}>00</ListGroup.Item>
-                      <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '15' })}>15</ListGroup.Item>
-                      <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '30' })}>30</ListGroup.Item>
-                      <ListGroup.Item onClick={() => this.setState({ selectedVMSTimeMin: '45' })}>45</ListGroup.Item>
-                    </ListGroup>
-                  </div>
-                </Card.Body>
-              </Card>
-              <Card bg="dark" text="light">
-                <Card.Header as="h6">AM/PM</Card.Header>
-                <Card.Body>
-                  <div className="timesListGroup">
-                    {this.state.vmsTimePM ? 'PM' : 'AM'}
-                    <ListGroup>
-                      <ListGroup.Item onClick={() => this.setState({ vmsTimePM: false })}>AM</ListGroup.Item>
-                      <ListGroup.Item onClick={() => this.setState({ vmsTimePM: true })}>PM</ListGroup.Item>
-                    </ListGroup>
-                  </div>
-                </Card.Body>
-              </Card>
-            </CardGroup>
-          </Card>
-
-          <Card.Footer className="text-muted"></Card.Footer>
-        </Modal>
-        <Modal
-          show={this.state.modalCameraOpen}
-          onHide={() => this.setState({ modalCameraOpen: false })}
-          centered
-          size="lg"
-        >
-          <Card className="text-center" bg="dark" text="light">
-            <Card.Header as="h5">Selecet Node</Card.Header>
-            <CardGroup>
-              <Card>
-                <Map isMarkerShown />
-              </Card>
-              <Card>
-                <Form inline>
-                  <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
-                  <Button type="submit">Submit</Button>
-                </Form>
-                {this.state.nodesReceived &&
-                  this.state.nodes.map((node) => (
-                    <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
-                  ))}
-              </Card>
-            </CardGroup>
-          </Card>
-
-          <Card.Footer className="text-muted"></Card.Footer>
-        </Modal>
       </Container>
     );
   }

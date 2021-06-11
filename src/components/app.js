@@ -160,6 +160,7 @@ export default function App() {
           <Nav.Link onClick={() => navigate('showVMS')}>Videos</Nav.Link>
           <Nav.Link onClick={() => navigate('showNodeManager')}>Node Manager</Nav.Link>
           <Nav.Link onClick={() => navigate('showSystemManager')}>System Manager</Nav.Link>
+
           {state.videoPlayerActive ? (
             <NavDropdown title="Date Time" id="nav-dropdown">
               <Card className="text-center">

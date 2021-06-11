@@ -20,12 +20,13 @@ import { GlobalContext } from '../../contexts/globalContext';
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
 
-  const handleEditNodeModal = (node) =>
+  const handleEditNodeModal = (node) => {
+    upDateSelectedNode(node);
     dispatch({
       type: 'SETTINGS_EDIT_NODE_MODAL',
       payload: true,
     });
-
+  };
   const handleSystemInfoNodeModal = () =>
     dispatch({
       type: 'SETTINGS_SYSTEMINFO_NODE_MODAL',
