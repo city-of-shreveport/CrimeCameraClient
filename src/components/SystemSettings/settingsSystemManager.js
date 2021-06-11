@@ -6,6 +6,8 @@ import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import SystemSettingsNewServerFormModal from './systemSettingsNewServerModal';
 import Table from 'react-bootstrap/Table';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
 
@@ -36,8 +38,7 @@ export default function SystemManager() {
     });
   return (
     <Container fluid className="settingsDIV">
-      <br />
-      <Row className="justify-content-md-center">
+      <Card className="text-center " bg="dark" text="light">
         <ButtonGroup aria-label="Basic example" className="me-2">
           <Button variant="secondary" onClick={handleAddServer}>
             Add Server
@@ -45,137 +46,122 @@ export default function SystemManager() {
           <Button variant="secondary">Cluster Manager</Button>
           <Button variant="secondary">Server Manager</Button>
         </ButtonGroup>
+        <Row className="justify-content-md-center">
+          <Card className="text-center " bg="dark" text="light">
+            <Tabs defaultActiveKey="ReStreamers" id="uncontrolled-tab-example">
+              <Tab eventKey="ReStreamers" title="ReStreamers">
+                <Table striped bordered hover variant="dark" size="sm">
+                  <thead>
+                    <tr>
+                      <td>Name</td>
+                      <td>Status</td>
+                      <td>ZeroTier ID</td>
+                      <td>Zero Tier IP</td>
+                      <td>Actions</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr></tr>
+                    {Restreamers.map((restreamer) => (
+                      <tr>
+                        <td>{restreamer.name}</td>
+                        <td>
+                          <Badge variant="danger">Danger</Badge>{' '}
+                        </td>
+                        <td>{restreamer.zeroTierNetworkID}</td>
+                        <td>{restreamer.zeroTierIP}</td>
+                        <td>Configure</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Tab>
 
-        <Card className="text-center " bg="dark" text="light">
-          <Card.Title>Server Cluster</Card.Title>
+              <Tab eventKey="Servers" title="Servers">
+                <Table striped bordered hover variant="dark" size="sm">
+                  <thead>
+                    <tr>
+                      <td>Name</td>
+                      <td>Status</td>
+                      <td>ZeroTier ID</td>
+                      <td>Zero Tier IP</td>
+                      <td>Actions</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Servers.map((server) => (
+                      <tr>
+                        <td>{server.name}</td>
+                        <td>
+                          <Badge variant="danger">Danger</Badge>{' '}
+                        </td>
+                        <td>{server.zeroTierNetworkID}</td>
+                        <td>{server.zeroTierIP}</td>
+                        <td>Configure</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Tab>
 
-          <Card.Body>
-            <Table striped bordered hover variant="dark">
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Status</td>
-                  <td>ZeroTier ID</td>
-                  <td>Zero Tier IP</td>
-                  <td>Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colSpan="5">
-                    <h4>ReStreamers</h4>
-                  </td>
-                </tr>
-                {Restreamers.map((restreamer) => (
-                  <tr>
-                    <td>{restreamer.name}</td>
-                    <td>
-                      <Badge variant="danger">Danger</Badge>{' '}
-                    </td>
-                    <td>{restreamer.zeroTierNetworkID}</td>
-                    <td>{restreamer.zeroTierIP}</td>
-                    <td>Configure</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Card.Body>
-          <Card.Body>
-            <Table striped bordered hover variant="dark">
-              <thead>
-                <tr>
-                  <td colSpan="5">
-                    <h4>Server</h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Name</td>
-                  <td>Status</td>
-                  <td>ZeroTier ID</td>
-                  <td>Zero Tier IP</td>
-                  <td>Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                {Servers.map((server) => (
-                  <tr>
-                    <td>{server.name}</td>
-                    <td>
-                      <Badge variant="danger">Danger</Badge>{' '}
-                    </td>
-                    <td>{server.zeroTierNetworkID}</td>
-                    <td>{server.zeroTierIP}</td>
-                    <td>Configure</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Card.Body>
-          <Card.Body>
-            <Table striped bordered hover variant="dark">
-              <thead>
-                <tr>
-                  <td colSpan="5" variant="danger">
-                    <h4>MongoDBs</h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Name</td>
-                  <td>Status</td>
-                  <td>ZeroTier ID</td>
-                  <td>Zero Tier IP</td>
-                  <td>Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                {Mongos.map((mongo) => (
-                  <tr>
-                    <td>{mongo.name}</td>
-                    <td>
-                      <Badge variant="danger">Danger</Badge>{' '}
-                    </td>
-                    <td>{mongo.zeroTierNetworkID}</td>
-                    <td>{mongo.zeroTierIP}</td>
-                    <td>Configure</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Card.Body>
-          <Card.Body>
-            <Table striped bordered hover variant="dark">
-              <thead>
-                <tr>
-                  <td colSpan="5">
-                    <h4>Client</h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Name</td>
-                  <td>Status</td>
-                  <td>ZeroTier ID</td>
-                  <td>Zero Tier IP</td>
-                  <td>Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                {Clients.map((client) => (
-                  <tr>
-                    <td>{client.name}</td>
-                    <td>
-                      <Badge variant="danger">Danger</Badge>{' '}
-                    </td>
-                    <td>{client.zeroTierNetworkID}</td>
-                    <td>{client.zeroTierIP}</td>
-                    <td>Configure</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Card.Body>
-        </Card>
-      </Row>
-      <SystemSettingsNewServerFormModal />
+              <Tab eventKey="MongoDBs" title="MongoDBs">
+                <Table striped bordered hover variant="dark" size="sm">
+                  <thead>
+                    <tr>
+                      <td>Name</td>
+                      <td>Status</td>
+                      <td>ZeroTier ID</td>
+                      <td>Zero Tier IP</td>
+                      <td>Actions</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Mongos.map((mongo) => (
+                      <tr>
+                        <td>{mongo.name}</td>
+                        <td>
+                          <Badge variant="danger">Danger</Badge>{' '}
+                        </td>
+                        <td>{mongo.zeroTierNetworkID}</td>
+                        <td>{mongo.zeroTierIP}</td>
+                        <td>Configure</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Tab>
+
+              <Tab eventKey="Clients" title="Clients">
+                <Table striped bordered hover variant="dark" size="sm">
+                  <thead>
+                    <tr>
+                      <td>Name</td>
+                      <td>Status</td>
+                      <td>ZeroTier ID</td>
+                      <td>Zero Tier IP</td>
+                      <td>Actions</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Clients.map((client) => (
+                      <tr>
+                        <td>{client.name}</td>
+                        <td>
+                          <Badge variant="danger">Danger</Badge>{' '}
+                        </td>
+                        <td>{client.zeroTierNetworkID}</td>
+                        <td>{client.zeroTierIP}</td>
+                        <td>Configure</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </Tab>
+            </Tabs>
+          </Card>
+        </Row>
+        <SystemSettingsNewServerFormModal />
+      </Card>
     </Container>
   );
 }

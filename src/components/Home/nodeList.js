@@ -1,4 +1,6 @@
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
+
 import Card from 'react-bootstrap/Card';
 import React, { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
@@ -68,9 +70,6 @@ export default function NodeList() {
   return (
     <div>
       <Card className="text-center " bg="dark" text="light">
-        <Card.Header>
-          <h2>Nodes</h2>
-        </Card.Header>
         <Card.Body className="nodeListHomePage">
           <Card bg="dark" text="light">
             <div className="nodeTableOverflow">

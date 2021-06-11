@@ -4,6 +4,8 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import Map from '../Home/map';
 import NodeList from '../Home/nodeList';
 import React, { useContext } from 'react';
@@ -54,19 +56,31 @@ export default function Home() {
                 {state.videoPlayerActive ? (
                   <CardGroup>
                     <Card bg="dark" text="light">
-                      <Player>
-                        <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-                      </Player>
+                      <Player
+                        src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+                        autoPlay={true}
+                        controls={false}
+                        width="85%"
+                        height="auto"
+                      />
                     </Card>
                     <Card bg="dark" text="light">
-                      <Player>
-                        <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-                      </Player>
+                      <Player
+                        src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+                        autoPlay={true}
+                        controls={false}
+                        width="85%"
+                        height="auto"
+                      />
                     </Card>
                     <Card bg="dark" text="light">
-                      <Player>
-                        <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
-                      </Player>
+                      <Player
+                        src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+                        autoPlay={true}
+                        controls={false}
+                        width="85%"
+                        height="auto"
+                      />
                     </Card>
                   </CardGroup>
                 ) : (
@@ -84,7 +98,7 @@ export default function Home() {
                         }}
                         autoPlay={true}
                         controls={true}
-                        width="100%"
+                        width="85%"
                         height="auto"
                       />
                     </Card>
@@ -98,7 +112,7 @@ export default function Home() {
                         }}
                         autoPlay={true}
                         controls={true}
-                        width="100%"
+                        width="85%"
                         height="auto"
                       />
                     </Card>
@@ -112,7 +126,7 @@ export default function Home() {
                         }}
                         autoPlay={true}
                         controls={true}
-                        width="100%"
+                        width="85%"
                         height="auto"
                       />
                     </Card>
@@ -123,58 +137,6 @@ export default function Home() {
               </Card.Body>
             </Card>
           </Col>
-          {state.videoPlayerActive ? (
-            <Col xs={4} bg="dark" text="light">
-              <Card className="text-center" bg="dark" text="light">
-                <Card.Header>Featured</Card.Header>
-                <Card.Body>
-                  <Calendar onClickDay={(e) => updateHomeVideoDate(e)} value={state.homeVideoDate} />
-                  <Form>
-                    <Row>
-                      <Col>
-                        <Form.Label>Hour</Form.Label>
-                        <Form.Control as="select" onChange={(e) => updateHomeTimeHour(e.target.value)}>
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                          <option>6</option>
-                          <option>7</option>
-                          <option>8</option>
-                          <option>9</option>
-                          <option>10</option>
-                          <option>11</option>
-                          <option>12</option>
-                        </Form.Control>
-                      </Col>
-                      <Col>
-                        {' '}
-                        <Form.Label>Minutes</Form.Label>
-                        <Form.Control as="select" onChange={(e) => updateHomeTimeMin(e.target.value)}>
-                          <option>00</option>
-                          <option>15</option>
-                          <option>30</option>
-                          <option>45</option>
-                        </Form.Control>
-                      </Col>
-                      <Col>
-                        {' '}
-                        <Form.Label>AM/PM</Form.Label>
-                        <Form.Control as="select" onChange={(e) => updateHomeTimeAMPM(e.target.value)}>
-                          <option>AM</option>
-                          <option>PM</option>
-                        </Form.Control>
-                      </Col>
-                    </Row>
-                  </Form>
-                </Card.Body>
-                <Card.Footer className="text-muted">2 days ago</Card.Footer>
-              </Card>
-            </Col>
-          ) : (
-            <div></div>
-          )}
         </Row>
         <NodeList />
       </Container>

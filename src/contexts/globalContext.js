@@ -141,10 +141,28 @@ const initialState = {
   },
   currentNodePerfmonAdded: false,
   systemSettingsNewServerFormModal: false,
+  selectedNodeModalVMS: { modalCameraOpen: false, camButtonSelected: '' },
+  selectedNodeVMS: { selectedNode1: '', selectedNode2: '', selectedNode3: '' },
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'UPDATESELECTEDCAMERAVMS':
+      return {
+        ...state,
+        selectedCameraVMS: action.payload,
+      };
+
+    case 'UPDATESELECTEDNODEVMS':
+      return {
+        ...state,
+        selectedNodeVMS: action.payload,
+      };
+    case 'UPDATESELECTEDNODEMODALVMS':
+      return {
+        ...state,
+        selectedNodeModalVMS: action.payload,
+      };
     case 'UPDATE_VIDEOPLAYERACTIVE':
       return {
         ...state,
@@ -325,6 +343,7 @@ const reducer = (state, action) => {
         showNodeManager: false,
         showVMS: false,
         showSystemManager: false,
+        videoPlayerActive: false,
       };
     case 'showVMS':
       return {
@@ -333,6 +352,7 @@ const reducer = (state, action) => {
         showNodeManager: false,
         showVMS: true,
         showSystemManager: false,
+        videoPlayerActive: true,
       };
     case 'showNodeManager':
       return {
@@ -341,6 +361,7 @@ const reducer = (state, action) => {
         showNodeManager: true,
         showVMS: false,
         showSystemManager: false,
+        videoPlayerActive: false,
       };
     case 'showSystemManager':
       return {
@@ -349,6 +370,7 @@ const reducer = (state, action) => {
         showNodeManager: false,
         showVMS: false,
         showSystemManager: true,
+        videoPlayerActive: false,
       };
 
     default:

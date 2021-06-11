@@ -224,23 +224,9 @@ export default class PlayerControlExample extends Component {
         <Row className="justify-content-md-center">
           <Col sm={12}>
             <Card className="text-center" bg="dark" text="light">
-              <Card.Header as="h5">Video Player</Card.Header>
               <Card.Body>
                 <br />
                 <Row>
-                  <Col xs={2}>
-                    <br />
-                    <br />
-                    <Card.Header>Camera</Card.Header>
-                    <Card.Title>{this.state.selectedCam1}</Card.Title>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => this.setState({ modalCameraOpen: true, camButtonSelected: 'selectedCam1' })}
-                    >
-                      Change
-                    </Button>
-                  </Col>
                   <Col xs={3}>
                     <Player
                       ref={(player1) => {
@@ -271,19 +257,6 @@ export default class PlayerControlExample extends Component {
                 </Row>
                 <br />
                 <Row>
-                  <Col xs={2}>
-                    <br />
-                    <br />
-                    <Card.Header>Camera</Card.Header>
-                    <Card.Title>{this.state.selectedCam2}</Card.Title>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => this.setState({ modalCameraOpen: true, camButtonSelected: 'selectedCam2' })}
-                    >
-                      Camera
-                    </Button>
-                  </Col>
                   <Col xs={3}>
                     <Player
                       ref={(player4) => {
@@ -315,19 +288,6 @@ export default class PlayerControlExample extends Component {
                 </Row>
                 <br />
                 <Row>
-                  <Col xs={2}>
-                    <br />
-                    <br />
-                    <Card.Header>Camera</Card.Header>
-                    <Card.Title>{this.state.selectedCam3}</Card.Title>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => this.setState({ modalCameraOpen: true, camButtonSelected: 'selectedCam3' })}
-                    >
-                      Camera
-                    </Button>
-                  </Col>
                   <Col xs={3}>
                     <Player
                       ref={(player7) => {
