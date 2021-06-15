@@ -8,7 +8,7 @@ const initialState = {
   perfmons: [],
   streamingstats: [],
   streams: [],
-  liveStreamingActive: false,
+  liveStreamingActive: true,
   videoPlayerActive: false,
   users: [],
   showHome: true,
@@ -138,25 +138,67 @@ const initialState = {
       currentLoadUser: 0,
       currentLoadSystem: 0,
     },
+    cameraStatus: {
+      camera1: false,
+      camera2: false,
+      camera3: false,
+    },
   },
   currentNodePerfmonAdded: false,
   systemSettingsNewServerFormModal: false,
-  selectedNodeModalVMS: { modalCameraOpen: false, camButtonSelected: '' },
-  selectedNodeVMS: { selectedNode1: '', selectedNode2: '', selectedNode3: '' },
+  camButtonSelected: '',
+  selectedNode1VMS: '',
+  selectedNode2VMS: '',
+  selectedNode3VMS: '',
+  selectedNode4VMS: '',
+  showDateTime: false,
+  showNodesList: false,
+  modalSelectNodeVMS: false,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'UPDATESMODALSELECTNODEVMS':
+      return {
+        ...state,
+        modalSelectNodeVMS: action.payload,
+      };
+    case 'UPDATESHOWNODESLIST':
+      return {
+        ...state,
+        showNodesList: action.payload,
+      };
+    case 'UPDATESHOWDATETIME':
+      return {
+        ...state,
+        showDateTime: action.payload,
+      };
+
     case 'UPDATESELECTEDCAMERAVMS':
       return {
         ...state,
         selectedCameraVMS: action.payload,
       };
 
-    case 'UPDATESELECTEDNODEVMS':
+    case 'UPDATESELECTEDNODE1VMS':
       return {
         ...state,
-        selectedNodeVMS: action.payload,
+        selectedNode1VMS: action.payload,
+      };
+    case 'UPDATESELECTEDNODE2VMS':
+      return {
+        ...state,
+        selectedNode2VMS: action.payload,
+      };
+    case 'UPDATESELECTEDNODE3VMS':
+      return {
+        ...state,
+        selectedNode3VMS: action.payload,
+      };
+    case 'UPDATESELECTEDNODE4VMS':
+      return {
+        ...state,
+        selectedNode4VMS: action.payload,
       };
     case 'UPDATESELECTEDNODEMODALVMS':
       return {

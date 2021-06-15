@@ -36,22 +36,24 @@ export default function Settings() {
   let perfMonTimerJob = null;
 
   const getPerfmonData = (node) =>
-    fetch('http://10.10.200.10:3001/api/perfmons/' + node)
+    fetch('http://10.10.10.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
         const rowLen = json.length;
-        json.map((perfmon, i) =>
-          rowLen === i + 2
-            ? dispatch({
-                type: 'UPDATE_CURRENT_NODE_PERFMON',
-                payload: perfmon,
-              })
-            : ''
-        );
+        json.map((perfmon, i) => {
+          console.log(perfmon);
+          if (rowLen === i + 1) {
+            dispatch({
+              type: 'UPDATE_CURRENT_NODE_PERFMON',
+              payload: perfmon,
+            });
+            console.log(state);
+          }
+        });
       });
 
   const getNodeInfo = (node) => {
-    fetch('http://10.10.200.10:3001/api/nodes/' + node)
+    fetch('http://10.10.10.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -180,19 +182,47 @@ export default function Settings() {
                         F
                       </td>
                       <td>
-                        <Button variant="outline-success" size="sm">
-                          Camera 1
-                        </Button>{' '}
-                        <Button variant="outline-success" size="sm">
-                          Camera 2
-                        </Button>{' '}
-                        <Button variant="outline-success" size="sm">
-                          Camera 3
-                        </Button>{' '}
+                        {tryValue(() => {
+                          return node.perfmon.cameraStatus.camera1 ? (
+                            <Button variant="outline-danger" size="sm">
+                              {node.perfmon.cameraStatus.camera1.toString()}
+                            </Button>
+                          ) : (
+                            <Button variant="outline-success" size="sm">
+                              {node.perfmon.cameraStatus.camera1.toString()}
+                            </Button>
+                          );
+                        })}
+                        {tryValue(() => {
+                          return node.perfmon.cameraStatus.camera2 ? (
+                            <Button variant="outline-danger" size="sm">
+                              {node.perfmon.cameraStatus.camera2.toString()}
+                            </Button>
+                          ) : (
+                            <Button variant="outline-success" size="sm">
+                              {node.perfmon.cameraStatus.camera2.toString()}
+                            </Button>
+                          );
+                        })}
+                        {tryValue(() => {
+                          return node.perfmon.cameraStatus.camera3 ? (
+                            <Button variant="outline-danger" size="sm">
+                              {node.perfmon.cameraStatus.camera3.toString()}
+                            </Button>
+                          ) : (
+                            <Button variant="outline-success" size="sm">
+                              {node.perfmon.cameraStatus.camera3.toString()}
+                            </Button>
+                          );
+                        })}
                       </td>
                       <td>
                         <Button variant="outline-warning" size="sm">
-                          Root 45%
+                          Root{' '}
+                          {tryValue(() => {
+                            return node.perfmon.cameraStatus.camera1.toString();
+                          })}
+                          %
                         </Button>{' '}
                         <Button variant="outline-warning" size="sm">
                           Video 95%

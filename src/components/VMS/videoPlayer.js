@@ -15,7 +15,7 @@ import Modal from 'react-bootstrap/Modal';
 import Nav from 'react-bootstrap/Nav';
 import Calendar from 'react-calendar';
 import { Player } from 'video-react';
-import Map from '../Home/map';
+import Map from './videoPlayerMap';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -35,15 +35,15 @@ export default class PlayerControlExample extends Component {
       source: sources.test,
       modalOpen: false,
       modalCameraOpen: false,
-      cameras: [],
+      nodes: [],
       videos: [],
-      camButtonSelected: '',
+      nodeButtonSelected: '',
       selectedCam1: '',
       selectedCam2: '',
       selectedCam3: '',
       selectedVMSTimeMin: '00',
       selectedVMSTimeHour: '12',
-      vmsTimePM: false,
+      vmsTimeAMPM: '',
       selectedVMSDate: new Date(),
     };
 
@@ -207,27 +207,40 @@ export default class PlayerControlExample extends Component {
     const upDateSelectedCam = (param) => {
       let buttonSelected = this.state.camButtonSelected;
       switch (buttonSelected) {
-        case 'selectedCam1':
-          this.setState({ selectedCam1: param });
+        case 'node1':
+          this.setState({ selectedNode1: param });
           break;
-        case 'selectedCam2':
-          this.setState({ selectedCam2: param });
+        case 'node2':
+          this.setState({ selectedNode2: param });
           break;
-        case 'selectedCam3':
-          this.setState({ selectedCam3: param });
+        case 'node3':
+          this.setState({ selectedNode3: param });
+          break;
+        case 'node4':
+          this.setState({ selectedNode3: param });
           break;
         default:
           break;
       }
     };
-    const updateHomeVideoDate = (e) => {};
+    const updateHomeVideoDate = (e) => {
+      this.setState({ selectedNode3: 3 });
+    };
 
-    const updateHomeTimeHour = (e) => {};
+    const updateHomeTimeHour = (e) => {
+      this.setState({ selectedVMSTimeHour: e });
+    };
 
-    const updateHomeTimeMin = (e) => {};
+    const updateHomeTimeMin = (e) => {
+      this.setState({ selectedVMSTimeMin: e });
+    };
 
-    const updateHomeTimeAMPM = (e) => {};
-
+    const updateHomeTimeAMPM = (e) => {
+      this.setState({ selectedVMSAMPM: e });
+    };
+    const updateSelectedNodeModalVMS = (e) => {
+      this.setState({ selectedVMSDate: e });
+    };
     return (
       <Container fluid className="homeContainer bg-dark">
         <Card className="text-center" bg="dark" text="light">
@@ -237,6 +250,56 @@ export default class PlayerControlExample extends Component {
             <FaStop size="28" className="amber-text pr-3" onClick={this.pause} />{' '}
             <FaFastForward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(10)} />{' '}
           </Nav>
+          <Nav className="justify-content-center" activeKey="/home">
+            <NavDropdown title="Select Date Time" id="nav-dropdown">
+              <Card className="text-center">
+                <h4>Select Date and Time</h4>
+                <Calendar onClickDay={(e) => updateHomeVideoDate(e)} />
+                <Form>
+                  <Row>
+                    <Col>
+                      <Form.Label>Hour</Form.Label>
+                      <Form.Control as="select" onChange={(e) => updateHomeTimeHour(e.target.value)}>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                      </Form.Control>
+                    </Col>
+                    <Col>
+                      {' '}
+                      <Form.Label>Minutes</Form.Label>
+                      <Form.Control as="select" onChange={(e) => updateHomeTimeMin(e.target.value)}>
+                        <option>00</option>
+                        <option>15</option>
+                        <option>30</option>
+                        <option>45</option>
+                      </Form.Control>
+                    </Col>
+                    <Col>
+                      {' '}
+                      <Form.Label>AM/PM</Form.Label>
+                      <Form.Control as="select" onChange={(e) => updateHomeTimeAMPM(e.target.value)}>
+                        <option>AM</option>
+                        <option>PM</option>
+                      </Form.Control>
+                    </Col>
+                  </Row>
+                  <br />
+                </Form>
+                <NavDropdown.Divider />
+                <Button>Set Date & Time</Button>
+              </Card>
+            </NavDropdown>
+          </Nav>
         </Card>
         <Row className="justify-content-md-center">
           <Col sm={14}>
@@ -244,6 +307,13 @@ export default class PlayerControlExample extends Component {
               <Card.Body>
                 <Row>
                   <Col xs={3}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => this.setState({ modalCameraOpen: true, nodeButtonSelected: 'node1' })}
+                    >
+                      Node 1
+                    </Button>
                     <Player
                       ref={(player1) => {
                         this.player1 = player1;
@@ -253,6 +323,13 @@ export default class PlayerControlExample extends Component {
                     </Player>
                   </Col>
                   <Col xs={3}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => this.setState({ modalCameraOpen: true, nodeButtonSelected: 'node2' })}
+                    >
+                      Node 2
+                    </Button>
                     <Player
                       ref={(player2) => {
                         this.player2 = player2;
@@ -262,6 +339,13 @@ export default class PlayerControlExample extends Component {
                     </Player>
                   </Col>
                   <Col xs={3}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => this.setState({ modalCameraOpen: true, nodeButtonSelected: 'node3' })}
+                    >
+                      Node 3
+                    </Button>
                     <Player
                       ref={(player3) => {
                         this.player3 = player3;
@@ -271,6 +355,13 @@ export default class PlayerControlExample extends Component {
                     </Player>
                   </Col>
                   <Col xs={3}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => this.setState({ modalCameraOpen: true, nodeButtonSelected: 'node4' })}
+                    >
+                      Node 4
+                    </Button>
                     <Player
                       ref={(player12) => {
                         this.player12 = player12;
@@ -366,6 +457,32 @@ export default class PlayerControlExample extends Component {
             </Card>
           </Col>
         </Row>
+        <Modal
+          show={this.state.modalCameraOpen}
+          onHide={() => this.setState({ modalCameraOpen: false })}
+          centered
+          size="lg"
+        >
+          <Card className="text-center" bg="dark" text="light">
+            <Card.Header as="h5">Selecet Node</Card.Header>
+            <CardGroup>
+              <Card>
+                <Map isMarkerShown />
+              </Card>
+              <Card>
+                <Form inline>
+                  <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
+                  <Button type="submit">Submit</Button>
+                </Form>
+                {this.state.nodes.map((node) => (
+                  <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
+                ))}
+              </Card>
+            </CardGroup>
+          </Card>
+
+          <Card.Footer className="text-muted"></Card.Footer>
+        </Modal>
       </Container>
     );
   }

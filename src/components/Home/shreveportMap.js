@@ -1,8 +1,17 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
+import NodeListStreamCameraModal from './nodeListStreamCameraModal';
+import ReactHlsPlayer from 'react-hls-player';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
 
+var infowindow;
 const GMap = () => {
-  const [dispatch] = useContext(GlobalContext);
+  const [state, dispatch] = useContext(GlobalContext);
+  function getDifferenceInMinutes(date1, date2) {
+    const diffInMs = Math.abs(date2 - date1);
+    return diffInMs / (1000 * 60);
+  }
 
   const getCameraInfo = (node) => {
     fetch('http://10.10.200.10:3001/api/nodes/' + node)
@@ -49,8 +58,11 @@ const GMap = () => {
   useEffect(() => {
     // eslint-disable-next-line
     googleMap = initGoogleMap();
+    var bounds = new window.google.maps.LatLngBounds();
+    var cameraSnapShot = null;
+    var nodeStatus = false;
     function getCams() {
-      fetch('http://10.10.200.10:3001/api/nodes')
+      fetch('http://10.10.10.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line
@@ -58,20 +70,40 @@ const GMap = () => {
 
           // eslint-disable-next-line
 
-          //var bounds = new window.google.maps.LatLngBounds();
           // eslint-disable-next-line
           json.map((node) => {
+            var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
+
+            console.log(difference);
+            if (difference > 15) {
+              nodeStatus = false;
+            } else {
+              nodeStatus = true;
+            }
             const marker = createMarker(
               {
                 lat: node.config.locationLat,
                 lng: node.config.locationLong,
-                icon: node.systemOK ? iconList.pinGreen : iconList.pinRed,
+                icon: nodeStatus ? iconList.pinGreen : iconList.pinRed,
               },
               node
             );
-            //bounds.extend(marker.position);
+            bounds.extend(marker.position);
             marker.addListener('click', () => {
+              clearInterval(cameraSnapShot);
               getCameraInfo(marker.nodeName);
+              infowindow.setContent(
+                "<img id='imgCamera1' width='200' height='150' src='http://10.10.10.10:3001/api/cameraConfig/snapshot/" +
+                  marker.nodeName +
+                  "/camera1' alt='Logo' />" +
+                  "<img id='imgCamera2' width='200' height='150' src='http://10.10.10.10:3001/api/cameraConfig/snapshot/" +
+                  marker.nodeName +
+                  "/camera2' alt='Logo' />" +
+                  "<img id='imgCamera3' width='200' height='150' src='http://10.10.10.10:3001/api/cameraConfig/snapshot/" +
+                  marker.nodeName +
+                  "/camera3' alt='Logo' />"
+              );
+              infowindow.open(initGoogleMap, marker);
             });
           });
         });
@@ -81,6 +113,7 @@ const GMap = () => {
       getCams();
     }, 360000);
     //googleMap.fitBounds(bounds); // the map to contain all markers
+    infowindow = new window.google.maps.InfoWindow();
   }, []);
 
   // initialize the google map
@@ -104,7 +137,7 @@ const GMap = () => {
       },
     });
 
-  return <div ref={googleMapRef} style={{ width: '100%', height: '400px' }} />;
+  return <div ref={googleMapRef} style={{ width: '100%', height: '600px' }} />;
 };
 
 export default GMap;

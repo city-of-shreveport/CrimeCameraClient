@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-
+import Moment from 'react-moment';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -34,11 +34,6 @@ export default function App() {
       payload: e,
     });
 
-  const updateSelectedNodeModalVMS = (e) =>
-    dispatch({
-      type: 'UPDATESELECTEDNODEMODALVMS',
-      payload: e,
-    });
   const updateHomeVideoDate = (e) =>
     dispatch({
       type: 'UPDATEHOMEVIDEODATE',
@@ -84,14 +79,42 @@ export default function App() {
         break;
     }
   };
+
+  function getDifferenceInDays(date1, date2) {
+    const diffInMs = Math.abs(date2 - date1);
+    return diffInMs / (1000 * 60 * 60 * 24);
+  }
+
+  function getDifferenceInHours(date1, date2) {
+    const diffInMs = Math.abs(date2 - date1);
+    return diffInMs / (1000 * 60 * 60);
+  }
+
+  function getDifferenceInMinutes(date1, date2) {
+    const diffInMs = Math.abs(date2 - date1);
+    return diffInMs / (1000 * 60);
+  }
+
+  function getDifferenceInSeconds(date1, date2) {
+    const diffInMs = Math.abs(date2 - date1);
+    return diffInMs / 1000;
+  }
   function fetchCurrentPerfMonData(nodedata) {
     var nodeArray = [];
     for (let i = 0; i < nodedata.length; i++) {
-      fetch('http://10.10.200.10:3001/api/perfmons/' + nodedata[i].name)
+      fetch('http://10.10.10.10:3001/api/perfmons/' + nodedata[i].name)
         .then((response) => response.json())
         .then((json) => {
           let nodeDataPerfMon = nodedata[i];
           nodeDataPerfMon.perfmon = json[0];
+          var difference = getDifferenceInMinutes(new Date(nodedata[i].lastCheckIn), new Date());
+
+          console.log(difference);
+          if (difference > 15) {
+            nodeDataPerfMon.nodeStatus = false;
+          } else {
+            nodeDataPerfMon.nodeStatus = true;
+          }
           nodeArray.push(nodeDataPerfMon);
         })
         .then(() => {
@@ -104,7 +127,7 @@ export default function App() {
   }
   useEffect(() => {
     function refreshData() {
-      fetch('http://10.10.200.10:3001/api/servers')
+      fetch('http://10.10.10.10:3001/api/servers')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -112,13 +135,13 @@ export default function App() {
             payload: json,
           });
         });
-      fetch('http://10.10.200.10:3001/api/nodes')
+      fetch('http://10.10.10.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           fetchCurrentPerfMonData(json);
         });
 
-      fetch('http://10.10.200.10:8000/api/server')
+      fetch('http://10.10.10.10:8000/api/server')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -127,7 +150,7 @@ export default function App() {
           });
         });
 
-      fetch('http://10.10.200.10:8000/api/streams')
+      fetch('http://10.10.10.10:8000/api/streams')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -156,108 +179,10 @@ export default function App() {
           Shreveport Crime Cameras
         </Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link onClick={() => navigate('showHome')}>Nodes</Nav.Link>
+          <Nav.Link onClick={() => navigate('showHome')}>Live</Nav.Link>
           <Nav.Link onClick={() => navigate('showVMS')}>Videos</Nav.Link>
           <Nav.Link onClick={() => navigate('showNodeManager')}>Node Manager</Nav.Link>
           <Nav.Link onClick={() => navigate('showSystemManager')}>System Manager</Nav.Link>
-
-          {state.videoPlayerActive ? (
-            <NavDropdown title="Date Time" id="nav-dropdown">
-              <Card className="text-center">
-                <h4>Select Date and Time</h4>
-                <Calendar onClickDay={(e) => updateHomeVideoDate(e)} value={state.homeVideoDate} />
-                <Form>
-                  <Row>
-                    <Col>
-                      <Form.Label>Hour</Form.Label>
-                      <Form.Control as="select" onChange={(e) => updateHomeTimeHour(e.target.value)}>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                        <option>11</option>
-                        <option>12</option>
-                      </Form.Control>
-                    </Col>
-                    <Col>
-                      {' '}
-                      <Form.Label>Minutes</Form.Label>
-                      <Form.Control as="select" onChange={(e) => updateHomeTimeMin(e.target.value)}>
-                        <option>00</option>
-                        <option>15</option>
-                        <option>30</option>
-                        <option>45</option>
-                      </Form.Control>
-                    </Col>
-                    <Col>
-                      {' '}
-                      <Form.Label>AM/PM</Form.Label>
-                      <Form.Control as="select" onChange={(e) => updateHomeTimeAMPM(e.target.value)}>
-                        <option>AM</option>
-                        <option>PM</option>
-                      </Form.Control>
-                    </Col>
-                  </Row>
-                  <br />
-                </Form>
-                <NavDropdown.Divider />
-                <Button>Fetch Videos</Button>
-              </Card>
-            </NavDropdown>
-          ) : (
-            <></>
-          )}
-          {state.showVMS && (
-            <NavDropdown title="Select Nodes" id="nav-dropdown">
-              {state.selectedNodeVMS.selectedNode1}
-
-              {state.selectedNodeVMS.selectedNode2}
-
-              {state.selectedNodeVMS.selectedNode3}
-
-              <ButtonToolbar aria-label="Toolbar with button groups">
-                <ButtonGroup className="mr-2" aria-label="First group">
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() =>
-                      updateSelectedNodeModalVMS({ modalCameraOpen: true, camButtonSelected: 'selectedNode1' })
-                    }
-                  >
-                    Camera 1
-                  </Button>
-                </ButtonGroup>
-                <ButtonGroup className="mr-2" aria-label="Second group">
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() =>
-                      updateSelectedNodeModalVMS({ modalCameraOpen: true, camButtonSelected: 'selectedNode2' })
-                    }
-                  >
-                    Camera 2
-                  </Button>
-                </ButtonGroup>
-                <ButtonGroup aria-label="Third group">
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() =>
-                      updateSelectedNodeModalVMS({ modalCameraOpen: true, camButtonSelected: 'selectedNode2' })
-                    }
-                  >
-                    Camera 3
-                  </Button>
-                </ButtonGroup>
-              </ButtonToolbar>
-            </NavDropdown>
-          )}
         </Nav>
         <Navbar.Collapse id="responsive-navbar-nav"></Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end marginLogidIn">
@@ -268,32 +193,6 @@ export default function App() {
       {state.showVMS && <VMS />}
       {state.showNodeManager && <NodeManager />}
       {state.showSystemManager && <SystemManager />}
-      <Modal
-        show={state.selectedNodeModalVMS.modalCameraOpen}
-        onHide={() => updateSelectedNodeModalVMS({ modalCameraOpen: false })}
-        centered
-        size="lg"
-      >
-        <Card className="text-center" bg="dark" text="light">
-          <Card.Header as="h5">Selecet Node</Card.Header>
-          <CardGroup>
-            <Card>
-              <Map isMarkerShown />
-            </Card>
-            <Card>
-              <Form inline>
-                <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
-                <Button type="submit">Submit</Button>
-              </Form>
-              {state.nodes.map((node) => (
-                <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
-              ))}
-            </Card>
-          </CardGroup>
-        </Card>
-
-        <Card.Footer className="text-muted"></Card.Footer>
-      </Modal>
     </>
   );
 }

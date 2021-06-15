@@ -1,6 +1,9 @@
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import ListGroup from 'react-bootstrap/ListGroup';
 
+import Col from 'react-bootstrap/Col';
+import Moment from 'react-moment';
 import Card from 'react-bootstrap/Card';
 import React, { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
@@ -10,11 +13,21 @@ export default function NodeList() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const startStream = (json) => {
-    fetch('http://10.10.200.10:3001/api/streams/start/' + json.name + '/' + json.ip).then((response) => {});
+    fetch('http://10.10.10.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
+    setTimeout(() => {
+      dispatch({
+        type: 'UPDATE_VIDEOPLAYERACTIVE',
+        payload: true,
+      });
+    }, 5000);
   };
 
   const stopStream = () => {
-    fetch('http://10.10.200.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
+    fetch('http://10.10.10.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
+    dispatch({
+      type: 'UPDATE_VIDEOPLAYERACTIVE',
+      payload: false,
+    });
   };
 
   const handleViewVideosComponent = () => {
@@ -34,13 +47,14 @@ export default function NodeList() {
   // eslint-disable-next-lineclear
   const getNodeInfo = (node) => {
     stopStream();
-    fetch('http://10.10.200.10:3001/api/nodes/' + node)
+    fetch('http://10.10.10.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
           type: 'UPDATE_CURRENT_NODE_INFO',
           payload: json,
         });
+        console.log(json);
         startStream(json);
       });
   };
@@ -66,62 +80,74 @@ export default function NodeList() {
       payload: false,
     });
   };
-
+  function loggedInAgo(param) {
+    return Moment(param).diff(Date());
+  }
   return (
-    <div>
+    <Col xs={3}>
       <Card className="text-center " bg="dark" text="light">
+        <Card.Title>On Line Nodes</Card.Title>
         <Card.Body className="nodeListHomePage">
           <Card bg="dark" text="light">
-            <div className="nodeTableOverflow">
-              <Table striped bordered hover variant="dark" responsive size="sm">
-                <thead>
-                  <tr>
-                    <th>Node Name</th>
-                    <th>Last Check In</th>
-                    <th>Cameras</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {state.nodes.map((node) => (
+            <Table striped bordered hover variant="dark">
+              <thead>
+                <tr>
+                  <th>Node</th>
+                  <th>Last Seen</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {state.nodes.map((node) =>
+                  node.nodeStatus === true ? (
                     <tr>
+                      {' '}
                       <td>{node.name}</td>
-
-                      <td>30 Seconds Ago</td>
-
                       <td>
-                        <Button variant="outline-success" size="sm">
-                          Camera 1
-                        </Button>{' '}
-                        <Button variant="outline-success" size="sm">
-                          Camera 2
-                        </Button>{' '}
-                        <Button variant="outline-success" size="sm">
-                          Camera 3
-                        </Button>{' '}
+                        <Moment fromNow>{node.lastCheckIn}</Moment>
                       </td>
-
-                      <td>
-                        <td>
-                          <Button variant="outline-primary" onClick={() => upDateSelectedNode(node.name)}>
-                            Live Feeds
-                          </Button>
-                        </td>
-                        <td>
-                          <Button variant="outline-primary" onClick={() => handleViewVideosComponent(node.name)}>
-                            Videos
-                          </Button>
-                        </td>
-                      </td>
+                      <td onClick={() => upDateSelectedNode(node.name)}>Start Stream</td>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
+                  ) : (
+                    <></>
+                  )
+                )}
+              </tbody>
+            </Table>
           </Card>
         </Card.Body>
-        <Card.Footer className="text-muted">Last updated 3 mins ago</Card.Footer>
       </Card>
-    </div>
+      <br />
+      <Card className="text-center " bg="dark" text="light">
+        <Card.Title>Off Line Nodes</Card.Title>
+        <Card.Body className="nodeListOffLineHomePage">
+          <Card bg="dark" text="light">
+            <Table striped bordered hover variant="dark">
+              <thead>
+                <tr>
+                  <th>Node</th>
+                  <th>Last Seen</th>
+                </tr>
+              </thead>
+              <tbody>
+                {state.nodes.map((node) =>
+                  node.nodeStatus === true ? (
+                    <></>
+                  ) : (
+                    <tr>
+                      {' '}
+                      <td>{node.name}</td>
+                      <td>
+                        <Moment fromNow>{node.lastCheckIn}</Moment>
+                      </td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </Table>
+          </Card>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 }
