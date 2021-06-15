@@ -127,23 +127,7 @@ const initialState = {
   },
   nodeForm: {},
   systemInfoModal: false,
-  currentNodePerfmon: {
-    mem: {
-      used: 0,
-      total: 0,
-    },
-    currentLoad: {
-      avgLoad: 0,
-      currentLoad: 0,
-      currentLoadUser: 0,
-      currentLoadSystem: 0,
-    },
-    cameraStatus: {
-      camera1: false,
-      camera2: false,
-      camera3: false,
-    },
-  },
+  currentNodePerfmon: {},
   currentNodePerfmonAdded: false,
   systemSettingsNewServerFormModal: false,
   camButtonSelected: '',

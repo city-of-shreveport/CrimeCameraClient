@@ -14,20 +14,10 @@ export default function NodeList() {
 
   const startStream = (json) => {
     fetch('http://10.10.10.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
-    setTimeout(() => {
-      dispatch({
-        type: 'UPDATE_VIDEOPLAYERACTIVE',
-        payload: true,
-      });
-    }, 5000);
   };
 
   const stopStream = () => {
     fetch('http://10.10.10.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
-    dispatch({
-      type: 'UPDATE_VIDEOPLAYERACTIVE',
-      payload: false,
-    });
   };
 
   const handleViewVideosComponent = () => {
@@ -56,6 +46,10 @@ export default function NodeList() {
         });
         console.log(json);
         startStream(json);
+        dispatch({
+          type: 'UPDATE_VIDEOPLAYERACTIVE',
+          payload: true,
+        });
       });
   };
 
@@ -80,9 +74,7 @@ export default function NodeList() {
       payload: false,
     });
   };
-  function loggedInAgo(param) {
-    return Moment(param).diff(Date());
-  }
+
   return (
     <Col xs={3}>
       <Card className="text-center " bg="dark" text="light">

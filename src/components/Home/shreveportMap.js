@@ -13,13 +13,60 @@ const GMap = () => {
     return diffInMs / (1000 * 60);
   }
 
-  const getCameraInfo = (node) => {
-    fetch('http://10.10.200.10:3001/api/nodes/' + node)
+  const startStream = (json) => {
+    fetch('http://10.10.10.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
+  };
+
+  const stopStream = () => {
+    fetch('http://10.10.10.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
+  };
+
+  const handleViewVideosComponent = () => {
+    stopStream();
+    dispatch({
+      type: 'UPDATE_VIDEOPLAYERACTIVE',
+      payload: true,
+    });
+    dispatch({
+      type: 'UPDATE_LIVESTREAMINGACTIVE',
+      payload: false,
+    });
+  };
+
+  let perfMonTimerJob = null;
+  const getPerfmonData = (node) =>
+    fetch('http://10.10.10.10:3001/api/perfmons/' + node)
+      .then((response) => response.json())
+      .then((json) => {
+        const rowLen = json.length;
+        json.map((perfmon, i) => {
+          console.log(perfmon);
+          if (i === 0) {
+            dispatch({
+              type: 'UPDATE_CURRENT_NODE_PERFMON',
+              payload: perfmon,
+            });
+            console.log(state);
+          }
+        });
+      });
+  // eslint-disable-next-lineclear
+  const getNodeInfo = (node) => {
+    stopStream();
+    console.log();
+    getPerfmonData(node);
+    fetch('http://10.10.10.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
           type: 'UPDATE_CURRENT_NODE_INFO',
           payload: json,
+        });
+        console.log(json);
+        startStream(json);
+        dispatch({
+          type: 'UPDATE_VIDEOPLAYERACTIVE',
+          payload: true,
         });
       });
   };
@@ -91,7 +138,7 @@ const GMap = () => {
             bounds.extend(marker.position);
             marker.addListener('click', () => {
               clearInterval(cameraSnapShot);
-              getCameraInfo(marker.nodeName);
+              getNodeInfo(marker.nodeName);
               infowindow.setContent(
                 "<img id='imgCamera1' width='200' height='150' src='http://10.10.10.10:3001/api/cameraConfig/snapshot/" +
                   marker.nodeName +

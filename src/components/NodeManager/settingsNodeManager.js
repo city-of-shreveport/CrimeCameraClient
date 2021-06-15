@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
+import Moment from 'react-moment';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NodeManagerEditNodeModal from './nodeManagerEditNodeModal';
@@ -41,8 +43,7 @@ export default function Settings() {
       .then((json) => {
         const rowLen = json.length;
         json.map((perfmon, i) => {
-          console.log(perfmon);
-          if (rowLen === i + 1) {
+          if (rowLen === 0) {
             dispatch({
               type: 'UPDATE_CURRENT_NODE_PERFMON',
               payload: perfmon,
@@ -143,107 +144,196 @@ export default function Settings() {
                     <th>Cameras</th>
                     <tr>Drives</tr>
                     <th>Actions</th>
+                    <th>Updated</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {state.nodes.map((node, i) => (
-                    <tr>
-                      <td onClick={() => upDateSelectedNode(node.name)}>{node.name}</td>
-                      <td>
-                        <ProgressBar
-                          variant="danger"
-                          now={tryValue(() => {
-                            return node.perfmon.currentLoad.currentLoadUser.toFixed(2) * 100;
-                          })}
-                          label={
-                            tryValue(() => {
-                              return node.perfmon.currentLoad.currentLoadUser.toFixed(2) * 100;
-                            }) + `%`
-                          }
-                        />
-                      </td>
-                      <td>
-                        <ProgressBar
-                          variant="danger"
-                          now={tryValue(() => {
-                            return (node.perfmon.mem.used / node.perfmon.mem.total).toFixed(2) * 100;
-                          })}
-                          label={
-                            tryValue(() => {
-                              return (node.perfmon.mem.used / node.perfmon.mem.total).toFixed(2) * 100;
-                            }) + `%`
-                          }
-                        />
-                      </td>
-                      <td>
-                        {tryValue(() => {
-                          return (node.perfmon.cpuTemperature.main * 1.8 + 32).toFixed(0);
-                        })}{' '}
-                        F
-                      </td>
-                      <td>
-                        {tryValue(() => {
-                          return node.perfmon.cameraStatus.camera1 ? (
-                            <Button variant="outline-danger" size="sm">
-                              {node.perfmon.cameraStatus.camera1.toString()}
-                            </Button>
-                          ) : (
-                            <Button variant="outline-success" size="sm">
-                              {node.perfmon.cameraStatus.camera1.toString()}
-                            </Button>
-                          );
-                        })}
-                        {tryValue(() => {
-                          return node.perfmon.cameraStatus.camera2 ? (
-                            <Button variant="outline-danger" size="sm">
-                              {node.perfmon.cameraStatus.camera2.toString()}
-                            </Button>
-                          ) : (
-                            <Button variant="outline-success" size="sm">
-                              {node.perfmon.cameraStatus.camera2.toString()}
-                            </Button>
-                          );
-                        })}
-                        {tryValue(() => {
-                          return node.perfmon.cameraStatus.camera3 ? (
-                            <Button variant="outline-danger" size="sm">
-                              {node.perfmon.cameraStatus.camera3.toString()}
-                            </Button>
-                          ) : (
-                            <Button variant="outline-success" size="sm">
-                              {node.perfmon.cameraStatus.camera3.toString()}
-                            </Button>
-                          );
-                        })}
-                      </td>
-                      <td>
-                        <Button variant="outline-warning" size="sm">
-                          Root{' '}
+                  {state.nodes.map((node, i) =>
+                    node.nodeStatus === true ? (
+                      <tr>
+                        <td onClick={() => upDateSelectedNode(node.name)}>{node.name}</td>
+                        <td>
                           {tryValue(() => {
-                            return node.perfmon.cameraStatus.camera1.toString();
+                            return node.perfmon.currentLoad.currentLoad.toFixed(2) > 50 ? (
+                              <h5 style={{ color: 'red' }}>
+                                {tryValue(() => {
+                                  return node.perfmon.currentLoad.currentLoad.toFixed(2);
+                                }) + ` %`}
+                              </h5>
+                            ) : (
+                              <h5 style={{ color: 'green' }}>
+                                {tryValue(() => {
+                                  return node.perfmon.currentLoad.currentLoad.toFixed(2);
+                                }) + ` %`}
+                              </h5>
+                            );
                           })}
-                          %
-                        </Button>{' '}
-                        <Button variant="outline-warning" size="sm">
-                          Video 95%
-                        </Button>{' '}
-                        <Button variant="outline-warning" size="sm">
-                          Buddy 90%
-                        </Button>{' '}
-                      </td>
-                      <td>
-                        <Button variant="outline-primary" size="sm" onClick={() => handleEditNodeModal(node.name)}>
-                          Configure
-                        </Button>{' '}
-                        <Button variant="outline-primary" size="sm" onClick={() => handleSystemInfoNodeModal()}>
-                          Information
-                        </Button>{' '}
-                        <Button variant="outline-primary" size="sm">
-                          Reboot
-                        </Button>{' '}
-                      </td>
-                    </tr>
-                  ))}
+                        </td>
+                        <td>
+                          {tryValue(() => {
+                            return ((node.perfmon.mem.used / node.perfmon.mem.total) * 100).toFixed(2) > 50 ? (
+                              <h5 style={{ color: 'red' }}>
+                                {tryValue(() => {
+                                  return ((node.perfmon.mem.used / node.perfmon.mem.total) * 100).toFixed(2);
+                                }) + ` %`}
+                              </h5>
+                            ) : (
+                              <h5 style={{ color: 'green' }}>
+                                {tryValue(() => {
+                                  return ((node.perfmon.mem.used / node.perfmon.mem.total) * 100).toFixed(2);
+                                }) + ` %`}
+                              </h5>
+                            );
+                          })}
+                        </td>
+                        <td>
+                          {tryValue(() => {
+                            return (node.perfmon.cpuTemperature.main * 1.8 + 32).toFixed(0) > 150 ? (
+                              <h5 style={{ color: 'red' }}>
+                                {tryValue(() => {
+                                  return (node.perfmon.cpuTemperature.main * 1.8 + 32).toFixed(0);
+                                })}{' '}
+                                F
+                              </h5>
+                            ) : (
+                              <h5 style={{ color: 'green' }}>
+                                {tryValue(() => {
+                                  return (node.perfmon.cpuTemperature.main * 1.8 + 32).toFixed(0);
+                                })}{' '}
+                                F
+                              </h5>
+                            );
+                          })}
+                        </td>
+                        <td>
+                          {tryValue(() => {
+                            return node.perfmon.cameraStatus.camera1 ? (
+                              <Button variant="outline-success" size="sm">
+                                Camera 1
+                              </Button>
+                            ) : (
+                              <Button variant="outline-danger" size="sm">
+                                Camera 1
+                              </Button>
+                            );
+                          })}
+                          {tryValue(() => {
+                            return node.perfmon.cameraStatus.camera2 ? (
+                              <Button variant="outline-success" size="sm">
+                                Camera 2
+                              </Button>
+                            ) : (
+                              <Button variant="outline-danger" size="sm">
+                                Camera 2
+                              </Button>
+                            );
+                          })}
+                          {tryValue(() => {
+                            return node.perfmon.cameraStatus.camera3 ? (
+                              <Button variant="outline-success" size="sm">
+                                Camera 3
+                              </Button>
+                            ) : (
+                              <Button variant="outline-danger" size="sm">
+                                Camera 3
+                              </Button>
+                            );
+                          })}
+                        </td>
+                        <td>
+                          <td>
+                            {tryValue(() => {
+                              return (node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100 >
+                                70 ? (
+                                <h5 style={{ color: 'red' }}>
+                                  {' '}
+                                  Root:
+                                  {tryValue(() => {
+                                    return (node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100;
+                                  })}
+                                  %{' '}
+                                </h5>
+                              ) : (
+                                <h5 style={{ color: 'green' }}>
+                                  {' '}
+                                  Root:
+                                  {tryValue(() => {
+                                    return (node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100;
+                                  })}
+                                  %{' '}
+                                </h5>
+                              );
+                            })}
+                          </td>{' '}
+                          <td>
+                            {tryValue(() => {
+                              return (node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100 >
+                                70 ? (
+                                <h5 style={{ color: 'red' }}>
+                                  {'    --    '}
+                                  Video:
+                                  {tryValue(() => {
+                                    return (node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100;
+                                  })}
+                                  %{' '}
+                                </h5>
+                              ) : (
+                                <h5 style={{ color: 'green' }}>
+                                  {'    --    '}
+                                  Video:
+                                  {tryValue(() => {
+                                    return (node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100;
+                                  })}
+                                  %
+                                </h5>
+                              );
+                            })}
+                          </td>
+                          {'     '}
+                          <td>
+                            {tryValue(() => {
+                              return (node.perfmon.fsSize[2].used / node.perfmon.fsSize[3].size).toFixed(2) * 100 >
+                                70 ? (
+                                <h5 style={{ color: 'red' }}>
+                                  {'    --    '}
+                                  Buddy:
+                                  {tryValue(() => {
+                                    return (node.perfmon.fsSize[2].used / node.perfmon.fsSize[3].size).toFixed(2) * 100;
+                                  })}
+                                  %{' '}
+                                </h5>
+                              ) : (
+                                <h5 style={{ color: 'green' }}>
+                                  {'    --    '}
+                                  Buddy:
+                                  {tryValue(() => {
+                                    return (node.perfmon.fsSize[2].used / node.perfmon.fsSize[3].size).toFixed(2) * 100;
+                                  })}
+                                  %
+                                </h5>
+                              );
+                            })}
+                          </td>
+                        </td>
+                        <td>
+                          <Button variant="outline-primary" size="sm" onClick={() => handleEditNodeModal(node.name)}>
+                            Configure
+                          </Button>{' '}
+                          <Button variant="outline-primary" size="sm" onClick={() => handleSystemInfoNodeModal()}>
+                            Information
+                          </Button>{' '}
+                          <Button variant="outline-primary" size="sm">
+                            Reboot
+                          </Button>{' '}
+                        </td>
+                        <td>
+                          <Moment fromNow>{node.perfmon.createdAt}</Moment>
+                        </td>
+                      </tr>
+                    ) : (
+                      <></>
+                    )
+                  )}
                 </tbody>
               </Table>
             </div>

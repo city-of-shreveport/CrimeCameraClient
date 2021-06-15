@@ -109,7 +109,7 @@ export default function App() {
           nodeDataPerfMon.perfmon = json[0];
           var difference = getDifferenceInMinutes(new Date(nodedata[i].lastCheckIn), new Date());
 
-          console.log(difference);
+          console.log(json[0]);
           if (difference > 15) {
             nodeDataPerfMon.nodeStatus = false;
           } else {
