@@ -22,21 +22,12 @@ export default function NodeList() {
 
   const handleViewVideosComponent = () => {
     stopStream();
-    dispatch({
-      type: 'UPDATE_VIDEOPLAYERACTIVE',
-      payload: true,
-    });
-    dispatch({
-      type: 'UPDATE_LIVESTREAMINGACTIVE',
-      payload: false,
-    });
   };
 
   let perfMonTimerJob = null;
 
   // eslint-disable-next-lineclear
   const getNodeInfo = (node) => {
-    stopStream();
     fetch('http://10.10.10.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
@@ -45,7 +36,7 @@ export default function NodeList() {
           payload: json,
         });
         console.log(json);
-        startStream(json);
+
         dispatch({
           type: 'UPDATE_VIDEOPLAYERACTIVE',
           payload: true,
