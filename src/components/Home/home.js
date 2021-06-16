@@ -164,120 +164,97 @@ export default function Home() {
     <>
       <Container fluid className="homeContainer bg-dark">
         <Row className="justify-content-md-center">
-          {state.showNodesList ? <NodeList /> : <></>}
-
           <Col>
             <CardGroup>
               <Card className="text-center gmapsCard" bg="dark" text="light">
                 <Card.Body>
-                  <Navbar bg="dark" variant="dark">
-                    <NavDropdown title="Nodes" id="navbarScrollingDropdown">
-                      {state.nodes.map((node) =>
-                        node.nodeStatus === true ? (
-                          <NavDropdown.Item onClick={() => upDateSelectedNode(node.name)}>{node.name}</NavDropdown.Item>
-                        ) : (
-                          <></>
-                        )
-                      )}
-                    </NavDropdown>
-
-                    <Navbar.Collapse className="justify-content-center">
-                      <Navbar.Brand>{state.currentNodeInfo.name}</Navbar.Brand>
-                      <Navbar.Text>
-                        was last seen <Moment fromNow>{state.currentNodeInfo.lastCheckIn}</Moment>{' '}
-                      </Navbar.Text>
-                    </Navbar.Collapse>
-                    <Nav className="mr-auto">
-                      {tryValue(() => {
-                        return state.currentNodePerfmon.cameraStatus.camera1 ? (
-                          <Nav.Link>
-                            <h5 style={{ color: 'green' }}>Camera 1: OK </h5>
-                          </Nav.Link>
-                        ) : (
-                          <Nav.Link>
-                            <h5 style={{ color: 'red' }}>Camera 1: Bad </h5>
-                          </Nav.Link>
-                        );
-                      })}
-                      {'  '}
-                      {tryValue(() => {
-                        return state.currentNodePerfmon.cameraStatus.camera2 ? (
-                          <Nav.Link>
-                            <h5 style={{ color: 'green' }}>Camera 2: OK </h5>
-                          </Nav.Link>
-                        ) : (
-                          <Nav.Link>
-                            <h5 style={{ color: 'red' }}>Camera 2: Bad </h5>
-                          </Nav.Link>
-                        );
-                      })}
-                      {'  '}
-                      {tryValue(() => {
-                        return state.currentNodePerfmon.cameraStatus.camera3 ? (
-                          <Nav.Link>
-                            <h5 style={{ color: 'green' }}>Camera 3: OK </h5>
-                          </Nav.Link>
-                        ) : (
-                          <Nav.Link>
-                            <h5 style={{ color: 'red' }}>Camera 3: Bad </h5>
-                          </Nav.Link>
-                        );
-                      })}
-
-                      <Button variant="outline-primary" onClick={() => openPlayer()}>
-                        Start Stream
-                      </Button>
-                    </Nav>
-                  </Navbar>
                   <Map isMarkerShown />
-
-                  <br />
-
-                  <CardGroup>
-                    <Card bg="dark" text="light">
-                      {state.videoPlayerActive ? (
-                        <ReactPlayer
-                          url={'http://10.10.10.10:8000/streams/' + state.currentNodeInfo.name + '-camera1.flv'}
-                          playing={true}
-                          controls={true}
-                          width="85%"
-                          height="auto"
-                        />
-                      ) : (
-                        <></>
-                      )}
-                    </Card>
-                    <Card bg="dark" text="light">
-                      {state.videoPlayerActive ? (
-                        <ReactPlayer
-                          url={'http://10.10.10.10:8000/streams/' + state.currentNodeInfo.name + '-camera2.flv'}
-                          playing={true}
-                          controls={true}
-                          width="85%"
-                          height="auto"
-                        />
-                      ) : (
-                        <></>
-                      )}
-                    </Card>
-                    <Card bg="dark" text="light">
-                      {state.videoPlayerActive ? (
-                        <ReactPlayer
-                          url={'http://10.10.10.10:8000/streams/' + state.currentNodeInfo.name + '-camera3.flv'}
-                          playing={true}
-                          controls={true}
-                          width="85%"
-                          height="auto"
-                        />
-                      ) : (
-                        <></>
-                      )}
-                    </Card>
-                  </CardGroup>
                 </Card.Body>
               </Card>
             </CardGroup>
           </Col>
+          {state.videoPlayerActive ? (
+            <Col xs={2}>
+              <h4 style={{ color: 'white' }}>{state.currentNodeInfo.name}</h4>
+
+              <Card bg="dark" text="light">
+                {tryValue(() => {
+                  return state.currentNodeInfo.perfmon.cameraStatus.camera1 ? (
+                    <Nav.Link>
+                      <h5 style={{ color: 'green' }}>Camera 1: OK </h5>
+                    </Nav.Link>
+                  ) : (
+                    <Nav.Link>
+                      <h5 style={{ color: 'red' }}>Camera 1: Bad </h5>
+                    </Nav.Link>
+                  );
+                })}
+
+                {state.videoPlayerActive ? (
+                  <ReactPlayer
+                    url={'http://10.10.10.10:8000/streams/' + state.currentNodeInfo.name + '-camera1.flv'}
+                    playing={true}
+                    controls={false}
+                    width="100%"
+                    height="auto"
+                  />
+                ) : (
+                  <></>
+                )}
+              </Card>
+              <Card bg="dark" text="light">
+                {tryValue(() => {
+                  return state.currentNodeInfo.perfmon.cameraStatus.camera2 ? (
+                    <Nav.Link>
+                      <h5 style={{ color: 'green' }}>Camera 2: OK </h5>
+                    </Nav.Link>
+                  ) : (
+                    <Nav.Link>
+                      <h5 style={{ color: 'red' }}>Camera 2: Bad </h5>
+                    </Nav.Link>
+                  );
+                })}
+                {'  '}
+                {state.videoPlayerActive ? (
+                  <ReactPlayer
+                    url={'http://10.10.10.10:8000/streams/' + state.currentNodeInfo.name + '-camera2.flv'}
+                    playing={true}
+                    controls={false}
+                    width="100%"
+                    height="auto"
+                  />
+                ) : (
+                  <></>
+                )}
+              </Card>
+              <Card bg="dark" text="light">
+                {tryValue(() => {
+                  return state.currentNodeInfo.perfmon.cameraStatus.camera3 ? (
+                    <Nav.Link>
+                      <h5 style={{ color: 'green' }}>Camera 3: OK </h5>
+                    </Nav.Link>
+                  ) : (
+                    <Nav.Link>
+                      <h5 style={{ color: 'red' }}>Camera 3: Bad </h5>
+                    </Nav.Link>
+                  );
+                })}
+                {state.videoPlayerActive ? (
+                  <ReactPlayer
+                    url={'http://10.10.10.10:8000/streams/' + state.currentNodeInfo.name + '-camera3.flv'}
+                    playing={true}
+                    controls={false}
+                    width="100%"
+                    height="auto"
+                  />
+                ) : (
+                  <></>
+                )}
+              </Card>
+            </Col>
+          ) : (
+            <></>
+          )}
         </Row>
       </Container>
     </>

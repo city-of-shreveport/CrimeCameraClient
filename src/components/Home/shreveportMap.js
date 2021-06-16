@@ -34,40 +34,39 @@ const GMap = () => {
   };
 
   let perfMonTimerJob = null;
-  const getPerfmonData = (node) =>
-    fetch('http://10.10.10.10:3001/api/perfmons/' + node)
+  function fetchCurrentPerfMonData(nodedata) {
+    var nodeArray = [];
+    let nodeDataPerfMon;
+    fetch('http://10.10.10.10:3001/api/perfmons/' + nodedata.name)
       .then((response) => response.json())
       .then((json) => {
-        const rowLen = json.length;
-        json.map((perfmon, i) => {
-          console.log(perfmon);
-          if (i === 0) {
-            dispatch({
-              type: 'UPDATE_CURRENT_NODE_PERFMON',
-              payload: perfmon,
-            });
-            console.log(state);
-          }
-        });
-      });
-  // eslint-disable-next-lineclear
-  const getNodeInfo = (node) => {
-    stopStream();
-    console.log();
-    getPerfmonData(node);
-    fetch('http://10.10.10.10:3001/api/nodes/' + node)
-      .then((response) => response.json())
-      .then((json) => {
+        nodeDataPerfMon = nodedata;
+        nodeDataPerfMon.perfmon = json[0];
+        var difference = getDifferenceInMinutes(new Date(nodedata.lastCheckIn), new Date());
+
+        console.log(json[0]);
+      })
+      .then(() => {
         dispatch({
           type: 'UPDATE_CURRENT_NODE_INFO',
-          payload: json,
+          payload: nodeDataPerfMon,
         });
-        console.log(json);
-        startStream(json);
+        console.log(nodeDataPerfMon);
+        startStream(nodeDataPerfMon);
         dispatch({
           type: 'UPDATE_VIDEOPLAYERACTIVE',
           payload: true,
         });
+      });
+  }
+  // eslint-disable-next-lineclear
+  const getNodeInfo = (node) => {
+    stopStream();
+
+    fetch('http://10.10.10.10:3001/api/nodes/' + node)
+      .then((response) => response.json())
+      .then((json) => {
+        fetchCurrentPerfMonData(json);
       });
   };
 
@@ -136,9 +135,7 @@ const GMap = () => {
               node
             );
             bounds.extend(marker.position);
-            marker.addListener('click', () => {
-              clearInterval(cameraSnapShot);
-              getNodeInfo(marker.nodeName);
+            marker.addListener('mouseover', function () {
               infowindow.setContent(
                 "<img id='imgCamera1' width='200' height='150' src='http://10.10.10.10:3001/api/cameraConfig/snapshot/" +
                   marker.nodeName +
@@ -151,6 +148,15 @@ const GMap = () => {
                   "/camera3' alt='Logo' />"
               );
               infowindow.open(initGoogleMap, marker);
+            });
+
+            // assuming you also want to hide the infowindow when user mouses-out
+            marker.addListener('mouseout', function () {
+              infowindow.close();
+            });
+            marker.addListener('click', () => {
+              clearInterval(cameraSnapShot);
+              getNodeInfo(marker.nodeName);
             });
           });
         });
@@ -166,7 +172,7 @@ const GMap = () => {
   // initialize the google map
   const initGoogleMap = () => {
     return new window.google.maps.Map(googleMapRef.current, {
-      center: { lat: 32.4918622, lng: -93.7550222 },
+      center: { lat: 32.4368622, lng: -93.7550222 },
       zoom: 12,
     });
   };
@@ -184,7 +190,7 @@ const GMap = () => {
       },
     });
 
-  return <div ref={googleMapRef} style={{ width: '100%', height: '600px' }} />;
+  return <div id="googleMapDIV" ref={googleMapRef} style={{ width: '100%', height: '900px' }} />;
 };
 
 export default GMap;
