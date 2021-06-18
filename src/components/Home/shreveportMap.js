@@ -190,7 +190,7 @@ const GMap = () => {
       },
     });
 
-  return <div id="googleMapDIV" ref={googleMapRef} style={{ width: '100%', height: '900px' }} />;
+  return <div id="googleMapDIV" ref={googleMapRef} style={{ width: '100%', height: '1024px' }} />;
 };
 
 export default GMap;

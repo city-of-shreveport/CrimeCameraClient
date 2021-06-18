@@ -3,7 +3,8 @@ import { Line } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
 
 defaults.animation = false;
-
+defaults.font.size = 16;
+defaults.font.color = 'white';
 const data = {
   labels: ['11:00', '11:15', '11:30', '11:45', '12:00', '12:15', '12:30', '12:45'],
   datasets: [
@@ -43,11 +44,13 @@ const options = {
     yAxes: [
       {
         ticks: {
+          fontColor: 'white',
           beginAtZero: true,
         },
       },
     ],
   },
+  maintainAspectRatio: false,
 };
 
 const LineChart = () => (

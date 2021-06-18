@@ -197,6 +197,7 @@ export default function Home() {
                     controls={false}
                     width="100%"
                     height="auto"
+                    fileConfig={{ attributes: { poster: '../../../public/logo512.png' } }}
                   />
                 ) : (
                   <></>
@@ -234,9 +235,17 @@ export default function Home() {
                       <h5 style={{ color: 'green' }}>Camera 3: OK </h5>
                     </Nav.Link>
                   ) : (
-                    <Nav.Link>
-                      <h5 style={{ color: 'red' }}>Camera 3: Bad </h5>
-                    </Nav.Link>
+                    tryValue(() => {
+                      return state.currentNodeInfo.perfmon.cameraStatus.camera3 ? (
+                        <Nav.Link>
+                          <h5 style={{ color: 'green' }}>Camera 3: OK </h5>
+                        </Nav.Link>
+                      ) : (
+                        <Nav.Link>
+                          <h5 style={{ color: 'red' }}>Camera 3: Bad </h5>
+                        </Nav.Link>
+                      );
+                    })
                   );
                 })}
                 {state.videoPlayerActive ? (

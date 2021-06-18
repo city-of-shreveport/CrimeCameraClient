@@ -6,6 +6,7 @@ const initialState = {
   nodes: [],
   servers: [],
   perfmons: [],
+  restreamerStreamsStats: [],
   streamingstats: [],
   streams: [],
   liveStreamingActive: true,
@@ -138,10 +139,21 @@ const initialState = {
   showDateTime: false,
   showNodesList: false,
   modalSelectNodeVMS: false,
+  restreamerserverstatistics: {},
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'RESTREAMINGSERVERSTATS':
+      return {
+        ...state,
+        restreamerserverstatistics: action.payload,
+      };
+    case 'RESTREAMINGSTATS':
+      return {
+        ...state,
+        restreamerStreamsStats: action.payload,
+      };
     case 'UPDATESMODALSELECTNODEVMS':
       return {
         ...state,

@@ -126,6 +126,38 @@ export default function App() {
     }
   }
   useEffect(() => {
+    function refreshStreamerStats() {
+      let currentStreams = [];
+      fetch('http://10.10.10.10:3001/api/perfMons/restreamerserverstatistics/10.10.10.10')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'RESTREAMINGSERVERSTATS',
+            payload: json,
+          });
+        });
+      fetch('http://10.10.10.10:3001/api/perfMons/streamstatistics/10.10.10.10')
+        .then((response) => response.json())
+        .then((json) => {
+          try {
+            Object.keys(json.streams).forEach(function (key) {
+              currentStreams.push({
+                streamName: key,
+                streamInfo: json.streams[key],
+              });
+              dispatch({
+                type: 'RESTREAMINGSTATS',
+                payload: currentStreams,
+              });
+            });
+          } catch (e) {
+            dispatch({
+              type: 'RESTREAMINGSTATS',
+              payload: currentStreams,
+            });
+          }
+        });
+    }
     function refreshData() {
       fetch('http://10.10.10.10:3001/api/servers')
         .then((response) => response.json())
@@ -161,17 +193,19 @@ export default function App() {
     }
 
     refreshData();
-
+    refreshStreamerStats();
     setInterval(() => {
       refreshData();
     }, 365000);
-
+    setInterval(() => {
+      refreshStreamerStats();
+    }, 10000);
     // eslint-disable-next-line
   }, []);
 
   return (
     <>
-      <Navbar bg="primary" variant="dark">
+      <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="#home">
           <IconContext.Provider value={{ size: 42 }}>
             <IoCameraOutline />
