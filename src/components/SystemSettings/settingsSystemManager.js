@@ -37,9 +37,7 @@ export default function SystemManager() {
       )
     );
   }
-  setInterval(() => {
-    console.log(state);
-  }, 5000);
+
   const handleAddServer = () =>
     dispatch({
       type: 'UPDATE_SYSTEMSETTINGSSERVERFORM',
@@ -47,14 +45,6 @@ export default function SystemManager() {
     });
   return (
     <Container className="settingsDIV">
-      <br />
-      <Card border="secondary" className="SystemSettingsLinerChartGroup" bg="dark" text="light">
-        <BarChart />
-      </Card>
-      <br />
-      <Card border="secondary" className="SystemSettingsLinerChartGroup" bg="dark" text="light">
-        <LineChart />
-      </Card>
       <br />
       <Row>
         <Col sm={3}>
@@ -238,50 +228,76 @@ export default function SystemManager() {
                 <tr>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics.cpu.load;
+                      return state.restreamerserverstatistics[0].cpu.load;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return (state.restreamerserverstatistics.net.inbytes * 0.000001).toFixed(2);
+                      return (state.restreamerserverstatistics[0].net.inbytes * 0.000001).toFixed(2);
                     })}
                     /
                     {tryValue(() => {
-                      return (state.restreamerserverstatistics.net.outbytes * 0.000001).toFixed(2);
+                      return (state.restreamerserverstatistics[0].net.outbytes * 0.000001).toFixed(2);
                     })}
                   </td>
 
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics.nodejs.uptime;
+                      return state.restreamerserverstatistics[0].nodejs.uptime;
                     })}
                   </td>
 
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics.clients.active;
+                      return state.restreamerserverstatistics[0].clients.active;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics.clients.idle;
+                      return state.restreamerserverstatistics[0].clients.idle;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics.clients.rtmp;
+                      return state.restreamerserverstatistics[0].clients.rtmp;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics.clients.http;
+                      return state.restreamerserverstatistics[0].clients.http;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics.clients.ws;
+                      return state.restreamerserverstatistics[0].clients.ws;
                     })}
                   </td>
+                </tr>
+              </tbody>
+            </Table>
+            <Row>
+              <Col>
+                <LineChart />
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+        <Col sm={3}>
+          <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
+            <Card.Title>General Stats</Card.Title>
+            <Table striped bordered hover variant="dark" size="sm">
+              <tbody>
+                <tr>
+                  <td>Connected Users</td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td>Server CPU</td>
+                  <td>35%</td>
+                </tr>
+                <tr>
+                  <td>Server Memory</td>
+                  <td>78%</td>
                 </tr>
               </tbody>
             </Table>

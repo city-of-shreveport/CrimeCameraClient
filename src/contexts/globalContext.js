@@ -139,7 +139,7 @@ const initialState = {
   showDateTime: false,
   showNodesList: false,
   modalSelectNodeVMS: false,
-  restreamerserverstatistics: {},
+  restreamerserverstatistics: [],
 };
 
 const reducer = (state, action) => {

@@ -128,7 +128,7 @@ export default function App() {
   useEffect(() => {
     function refreshStreamerStats() {
       let currentStreams = [];
-      fetch('http://10.10.10.10:3001/api/perfMons/restreamerserverstatistics/10.10.10.10')
+      fetch('http://10.10.10.10:3001/api/streams/streamingserverstats')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -136,7 +136,7 @@ export default function App() {
             payload: json,
           });
         });
-      fetch('http://10.10.10.10:3001/api/perfMons/streamstatistics/10.10.10.10')
+      fetch('http://10.10.10.10:3001/api/streams/streamstatistics/10.10.10.10')
         .then((response) => response.json())
         .then((json) => {
           try {

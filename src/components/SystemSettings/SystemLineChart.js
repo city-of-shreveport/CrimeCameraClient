@@ -1,62 +1,75 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Line } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
-
+import Moment from 'react-moment';
+import moment from 'moment';
+import { GlobalContext } from '../../contexts/globalContext';
 defaults.animation = false;
 defaults.font.size = 16;
 defaults.font.color = 'white';
-const data = {
-  labels: ['11:00', '11:15', '11:30', '11:45', '12:00', '12:15', '12:30', '12:45'],
-  datasets: [
-    {
-      label: 'Active Streams',
-      data: [22, 45, 32, 56, 22, 45, 32, 56],
-      fill: false,
-      backgroundColor: 'Blue',
-      borderColor: 'Blue',
-    },
-    {
-      label: 'Idle Streams',
-      data: [30, 35, 32, 36, 30, 35, 32, 36],
-      fill: false,
-      backgroundColor: 'Red',
-      borderColor: 'Red',
-    },
-    {
-      label: 'RTMP Connection',
-      data: [54, 45, 34, 54, 54, 45, 34, 54],
-      fill: false,
-      backgroundColor: 'Green',
-      borderColor: 'Green',
-    },
-    {
-      label: 'WS Connection',
-      data: [34, 65, 67, 68, 34, 65, 67, 68],
-      fill: false,
-      backgroundColor: 'Purple',
-      borderColor: 'Purple',
-    },
-  ],
-};
 
-const options = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          fontColor: 'white',
-          beginAtZero: true,
+export default function LineChart() {
+  const [state, dispatch] = useContext(GlobalContext);
+  let memrss = [];
+  let chartLables = [];
+
+  let accepted = [];
+  let active = [];
+  let idle = [];
+  let rtmp = [];
+  let http = [];
+  let ws = [];
+  state.restreamerserverstatistics.map((streamStat, i) => {
+    let createdTime = moment(streamStat.createdAt).format('HH:mm');
+    console.log(createdTime);
+    chartLables.push(createdTime);
+    accepted.push(streamStat.clients.accepted);
+    active.push(streamStat.clients.active);
+    idle.push(streamStat.clients.idle);
+    rtmp.push(streamStat.clients.rtmp);
+
+    http.push(streamStat.clients.http);
+    ws.push(streamStat.clients.ws);
+  });
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            fontColor: 'white',
+            beginAtZero: true,
+          },
         },
+      ],
+    },
+    maintainAspectRatio: false,
+  };
+
+  const data = {
+    labels: chartLables,
+    datasets: [
+      {
+        label: 'rtmp',
+        data: rtmp,
+        fill: false,
+        backgroundColor: 'Green',
+        borderColor: 'Green',
+      },
+      {
+        label: 'http',
+        data: http,
+        fill: false,
+        backgroundColor: 'Purple',
+        borderColor: 'Purple',
+      },
+      {
+        label: 'ws',
+        data: ws,
+        fill: false,
+        backgroundColor: 'Cyan',
+        borderColor: 'Cyan',
       },
     ],
-  },
-  maintainAspectRatio: false,
-};
-
-const LineChart = () => (
-  <>
-    <Line data={data} options={options} />
-  </>
-);
-
-export default LineChart;
+  };
+  return <Line data={data} options={options} />;
+}
