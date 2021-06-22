@@ -10,26 +10,24 @@ defaults.font.color = 'white';
 
 export default function LineChart() {
   const [state, dispatch] = useContext(GlobalContext);
-  let memrss = [];
   let chartLables = [];
 
-  let accepted = [];
-  let active = [];
-  let idle = [];
-  let rtmp = [];
-  let http = [];
-  let ws = [];
-  state.restreamerserverstatistics.map((streamStat, i) => {
+  let currentLoad = [];
+  let mem = [];
+  let fsSize = [];
+  let cputemp = [];
+  state.serverstatistics.map((streamStat, i) => {
     let createdTime = moment(streamStat.createdAt).format('HH:mm');
-    chartLables.push(createdTime);
-    accepted.push(streamStat.clients.accepted);
-    active.push(streamStat.clients.active);
-    idle.push(streamStat.clients.idle);
-    rtmp.push(streamStat.clients.rtmp);
 
-    http.push(streamStat.clients.http);
-    ws.push(streamStat.clients.ws);
+    currentLoad.push(streamStat.currentLoad.currentLoad.toFixed(2));
+
+    mem.push((streamStat.mem.used / streamStat.mem.total).toFixed(2) * 100);
+    fsSize.push((streamStat.fsSize[0].used / streamStat.fsSize[0].size).toFixed(2) * 100);
+
+    cputemp.push(streamStat.cpuTemperature.main);
+    chartLables.push(createdTime);
   });
+
   const options = {
     scales: {
       yAxes: [
@@ -48,27 +46,28 @@ export default function LineChart() {
     labels: chartLables,
     datasets: [
       {
-        label: 'rtmp',
-        data: rtmp,
+        label: 'CurrentLoad',
+        data: currentLoad,
         fill: false,
-        backgroundColor: 'Green',
-        borderColor: 'Green',
+        backgroundColor: 'rgba(0, 255, 25, 1)',
+        borderColor: 'rgba(0, 255, 25, 1)',
       },
       {
-        label: 'http',
-        data: http,
+        label: 'Memory',
+        data: mem,
         fill: false,
         backgroundColor: 'Purple',
         borderColor: 'Purple',
       },
+
       {
-        label: 'ws',
-        data: ws,
-        fill: false,
-        backgroundColor: 'Cyan',
-        borderColor: 'Cyan',
+        label: 'CPU Temp',
+        data: cputemp,
+        fill: true,
+        backgroundColor: 'rgba(0, 0, 200, 0.6)',
       },
     ],
   };
+  console.log(data);
   return <Line data={data} options={options} />;
 }

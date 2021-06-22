@@ -140,10 +140,16 @@ const initialState = {
   showNodesList: false,
   modalSelectNodeVMS: false,
   restreamerserverstatistics: [],
+  serverstatistics: [],
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'SERVERSTATS':
+      return {
+        ...state,
+        serverstatistics: action.payload,
+      };
     case 'RESTREAMINGSERVERSTATS':
       return {
         ...state,

@@ -16,6 +16,8 @@ import { GlobalContext } from '../../contexts/globalContext';
 import tryValue from '../../helperFunctions';
 import LineChart from './SystemLineChart';
 import BarChart from './SystemBarChar2';
+import NewServerModal from './systemSettingsNewServerModal';
+import ServerLineChart from './SystemServerLineChart';
 let currentLiveStreams = {};
 
 export default function SystemManager() {
@@ -37,7 +39,15 @@ export default function SystemManager() {
       )
     );
   }
-
+  const stopStream = (node) => {
+    let nodeNameRaw = node.split('-');
+    let nodeName = nodeNameRaw[0];
+    fetch('http://10.10.10.10:3001/api/streams/stop/' + nodeName)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log('stopped');
+      });
+  };
   const handleAddServer = () =>
     dispatch({
       type: 'UPDATE_SYSTEMSETTINGSSERVERFORM',
@@ -49,7 +59,8 @@ export default function SystemManager() {
       <Row>
         <Col sm={3}>
           <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
-            <Card.Title>Servers</Card.Title>
+            <Card.Title>Main Servers</Card.Title>
+            <Button onClick={() => handleAddServer()}>Add Server</Button>
             <Table striped bordered hover variant="dark" size="sm">
               <thead>
                 <tr>
@@ -72,34 +83,10 @@ export default function SystemManager() {
             </Table>
           </Card>
         </Col>
+
         <Col sm={3}>
           <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
-            <Card.Title>Clients</Card.Title>
-            <Table striped bordered hover variant="dark" size="sm">
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Status</td>
-                  <td>Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                {Clients.map((client) => (
-                  <tr>
-                    <td>{client.name}</td>
-                    <td>
-                      <Badge variant="danger">Danger</Badge>{' '}
-                    </td>
-                    <td>Configure</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Card>
-        </Col>
-        <Col sm={3}>
-          <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
-            <Card.Title>Restreamers</Card.Title>
+            <Card.Title>Rec Center 1</Card.Title>
             <Table striped bordered hover variant="dark" size="sm">
               <thead>
                 <tr>
@@ -110,43 +97,15 @@ export default function SystemManager() {
               </thead>
               <tbody>
                 <tr></tr>
-                {Restreamers.map((restreamer) => (
-                  <tr>
-                    <td>{restreamer.name}</td>
-                    <td>
-                      <Badge variant="danger">Danger</Badge>{' '}
-                    </td>
-                    <td>Configure</td>
-                  </tr>
-                ))}
               </tbody>
             </Table>
           </Card>
         </Col>
-        <Col sm={3}>
-          <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
-            <Card.Title>Mongo DBs</Card.Title>
-            <Table striped bordered hover variant="dark" size="sm">
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Status</td>
-                  <td>Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                {Mongos.map((mongo) => (
-                  <tr>
-                    <td>{mongo.name}</td>
-                    <td>
-                      <Badge variant="danger">Danger</Badge>{' '}
-                    </td>
-                    <td>Configure</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+        <Col sm={5}>
+          <Card bg="dark" text="light" border="light" className="text-center systemSettingsServerCard">
+            <ServerLineChart />
           </Card>
+          <br />
         </Col>
       </Row>
       <Row>
@@ -201,6 +160,9 @@ export default function SystemManager() {
                         })}
                       </Moment>
                     </td>
+                    <td>
+                      <Button onClick={() => stopStream(stream.streamName)}></Button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -228,48 +190,48 @@ export default function SystemManager() {
                 <tr>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[0].cpu.load;
+                      return state.restreamerserverstatistics[19].cpu.load;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return (state.restreamerserverstatistics[0].net.inbytes * 0.000001).toFixed(2);
+                      return (state.restreamerserverstatistics[19].net.inbytes * 0.000001).toFixed(2);
                     })}
                     /
                     {tryValue(() => {
-                      return (state.restreamerserverstatistics[0].net.outbytes * 0.000001).toFixed(2);
+                      return (state.restreamerserverstatistics[19].net.outbytes * 0.000001).toFixed(2);
                     })}
                   </td>
 
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[0].nodejs.uptime;
+                      return state.restreamerserverstatistics[19].nodejs.uptime;
                     })}
                   </td>
 
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[0].clients.active;
+                      return state.restreamerserverstatistics[19].clients.active;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[0].clients.idle;
+                      return state.restreamerserverstatistics[19].clients.idle;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[0].clients.rtmp;
+                      return state.restreamerserverstatistics[19].clients.rtmp;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[0].clients.http;
+                      return state.restreamerserverstatistics[19].clients.http;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[0].clients.ws;
+                      return state.restreamerserverstatistics[19].clients.ws;
                     })}
                   </td>
                 </tr>
@@ -304,6 +266,7 @@ export default function SystemManager() {
           </Card>
         </Col>
       </Row>
+      <NewServerModal />
     </Container>
   );
 }

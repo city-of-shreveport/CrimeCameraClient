@@ -19,14 +19,14 @@ import Map from './videoPlayerMap';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import tryValue from '../../helperFunctions';
 const sources = {
   sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
   bunnyTrailer: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
   bunnyMovie: 'http://media.w3.org/2010/05/bunny/movie.mp4',
   test: 'http://media.w3.org/2010/05/video/movie_300.webm',
 };
-
+let selectedNodesArray = [];
 export default class PlayerControlExample extends Component {
   constructor(props, context) {
     super(props, context);
@@ -37,17 +37,19 @@ export default class PlayerControlExample extends Component {
       modalCameraOpen: false,
       nodes: [],
       videos: [],
+      selectedNodesArray: [''],
       nodeButtonSelected: '',
-      selectedCam1: '',
-      selectedCam2: '',
-      selectedCam3: '',
-      selectedVMSTimeMin: '00',
-      selectedVMSTimeHour: '12',
+      selectedNode1: 'Selecet Node1',
+      selectedNode2: 'Selecet Node2',
+      selectedNode3: 'Selecet Node3',
+      selectedNode4: 'Selecet Node4',
+      selectedVMSTimeMin: '',
+      selectedVMSTimeHour: '',
       vmsTimeAMPM: '',
-      selectedVMSDate: new Date(),
+      selectedVMSDate: '',
     };
 
-    fetch('http://10.10.200.10:3001/api/nodes')
+    fetch('http://10.10.10.10:3001/api/nodes')
       .then((response) => response.json())
       .then((json) => {
         this.setState({ nodes: json });
@@ -76,7 +78,7 @@ export default class PlayerControlExample extends Component {
   }
 
   async fetchVideos() {
-    fetch(`http://10.10.200.10:3001/api/videos/CrimeCamera001/1613248535/1623248535`)
+    fetch(`http://10.10.10.10:3001/api/videos/CrimeCamera001/1613248535/1623248535`)
       .then((response) => response.json())
       .then((json) => {
         this.setState({ videos: json });
@@ -204,27 +206,22 @@ export default class PlayerControlExample extends Component {
   }
 
   render() {
-    const upDateSelectedCam = (param) => {
-      let buttonSelected = this.state.camButtonSelected;
-      switch (buttonSelected) {
-        case 'node1':
-          this.setState({ selectedNode1: param });
-          break;
-        case 'node2':
-          this.setState({ selectedNode2: param });
-          break;
-        case 'node3':
-          this.setState({ selectedNode3: param });
-          break;
-        case 'node4':
-          this.setState({ selectedNode3: param });
-          break;
-        default:
-          break;
+    const removeSelectedNodes = (param) => {
+      const index = selectedNodesArray.indexOf(param);
+      if (index > -1) {
+        selectedNodesArray.splice(index, 1);
+        this.setState({ selectedNodes: selectedNodesArray });
+      }
+    };
+    const upDateSelectedNodes = (param) => {
+      if (selectedNodesArray.length < 4) {
+        selectedNodesArray.push(param);
+        console.log(selectedNodesArray);
+        this.setState({ selectedNodes: selectedNodesArray });
       }
     };
     const updateHomeVideoDate = (e) => {
-      this.setState({ selectedNode3: 3 });
+      this.setState({ selectedVMSDate: e });
     };
 
     const updateHomeTimeHour = (e) => {
@@ -245,16 +242,17 @@ export default class PlayerControlExample extends Component {
       <Container fluid className="homeContainer bg-dark">
         <Card className="text-center" bg="dark" text="light">
           <Nav className="justify-content-center" activeKey="/home">
+            <Nav.Link onClick={() => this.setState({ modalCameraOpen: true })}>Select Nodes</Nav.Link>{' '}
             <FaFastBackward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(-10)} />{' '}
             <FaPlay size="28" className="amber-text pr-3" onClick={this.play} />{' '}
             <FaStop size="28" className="amber-text pr-3" onClick={this.pause} />{' '}
             <FaFastForward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(10)} />{' '}
-          </Nav>
-          <Nav className="justify-content-center" activeKey="/home">
             <NavDropdown title="Select Date Time" id="nav-dropdown">
               <Card className="text-center">
                 <h4>Select Date and Time</h4>
+
                 <Calendar onClickDay={(e) => updateHomeVideoDate(e)} />
+
                 <Form>
                   <Row>
                     <Col>
@@ -295,10 +293,31 @@ export default class PlayerControlExample extends Component {
                   </Row>
                   <br />
                 </Form>
+
                 <NavDropdown.Divider />
                 <Button>Set Date & Time</Button>
               </Card>
             </NavDropdown>
+            <NavDropdown.Divider />
+            <Card bg="dark" text="light">
+              <Navbar.Text>
+                {tryValue(() => {
+                  return this.state.selectedVMSDate.getMonth() + '/';
+                })}
+                {tryValue(() => {
+                  return this.state.selectedVMSDate.getDate();
+                })}{' '}
+                {tryValue(() => {
+                  return this.state.selectedVMSTimeHour + ':';
+                })}
+                {tryValue(() => {
+                  return this.state.selectedVMSTimeMin;
+                })}{' '}
+                {tryValue(() => {
+                  return this.state.selectedVMSAMPM;
+                })}
+              </Navbar.Text>
+            </Card>
           </Nav>
         </Card>
         <Row className="justify-content-md-center">
@@ -307,13 +326,10 @@ export default class PlayerControlExample extends Component {
               <Card.Body>
                 <Row>
                   <Col xs={3}>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => this.setState({ modalCameraOpen: true, nodeButtonSelected: 'node1' })}
-                    >
-                      Node 1
-                    </Button>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[0];
+                    })}{' '}
+                    Camera 1
                     <Player
                       ref={(player1) => {
                         this.player1 = player1;
@@ -323,13 +339,10 @@ export default class PlayerControlExample extends Component {
                     </Player>
                   </Col>
                   <Col xs={3}>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => this.setState({ modalCameraOpen: true, nodeButtonSelected: 'node2' })}
-                    >
-                      Node 2
-                    </Button>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[1];
+                    })}{' '}
+                    Camera 1
                     <Player
                       ref={(player2) => {
                         this.player2 = player2;
@@ -339,13 +352,10 @@ export default class PlayerControlExample extends Component {
                     </Player>
                   </Col>
                   <Col xs={3}>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => this.setState({ modalCameraOpen: true, nodeButtonSelected: 'node3' })}
-                    >
-                      Node 3
-                    </Button>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[2];
+                    })}{' '}
+                    Camera 1
                     <Player
                       ref={(player3) => {
                         this.player3 = player3;
@@ -355,13 +365,10 @@ export default class PlayerControlExample extends Component {
                     </Player>
                   </Col>
                   <Col xs={3}>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => this.setState({ modalCameraOpen: true, nodeButtonSelected: 'node4' })}
-                    >
-                      Node 4
-                    </Button>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[3];
+                    })}{' '}
+                    Camera 1
                     <Player
                       ref={(player12) => {
                         this.player12 = player12;
@@ -374,6 +381,10 @@ export default class PlayerControlExample extends Component {
                 <br />
                 <Row>
                   <Col xs={3}>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[0];
+                    })}{' '}
+                    Camera 2
                     <Player
                       ref={(player4) => {
                         this.player4 = player4;
@@ -384,6 +395,10 @@ export default class PlayerControlExample extends Component {
                   </Col>
 
                   <Col xs={3}>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[1];
+                    })}{' '}
+                    Camera 2
                     <Player
                       ref={(player5) => {
                         this.player5 = player5;
@@ -393,6 +408,10 @@ export default class PlayerControlExample extends Component {
                     </Player>
                   </Col>
                   <Col xs={3}>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[2];
+                    })}{' '}
+                    Camera 2
                     <Player
                       ref={(player6) => {
                         this.player6 = player6;
@@ -402,6 +421,10 @@ export default class PlayerControlExample extends Component {
                     </Player>
                   </Col>
                   <Col xs={3}>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[3];
+                    })}{' '}
+                    Camera 2
                     <Player
                       ref={(player11) => {
                         this.player11 = player11;
@@ -414,6 +437,10 @@ export default class PlayerControlExample extends Component {
                 <br />
                 <Row>
                   <Col xs={3}>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[0];
+                    })}{' '}
+                    Camera 3
                     <Player
                       ref={(player7) => {
                         this.player7 = player7;
@@ -424,6 +451,10 @@ export default class PlayerControlExample extends Component {
                   </Col>
 
                   <Col xs={3}>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[1];
+                    })}{' '}
+                    Camera 3
                     <Player
                       ref={(player8) => {
                         this.player8 = player8;
@@ -434,6 +465,10 @@ export default class PlayerControlExample extends Component {
                   </Col>
 
                   <Col xs={3}>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[2];
+                    })}{' '}
+                    Camera 3
                     <Player
                       ref={(player9) => {
                         this.player9 = player9;
@@ -443,6 +478,10 @@ export default class PlayerControlExample extends Component {
                     </Player>
                   </Col>
                   <Col xs={3}>
+                    {tryValue(() => {
+                      return this.state.selectedNodes[3];
+                    })}{' '}
+                    Camera 3
                     <Player
                       ref={(player10) => {
                         this.player10 = player10;
@@ -467,6 +506,62 @@ export default class PlayerControlExample extends Component {
             <Card.Header as="h5">Selecet Node</Card.Header>
             <CardGroup>
               <Card>
+                <Card.Header>Selected Nodes</Card.Header>
+
+                <ListGroup.Item
+                  onClick={() =>
+                    removeSelectedNodes(
+                      tryValue(() => {
+                        return this.state.selectedNodes[0];
+                      })
+                    )
+                  }
+                >
+                  {tryValue(() => {
+                    return this.state.selectedNodes[0];
+                  })}
+                </ListGroup.Item>
+                <ListGroup.Item
+                  onClick={() =>
+                    removeSelectedNodes(
+                      tryValue(() => {
+                        return this.state.selectedNodes[1];
+                      })
+                    )
+                  }
+                >
+                  {tryValue(() => {
+                    return this.state.selectedNodes[1];
+                  })}
+                </ListGroup.Item>
+                <ListGroup.Item
+                  onClick={() =>
+                    removeSelectedNodes(
+                      tryValue(() => {
+                        return this.state.selectedNodes[2];
+                      })
+                    )
+                  }
+                >
+                  {tryValue(() => {
+                    return this.state.selectedNodes[2];
+                  })}
+                </ListGroup.Item>
+                <ListGroup.Item
+                  onClick={() =>
+                    removeSelectedNodes(
+                      tryValue(() => {
+                        return this.state.selectedNodes[3];
+                      })
+                    )
+                  }
+                >
+                  {tryValue(() => {
+                    return this.state.selectedNodes[3];
+                  })}
+                </ListGroup.Item>
+              </Card>
+              <Card>
                 <Map isMarkerShown />
               </Card>
               <Card>
@@ -475,7 +570,7 @@ export default class PlayerControlExample extends Component {
                   <Button type="submit">Submit</Button>
                 </Form>
                 {this.state.nodes.map((node) => (
-                  <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
+                  <ListGroup.Item onClick={() => upDateSelectedNodes(node.name)}>{node.name}</ListGroup.Item>
                 ))}
               </Card>
             </CardGroup>

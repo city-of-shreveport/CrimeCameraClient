@@ -9,7 +9,7 @@ const VMSMAP = () => {
   const [state, dispatch] = useContext(GlobalContext);
 
   const getCameraInfo = (node) => {
-    fetch('http://10.10.200.10:3001/api/nodes/' + node)
+    fetch('http://10.10.10.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -54,7 +54,7 @@ const VMSMAP = () => {
     // eslint-disable-next-line
     VMSGoogleMap = initGoogleMap();
     function getCams() {
-      fetch('http://10.10.200.10:3001/api/nodes')
+      fetch('http://10.10.10.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line

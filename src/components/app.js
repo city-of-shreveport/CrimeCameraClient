@@ -127,6 +127,14 @@ export default function App() {
   }
   useEffect(() => {
     function refreshStreamerStats() {
+      fetch('http://10.10.10.10:3001/api/perfMons/CrimeCameraSystem')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'SERVERSTATS',
+            payload: json,
+          });
+        });
       let currentStreams = [];
       fetch('http://10.10.10.10:3001/api/streams/streamingserverstats')
         .then((response) => response.json())
@@ -157,6 +165,15 @@ export default function App() {
             });
           }
         });
+
+      fetch('http://10.10.10.10:8000/api/streams')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'UPDATE_STREAMS',
+            payload: json,
+          });
+        });
     }
     function refreshData() {
       fetch('http://10.10.10.10:3001/api/servers')
@@ -172,24 +189,6 @@ export default function App() {
         .then((json) => {
           fetchCurrentPerfMonData(json);
         });
-
-      fetch('http://10.10.10.10:8000/api/server')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'UPDATE_STREAMINGSTATS',
-            payload: json,
-          });
-        });
-
-      fetch('http://10.10.10.10:8000/api/streams')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'UPDATE_STREAMS',
-            payload: json,
-          });
-        });
     }
 
     refreshData();
@@ -199,7 +198,7 @@ export default function App() {
     }, 365000);
     setInterval(() => {
       refreshStreamerStats();
-    }, 10000);
+    }, 1000);
     // eslint-disable-next-line
   }, []);
 

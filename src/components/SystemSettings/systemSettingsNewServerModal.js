@@ -25,7 +25,7 @@ export default function SystemSettingsNewServerFormModal() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch('http://10.10.200.10:3001/api/servers', requestOptions)
+    fetch('http://10.10.10.10:3001/api/servers', requestOptions)
       .then((response) => response.json())
       .then((data) => {});
   };
