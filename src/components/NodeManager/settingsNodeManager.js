@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-import Badge from 'react-bootstrap/Badge';
+// import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Moment from 'react-moment';
@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NodeManagerEditNodeModal from './nodeManagerEditNodeModal';
 import NodeManagerNewNodeModal from './nodeManagerNewNodeModal';
-import ProgressBar from 'react-bootstrap/ProgressBar';
+// import ProgressBar from 'react-bootstrap/ProgressBar';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import SettingsNodeCard from './settingsModalNodeCard';
@@ -42,6 +42,7 @@ export default function Settings() {
       .then((response) => response.json())
       .then((json) => {
         const rowLen = json.length;
+        // eslint-disable-next-line
         json.map((perfmon, i) => {
           if (rowLen === 0) {
             dispatch({

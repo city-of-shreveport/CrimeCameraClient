@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Line } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
-import Moment from 'react-moment';
+// import Moment from 'react-moment';
 import moment from 'moment';
 import { GlobalContext } from '../../contexts/globalContext';
 defaults.animation = false;
@@ -9,16 +9,18 @@ defaults.font.size = 16;
 defaults.font.color = 'white';
 
 export default function LineChart() {
-  const [state, dispatch] = useContext(GlobalContext);
-  let memrss = [];
-  let chartLables = [];
+  const [state] = useContext(GlobalContext);
 
+  // let memrss = [];
+  let chartLables = [];
   let accepted = [];
   let active = [];
   let idle = [];
   let rtmp = [];
   let http = [];
   let ws = [];
+
+  // eslint-disable-next-line
   state.restreamerserverstatistics.map((streamStat, i) => {
     let createdTime = moment(streamStat.createdAt).format('HH:mm');
     chartLables.push(createdTime);
@@ -30,6 +32,7 @@ export default function LineChart() {
     http.push(streamStat.clients.http);
     ws.push(streamStat.clients.ws);
   });
+
   const options = {
     scales: {
       yAxes: [

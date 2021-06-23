@@ -1,24 +1,25 @@
+// import BarChart from './SystemBarChar2';
+// import ButtonGroup from 'react-bootstrap/ButtonGroup';
+// import CardDeck from 'react-bootstrap/CardDeck';
+// import SystemSettingsNewServerFormModal from './systemSettingsNewServerModal';
+// import Tab from 'react-bootstrap/Tab';
+// import Tabs from 'react-bootstrap/Tabs';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
-import CardDeck from 'react-bootstrap/CardDeck';
+import LineChart from './SystemLineChart';
 import Moment from 'react-moment';
+import NewServerModal from './systemSettingsNewServerModal';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
-import SystemSettingsNewServerFormModal from './systemSettingsNewServerModal';
+import ServerLineChart from './SystemServerLineChart';
 import Table from 'react-bootstrap/Table';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
+import tryValue from '../../helperFunctions';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
-import tryValue from '../../helperFunctions';
-import LineChart from './SystemLineChart';
-import BarChart from './SystemBarChar2';
-import NewServerModal from './systemSettingsNewServerModal';
-import ServerLineChart from './SystemServerLineChart';
-let currentLiveStreams = {};
+
+// let currentLiveStreams = {};
 
 export default function SystemManager() {
   const [state, dispatch] = useContext(GlobalContext);

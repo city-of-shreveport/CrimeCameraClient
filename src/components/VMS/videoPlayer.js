@@ -213,6 +213,7 @@ export default class PlayerControlExample extends Component {
         this.setState({ selectedNodes: selectedNodesArray });
       }
     };
+
     const upDateSelectedNodes = (param) => {
       if (selectedNodesArray.length < 4) {
         selectedNodesArray.push(param);
@@ -220,6 +221,7 @@ export default class PlayerControlExample extends Component {
         this.setState({ selectedNodes: selectedNodesArray });
       }
     };
+
     const updateHomeVideoDate = (e) => {
       this.setState({ selectedVMSDate: e });
     };
@@ -235,9 +237,11 @@ export default class PlayerControlExample extends Component {
     const updateHomeTimeAMPM = (e) => {
       this.setState({ selectedVMSAMPM: e });
     };
-    const updateSelectedNodeModalVMS = (e) => {
-      this.setState({ selectedVMSDate: e });
-    };
+
+    // const updateSelectedNodeModalVMS = (e) => {
+    //   this.setState({ selectedVMSDate: e });
+    // };
+
     return (
       <Container fluid className="homeContainer bg-dark">
         <Card className="text-center" bg="dark" text="light">
@@ -453,7 +457,7 @@ export default class PlayerControlExample extends Component {
           size="lg"
           className="custom-modal"
         >
-          <Card className="text-center" bg="dark" text="light" className="custom-modal">
+          <Card className="text-center custom-modal" bg="dark" text="light">
             <Card.Header as="h5">Selecet Node</Card.Header>
             <CardGroup>
               <Card>

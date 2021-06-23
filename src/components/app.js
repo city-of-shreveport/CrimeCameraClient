@@ -1,24 +1,23 @@
+// import Button from 'react-bootstrap/Button';
+// import ButtonGroup from 'react-bootstrap/ButtonGroup';
+// import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+// import Calendar from 'react-calendar';
+// import Card from 'react-bootstrap/Card';
+// import CardGroup from 'react-bootstrap/CardGroup';
+// import Col from 'react-bootstrap/Col';
+// import Form from 'react-bootstrap/Form';
+// import ListGroup from 'react-bootstrap/ListGroup';
+// import Map from './Home/map';
+// import Modal from 'react-bootstrap/Modal';
+// import Moment from 'react-moment';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
+// import Row from 'react-bootstrap/Row';
+// import FormControl from 'react-bootstrap/FormControl';
 import Home from './Home/home';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Moment from 'react-moment';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Calendar from 'react-calendar';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Map from './Home/map';
-import Modal from 'react-bootstrap/Modal';
-import CardGroup from 'react-bootstrap/CardGroup';
-import ListGroup from 'react-bootstrap/ListGroup';
-
-import FormControl from 'react-bootstrap/FormControl';
-import React, { useContext, useEffect } from 'react';
 import NodeManager from './NodeManager/settingsNodeManager';
+import React, { useContext, useEffect } from 'react';
 import SystemManager from './SystemSettings/settingsSystemManager';
 import VMS from './VMS/vms';
 import { GlobalContext } from '../contexts/globalContext';
@@ -28,34 +27,35 @@ import { IoCameraOutline } from 'react-icons/io5';
 export default function App() {
   const [state, dispatch] = useContext(GlobalContext);
 
-  const updateSelectedNodeVMS = (e) =>
-    dispatch({
-      type: 'UPDATESELECTEDNODEVMS',
-      payload: e,
-    });
+  // const updateSelectedNodeVMS = (e) =>
+  //   dispatch({
+  //     type: 'UPDATESELECTEDNODEVMS',
+  //     payload: e,
+  //   });
 
-  const updateHomeVideoDate = (e) =>
-    dispatch({
-      type: 'UPDATEHOMEVIDEODATE',
-      payload: e,
-    });
-  const updateHomeTimeHour = (e) =>
-    dispatch({
-      type: 'UPDATEHOMEVIDEOTIMEHOUR',
-      payload: e,
-    });
+  // const updateHomeVideoDate = (e) =>
+  //   dispatch({
+  //     type: 'UPDATEHOMEVIDEODATE',
+  //     payload: e,
+  //   });
 
-  const updateHomeTimeMin = (e) =>
-    dispatch({
-      type: 'UPDATEHOMEVIDEOTIMEMIN',
-      payload: e,
-    });
+  // const updateHomeTimeHour = (e) =>
+  //   dispatch({
+  //     type: 'UPDATEHOMEVIDEOTIMEHOUR',
+  //     payload: e,
+  //   });
 
-  const updateHomeTimeAMPM = (e) =>
-    dispatch({
-      type: 'UPDATEHOMEVIDEOTIMEPM',
-      payload: e,
-    });
+  // const updateHomeTimeMin = (e) =>
+  //   dispatch({
+  //     type: 'UPDATEHOMEVIDEOTIMEMIN',
+  //     payload: e,
+  //   });
+
+  // const updateHomeTimeAMPM = (e) =>
+  //   dispatch({
+  //     type: 'UPDATEHOMEVIDEOTIMEPM',
+  //     payload: e,
+  //   });
 
   function navigate(screen) {
     dispatch({
@@ -63,42 +63,44 @@ export default function App() {
       payload: true,
     });
   }
-  const upDateSelectedCam = (param) => {
-    let buttonSelected = state.selectedNodeModalVMS.camButtonSelected;
-    switch (buttonSelected) {
-      case 'selectedNode1':
-        updateSelectedNodeVMS({ selectedNode1VMS: param });
-        break;
-      case 'selectedNode2':
-        updateSelectedNodeVMS({ selectedNode2VMS: param });
-        break;
-      case 'selectedNode3':
-        updateSelectedNodeVMS({ selectedNode3VMS: param });
-        break;
-      default:
-        break;
-    }
-  };
 
-  function getDifferenceInDays(date1, date2) {
-    const diffInMs = Math.abs(date2 - date1);
-    return diffInMs / (1000 * 60 * 60 * 24);
-  }
+  // const upDateSelectedCam = (param) => {
+  //   let buttonSelected = state.selectedNodeModalVMS.camButtonSelected;
+  //   switch (buttonSelected) {
+  //     case 'selectedNode1':
+  //       updateSelectedNodeVMS({ selectedNode1VMS: param });
+  //       break;
+  //     case 'selectedNode2':
+  //       updateSelectedNodeVMS({ selectedNode2VMS: param });
+  //       break;
+  //     case 'selectedNode3':
+  //       updateSelectedNodeVMS({ selectedNode3VMS: param });
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
-  function getDifferenceInHours(date1, date2) {
-    const diffInMs = Math.abs(date2 - date1);
-    return diffInMs / (1000 * 60 * 60);
-  }
+  // function getDifferenceInDays(date1, date2) {
+  //   const diffInMs = Math.abs(date2 - date1);
+  //   return diffInMs / (1000 * 60 * 60 * 24);
+  // }
+
+  // function getDifferenceInHours(date1, date2) {
+  //   const diffInMs = Math.abs(date2 - date1);
+  //   return diffInMs / (1000 * 60 * 60);
+  // }
 
   function getDifferenceInMinutes(date1, date2) {
     const diffInMs = Math.abs(date2 - date1);
     return diffInMs / (1000 * 60);
   }
 
-  function getDifferenceInSeconds(date1, date2) {
-    const diffInMs = Math.abs(date2 - date1);
-    return diffInMs / 1000;
-  }
+  // function getDifferenceInSeconds(date1, date2) {
+  //   const diffInMs = Math.abs(date2 - date1);
+  //   return diffInMs / 1000;
+  // }
+
   function fetchCurrentPerfMonData(nodedata) {
     var nodeArray = [];
     for (let i = 0; i < nodedata.length; i++) {

@@ -1,6 +1,6 @@
-import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
-import ListGroup from 'react-bootstrap/ListGroup';
+// import Button from 'react-bootstrap/Button';
+// import Alert from 'react-bootstrap/Alert';
+// import ListGroup from 'react-bootstrap/ListGroup';
 
 import Col from 'react-bootstrap/Col';
 import Moment from 'react-moment';
@@ -12,17 +12,17 @@ import { GlobalContext } from '../../contexts/globalContext';
 export default function NodeList() {
   const [state, dispatch] = useContext(GlobalContext);
 
-  const startStream = (json) => {
-    fetch('http://10.10.10.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
-  };
+  // const startStream = (json) => {
+  //   fetch('http://10.10.10.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
+  // };
 
   const stopStream = () => {
     fetch('http://10.10.10.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
   };
 
-  const handleViewVideosComponent = () => {
-    stopStream();
-  };
+  // const handleViewVideosComponent = () => {
+  //   stopStream();
+  // };
 
   let perfMonTimerJob = null;
 

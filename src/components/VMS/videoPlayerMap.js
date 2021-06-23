@@ -1,23 +1,25 @@
+// eslint-disable-next-line
 import React, { useEffect, useRef, useContext } from 'react';
-import { GlobalContext } from '../../contexts/globalContext';
-import ReactHlsPlayer from 'react-hls-player';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+// import { GlobalContext } from '../../contexts/globalContext';
+// import ReactHlsPlayer from 'react-hls-player';
+// import Card from 'react-bootstrap/Card';
+// import CardGroup from 'react-bootstrap/CardGroup';
 
-var infowindow;
+// var infowindow;
+
 const VMSMAP = () => {
-  const [state, dispatch] = useContext(GlobalContext);
+  // const [state, dispatch] = useContext(GlobalContext);
 
-  const getCameraInfo = (node) => {
-    fetch('http://10.10.10.10:3001/api/nodes/' + node)
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch({
-          type: 'UPDATE_CURRENT_NODE_INFO',
-          payload: json,
-        });
-      });
-  };
+  // const getCameraInfo = (node) => {
+  //   fetch('http://10.10.10.10:3001/api/nodes/' + node)
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       dispatch({
+  //         type: 'UPDATE_CURRENT_NODE_INFO',
+  //         payload: json,
+  //       });
+  //     });
+  // };
 
   const googleMapRef = useRef(null);
   let VMSGoogleMap = null;

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
-import NodeListStreamCameraModal from './nodeListStreamCameraModal';
-import ReactHlsPlayer from 'react-hls-player';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+// import NodeListStreamCameraModal from './nodeListStreamCameraModal';
+// import ReactHlsPlayer from 'react-hls-player';
+// import Card from 'react-bootstrap/Card';
+// import CardGroup from 'react-bootstrap/CardGroup';
 
 var infowindow;
 const GMap = () => {
@@ -21,28 +21,30 @@ const GMap = () => {
     fetch('http://10.10.10.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
   };
 
-  const handleViewVideosComponent = () => {
-    stopStream();
-    dispatch({
-      type: 'UPDATE_VIDEOPLAYERACTIVE',
-      payload: true,
-    });
-    dispatch({
-      type: 'UPDATE_LIVESTREAMINGACTIVE',
-      payload: false,
-    });
-  };
+  // const handleViewVideosComponent = () => {
+  //   stopStream();
+  //   dispatch({
+  //     type: 'UPDATE_VIDEOPLAYERACTIVE',
+  //     payload: true,
+  //   });
+  //   dispatch({
+  //     type: 'UPDATE_LIVESTREAMINGACTIVE',
+  //     payload: false,
+  //   });
+  // };
 
-  let perfMonTimerJob = null;
+  // let perfMonTimerJob = null;
+
   function fetchCurrentPerfMonData(nodedata) {
-    var nodeArray = [];
+    // var nodeArray = [];
     let nodeDataPerfMon;
+
     fetch('http://10.10.10.10:3001/api/perfmons/' + nodedata.name)
       .then((response) => response.json())
       .then((json) => {
         nodeDataPerfMon = nodedata;
         nodeDataPerfMon.perfmon = json[0];
-        var difference = getDifferenceInMinutes(new Date(nodedata.lastCheckIn), new Date());
+        // var difference = getDifferenceInMinutes(new Date(nodedata.lastCheckIn), new Date());
 
         console.log(json[0]);
       })
