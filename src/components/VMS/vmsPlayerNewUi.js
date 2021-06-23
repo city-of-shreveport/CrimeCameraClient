@@ -1,26 +1,25 @@
-import { FaPlay } from 'react-icons/fa';
-import { FaStop } from 'react-icons/fa';
-import { FaFastForward } from 'react-icons/fa';
-import { FaFastBackward } from 'react-icons/fa';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import Calendar from 'react-calendar';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import Navbar from 'react-bootstrap/Navbar';
-import React, { Component, useContext, useEffect } from 'react';
-import { GlobalContext } from '../../contexts/globalContext';
-
-import Row from 'react-bootstrap/Row';
-import Modal from 'react-bootstrap/Modal';
-import Nav from 'react-bootstrap/Nav';
-import Calendar from 'react-calendar';
-import { Player } from 'video-react';
-import Map from './videoPlayerMap';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Map from './videoPlayerMap';
+import Modal from 'react-bootstrap/Modal';
+import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Navbar from 'react-bootstrap/Navbar';
+import React, { Component, useContext, useEffect } from 'react';
+import Row from 'react-bootstrap/Row';
+import { FaFastBackward } from 'react-icons/fa';
+import { FaFastForward } from 'react-icons/fa';
+import { FaPlay } from 'react-icons/fa';
+import { FaStop } from 'react-icons/fa';
+import { GlobalContext } from '../../contexts/globalContext';
+import { Player } from 'video-react';
 
 const sources = {
   sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
@@ -33,30 +32,29 @@ export default function PlayerControlExample() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const upDateSelectedCam = (param) => {
-    let buttonSelected = this.state.camButtonSelected;
-    switch (buttonSelected) {
+    switch (this.state.camButtonSelected) {
       case 'node1':
         dispatch({
-          type: 'UPDATESELECTEDNODE1VMS',
-          payload: param,
+          type: 'updateState',
+          payload: { selectedNode1VMS: param },
         });
         break;
       case 'node2':
         dispatch({
-          type: 'UPDATESELECTEDNODE2VMS',
-          payload: param,
+          type: 'updateState',
+          payload: { selectedNode2VMS: param },
         });
         break;
       case 'node3':
         dispatch({
-          type: 'UPDATESELECTEDNODE3VMS',
-          payload: param,
+          type: 'updateState',
+          payload: { selectedNode3VMS: param },
         });
         break;
       case 'node4':
         dispatch({
-          type: 'UPDATESELECTEDNODE4VMS',
-          payload: param,
+          type: 'updateState',
+          payload: { selectedNode4VMS: param },
         });
         break;
       default:
@@ -69,38 +67,43 @@ export default function PlayerControlExample() {
       type: 'UPDATEMODALSELECTNNODEVMS ',
       payload: e,
     });
+
   const updateHomeVideoDate = (e) =>
     dispatch({
-      type: 'UPDATEHOMEVIDEODATE',
-      payload: e,
+      type: 'updateState',
+      payload: { homeVideoDate: e },
     });
+
   const updateHomeTimeHour = (e) =>
     dispatch({
-      type: 'UPDATEHOMEVIDEOTIMEHOUR',
-      payload: e,
+      type: 'updateState',
+      payload: { homeVideoTimeHour: e },
     });
 
   const updateHomeTimeMin = (e) =>
     dispatch({
-      type: 'UPDATEHOMEVIDEOTIMEMIN',
-      payload: e,
+      type: 'updateState',
+      payload: { homeVideoTimeMine: e },
     });
 
   const updateHomeTimeAMPM = (e) =>
     dispatch({
-      type: 'UPDATEHOMEVIDEOTIMEPM',
-      payload: e,
+      type: 'updateState',
+      payload: { vmsTimeAMPM: e },
     });
+
   const selecetNodeButton = (e) => {
     dispatch({
       type: 'UPDATEMODALSELECTNNODEVMS ',
       payload: true,
     });
+
     dispatch({
       type: 'UPDATENODEBUTTONSELECTED ',
       payload: e,
     });
   };
+
   return (
     <Container fluid className="homeContainer bg-dark">
       <Card className="text-center" bg="dark" text="light">

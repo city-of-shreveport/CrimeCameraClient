@@ -1,9 +1,3 @@
-// import BarChart from './SystemBarChar2';
-// import ButtonGroup from 'react-bootstrap/ButtonGroup';
-// import CardDeck from 'react-bootstrap/CardDeck';
-// import SystemSettingsNewServerFormModal from './systemSettingsNewServerModal';
-// import Tab from 'react-bootstrap/Tab';
-// import Tabs from 'react-bootstrap/Tabs';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -19,10 +13,9 @@ import tryValue from '../../helperFunctions';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
 
-// let currentLiveStreams = {};
-
 export default function SystemManager() {
   const [state, dispatch] = useContext(GlobalContext);
+
   let Mongos = [];
   let Restreamers = [];
   let Clients = [];
@@ -40,20 +33,24 @@ export default function SystemManager() {
       )
     );
   }
+
   const stopStream = (node) => {
     let nodeNameRaw = node.split('-');
     let nodeName = nodeNameRaw[0];
+
     fetch('http://10.10.10.10:3001/api/streams/stop/' + nodeName)
       .then((response) => response.json())
       .then((json) => {
         console.log('stopped');
       });
   };
+
   const handleAddServer = () =>
     dispatch({
-      type: 'UPDATE_SYSTEMSETTINGSSERVERFORM',
-      payload: true,
+      type: 'updateState',
+      payload: { systemSettingsNewServerFormModal: true },
     });
+
   return (
     <Container className="settingsDIV">
       <br />

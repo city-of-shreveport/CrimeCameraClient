@@ -32,8 +32,8 @@ export default function SystemSettingsNewServerFormModal() {
 
   const handleAddServer = () =>
     dispatch({
-      type: 'UPDATE_SYSTEMSETTINGSSERVERFORM',
-      payload: false,
+      type: 'updateState',
+      payload: { systemSettingsNewServerFormModal: false },
     });
 
   return (

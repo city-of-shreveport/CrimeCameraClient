@@ -1,18 +1,3 @@
-// import Button from 'react-bootstrap/Button';
-// import ButtonGroup from 'react-bootstrap/ButtonGroup';
-// import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-// import Calendar from 'react-calendar';
-// import Card from 'react-bootstrap/Card';
-// import CardGroup from 'react-bootstrap/CardGroup';
-// import Col from 'react-bootstrap/Col';
-// import Form from 'react-bootstrap/Form';
-// import ListGroup from 'react-bootstrap/ListGroup';
-// import Map from './Home/map';
-// import Modal from 'react-bootstrap/Modal';
-// import Moment from 'react-moment';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
-// import Row from 'react-bootstrap/Row';
-// import FormControl from 'react-bootstrap/FormControl';
 import Home from './Home/home';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -27,82 +12,69 @@ import { IoCameraOutline } from 'react-icons/io5';
 export default function App() {
   const [state, dispatch] = useContext(GlobalContext);
 
-  // const updateSelectedNodeVMS = (e) =>
-  //   dispatch({
-  //     type: 'UPDATESELECTEDNODEVMS',
-  //     payload: e,
-  //   });
-
-  // const updateHomeVideoDate = (e) =>
-  //   dispatch({
-  //     type: 'UPDATEHOMEVIDEODATE',
-  //     payload: e,
-  //   });
-
-  // const updateHomeTimeHour = (e) =>
-  //   dispatch({
-  //     type: 'UPDATEHOMEVIDEOTIMEHOUR',
-  //     payload: e,
-  //   });
-
-  // const updateHomeTimeMin = (e) =>
-  //   dispatch({
-  //     type: 'UPDATEHOMEVIDEOTIMEMIN',
-  //     payload: e,
-  //   });
-
-  // const updateHomeTimeAMPM = (e) =>
-  //   dispatch({
-  //     type: 'UPDATEHOMEVIDEOTIMEPM',
-  //     payload: e,
-  //   });
-
   function navigate(screen) {
-    dispatch({
-      type: screen,
-      payload: true,
-    });
+    switch (screen) {
+      case 'feeds':
+        dispatch({
+          type: 'updateState',
+          payload: {
+            showHome: true,
+            showNodeManager: false,
+            showVMS: false,
+            showSystemManager: false,
+            videoPlayerActive: false,
+          },
+        });
+        break;
+      case 'videos':
+        dispatch({
+          type: 'updateState',
+          payload: {
+            showHome: false,
+            showNodeManager: false,
+            showVMS: true,
+            showSystemManager: false,
+            videoPlayerActive: false,
+          },
+        });
+        break;
+      case 'nodes':
+        dispatch({
+          type: 'updateState',
+          payload: {
+            showHome: false,
+            showNodeManager: true,
+            showVMS: false,
+            showSystemManager: false,
+            videoPlayerActive: false,
+          },
+        });
+        break;
+      case 'system':
+        dispatch({
+          type: 'updateState',
+          payload: {
+            showHome: false,
+            showNodeManager: false,
+            showVMS: false,
+            showSystemManager: true,
+            videoPlayerActive: false,
+          },
+        });
+        break;
+      default:
+        break;
+    }
   }
-
-  // const upDateSelectedCam = (param) => {
-  //   let buttonSelected = state.selectedNodeModalVMS.camButtonSelected;
-  //   switch (buttonSelected) {
-  //     case 'selectedNode1':
-  //       updateSelectedNodeVMS({ selectedNode1VMS: param });
-  //       break;
-  //     case 'selectedNode2':
-  //       updateSelectedNodeVMS({ selectedNode2VMS: param });
-  //       break;
-  //     case 'selectedNode3':
-  //       updateSelectedNodeVMS({ selectedNode3VMS: param });
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  // function getDifferenceInDays(date1, date2) {
-  //   const diffInMs = Math.abs(date2 - date1);
-  //   return diffInMs / (1000 * 60 * 60 * 24);
-  // }
-
-  // function getDifferenceInHours(date1, date2) {
-  //   const diffInMs = Math.abs(date2 - date1);
-  //   return diffInMs / (1000 * 60 * 60);
-  // }
 
   function getDifferenceInMinutes(date1, date2) {
     const diffInMs = Math.abs(date2 - date1);
     return diffInMs / (1000 * 60);
   }
 
-  // function getDifferenceInSeconds(date1, date2) {
-  //   const diffInMs = Math.abs(date2 - date1);
-  //   return diffInMs / 1000;
-  // }
-
   function fetchCurrentPerfMonData(nodedata) {
     var nodeArray = [];
+
     for (let i = 0; i < nodedata.length; i++) {
       fetch('http://10.10.10.10:3001/api/perfmons/' + nodedata[i].name)
         .then((response) => response.json())
@@ -111,41 +83,45 @@ export default function App() {
           nodeDataPerfMon.perfmon = json[0];
           var difference = getDifferenceInMinutes(new Date(nodedata[i].lastCheckIn), new Date());
 
-          console.log(json[0]);
           if (difference > 15) {
             nodeDataPerfMon.nodeStatus = false;
           } else {
             nodeDataPerfMon.nodeStatus = true;
           }
+
           nodeArray.push(nodeDataPerfMon);
         })
         .then(() => {
           dispatch({
-            type: 'UPDATENODES',
-            payload: nodeArray,
+            type: 'updateState',
+            payload: { nodes: nodeArray },
           });
         });
     }
   }
+
   useEffect(() => {
     function refreshStreamerStats() {
       fetch('http://10.10.10.10:3001/api/perfMons/CrimeCameraSystem')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'SERVERSTATS',
-            payload: json,
+            type: 'updateState',
+            payload: { serverstatistics: json },
           });
         });
+
       let currentStreams = [];
+
       fetch('http://10.10.10.10:3001/api/streams/streamingserverstats')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'RESTREAMINGSERVERSTATS',
-            payload: json,
+            type: 'updateState',
+            payload: { restreamerserverstatistics: json },
           });
         });
+
       fetch('http://10.10.10.10:3001/api/streams/streamstatistics/10.10.10.10')
         .then((response) => response.json())
         .then((json) => {
@@ -155,15 +131,16 @@ export default function App() {
                 streamName: key,
                 streamInfo: json.streams[key],
               });
+
               dispatch({
-                type: 'RESTREAMINGSTATS',
-                payload: currentStreams,
+                type: 'updateState',
+                payload: { restreamerStreamsStats: currentStreams },
               });
             });
           } catch (e) {
             dispatch({
-              type: 'RESTREAMINGSTATS',
-              payload: currentStreams,
+              type: 'updateState',
+              payload: { restreamerStreamsStats: currentStreams },
             });
           }
         });
@@ -172,20 +149,22 @@ export default function App() {
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'UPDATE_STREAMS',
-            payload: json,
+            type: 'updateState',
+            payload: { streams: json },
           });
         });
     }
+
     function refreshData() {
       fetch('http://10.10.10.10:3001/api/servers')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'UPDATESERVERS',
-            payload: json,
+            type: 'updateState',
+            payload: { servers: json },
           });
         });
+
       fetch('http://10.10.10.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
@@ -195,9 +174,11 @@ export default function App() {
 
     refreshData();
     refreshStreamerStats();
+
     setInterval(() => {
       refreshData();
     }, 365000);
+
     setInterval(() => {
       refreshStreamerStats();
     }, 1000);
@@ -214,14 +195,14 @@ export default function App() {
           Shreveport Crime Cameras
         </Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link onClick={() => navigate('showHome')}>Live</Nav.Link>
-          <Nav.Link onClick={() => navigate('showVMS')}>Videos</Nav.Link>
-          <Nav.Link onClick={() => navigate('showNodeManager')}>Node Manager</Nav.Link>
-          <Nav.Link onClick={() => navigate('showSystemManager')}>System Manager</Nav.Link>
+          <Nav.Link onClick={() => navigate('feeds')}>Feeds</Nav.Link>
+          <Nav.Link onClick={() => navigate('videos')}>Videos</Nav.Link>
+          <Nav.Link onClick={() => navigate('nodes')}>Nodes</Nav.Link>
+          <Nav.Link onClick={() => navigate('system')}>System</Nav.Link>
         </Nav>
         <Navbar.Collapse id="responsive-navbar-nav"></Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end marginLogidIn">
-          <Navbar.Text>Signed in as: Jack Swayze </Navbar.Text>
+          <Navbar.Text></Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
       {state.showHome && <Home />}

@@ -5,12 +5,12 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SettingsSysInfoEditCard() {
-  const [, dispatch] = useContext(GlobalContext);
+  const [dispatch] = useContext(GlobalContext);
 
   const handleSysConfigModal = () =>
     dispatch({
-      type: 'UPDATE_CAMERASYSCOMPONENT',
-      payload: false,
+      type: 'updateState',
+      payload: { cameraSettingsComponent: false },
     });
 
   return (

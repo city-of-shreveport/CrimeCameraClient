@@ -1,5 +1,4 @@
 import Button from 'react-bootstrap/Button';
-// import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Moment from 'react-moment';
@@ -7,11 +6,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NodeManagerEditNodeModal from './nodeManagerEditNodeModal';
 import NodeManagerNewNodeModal from './nodeManagerNewNodeModal';
-// import ProgressBar from 'react-bootstrap/ProgressBar';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
-import SettingsNodeCard from './settingsModalNodeCard';
-import SettingsNodesSettingsCard from './settingsModalNodesSettingsCard';
 import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
 import Table from 'react-bootstrap/Table';
@@ -25,14 +21,15 @@ export default function Settings() {
   const handleEditNodeModal = (node) => {
     upDateSelectedNode(node);
     dispatch({
-      type: 'SETTINGS_EDIT_NODE_MODAL',
-      payload: true,
+      type: 'updateState',
+      payload: { editNodeModal: true },
     });
   };
+
   const handleSystemInfoNodeModal = () =>
     dispatch({
-      type: 'SETTINGS_SYSTEMINFO_NODE_MODAL',
-      payload: true,
+      type: 'updateState',
+      payload: { systemInfoModal: true },
     });
 
   let perfMonTimerJob = null;
@@ -46,10 +43,9 @@ export default function Settings() {
         json.map((perfmon, i) => {
           if (rowLen === 0) {
             dispatch({
-              type: 'UPDATE_CURRENT_NODE_PERFMON',
-              payload: perfmon,
+              type: 'updateState',
+              payload: { currentNodePerfmon: perfmon, currentNodePerfmonAdded: true },
             });
-            console.log(state);
           }
         });
       });
@@ -59,11 +55,13 @@ export default function Settings() {
       .then((response) => response.json())
       .then((json) => {
         dispatch({
-          type: 'UPDATE_CURRENT_NODE_INFO',
-          payload: json,
+          type: 'updateState',
+          payload: { previousNode: state.currentNodeInfo.name, currentNodeInfo: json },
         });
       });
+
     getPerfmonData(node);
+
     perfMonTimerJob = setInterval(() => {
       getPerfmonData(node);
     }, 60000);
@@ -71,41 +69,24 @@ export default function Settings() {
 
   const handleNewNodeModalOpen = () =>
     dispatch({
-      type: 'SETTINGS_NEW_NODE_MODAL',
-      payload: true,
+      type: 'updateState',
+      payload: { newNodeModal: true },
     });
 
   const upDateSelectedNode = (param) => {
     getNodeInfo(param);
     clearInterval(perfMonTimerJob);
+
     dispatch({
-      type: 'UPDATE_SELECTEDNODE',
-      payload: param,
-    });
-    dispatch({
-      type: 'UPDATE_NODESYSCAMERACOMPONENT',
-      payload: false,
+      type: 'updateState',
+      payload: {
+        selectedNode: param,
+        nodeSelected: true,
+        nodeSettingsCameraComponent: false,
+      },
     });
   };
 
-  // eslint-disable-next-line
-  const cameraInformation = () => {
-    return (
-      <Card bg="dark" text="light">
-        <Card.Header>Cameras</Card.Header>
-        <Card.Header></Card.Header>
-        <Card.Body>
-          {state.currentNodeInfo.name === ' ' ? (
-            <div></div>
-          ) : state.nodeSettingsCameraComponent ? (
-            <SettingsNodesSettingsCard />
-          ) : (
-            <SettingsNodeCard />
-          )}
-        </Card.Body>
-      </Card>
-    );
-  };
   return (
     <Container fluid className="settingsDIV bg-dark">
       <br />

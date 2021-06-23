@@ -32,8 +32,8 @@ export default function NodeManagerNewNodeModal() {
 
   const handleNewNodeModalClose = () =>
     dispatch({
-      type: 'SETTINGS_NEW_NODE_MODAL',
-      payload: false,
+      type: 'updateState',
+      payload: { newNodeModal: false },
     });
 
   return (

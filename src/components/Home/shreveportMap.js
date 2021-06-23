@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
-// import NodeListStreamCameraModal from './nodeListStreamCameraModal';
-// import ReactHlsPlayer from 'react-hls-player';
-// import Card from 'react-bootstrap/Card';
-// import CardGroup from 'react-bootstrap/CardGroup';
 
 var infowindow;
+
 const GMap = () => {
   const [state, dispatch] = useContext(GlobalContext);
+
   function getDifferenceInMinutes(date1, date2) {
     const diffInMs = Math.abs(date2 - date1);
     return diffInMs / (1000 * 60);
@@ -15,53 +13,27 @@ const GMap = () => {
 
   const startStream = (json) => {
     fetch('http://10.10.10.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
+    dispatch({
+      type: 'updateState',
+      payload: { previousNode: state.currentNodeInfo.name, currentNodeInfo: json, videoPlayerActive: true },
+    });
   };
 
   const stopStream = () => {
     fetch('http://10.10.10.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
   };
 
-  // const handleViewVideosComponent = () => {
-  //   stopStream();
-  //   dispatch({
-  //     type: 'UPDATE_VIDEOPLAYERACTIVE',
-  //     payload: true,
-  //   });
-  //   dispatch({
-  //     type: 'UPDATE_LIVESTREAMINGACTIVE',
-  //     payload: false,
-  //   });
-  // };
-
-  // let perfMonTimerJob = null;
-
   function fetchCurrentPerfMonData(nodedata) {
-    // var nodeArray = [];
-    let nodeDataPerfMon;
-
     fetch('http://10.10.10.10:3001/api/perfmons/' + nodedata.name)
       .then((response) => response.json())
       .then((json) => {
-        nodeDataPerfMon = nodedata;
-        nodeDataPerfMon.perfmon = json[0];
-        // var difference = getDifferenceInMinutes(new Date(nodedata.lastCheckIn), new Date());
-
-        console.log(json[0]);
+        nodedata.perfmon = json[0];
       })
       .then(() => {
-        dispatch({
-          type: 'UPDATE_CURRENT_NODE_INFO',
-          payload: nodeDataPerfMon,
-        });
-        console.log(nodeDataPerfMon);
-        startStream(nodeDataPerfMon);
-        dispatch({
-          type: 'UPDATE_VIDEOPLAYERACTIVE',
-          payload: true,
-        });
+        startStream(nodedata);
       });
   }
-  // eslint-disable-next-lineclear
+
   const getNodeInfo = (node) => {
     stopStream();
 
@@ -75,7 +47,6 @@ const GMap = () => {
   const googleMapRef = useRef(null);
   let googleMap = null;
 
-  // list of icons
   const iconList = {
     pinGreen: 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png',
     pinYellow: 'http://maps.google.com/mapfiles/kml/paddle/ylw-blank.png',
@@ -98,11 +69,6 @@ const GMap = () => {
     track15: 'http://earth.google.com/images/kml-icons/track-directional/track-15.png',
   };
 
-  // eslint-disable-next-line
-  let markerList = [];
-  //YA
-  // list of the marker object along with icon
-
   useEffect(() => {
     // eslint-disable-next-line
     googleMap = initGoogleMap();
@@ -114,20 +80,17 @@ const GMap = () => {
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line
-          markerList = json;
-
-          // eslint-disable-next-line
 
           // eslint-disable-next-line
           json.map((node) => {
             var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
 
-            console.log(difference);
             if (difference > 15) {
               nodeStatus = false;
             } else {
               nodeStatus = true;
             }
+
             const marker = createMarker(
               {
                 lat: node.config.locationLat,
@@ -136,7 +99,9 @@ const GMap = () => {
               },
               node
             );
+
             bounds.extend(marker.position);
+
             marker.addListener('mouseover', function () {
               infowindow.setContent(
                 "<img id='imgCamera1' width='200' height='150' src='http://10.10.10.10:3001/api/cameraConfig/snapshot/" +
@@ -152,10 +117,10 @@ const GMap = () => {
               infowindow.open(initGoogleMap, marker);
             });
 
-            // assuming you also want to hide the infowindow when user mouses-out
             marker.addListener('mouseout', function () {
               infowindow.close();
             });
+
             marker.addListener('click', () => {
               clearInterval(cameraSnapShot);
               getNodeInfo(marker.nodeName);
@@ -167,11 +132,10 @@ const GMap = () => {
     setInterval(() => {
       getCams();
     }, 360000);
-    //googleMap.fitBounds(bounds); // the map to contain all markers
+
     infowindow = new window.google.maps.InfoWindow();
   }, []);
 
-  // initialize the google map
   const initGoogleMap = () => {
     return new window.google.maps.Map(googleMapRef.current, {
       center: { lat: 32.4368622, lng: -93.7550222 },
@@ -179,7 +143,6 @@ const GMap = () => {
     });
   };
 
-  // create marker on google map
   const createMarker = (markerObj, node) =>
     new window.google.maps.Marker({
       position: { lat: markerObj.lat, lng: markerObj.lng },
@@ -187,7 +150,6 @@ const GMap = () => {
       nodeName: node.name,
       icon: {
         url: markerObj.icon,
-        // set marker width and height
         scaledSize: new window.google.maps.Size(50, 50),
       },
     });

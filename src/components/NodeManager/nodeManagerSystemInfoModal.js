@@ -10,8 +10,8 @@ export default function NodeManagerSystemInfoModal() {
 
   const handleSystemInfoNodeModalClose = () =>
     dispatch({
-      type: 'SETTINGS_SYSTEMINFO_NODE_MODAL',
-      payload: false,
+      type: 'updateState',
+      payload: { systemInfoModal: false },
     });
 
   return (

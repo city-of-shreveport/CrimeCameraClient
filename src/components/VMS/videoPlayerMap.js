@@ -1,30 +1,9 @@
-// eslint-disable-next-line
 import React, { useEffect, useRef, useContext } from 'react';
-// import { GlobalContext } from '../../contexts/globalContext';
-// import ReactHlsPlayer from 'react-hls-player';
-// import Card from 'react-bootstrap/Card';
-// import CardGroup from 'react-bootstrap/CardGroup';
-
-// var infowindow;
 
 const VMSMAP = () => {
-  // const [state, dispatch] = useContext(GlobalContext);
-
-  // const getCameraInfo = (node) => {
-  //   fetch('http://10.10.10.10:3001/api/nodes/' + node)
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       dispatch({
-  //         type: 'UPDATE_CURRENT_NODE_INFO',
-  //         payload: json,
-  //       });
-  //     });
-  // };
-
   const googleMapRef = useRef(null);
   let VMSGoogleMap = null;
 
-  // list of icons
   const iconList = {
     pinGreen: 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png',
     pinYellow: 'http://maps.google.com/mapfiles/kml/paddle/ylw-blank.png',
@@ -47,24 +26,15 @@ const VMSMAP = () => {
     track15: 'http://earth.google.com/images/kml-icons/track-directional/track-15.png',
   };
 
-  // eslint-disable-next-line
   let markerList = [];
-  //YA
-  // list of the marker object along with icon
 
   useEffect(() => {
-    // eslint-disable-next-line
     VMSGoogleMap = initGoogleMap();
     function getCams() {
       fetch('http://10.10.10.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
-          // eslint-disable-next-line
           markerList = json;
-
-          // eslint-disable-next-line
-
-          // eslint-disable-next-line
           json.map((node) => {
             const marker = createMarker(
               {
@@ -79,11 +49,8 @@ const VMSMAP = () => {
         });
     }
     getCams();
-
-    //googleMap.fitBounds(bounds); // the map to contain all markers
   }, []);
 
-  // initialize the google map
   const initGoogleMap = () => {
     return new window.google.maps.Map(googleMapRef.current, {
       center: { lat: 32.4918622, lng: -93.7550222 },
@@ -91,7 +58,6 @@ const VMSMAP = () => {
     });
   };
 
-  // create marker on google map
   const createMarker = (markerObj, node) =>
     new window.google.maps.Marker({
       position: { lat: markerObj.lat, lng: markerObj.lng },
@@ -99,7 +65,6 @@ const VMSMAP = () => {
       nodeName: node.name,
       icon: {
         url: markerObj.icon,
-        // set marker width and height
         scaledSize: new window.google.maps.Size(50, 50),
       },
     });
