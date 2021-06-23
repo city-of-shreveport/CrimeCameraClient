@@ -242,62 +242,11 @@ export default class PlayerControlExample extends Component {
       <Container fluid className="homeContainer bg-dark">
         <Card className="text-center" bg="dark" text="light">
           <Nav className="justify-content-center" activeKey="/home">
-            <Nav.Link onClick={() => this.setState({ modalCameraOpen: true })}>Select Nodes</Nav.Link>{' '}
+            <Nav.Link onClick={() => this.setState({ modalCameraOpen: true })}>Set Nodes/Date</Nav.Link>{' '}
             <FaFastBackward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(-10)} />{' '}
             <FaPlay size="28" className="amber-text pr-3" onClick={this.play} />{' '}
             <FaStop size="28" className="amber-text pr-3" onClick={this.pause} />{' '}
             <FaFastForward size="28" className="amber-text pr-3" onClick={this.changeCurrentTime(10)} />{' '}
-            <NavDropdown title="Select Date Time" id="nav-dropdown">
-              <Card className="text-center">
-                <h4>Select Date and Time</h4>
-
-                <Calendar onClickDay={(e) => updateHomeVideoDate(e)} />
-
-                <Form>
-                  <Row>
-                    <Col>
-                      <Form.Label>Hour</Form.Label>
-                      <Form.Control as="select" onChange={(e) => updateHomeTimeHour(e.target.value)}>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                        <option>11</option>
-                        <option>12</option>
-                      </Form.Control>
-                    </Col>
-                    <Col>
-                      {' '}
-                      <Form.Label>Minutes</Form.Label>
-                      <Form.Control as="select" onChange={(e) => updateHomeTimeMin(e.target.value)}>
-                        <option>00</option>
-                        <option>15</option>
-                        <option>30</option>
-                        <option>45</option>
-                      </Form.Control>
-                    </Col>
-                    <Col>
-                      {' '}
-                      <Form.Label>AM/PM</Form.Label>
-                      <Form.Control as="select" onChange={(e) => updateHomeTimeAMPM(e.target.value)}>
-                        <option>AM</option>
-                        <option>PM</option>
-                      </Form.Control>
-                    </Col>
-                  </Row>
-                  <br />
-                </Form>
-
-                <NavDropdown.Divider />
-                <Button>Set Date & Time</Button>
-              </Card>
-            </NavDropdown>
             <NavDropdown.Divider />
             <Card bg="dark" text="light">
               <Navbar.Text>
@@ -496,13 +445,15 @@ export default class PlayerControlExample extends Component {
             </Card>
           </Col>
         </Row>
+
         <Modal
           show={this.state.modalCameraOpen}
           onHide={() => this.setState({ modalCameraOpen: false })}
           centered
           size="lg"
+          className="custom-modal"
         >
-          <Card className="text-center" bg="dark" text="light">
+          <Card className="text-center" bg="dark" text="light" className="custom-modal">
             <Card.Header as="h5">Selecet Node</Card.Header>
             <CardGroup>
               <Card>
@@ -560,11 +511,60 @@ export default class PlayerControlExample extends Component {
                     return this.state.selectedNodes[3];
                   })}
                 </ListGroup.Item>
+                <Card className="text-center" text="dark">
+                  <h4>Select Date and Time</h4>
+
+                  <Calendar onClickDay={(e) => updateHomeVideoDate(e)} />
+
+                  <Form>
+                    <Row>
+                      <Col>
+                        <Form.Label>Hour</Form.Label>
+                        <Form.Control as="select" onChange={(e) => updateHomeTimeHour(e.target.value)}>
+                          <option></option>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                          <option>11</option>
+                          <option>12</option>
+                        </Form.Control>
+                      </Col>
+                      <Col>
+                        {' '}
+                        <Form.Label>Minutes</Form.Label>
+                        <Form.Control as="select" onChange={(e) => updateHomeTimeMin(e.target.value)}>
+                          <option></option>
+                          <option>00</option>
+                          <option>15</option>
+                          <option>30</option>
+                          <option>45</option>
+                        </Form.Control>
+                      </Col>
+                      <Col>
+                        {' '}
+                        <Form.Label>AM/PM</Form.Label>
+                        <Form.Control as="select" onChange={(e) => updateHomeTimeAMPM(e.target.value)}>
+                          <option></option>
+                          <option>AM</option>
+                          <option>PM</option>
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                    <br />
+                  </Form>
+                </Card>
               </Card>
               <Card>
                 <Map isMarkerShown />
               </Card>
-              <Card>
+              <Card className="nodesListVMSModal">
                 <Form inline>
                   <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
                   <Button type="submit">Submit</Button>

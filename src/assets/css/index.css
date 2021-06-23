@@ -112,3 +112,7 @@ code {
   height: 22vh;
   overflow: scroll;
 }
+.nodesListVMSModal {
+  height: 62vh;
+  overflow: scroll;
+}
