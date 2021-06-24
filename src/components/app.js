@@ -14,7 +14,7 @@ export default function App() {
 
   function navigate(screen) {
     switch (screen) {
-      case 'feeds':
+      case 'streams':
         dispatch({
           type: 'updateState',
           payload: {
@@ -195,7 +195,7 @@ export default function App() {
           Shreveport Crime Cameras
         </Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link onClick={() => navigate('feeds')}>Feeds</Nav.Link>
+          <Nav.Link onClick={() => navigate('streams')}>Streams</Nav.Link>
           <Nav.Link onClick={() => navigate('videos')}>Videos</Nav.Link>
           <Nav.Link onClick={() => navigate('nodes')}>Nodes</Nav.Link>
           <Nav.Link onClick={() => navigate('system')}>System</Nav.Link>

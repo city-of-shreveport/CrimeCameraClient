@@ -15,6 +15,7 @@ const initialState = {
   homeVideoTimeMin: '00',
   homeVideoTimePM: false,
   homeViewVideosModal: false,
+  isPlayingVMS: false,
   liveStreamingActive: true,
   modalSelectNodeVMS: false,
   nodeForm: {},
