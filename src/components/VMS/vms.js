@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import { FaFastBackward, FaFastForward, FaPlay, FaPause } from 'react-icons/fa';
 import { GlobalContext } from '../../contexts/globalContext';
@@ -18,7 +18,7 @@ export default function VMS() {
   };
 
   const isPlaying = () => {
-    if (state.isPlayingVMS == true) {
+    if (state.isPlayingVMS === true) {
       return (
         <FaPause
           size="64"
@@ -90,35 +90,19 @@ export default function VMS() {
             <Card className="text-center" bg="dark" text="light">
               <Card.Body>
                 <Row className="align-items-center">
-                  <Col xs={3}>
+                  <Col xs={6}>
                     <video
                       width="400px"
                       controls="true"
-                      src="http://10.10.10.10:3001/nodes/CrimeCamera019/camera1/1624311902.mp4"
+                      src="http://10.10.10.10:3001/nodes/CrimeCamera018/camera1/1624311902.mp4"
                     ></video>
                   </Col>
 
-                  <Col xs={3}>
+                  <Col xs={6}>
                     <video
                       width="400px"
                       controls="true"
-                      src="http://10.10.10.10:3001/nodes/CrimeCamera019/camera1/1624461303.mp4"
-                    ></video>
-                  </Col>
-
-                  <Col xs={3}>
-                    <video
-                      width="400px"
-                      controls="true"
-                      src="http://10.10.10.10:3001/nodes/CrimeCamera019/camera1/1624311902.mp4"
-                    ></video>
-                  </Col>
-
-                  <Col xs={3}>
-                    <video
-                      width="400px"
-                      controls="true"
-                      src="http://10.10.10.10:3001/nodes/CrimeCamera019/camera1/1624461303.mp4"
+                      src="http://10.10.10.10:3001/nodes/CrimeCamera018/camera1/1624311902.mp4"
                     ></video>
                   </Col>
                 </Row>
