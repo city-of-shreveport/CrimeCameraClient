@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import React, { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
 import { GlobalContext } from '../../contexts/globalContext';
-
+import tryValue from '../../helperFunctions';
 export default function NodeManagerSystemInfoModal() {
   const [state, dispatch] = useContext(GlobalContext);
 
@@ -22,7 +22,9 @@ export default function NodeManagerSystemInfoModal() {
       centered
       size="lg"
     >
-      {state.currentNodeInfo.name === ' ' ? (
+      {tryValue(() => {
+        return state.currentNodeInfo.name;
+      }) === ' ' ? (
         <div>SELECT A CAMERA FIRST</div>
       ) : (
         <Card className="text-center">
@@ -39,15 +41,27 @@ export default function NodeManagerSystemInfoModal() {
                         <tbody>
                           <tr>
                             <td>brand</td>
-                            <td>{state.currentNodeInfo.sysInfo.cpu.brand}</td>
+                            <td>
+                              {tryValue(() => {
+                                return state.currentNodeInfo.sysInfo.cpu.brand;
+                              })}
+                            </td>
                           </tr>
                           <tr>
                             <td>cores</td>
-                            <td>{state.currentNodeInfo.sysInfo.cpu.cores}</td>
+                            <td>
+                              {tryValue(() => {
+                                return state.currentNodeInfo.sysInfo.cpu.cores;
+                              })}
+                            </td>
                           </tr>
                           <tr>
                             <td>family</td>
-                            <td>{state.currentNodeInfo.sysInfo.cpu.family}</td>
+                            <td>
+                              {tryValue(() => {
+                                return state.currentNodeInfo.sysInfo.cpu.family;
+                              })}
+                            </td>
                           </tr>
                         </tbody>
                       </Table>
@@ -67,16 +81,19 @@ export default function NodeManagerSystemInfoModal() {
                           </tr>
                         </thead>
                         <tbody>
-                          {state.currentNodeInfo.sysInfo.diskLayout.map((disk, index) => (
-                            <tr>
-                              <td>{index + 1}</td>
-                              <td>{disk.device}</td>
+                          {tryValue(() => {
+                            return;
+                            state.currentNodeInfo.sysInfo.diskLayout.map((disk, index) => (
+                              <tr>
+                                <td>{index + 1}</td>
+                                <td>{disk.device}</td>
 
-                              <td>{parseFloat(disk.size / 1024 / 1024 / 1024 / 1024).toFixed(2)} TB</td>
+                                <td>{parseFloat(disk.size / 1024 / 1024 / 1024 / 1024).toFixed(2)} TB</td>
 
-                              <td>{disk.vendor}</td>
-                            </tr>
-                          ))}
+                                <td>{disk.vendor}</td>
+                              </tr>
+                            ));
+                          })}
                         </tbody>
                       </Table>
                     </Card.Text>
@@ -90,20 +107,33 @@ export default function NodeManagerSystemInfoModal() {
                         <tbody>
                           <tr>
                             <td>clockSpeed</td>
-                            <td>{state.currentNodeInfo.sysInfo.memLayout[0].clockSpeed}</td>
+                            <td>
+                              {tryValue(() => {
+                                return state.currentNodeInfo.sysInfo.memLayout[0].clockSpeed;
+                              })}
+                            </td>
                           </tr>
                           <tr>
                             <td>size</td>
                             <td>
-                              {parseFloat(state.currentNodeInfo.sysInfo.memLayout[0].size / 1024 / 1024 / 1024).toFixed(
-                                2
-                              )}{' '}
+                              {parseFloat(
+                                tryValue(() => {
+                                  return state.currentNodeInfo.sysInfo.memLayout[0].size;
+                                }) /
+                                  1024 /
+                                  1024 /
+                                  1024
+                              ).toFixed(2)}{' '}
                               MB
                             </td>
                           </tr>
                           <tr>
                             <td>type</td>
-                            <td>{state.currentNodeInfo.sysInfo.memLayout[0].type}</td>
+                            <td>
+                              {tryValue(() => {
+                                return state.currentNodeInfo.sysInfo.memLayout[0].type;
+                              })}
+                            </td>
                           </tr>
                         </tbody>
                       </Table>
@@ -117,19 +147,35 @@ export default function NodeManagerSystemInfoModal() {
                         <tbody>
                           <tr>
                             <td>arch</td>
-                            <td>{state.currentNodeInfo.sysInfo.osInfo.arch}</td>
+                            <td>
+                              {tryValue(() => {
+                                return state.currentNodeInfo.sysInfo.osInfo.arch;
+                              })}
+                            </td>
                           </tr>
                           <tr>
                             <td>codename</td>
-                            <td>{state.currentNodeInfo.sysInfo.osInfo.codename}</td>
+                            <td>
+                              {tryValue(() => {
+                                return state.currentNodeInfo.sysInfo.osInfo.codename;
+                              })}
+                            </td>
                           </tr>
                           <tr>
                             <td>kernel</td>
-                            <td>{state.currentNodeInfo.sysInfo.osInfo.kernel}</td>
+                            <td>
+                              {tryValue(() => {
+                                return state.currentNodeInfo.sysInfo.osInfo.kernel;
+                              })}
+                            </td>
                           </tr>
                           <tr>
                             <td>release</td>
-                            <td>{state.currentNodeInfo.sysInfo.osInfo.release}</td>
+                            <td>
+                              {tryValue(() => {
+                                return state.currentNodeInfo.sysInfo.osInfo.release;
+                              })}
+                            </td>
                           </tr>
                         </tbody>
                       </Table>

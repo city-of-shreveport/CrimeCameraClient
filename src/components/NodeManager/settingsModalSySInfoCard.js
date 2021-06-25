@@ -93,7 +93,7 @@ export default function SettingsSysInfoCard() {
                 <td>Buddy 1</td>
                 <td>
                   {tryValue(() => {
-                    return state.currentNodeInfo.config.buddyDriveDevicePath;
+                    return state.currentNodeInfo.config.buddyDrives.buddy1.hostName;
                   })}
                 </td>
               </tr>
@@ -101,7 +101,7 @@ export default function SettingsSysInfoCard() {
                 <td>Buddy 2</td>
                 <td>
                   {tryValue(() => {
-                    return state.currentNodeInfo.config.buddyDriveDevicePath;
+                    return state.currentNodeInfo.config.buddyDrives.buddy2.hostName;
                   })}
                 </td>
               </tr>

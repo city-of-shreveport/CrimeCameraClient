@@ -116,3 +116,6 @@ code {
   height: 62vh;
   overflow: scroll;
 }
+.NodePerfMonLineChartDiv {
+  max-height: 200px;
+}

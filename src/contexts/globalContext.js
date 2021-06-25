@@ -4,7 +4,8 @@ export const GlobalContext = createContext();
 
 const initialState = {
   camButtonSelected: '',
-  currentNodePerfmon: {},
+  currentNodeSinglePerfmon: {},
+  currentNodePerfmon: [],
   currentNodePerfmonAdded: false,
   editNodeModal: false,
   homeSelectedNode: 'NONE',
@@ -23,6 +24,7 @@ const initialState = {
   nodeSettingsCameraComponent: false,
   nodeSettingsComponent: false,
   nodeSettingsNodeComponent: false,
+  nodeSettingsChartPerfMonModal: false,
   nodes: [],
   perfmons: [],
   previousNode: '',

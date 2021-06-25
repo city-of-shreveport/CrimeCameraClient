@@ -14,7 +14,7 @@ import Table from 'react-bootstrap/Table';
 import tryValue from '../../helperFunctions';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
-
+import NodeChartModal from './nodeManagerNodePerfMonCharts.js';
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
 
@@ -34,7 +34,7 @@ export default function Settings() {
 
   let perfMonTimerJob = null;
 
-  const getPerfmonData = (node) =>
+  const getSinglePerfmonData = (node) =>
     fetch('http://10.10.10.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
@@ -44,11 +44,21 @@ export default function Settings() {
           if (rowLen === 0) {
             dispatch({
               type: 'updateState',
-              payload: { currentNodePerfmon: perfmon, currentNodePerfmonAdded: true },
+              payload: { currentNodeSinglePerfmon: perfmon, currentNodePerfmonAdded: true },
             });
           }
         });
       });
+  function fetchCurrentNodePerfMon() {
+    fetch('http://10.10.10.10:3001/api/perfmons/' + state.currentNodeInfo.name)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: 'updateState',
+          payload: { currentNodePerfmon: json },
+        });
+      });
+  }
 
   const getNodeInfo = (node) => {
     fetch('http://10.10.10.10:3001/api/nodes/' + node)
@@ -56,15 +66,31 @@ export default function Settings() {
       .then((json) => {
         dispatch({
           type: 'updateState',
-          payload: { previousNode: state.currentNodeInfo.name, currentNodeInfo: json },
+          payload: {
+            previousNode: tryValue(() => {
+              return state.currentNodeInfo.name;
+            }),
+            currentNodeInfo: json,
+          },
         });
       });
 
-    getPerfmonData(node);
+    getSinglePerfmonData(node);
 
     perfMonTimerJob = setInterval(() => {
-      getPerfmonData(node);
+      getSinglePerfmonData(node);
     }, 60000);
+  };
+
+  const handleNodeChartModal = () => {
+    fetchCurrentNodePerfMon();
+    setInterval(() => {
+      fetchCurrentNodePerfMon();
+    }, 5000);
+    dispatch({
+      type: 'updateState',
+      payload: { nodeSettingsChartPerfMonModal: true },
+    });
   };
 
   const handleNewNodeModalOpen = () =>
@@ -304,12 +330,16 @@ export default function Settings() {
                           <Button variant="outline-primary" size="sm" onClick={() => handleSystemInfoNodeModal()}>
                             Information
                           </Button>{' '}
-                          <Button variant="outline-primary" size="sm">
-                            Reboot
+                          <Button variant="outline-primary" size="sm" onClick={() => handleNodeChartModal()}>
+                            Charts
                           </Button>{' '}
                         </td>
                         <td>
-                          <Moment fromNow>{node.perfmon.createdAt}</Moment>
+                          <Moment fromNow>
+                            {tryValue(() => {
+                              return node.perfmon.createdAt;
+                            })}
+                          </Moment>
                         </td>
                       </tr>
                     ) : (
@@ -321,7 +351,10 @@ export default function Settings() {
             </div>
           </Card>
         </Col>
-        {state.currentNodeInfo.name === ' ' ? (
+
+        {tryValue(() => {
+          return state.currentNodeInfo.name;
+        }) === null ? (
           <div></div>
         ) : (
           <Col xs={2}>
@@ -339,6 +372,7 @@ export default function Settings() {
 
       <NodeManagerNewNodeModal />
       <NodeManagerEditNodeModal />
+      <NodeChartModal />
     </Container>
   );
 }
