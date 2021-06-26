@@ -1,19 +1,14 @@
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import Modal from 'react-bootstrap/Modal';
 import React, { useContext } from 'react';
-import Table from 'react-bootstrap/Table';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import moment from 'moment';
 import { GlobalContext } from '../../contexts/globalContext';
-import tryValue from '../../helperFunctions';
 import { Line } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
-// import Moment from 'react-moment';
-import moment from 'moment';
+
 defaults.animation = false;
 defaults.font.size = 16;
 defaults.font.color = 'white';
+
 export default function NodeManagerSystemInfoModal() {
   const [state, dispatch] = useContext(GlobalContext);
   let chartLables = [];
@@ -28,6 +23,7 @@ export default function NodeManagerSystemInfoModal() {
       payload: { nodeSettingsChartPerfMonModal: false },
     });
 
+  // eslint-disable-next-line
   state.currentNodePerfmon.map((currentNodeStat, i) => {
     let createdTime = moment(currentNodeStat.createdAt).format('HH:mm');
     currentLoad.push(currentNodeStat.currentLoad.currentLoad.toFixed(2));
@@ -36,6 +32,7 @@ export default function NodeManagerSystemInfoModal() {
     cputemp.push(currentNodeStat.cpuTemperature.main);
     chartLables.push(createdTime);
   });
+
   const options = {
     scales: {
       yAxes: [

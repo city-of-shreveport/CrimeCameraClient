@@ -3,8 +3,9 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Modal from 'react-bootstrap/Modal';
 import React, { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
-import { GlobalContext } from '../../contexts/globalContext';
 import tryValue from '../../helperFunctions';
+import { GlobalContext } from '../../contexts/globalContext';
+
 export default function NodeManagerSystemInfoModal() {
   const [state, dispatch] = useContext(GlobalContext);
 
@@ -82,8 +83,7 @@ export default function NodeManagerSystemInfoModal() {
                         </thead>
                         <tbody>
                           {tryValue(() => {
-                            return;
-                            state.currentNodeInfo.sysInfo.diskLayout.map((disk, index) => (
+                            return state.currentNodeInfo.sysInfo.diskLayout.map((disk, index) => (
                               <tr>
                                 <td>{index + 1}</td>
                                 <td>{disk.device}</td>
