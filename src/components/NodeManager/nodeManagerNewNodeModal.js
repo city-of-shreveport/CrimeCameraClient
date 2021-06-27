@@ -32,7 +32,7 @@ export default function NodeManagerNewNodeModal() {
 
   const handleNewNodeModalClose = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { newNodeModal: false },
     });
 

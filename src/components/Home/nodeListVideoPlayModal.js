@@ -15,31 +15,31 @@ export default function NodeListVideoPlayerModal() {
 
   const updateHomeTimeHour = (e) =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { homeVideoTimeHour: e },
     });
 
   const updateHomeTimeMin = (e) =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { homeVideoTimeMin: e },
     });
 
   const updateHomeTimePM = (e) =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { vmsTimeAMPM: e },
     });
 
   const updateHomeVideoDate = (e) =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { homeVideoDate: e },
     });
 
   const handleViewVideosModalClose = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { homeViewVideosModal: false },
     });
 

@@ -17,7 +17,7 @@ export default function VMS() {
 
   const setState = (newState) => {
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: newState,
     });
   };

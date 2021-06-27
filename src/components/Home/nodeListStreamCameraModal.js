@@ -11,7 +11,7 @@ export default function NodeListStreamCameraModal() {
   const handleStreamModalClose = () => {
     fetch('http://10.10.200.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {
       dispatch({
-        type: 'updateState',
+        type: 'setState',
         payload: { homeStreamingModal: false },
       });
     });

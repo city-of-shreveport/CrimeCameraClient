@@ -34,7 +34,7 @@ export default function NodeManagerEditNodeModal() {
 
   const handleEditNodeModalClose = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { editNodeModal: false },
     });
 

@@ -47,7 +47,7 @@ export default function SystemManager() {
 
   const handleAddServer = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { systemSettingsNewServerFormModal: true },
     });
 

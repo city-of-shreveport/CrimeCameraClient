@@ -19,7 +19,7 @@ export default function NodeManagerSystemInfoModal() {
 
   const handleNodeChartModalClose = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { nodeSettingsChartPerfMonModal: false },
     });
 

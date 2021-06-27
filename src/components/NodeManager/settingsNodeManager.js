@@ -21,14 +21,14 @@ export default function Settings() {
   const handleEditNodeModal = (node) => {
     upDateSelectedNode(node);
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { editNodeModal: true },
     });
   };
 
   const handleSystemInfoNodeModal = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { systemInfoModal: true },
     });
 
@@ -43,7 +43,7 @@ export default function Settings() {
         json.map((perfmon, i) => {
           if (rowLen === 0) {
             dispatch({
-              type: 'updateState',
+              type: 'setState',
               payload: { currentNodeSinglePerfmon: perfmon, currentNodePerfmonAdded: true },
             });
           }
@@ -54,7 +54,7 @@ export default function Settings() {
       .then((response) => response.json())
       .then((json) => {
         dispatch({
-          type: 'updateState',
+          type: 'setState',
           payload: { currentNodePerfmon: json },
         });
       });
@@ -65,7 +65,7 @@ export default function Settings() {
       .then((response) => response.json())
       .then((json) => {
         dispatch({
-          type: 'updateState',
+          type: 'setState',
           payload: {
             previousNode: tryValue(() => {
               return state.currentNodeInfo.name;
@@ -88,14 +88,14 @@ export default function Settings() {
       fetchCurrentNodePerfMon();
     }, 5000);
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { nodeSettingsChartPerfMonModal: true },
     });
   };
 
   const handleNewNodeModalOpen = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { newNodeModal: true },
     });
 
@@ -104,7 +104,7 @@ export default function Settings() {
     clearInterval(perfMonTimerJob);
 
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: {
         selectedNode: param,
         nodeSelected: true,

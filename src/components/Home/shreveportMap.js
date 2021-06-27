@@ -14,7 +14,7 @@ const GMap = () => {
   const startStream = (json) => {
     fetch('http://10.10.10.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { previousNode: state.currentNodeInfo.name, currentNodeInfo: json, videoPlayerActive: true },
     });
   };

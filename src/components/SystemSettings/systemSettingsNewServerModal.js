@@ -32,7 +32,7 @@ export default function SystemSettingsNewServerFormModal() {
 
   const handleAddServer = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { systemSettingsNewServerFormModal: false },
     });
 

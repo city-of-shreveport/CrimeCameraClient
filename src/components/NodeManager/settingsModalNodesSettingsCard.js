@@ -14,7 +14,7 @@ export default function SettingsNodesSettingsCard() {
 
   const handleSysConfigCameraModal = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { nodeSettingsCameraComponent: false },
     });
 

@@ -27,7 +27,7 @@ export default function NodeList() {
       .then((response) => response.json())
       .then((json) => {
         dispatch({
-          type: 'updateState',
+          type: 'setState',
           payload: { previousNode: state.currentNodeInfo.name, currentNodeInfo: json, videoPlayerActive: true },
         });
       });
@@ -39,7 +39,7 @@ export default function NodeList() {
     clearInterval(perfMonTimerJob);
 
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: {
         selectedNode: param,
         nodeSelected: true,

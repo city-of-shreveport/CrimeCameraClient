@@ -16,7 +16,7 @@ export default function App() {
     switch (screen) {
       case 'streams':
         dispatch({
-          type: 'updateState',
+          type: 'setState',
           payload: {
             showHome: true,
             showNodeManager: false,
@@ -28,7 +28,7 @@ export default function App() {
         break;
       case 'videos':
         dispatch({
-          type: 'updateState',
+          type: 'setState',
           payload: {
             showHome: false,
             showNodeManager: false,
@@ -40,7 +40,7 @@ export default function App() {
         break;
       case 'nodes':
         dispatch({
-          type: 'updateState',
+          type: 'setState',
           payload: {
             showHome: false,
             showNodeManager: true,
@@ -52,7 +52,7 @@ export default function App() {
         break;
       case 'system':
         dispatch({
-          type: 'updateState',
+          type: 'setState',
           payload: {
             showHome: false,
             showNodeManager: false,
@@ -93,7 +93,7 @@ export default function App() {
         })
         .then(() => {
           dispatch({
-            type: 'updateState',
+            type: 'setState',
             payload: { nodes: nodeArray },
           });
         });
@@ -106,7 +106,7 @@ export default function App() {
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'updateState',
+            type: 'setState',
             payload: { serverstatistics: json },
           });
         });
@@ -117,7 +117,7 @@ export default function App() {
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'updateState',
+            type: 'setState',
             payload: { restreamerserverstatistics: json },
           });
         });
@@ -133,13 +133,13 @@ export default function App() {
               });
 
               dispatch({
-                type: 'updateState',
+                type: 'setState',
                 payload: { restreamerStreamsStats: currentStreams },
               });
             });
           } catch (e) {
             dispatch({
-              type: 'updateState',
+              type: 'setState',
               payload: { restreamerStreamsStats: currentStreams },
             });
           }
@@ -149,7 +149,7 @@ export default function App() {
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'updateState',
+            type: 'setState',
             payload: { streams: json },
           });
         });
@@ -160,7 +160,7 @@ export default function App() {
         .then((response) => response.json())
         .then((json) => {
           dispatch({
-            type: 'updateState',
+            type: 'setState',
             payload: { servers: json },
           });
         });

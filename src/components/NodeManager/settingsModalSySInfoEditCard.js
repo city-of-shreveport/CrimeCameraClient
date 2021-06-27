@@ -9,7 +9,7 @@ export default function SettingsSysInfoEditCard() {
 
   const handleSysConfigModal = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { cameraSettingsComponent: false },
     });
 

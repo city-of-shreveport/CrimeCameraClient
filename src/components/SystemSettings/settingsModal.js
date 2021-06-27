@@ -16,7 +16,7 @@ export default function SettingsModal() {
 
   const handleClose = () =>
     dispatch({
-      type: 'updateState',
+      type: 'setState',
       payload: { settingsModal: false },
     });
 

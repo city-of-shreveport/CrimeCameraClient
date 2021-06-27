@@ -61,7 +61,7 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'updateState':
+    case 'setState':
       return {
         ...state,
         ...action.payload,
