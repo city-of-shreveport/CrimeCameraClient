@@ -12,7 +12,7 @@ import Row from 'react-bootstrap/Row';
 import { FaFastBackward, FaFastForward, FaPlay, FaPause } from 'react-icons/fa';
 import { GlobalContext } from '../../contexts/globalContext';
 
-export default function VMS() {
+export default function RecordingViewer() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const setState = (newState) => {
@@ -22,15 +22,37 @@ export default function VMS() {
     });
   };
 
-  const isPlaying = () => {
-    if (state.isPlayingVMS === true) {
+  const addNode = (node) => {
+    if (state.selectedNodes.length <= 2) {
+      state.selectedNodes.push(node);
+      setState({ selectedNodes: state.selectedNodes });
+    }
+  };
+
+  const removeNode = (node) => {
+    setState({
+      selectedNodes: state.selectedNodes.filter((n) => n !== node),
+    });
+  };
+
+  const submitForm = () => {
+    console.log('form submitted!');
+    console.log(`state.selectedDate: ${state.selectedDate}`);
+    console.log(`state.selectedTimeHour: ${state.selectedTimeHour}`);
+    console.log(`state.selectedTimeMinute: ${state.selectedTimeMinute}`);
+    console.log(`state.selectedTimeMeridiem: ${state.selectedTimeMeridiem}`);
+    console.log(`state.selectedNodes: ${state.selectedNodes}`);
+  };
+
+  const renderPlayPauseControl = () => {
+    if (state.playPauseControl === true) {
       return (
         <FaPause
           size="3em"
           className="amber-text pr-3"
           onClick={() => {
             [...document.getElementsByTagName('video')].map((video) => video.pause());
-            setState({ isPlayingVMS: false });
+            setState({ isPlayingRecordingViewer: false });
           }}
         />
       );
@@ -41,49 +63,17 @@ export default function VMS() {
           className="amber-text pr-3"
           onClick={() => {
             [...document.getElementsByTagName('video')].map((video) => video.play());
-            setState({ isPlayingVMS: true });
+            setState({ isPlayingRecordingViewer: true });
           }}
         />
       );
     }
   };
 
-  const removeSelectedNodes = (param) => {
-    const index = state.selectedNodesArray.indexOf(param);
-
-    if (index > -1) {
-      state.selectedNodesArray.splice(index, 1);
-      setState({ selectedNodes: state.selectedNodesArray });
-    }
-  };
-
-  const upDateSelectedNodes = (param) => {
-    if (state.selectedNodesArray.length <= 2) {
-      state.selectedNodesArray.push(param);
-      setState({ selectedNodes: state.selectedNodesArray });
-    }
-  };
-
-  const updateHomeVideoDate = (e) => {
-    setState({ selectedVMSDate: e });
-  };
-
-  const updateHomeTimeHour = (e) => {
-    setState({ selectedVMSTimeHour: e });
-  };
-
-  const updateHomeTimeMin = (e) => {
-    setState({ selectedVMSTimeMin: e });
-  };
-
-  const updateHomeTimeAMPM = (e) => {
-    setState({ selectedVMSAMPM: e });
-  };
-
   const renderCurrentNodeList = () => {
-    return state.selectedNodesArray.map((value, index) => {
+    return state.selectedNodes.map((value, index) => {
       return (
-        <ListGroup.Item onClick={() => removeSelectedNodes(state.selectedNodes[index])}>
+        <ListGroup.Item onClick={() => removeNode(state.selectedNodes[index])}>
           {state.selectedNodes[index]}
         </ListGroup.Item>
       );
@@ -112,7 +102,7 @@ export default function VMS() {
                       }
                     />
                   </Col>
-                  <Col xs={4}>{isPlaying()}</Col>
+                  <Col xs={4}>{renderPlayPauseControl()}</Col>
                   <Col xs={4}>
                     <FaFastForward
                       size="3em"
@@ -181,13 +171,13 @@ export default function VMS() {
             <Card>
               <Card className="text-center" text="dark">
                 <h4>DateTime</h4>
-                <Calendar onClickDay={(e) => updateHomeVideoDate(e)} />
+                <Calendar onClickDay={(value) => setState({ selectedDate: value })} />
 
                 <Form>
                   <Row>
                     <Col>
                       <Form.Label>Hour</Form.Label>
-                      <Form.Control as="select" onChange={(e) => updateHomeTimeHour(e.target.value)}>
+                      <Form.Control as="select" onChange={(e) => setState({ selectedTimeHour: e.target.value })}>
                         <option></option>
                         <option>1</option>
                         <option>2</option>
@@ -207,7 +197,7 @@ export default function VMS() {
                     <Col>
                       {' '}
                       <Form.Label>Minute</Form.Label>
-                      <Form.Control as="select" onChange={(e) => updateHomeTimeMin(e.target.value)}>
+                      <Form.Control as="select" onChange={(e) => setState({ selectedTimeMinute: e.target.value })}>
                         <option></option>
                         <option>00</option>
                         <option>15</option>
@@ -219,7 +209,7 @@ export default function VMS() {
                     <Col>
                       {' '}
                       <Form.Label>AM/PM</Form.Label>
-                      <Form.Control as="select" onChange={(e) => updateHomeTimeAMPM(e.target.value)}>
+                      <Form.Control as="select" onChange={(e) => setState({ selectedTimeMeridiem: e.target.value })}>
                         <option></option>
                         <option>AM</option>
                         <option>PM</option>
@@ -231,14 +221,14 @@ export default function VMS() {
               </Card>
             </Card>
 
-            <Card style={{ height: '62vh', overflow: 'scroll' }} className="text-center" text="dark">
+            <Card style={{ maxHeight: '500px', overflow: 'scroll' }} className="text-center" text="dark">
               <h4>Nodes</h4>
               {state.nodes.map((node) => (
-                <ListGroup.Item onClick={() => upDateSelectedNodes(node.name)}>{node.name}</ListGroup.Item>
+                <ListGroup.Item onClick={() => addNode(node.name)}>{node.name}</ListGroup.Item>
               ))}
             </Card>
 
-            <Card style={{ height: '62vh', overflow: 'scroll' }} className="text-center" text="dark">
+            <Card style={{ maxHeight: '500px', overflow: 'scroll' }} className="text-center" text="dark">
               <h4>Selected</h4>
               {renderCurrentNodeList()}
             </Card>
@@ -246,7 +236,7 @@ export default function VMS() {
         </Card>
 
         <Form inline className="text-center">
-          <Button type="submit">Submit</Button>
+          <Button onClick={submitForm}>Submit</Button>
         </Form>
         <Card.Footer className="text-muted"></Card.Footer>
       </Modal>

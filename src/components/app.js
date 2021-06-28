@@ -3,8 +3,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NodeManager from './NodeManager/settingsNodeManager';
 import React, { useContext, useEffect } from 'react';
+import RecordingViewer from './videos/RecordingViewer';
 import SystemManager from './SystemSettings/settingsSystemManager';
-import VMS from './VMS/vms';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
 import { IoCameraOutline } from 'react-icons/io5';
@@ -20,7 +20,7 @@ export default function App() {
           payload: {
             showHome: true,
             showNodeManager: false,
-            showVMS: false,
+            showRecordingViewer: false,
             showSystemManager: false,
             videoPlayerActive: false,
           },
@@ -32,7 +32,7 @@ export default function App() {
           payload: {
             showHome: false,
             showNodeManager: false,
-            showVMS: true,
+            showRecordingViewer: true,
             showSystemManager: false,
             videoPlayerActive: false,
           },
@@ -44,7 +44,7 @@ export default function App() {
           payload: {
             showHome: false,
             showNodeManager: true,
-            showVMS: false,
+            showRecordingViewer: false,
             showSystemManager: false,
             videoPlayerActive: false,
           },
@@ -56,7 +56,7 @@ export default function App() {
           payload: {
             showHome: false,
             showNodeManager: false,
-            showVMS: false,
+            showRecordingViewer: false,
             showSystemManager: true,
             videoPlayerActive: false,
           },
@@ -206,7 +206,7 @@ export default function App() {
         </Navbar.Collapse>
       </Navbar>
       {state.showHome && <Home />}
-      {state.showVMS && <VMS />}
+      {state.showRecordingViewer && <RecordingViewer />}
       {state.showNodeManager && <NodeManager />}
       {state.showSystemManager && <SystemManager />}
     </>
