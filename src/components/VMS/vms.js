@@ -91,7 +91,7 @@ export default function VMS() {
   };
 
   return (
-    <Container fluid className="homeContainer bg-dark">
+    <Container fluid className="bg-dark">
       <Row>
         <Card className="text-center" bg="dark" text="light">
           <Card.Body>
@@ -172,9 +172,9 @@ export default function VMS() {
         onHide={() => setState({ modalCameraOpen: false })}
         centered
         size="lg"
-        className="vms-node-modal"
+        style={{ minWidth: '100%', height: 'auto' }}
       >
-        <Card className="text-center custom-modal" bg="dark" text="light">
+        <Card style={{ minWidth: '95%', height: 'auto' }} className="text-center" bg="dark" text="light">
           <Card.Header as="h5">Select Nodes</Card.Header>
 
           <CardGroup>
@@ -231,14 +231,14 @@ export default function VMS() {
               </Card>
             </Card>
 
-            <Card className="text-center nodesListVMSModal" text="dark">
+            <Card style={{ height: '62vh', overflow: 'scroll' }} className="text-center" text="dark">
               <h4>Nodes</h4>
               {state.nodes.map((node) => (
                 <ListGroup.Item onClick={() => upDateSelectedNodes(node.name)}>{node.name}</ListGroup.Item>
               ))}
             </Card>
 
-            <Card className="text-center nodesListVMSModal" text="dark">
+            <Card style={{ height: '62vh', overflow: 'scroll' }} className="text-center" text="dark">
               <h4>Selected</h4>
               {renderCurrentNodeList()}
             </Card>

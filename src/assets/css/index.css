@@ -91,11 +91,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.vms-node-modal {
-  min-width: 100% !important;
-  height: auto;
-}
-
 .custom-modal-streaming {
   min-width: 95% !important;
   height: auto;
@@ -133,11 +128,6 @@ code {
 
 .SystemSettingsLinerChartGroup {
   height: 22vh;
-  overflow: scroll;
-}
-
-.nodesListVMSModal {
-  height: 62vh;
   overflow: scroll;
 }
 
