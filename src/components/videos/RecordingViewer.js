@@ -22,17 +22,18 @@ export default function RecordingViewer() {
     });
   };
 
-  const addNode = (node) => {
-    if (state.selectedNodes.length <= 2) {
-      state.selectedNodes.push(node);
-      setState({ selectedNodes: state.selectedNodes });
+  const toggleNode = (node) => {
+    if (state.selectedNodes.includes(node)) {
+      var newNodeList = state.selectedNodes.filter((n) => {
+        return n !== node;
+      });
+      setState({ selectedNodes: newNodeList });
+    } else {
+      if (state.selectedNodes.length <= 2) {
+        state.selectedNodes.push(node);
+        setState({ selectedNodes: state.selectedNodes });
+      }
     }
-  };
-
-  const removeNode = (node) => {
-    setState({
-      selectedNodes: state.selectedNodes.filter((n) => n !== node),
-    });
   };
 
   const submitForm = () => {
@@ -45,7 +46,7 @@ export default function RecordingViewer() {
   };
 
   const renderPlayPauseControl = () => {
-    if (state.playPauseControl === true) {
+    if (state.isPlayingRecordingViewer === true) {
       return (
         <FaPause
           size="3em"
@@ -70,13 +71,21 @@ export default function RecordingViewer() {
     }
   };
 
-  const renderCurrentNodeList = () => {
-    return state.selectedNodes.map((value, index) => {
-      return (
-        <ListGroup.Item onClick={() => removeNode(state.selectedNodes[index])}>
-          {state.selectedNodes[index]}
-        </ListGroup.Item>
-      );
+  const renderNodeList = () => {
+    return state.nodes.map((node) => {
+      if (state.selectedNodes.includes(node.name)) {
+        return (
+          <ListGroup.Item style={{ backgroundColor: 'lightblue' }} onClick={() => toggleNode(node.name)}>
+            {node.name}
+          </ListGroup.Item>
+        );
+      } else {
+        return (
+          <ListGroup.Item style={{ backgroundColor: 'white' }} onClick={() => toggleNode(node.name)}>
+            {node.name}
+          </ListGroup.Item>
+        );
+      }
     });
   };
 
@@ -162,14 +171,14 @@ export default function RecordingViewer() {
         onHide={() => setState({ modalCameraOpen: false })}
         centered
         size="lg"
-        style={{ minWidth: '100%', height: 'auto' }}
+        style={{ maxHeight: '90%', minWidth: '100%' }}
       >
-        <Card style={{ minWidth: '95%', height: 'auto' }} className="text-center" bg="dark" text="light">
+        <Card className="text-center" bg="dark" text="light">
           <Card.Header as="h5">Select Nodes</Card.Header>
 
           <CardGroup>
             <Card>
-              <Card className="text-center" text="dark">
+              <Card style={{ maxHeight: '50vh', overflow: 'scroll' }} className="text-center" text="dark">
                 <h4>DateTime</h4>
                 <Calendar onClickDay={(value) => setState({ selectedDate: value })} />
 
@@ -216,29 +225,18 @@ export default function RecordingViewer() {
                       </Form.Control>
                     </Col>
                   </Row>
-                  <br />
                 </Form>
               </Card>
             </Card>
 
-            <Card style={{ maxHeight: '500px', overflow: 'scroll' }} className="text-center" text="dark">
+            <Card style={{ maxHeight: '50vh', overflow: 'scroll' }} className="text-center" text="dark">
               <h4>Nodes</h4>
-              {state.nodes.map((node) => (
-                <ListGroup.Item onClick={() => addNode(node.name)}>{node.name}</ListGroup.Item>
-              ))}
-            </Card>
-
-            <Card style={{ maxHeight: '500px', overflow: 'scroll' }} className="text-center" text="dark">
-              <h4>Selected</h4>
-              {renderCurrentNodeList()}
+              {renderNodeList()}
             </Card>
           </CardGroup>
         </Card>
 
-        <Form inline className="text-center">
-          <Button onClick={submitForm}>Submit</Button>
-        </Form>
-        <Card.Footer className="text-muted"></Card.Footer>
+        <Button onClick={submitForm}>Submit</Button>
       </Modal>
     </Container>
   );
