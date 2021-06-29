@@ -7,10 +7,12 @@ import { GlobalContext } from '../../contexts/globalContext';
 
 export default function SettingsRestreaming() {
   const [state, dispatch] = useContext(GlobalContext);
+
   let Mongos = [];
   let Restreamers = [];
   let Clients = [];
   let Servers = [];
+
   {
     state.servers.map(
       (server) => (
@@ -21,6 +23,7 @@ export default function SettingsRestreaming() {
       )
     );
   }
+
   return (
     <>
       <Card.Title>MongoDBs</Card.Title>

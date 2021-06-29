@@ -59,40 +59,52 @@ export default function NodeListVideoPlayerModal() {
                   <Card.Body>
                     <div className="timesListGroup">
                       <ListGroup>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('1')}>
+                        <ListGroup.Item key={'updateHomeTimeHour("1")'} action onClick={() => updateHomeTimeHour('1')}>
                           1
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('2')}>
+                        <ListGroup.Item key={'updateHomeTimeHour("2")'} action onClick={() => updateHomeTimeHour('2')}>
                           2
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('3')}>
+                        <ListGroup.Item key={'updateHomeTimeHour("3")'} action onClick={() => updateHomeTimeHour('3')}>
                           3
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('4')}>
+                        <ListGroup.Item key={'updateHomeTimeHour("4")'} action onClick={() => updateHomeTimeHour('4')}>
                           4
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('5')}>
+                        <ListGroup.Item key={'updateHomeTimeHour("5")'} action onClick={() => updateHomeTimeHour('5')}>
                           5
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('6')}>
+                        <ListGroup.Item key={'updateHomeTimeHour("6")'} action onClick={() => updateHomeTimeHour('6')}>
                           6
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('7')}>
+                        <ListGroup.Item key={'updateHomeTimeHour("7")'} action onClick={() => updateHomeTimeHour('7')}>
                           7
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('8')}>
+                        <ListGroup.Item key={'updateHomeTimeHour("8")'} action onClick={() => updateHomeTimeHour('8')}>
                           8
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('9')}>
+                        <ListGroup.Item key={'updateHomeTimeHour("9")'} action onClick={() => updateHomeTimeHour('9')}>
                           9
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('10')}>
+                        <ListGroup.Item
+                          key={'updateHomeTimeHour("10")'}
+                          action
+                          onClick={() => updateHomeTimeHour('10')}
+                        >
                           10
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('11')}>
+                        <ListGroup.Item
+                          key={'updateHomeTimeHour("11")'}
+                          action
+                          onClick={() => updateHomeTimeHour('11')}
+                        >
                           11
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => updateHomeTimeHour('12')}>
+                        <ListGroup.Item
+                          key={'updateHomeTimeHour("12")'}
+                          action
+                          onClick={() => updateHomeTimeHour('12')}
+                        >
                           12
                         </ListGroup.Item>
                       </ListGroup>
@@ -104,10 +116,18 @@ export default function NodeListVideoPlayerModal() {
                   <Card.Body>
                     <div className="timesListGroup">
                       <ListGroup>
-                        <ListGroup.Item onClick={() => updateHomeTimeMin('00')}>00</ListGroup.Item>
-                        <ListGroup.Item onClick={() => updateHomeTimeMin('15')}>15</ListGroup.Item>
-                        <ListGroup.Item onClick={() => updateHomeTimeMin('30')}>30</ListGroup.Item>
-                        <ListGroup.Item onClick={() => updateHomeTimeMin('45')}>45</ListGroup.Item>
+                        <ListGroup.Item key={'updateHomeTimeMin("00")'} onClick={() => updateHomeTimeMin('00')}>
+                          00
+                        </ListGroup.Item>
+                        <ListGroup.Item key={'updateHomeTimeMin("15")'} onClick={() => updateHomeTimeMin('15')}>
+                          15
+                        </ListGroup.Item>
+                        <ListGroup.Item key={'updateHomeTimeMin("30")'} onClick={() => updateHomeTimeMin('30')}>
+                          30
+                        </ListGroup.Item>
+                        <ListGroup.Item key={'updateHomeTimeMin("45")'} onClick={() => updateHomeTimeMin('45')}>
+                          45
+                        </ListGroup.Item>
                       </ListGroup>
                     </div>
                   </Card.Body>
@@ -117,8 +137,12 @@ export default function NodeListVideoPlayerModal() {
                   <Card.Body>
                     <div className="timesListGroup">
                       <ListGroup>
-                        <ListGroup.Item onClick={() => updateHomeTimePM(false)}>AM</ListGroup.Item>
-                        <ListGroup.Item onClick={() => updateHomeTimePM(true)}>PM</ListGroup.Item>
+                        <ListGroup.Item key={'updateHomeTimePM"false")'} onClick={() => updateHomeTimePM(false)}>
+                          AM
+                        </ListGroup.Item>
+                        <ListGroup.Item key={'updateHomeTimePM"true")'} onClick={() => updateHomeTimePM(true)}>
+                          PM
+                        </ListGroup.Item>
                       </ListGroup>
                     </div>
                   </Card.Body>

@@ -11,20 +11,21 @@ export default function SettingsnodeList() {
       type: 'UPDATE_SELECTEDCAMERA',
       payload: param,
     });
+
   return (
     <>
       <br />
-
       <Card className="text-center">
         <Card.Header as="h3">
           Cameras
           <Card.Text as="h6">45 Online / 2 Problems</Card.Text>
         </Card.Header>
-
         <Card.Text>
           <ListGroup>
             {state.nodes.map((node) => (
-              <ListGroup.Item onClick={() => upDateSelectedCam(node.name)}>{node.name}</ListGroup.Item>
+              <ListGroup.Item key={node.name} onClick={() => upDateSelectedCam(node.name)}>
+                {node.name}
+              </ListGroup.Item>
             ))}
           </ListGroup>
         </Card.Text>

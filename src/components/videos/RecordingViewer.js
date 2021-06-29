@@ -37,12 +37,13 @@ export default function RecordingViewer() {
   };
 
   const submitForm = () => {
-    console.log('form submitted!');
-    console.log(`state.selectedDate: ${state.selectedDate}`);
-    console.log(`state.selectedTimeHour: ${state.selectedTimeHour}`);
-    console.log(`state.selectedTimeMinute: ${state.selectedTimeMinute}`);
-    console.log(`state.selectedTimeMeridiem: ${state.selectedTimeMeridiem}`);
-    console.log(`state.selectedNodes: ${state.selectedNodes}`);
+    console.log({
+      date: state.selectedDate,
+      hour: state.selectedTimeHour,
+      minute: state.selectedTimeMinute,
+      meridiem: state.selectedTimeMeridiem,
+      nodes: state.selectedNodes,
+    });
   };
 
   const renderPlayPauseControl = () => {
@@ -75,13 +76,17 @@ export default function RecordingViewer() {
     return state.nodes.map((node) => {
       if (state.selectedNodes.includes(node.name)) {
         return (
-          <ListGroup.Item style={{ backgroundColor: 'lightblue' }} onClick={() => toggleNode(node.name)}>
+          <ListGroup.Item
+            key={node.name}
+            style={{ backgroundColor: 'lightblue' }}
+            onClick={() => toggleNode(node.name)}
+          >
             {node.name}
           </ListGroup.Item>
         );
       } else {
         return (
-          <ListGroup.Item style={{ backgroundColor: 'white' }} onClick={() => toggleNode(node.name)}>
+          <ListGroup.Item key={node.name} style={{ backgroundColor: 'white' }} onClick={() => toggleNode(node.name)}>
             {node.name}
           </ListGroup.Item>
         );
@@ -132,14 +137,14 @@ export default function RecordingViewer() {
 
       {[1, 2, 3].map((value, index) => {
         return (
-          <Row>
+          <Row key={index}>
             <Card className="text-center" bg="dark" text="light">
               <Card.Body>
                 <Row className="justify-content-center align-items-center">
                   <Col xs={4}>
                     <video
                       style={{ maxWidth: '30vw', maxHeight: '45vh' }}
-                      controls="true"
+                      controls
                       src="http://media.w3.org/2010/05/video/movie_300.webm"
                     ></video>
                   </Col>
@@ -147,7 +152,7 @@ export default function RecordingViewer() {
                   <Col xs={4}>
                     <video
                       style={{ maxWidth: '30vw', maxHeight: '45vh' }}
-                      controls="true"
+                      controls
                       src="http://media.w3.org/2010/05/video/movie_300.webm"
                     ></video>
                   </Col>
@@ -155,7 +160,7 @@ export default function RecordingViewer() {
                   <Col xs={4}>
                     <video
                       style={{ maxWidth: '30vw', maxHeight: '45vh' }}
-                      controls="true"
+                      controls
                       src="http://media.w3.org/2010/05/video/movie_300.webm"
                     ></video>
                   </Col>
