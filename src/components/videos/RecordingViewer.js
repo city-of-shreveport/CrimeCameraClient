@@ -184,7 +184,11 @@ export default function RecordingViewer() {
           <Card.Header as="h5">Select Nodes</Card.Header>
 
           <CardGroup>
-            <Card style={{ maxHeight: '50vh', overflow: 'scroll' }} className="text-center" text="dark">
+            <Card
+              style={{ minHeight: '60vh', maxHeight: '50vh', overflow: 'scroll' }}
+              className="text-center"
+              text="dark"
+            >
               <h4>DateTime</h4>
               <DateTimePicker
                 style={{}}
