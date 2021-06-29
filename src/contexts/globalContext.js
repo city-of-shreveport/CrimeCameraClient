@@ -3,6 +3,7 @@ import React, { useReducer, createContext } from 'react';
 export const GlobalContext = createContext();
 
 const initialState = {
+  // General
   camButtonSelected: '',
   currentNodePerfmon: [],
   currentNodePerfmonAdded: false,
@@ -16,7 +17,6 @@ const initialState = {
   homeVideoTimeMin: '00',
   homeVideoTimePM: false,
   homeViewVideosModal: false,
-  isPlayingRecordingViewer: false,
   liveStreamingActive: true,
   nodeForm: {},
   nodeSelected: false,
@@ -29,12 +29,7 @@ const initialState = {
   previousNode: '',
   restreamerStreamsStats: [],
   restreamerserverstatistics: [],
-  selectedDate: '',
   selectedNode: 'NONE',
-  selectedNodes: [],
-  selectedTimeHour: '',
-  selectedTimeMeridiem: '',
-  selectedTimeMinute: '',
   servers: [],
   serverstatistics: [],
   settingsModal: false,
@@ -50,6 +45,12 @@ const initialState = {
   videoPlayer: {},
   videoPlayerActive: false,
   videoPlayersState: {},
+
+  // RecordingViewer
+  RecordingViewerIsPlaying: false,
+  RecordingViewerModalOpen: false,
+  RecordingViewerSelectedDateTime: '',
+  RecordingViewerSelectedNodes: [],
 };
 
 const reducer = (state, action) => {

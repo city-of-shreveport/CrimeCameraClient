@@ -1,10 +1,9 @@
 import Button from 'react-bootstrap/Button';
-import Calendar from 'react-calendar';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
+import DateTimePicker from 'react-datetime-picker';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Modal from 'react-bootstrap/Modal';
 import React, { useContext } from 'react';
@@ -23,38 +22,41 @@ export default function RecordingViewer() {
   };
 
   const toggleNode = (node) => {
-    if (state.selectedNodes.includes(node)) {
-      var newNodeList = state.selectedNodes.filter((n) => {
+    if (state.RecordingViewerSelectedNodes.includes(node)) {
+      var newNodeList = state.RecordingViewerSelectedNodes.filter((n) => {
         return n !== node;
       });
-      setState({ selectedNodes: newNodeList });
+      setState({ RecordingViewerSelectedNodes: newNodeList });
     } else {
-      if (state.selectedNodes.length <= 2) {
-        state.selectedNodes.push(node);
-        setState({ selectedNodes: state.selectedNodes });
+      if (state.RecordingViewerSelectedNodes.length <= 2) {
+        state.RecordingViewerSelectedNodes.push(node);
+        setState({ RecordingViewerSelectedNodes: state.RecordingViewerSelectedNodes });
       }
     }
   };
 
   const submitForm = () => {
-    console.log({
-      date: state.selectedDate,
-      hour: state.selectedTimeHour,
-      minute: state.selectedTimeMinute,
-      meridiem: state.selectedTimeMeridiem,
-      nodes: state.selectedNodes,
-    });
+    fetch(`http://10.10.10.10:3001/api/videos/recordings`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        dateTime: state.RecordingViewerSelectedDateTime,
+        nodes: state.RecordingViewerSelectedNodes,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   };
 
   const renderPlayPauseControl = () => {
-    if (state.isPlayingRecordingViewer === true) {
+    if (state.RecordingViewerIsPlaying === true) {
       return (
         <FaPause
           size="3em"
           className="amber-text pr-3"
           onClick={() => {
             [...document.getElementsByTagName('video')].map((video) => video.pause());
-            setState({ isPlayingRecordingViewer: false });
+            setState({ RecordingViewerIsPlaying: false });
           }}
         />
       );
@@ -65,7 +67,7 @@ export default function RecordingViewer() {
           className="amber-text pr-3"
           onClick={() => {
             [...document.getElementsByTagName('video')].map((video) => video.play());
-            setState({ isPlayingRecordingViewer: true });
+            setState({ RecordingViewerIsPlaying: true });
           }}
         />
       );
@@ -74,7 +76,7 @@ export default function RecordingViewer() {
 
   const renderNodeList = () => {
     return state.nodes.map((node) => {
-      if (state.selectedNodes.includes(node.name)) {
+      if (state.RecordingViewerSelectedNodes.includes(node.name)) {
         return (
           <ListGroup.Item
             key={node.name}
@@ -101,7 +103,7 @@ export default function RecordingViewer() {
           <Card.Body>
             <Row className="justify-content-center align-items-center">
               <Col xs={3}>
-                <Button onClick={() => setState({ modalCameraOpen: true })}>Select Nodes</Button>
+                <Button onClick={() => setState({ RecordingViewerModalOpen: true })}>Select Nodes</Button>
               </Col>
               <Col xs={6}>
                 <Row className="justify-content-center">
@@ -172,69 +174,23 @@ export default function RecordingViewer() {
       })}
 
       <Modal
-        show={state.modalCameraOpen}
-        onHide={() => setState({ modalCameraOpen: false })}
+        show={state.RecordingViewerModalOpen}
+        onHide={() => setState({ RecordingViewerModalOpen: false })}
+        size="md"
         centered
-        size="lg"
         style={{ maxHeight: '90%', minWidth: '100%' }}
       >
         <Card className="text-center" bg="dark" text="light">
           <Card.Header as="h5">Select Nodes</Card.Header>
 
           <CardGroup>
-            <Card>
-              <Card style={{ maxHeight: '50vh', overflow: 'scroll' }} className="text-center" text="dark">
-                <h4>DateTime</h4>
-                <Calendar onClickDay={(value) => setState({ selectedDate: value })} />
-
-                <Form>
-                  <Row>
-                    <Col>
-                      <Form.Label>Hour</Form.Label>
-                      <Form.Control as="select" onChange={(e) => setState({ selectedTimeHour: e.target.value })}>
-                        <option></option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                        <option>11</option>
-                        <option>12</option>
-                      </Form.Control>
-                    </Col>
-
-                    <Col>
-                      {' '}
-                      <Form.Label>Minute</Form.Label>
-                      <Form.Control as="select" onChange={(e) => setState({ selectedTimeMinute: e.target.value })}>
-                        <option></option>
-                        <option>00</option>
-                        <option>15</option>
-                        <option>30</option>
-                        <option>45</option>
-                      </Form.Control>
-                    </Col>
-
-                    <Col>
-                      {' '}
-                      <Form.Label>AM/PM</Form.Label>
-                      <Form.Control as="select" onChange={(e) => setState({ selectedTimeMeridiem: e.target.value })}>
-                        <option></option>
-                        <option>AM</option>
-                        <option>PM</option>
-                      </Form.Control>
-                    </Col>
-                  </Row>
-                </Form>
-              </Card>
-            </Card>
-
             <Card style={{ maxHeight: '50vh', overflow: 'scroll' }} className="text-center" text="dark">
+              <h4>DateTime</h4>
+              <DateTimePicker
+                style={{}}
+                onChange={(value) => setState({ RecordingViewerSelectedDateTime: value })}
+                value={state.RecordingViewerSelectedDateTime}
+              />
               <h4>Nodes</h4>
               {renderNodeList()}
             </Card>

@@ -20,6 +20,7 @@
     "react-calendar": "^3.4.0",
     "react-chartjs-2": "^3.0.3",
     "react-context-hook": "^3.0.0",
+    "react-datetime-picker": "^3.3.0",
     "react-dom": "^17.0.0",
     "react-hls-player": "^3.0.1",
     "react-icons": "^4.2.0",
