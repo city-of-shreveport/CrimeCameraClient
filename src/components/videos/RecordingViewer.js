@@ -150,7 +150,7 @@ export default function RecordingViewer() {
                     return (
                       <Col xs={4}>
                         <video
-                          style={{ maxWidth: '30vw', maxHeight: '45vh' }}
+                          style={{ maxWidth: '30vw', maxHeight: '25vh' }}
                           controls
                           src={`http://10.10.10.10:3001/nodes/${key}/${recording.fileLocation}`}
                         ></video>
