@@ -47,6 +47,7 @@ const initialState = {
   videoPlayersState: {},
 
   // RecordingViewer
+  RecordingViewerFileURLLists: {},
   RecordingViewerIsPlaying: false,
   RecordingViewerModalOpen: false,
   RecordingViewerSelectedDateTime: '',

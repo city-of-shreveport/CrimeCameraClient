@@ -26,6 +26,7 @@ export default function RecordingViewer() {
       var newNodeList = state.RecordingViewerSelectedNodes.filter((n) => {
         return n !== node;
       });
+
       setState({ RecordingViewerSelectedNodes: newNodeList });
     } else {
       if (state.RecordingViewerSelectedNodes.length <= 2) {
@@ -45,7 +46,9 @@ export default function RecordingViewer() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        setState({ RecordingViewerFileURLLists: data, RecordingViewerModalOpen: false });
+      });
   };
 
   const renderPlayPauseControl = () => {
@@ -137,35 +140,23 @@ export default function RecordingViewer() {
         </Card>
       </Row>
 
-      {[1, 2, 3].map((value, index) => {
+      {Object.keys(state.RecordingViewerFileURLLists).map((key) => {
         return (
-          <Row key={index}>
+          <Row key={key}>
             <Card className="text-center" bg="dark" text="light">
               <Card.Body>
                 <Row className="justify-content-center align-items-center">
-                  <Col xs={4}>
-                    <video
-                      style={{ maxWidth: '30vw', maxHeight: '45vh' }}
-                      controls
-                      src="http://media.w3.org/2010/05/video/movie_300.webm"
-                    ></video>
-                  </Col>
-
-                  <Col xs={4}>
-                    <video
-                      style={{ maxWidth: '30vw', maxHeight: '45vh' }}
-                      controls
-                      src="http://media.w3.org/2010/05/video/movie_300.webm"
-                    ></video>
-                  </Col>
-
-                  <Col xs={4}>
-                    <video
-                      style={{ maxWidth: '30vw', maxHeight: '45vh' }}
-                      controls
-                      src="http://media.w3.org/2010/05/video/movie_300.webm"
-                    ></video>
-                  </Col>
+                  {state.RecordingViewerFileURLLists[key].map((recording) => {
+                    return (
+                      <Col xs={4}>
+                        <video
+                          style={{ maxWidth: '30vw', maxHeight: '45vh' }}
+                          controls
+                          src={`http://10.10.10.10:3001/nodes/${key}/${recording.fileLocation}`}
+                        ></video>
+                      </Col>
+                    );
+                  })}
                 </Row>
               </Card.Body>
             </Card>
