@@ -48,6 +48,7 @@ export default function RecordingViewer() {
       .then((response) => response.json())
       .then((data) => {
         setState({ RecordingViewerFileURLLists: data, RecordingViewerModalOpen: false });
+        console.log(state.RecordingViewerFileURLLists);
       });
   };
 
