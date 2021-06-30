@@ -35,7 +35,7 @@ export default function Settings() {
   let perfMonTimerJob = null;
 
   const getSinglePerfmonData = (node) =>
-    fetch('http://10.10.10.10:3001/api/perfmons/' + node)
+    fetch('http://10.10.30.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
         const rowLen = json.length;
@@ -50,7 +50,7 @@ export default function Settings() {
         });
       });
   function fetchCurrentNodePerfMon() {
-    fetch('http://10.10.10.10:3001/api/perfmons/' + state.currentNodeInfo.name)
+    fetch('http://10.10.30.10:3001/api/perfmons/' + state.currentNodeInfo.name)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -61,7 +61,7 @@ export default function Settings() {
   }
 
   const getNodeInfo = (node) => {
-    fetch('http://10.10.10.10:3001/api/nodes/' + node)
+    fetch('http://10.10.30.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({

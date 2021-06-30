@@ -38,7 +38,7 @@ export default function SystemManager() {
     let nodeNameRaw = node.split('-');
     let nodeName = nodeNameRaw[0];
 
-    fetch('http://10.10.10.10:3001/api/streams/stop/' + nodeName)
+    fetch('http://10.10.30.10:3001/api/streams/stop/' + nodeName)
       .then((response) => response.json())
       .then((json) => {
         console.log('stopped');

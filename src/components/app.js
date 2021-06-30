@@ -76,7 +76,7 @@ export default function App() {
     var nodeArray = [];
 
     for (let i = 0; i < nodedata.length; i++) {
-      fetch('http://10.10.10.10:3001/api/perfmons/' + nodedata[i].name)
+      fetch('http://10.10.30.10:3001/api/perfmons/' + nodedata[i].name)
         .then((response) => response.json())
         .then((json) => {
           let nodeDataPerfMon = nodedata[i];
@@ -102,7 +102,7 @@ export default function App() {
 
   useEffect(() => {
     function refreshStreamerStats() {
-      fetch('http://10.10.10.10:3001/api/perfMons/CrimeCameraSystem')
+      fetch('http://10.10.30.10:3001/api/perfMons/CrimeCameraSystem')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -113,7 +113,7 @@ export default function App() {
 
       let currentStreams = [];
 
-      fetch('http://10.10.10.10:3001/api/streams/streamingserverstats')
+      fetch('http://10.10.30.10:3001/api/streams/streamingserverstats')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -122,7 +122,7 @@ export default function App() {
           });
         });
 
-      fetch('http://10.10.10.10:3001/api/streams/streamstatistics/10.10.10.10')
+      fetch('http://10.10.30.10:3001/api/streams/streamstatistics/10.10.30.10')
         .then((response) => response.json())
         .then((json) => {
           try {
@@ -145,7 +145,7 @@ export default function App() {
           }
         });
 
-      fetch('http://10.10.10.10:8000/api/streams')
+      fetch('http://10.10.30.10:8000/api/streams')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -156,7 +156,7 @@ export default function App() {
     }
 
     function refreshData() {
-      fetch('http://10.10.10.10:3001/api/servers')
+      fetch('http://10.10.30.10:3001/api/servers')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -165,7 +165,7 @@ export default function App() {
           });
         });
 
-      fetch('http://10.10.10.10:3001/api/nodes')
+      fetch('http://10.10.30.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           fetchCurrentPerfMonData(json);

@@ -12,7 +12,7 @@ const GMap = () => {
   }
 
   const startStream = (json) => {
-    fetch('http://10.10.10.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
+    fetch('http://10.10.30.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
     dispatch({
       type: 'setState',
       payload: { previousNode: state.currentNodeInfo.name, currentNodeInfo: json, videoPlayerActive: true },
@@ -20,11 +20,11 @@ const GMap = () => {
   };
 
   const stopStream = () => {
-    fetch('http://10.10.10.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
+    fetch('http://10.10.30.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
   };
 
   function fetchCurrentPerfMonData(nodedata) {
-    fetch('http://10.10.10.10:3001/api/perfmons/' + nodedata.name)
+    fetch('http://10.10.30.10:3001/api/perfmons/' + nodedata.name)
       .then((response) => response.json())
       .then((json) => {
         nodedata.perfmon = json[0];
@@ -37,7 +37,7 @@ const GMap = () => {
   const getNodeInfo = (node) => {
     stopStream();
 
-    fetch('http://10.10.10.10:3001/api/nodes/' + node)
+    fetch('http://10.10.30.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         fetchCurrentPerfMonData(json);
@@ -76,7 +76,7 @@ const GMap = () => {
     var cameraSnapShot = null;
     var nodeStatus = false;
     function getCams() {
-      fetch('http://10.10.10.10:3001/api/nodes')
+      fetch('http://10.10.30.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           // eslint-disable-next-line
@@ -104,13 +104,13 @@ const GMap = () => {
 
             marker.addListener('mouseover', function () {
               infowindow.setContent(
-                "<img id='imgCamera1' width='200' height='150' src='http://10.10.10.10:3001/api/cameraConfig/snapshot/" +
+                "<img id='imgCamera1' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/" +
                   marker.nodeName +
                   "/camera1' alt='Logo' />" +
-                  "<img id='imgCamera2' width='200' height='150' src='http://10.10.10.10:3001/api/cameraConfig/snapshot/" +
+                  "<img id='imgCamera2' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/" +
                   marker.nodeName +
                   "/camera2' alt='Logo' />" +
-                  "<img id='imgCamera3' width='200' height='150' src='http://10.10.10.10:3001/api/cameraConfig/snapshot/" +
+                  "<img id='imgCamera3' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/" +
                   marker.nodeName +
                   "/camera3' alt='Logo' />"
               );

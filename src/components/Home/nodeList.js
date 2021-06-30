@@ -9,11 +9,11 @@ export default function NodeList() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const startStream = (json) => {
-    fetch('http://10.10.10.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
+    fetch('http://10.10.30.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
   };
 
   const stopStream = () => {
-    fetch('http://10.10.10.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
+    fetch('http://10.10.30.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
   };
 
   const handleViewVideosComponent = () => {
@@ -23,7 +23,7 @@ export default function NodeList() {
   let perfMonTimerJob = null;
 
   const getNodeInfo = (node) => {
-    fetch('http://10.10.10.10:3001/api/nodes/' + node)
+    fetch('http://10.10.30.10:3001/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
