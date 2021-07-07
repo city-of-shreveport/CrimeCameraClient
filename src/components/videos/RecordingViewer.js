@@ -48,7 +48,6 @@ export default function RecordingViewer() {
       .then((response) => response.json())
       .then((data) => {
         setState({ RecordingViewerFileURLLists: data, RecordingViewerModalOpen: false });
-        console.log(state.RecordingViewerFileURLLists);
       });
   };
 
@@ -153,7 +152,7 @@ export default function RecordingViewer() {
                         <video
                           style={{ maxWidth: '30vw', maxHeight: '25vh' }}
                           controls
-                          src={`http://10.10.30.10:3001/nodes/${key}/${recording.fileLocation}`}
+                          src={`http://10.10.30.10:3001/api/videos/stream/${key}/${recording.fileLocation}`}
                         ></video>
                       </Col>
                     );
