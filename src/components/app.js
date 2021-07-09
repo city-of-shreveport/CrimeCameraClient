@@ -181,7 +181,7 @@ export default function App() {
 
     setInterval(() => {
       refreshStreamerStats();
-    }, 1000);
+    }, 10000);
     // eslint-disable-next-line
   }, []);
 

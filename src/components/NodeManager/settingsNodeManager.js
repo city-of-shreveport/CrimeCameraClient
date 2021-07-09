@@ -15,9 +15,9 @@ import tryValue from '../../helperFunctions';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
 import NodeChartModal from './nodeManagerNodePerfMonCharts.js';
+import NodeCameraSettingModal from './settingsNodeCameraSettingsModal'
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
-
   const handleEditNodeModal = (node) => {
     upDateSelectedNode(node);
     dispatch({
@@ -25,6 +25,40 @@ export default function Settings() {
       payload: { editNodeModal: true },
     });
   };
+
+const getCameraConfigs = (param) => {
+let cameras = ['camera1','camera2','camera3']
+let cameraConfigs = []
+  cameras.map((camera, i) =>{
+    fetch('http://10.10.30.10:3001/api/cameraConfig/videoColorConfig/' + param +'/' + camera)
+        .then((response) => console.log(response))
+        
+
+  })
+}
+
+
+const handleOpenNodeCameraConfigModal = (param) =>{
+    getNodeInfo(param);
+    clearInterval(perfMonTimerJob);
+
+    dispatch({
+      type: 'setState',
+      payload: {
+        selectedNode: param,
+        nodeSelected: true,
+        nodeCameraSettingsoModal: true,
+      },
+    });
+
+
+
+}
+    
+
+
+
+
 
   const handleSystemInfoNodeModal = () =>
     dispatch({
@@ -38,10 +72,12 @@ export default function Settings() {
     fetch('http://10.10.30.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
+
         const rowLen = json.length;
         // eslint-disable-next-line
         json.map((perfmon, i) => {
           if (rowLen === 0) {
+            console.log(perfmon)
             dispatch({
               type: 'setState',
               payload: { currentNodeSinglePerfmon: perfmon, currentNodePerfmonAdded: true },
@@ -57,6 +93,7 @@ export default function Settings() {
           type: 'setState',
           payload: { currentNodePerfmon: json },
         });
+
       });
   }
 
@@ -76,9 +113,10 @@ export default function Settings() {
       });
 
     getSinglePerfmonData(node);
-
+getCameraConfigs(node)
     perfMonTimerJob = setInterval(() => {
       getSinglePerfmonData(node);
+
     }, 60000);
   };
 
@@ -251,13 +289,13 @@ export default function Settings() {
                         <td>
                           <td>
                             {tryValue(() => {
-                              return (node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100 >
+                              return ((node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100).toFixed(0) >
                                 70 ? (
                                 <h5 style={{ color: 'red' }}>
                                   {' '}
                                   Root:
                                   {tryValue(() => {
-                                    return (node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100;
+                                    return ((node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100).toFixed(0);
                                   })}
                                   %{' '}
                                 </h5>
@@ -266,7 +304,7 @@ export default function Settings() {
                                   {' '}
                                   Root:
                                   {tryValue(() => {
-                                    return (node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100;
+                                    return ((node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100).toFixed(0);
                                   })}
                                   %{' '}
                                 </h5>
@@ -275,13 +313,13 @@ export default function Settings() {
                           </td>{' '}
                           <td>
                             {tryValue(() => {
-                              return (node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100 >
+                              return ((node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100).toFixed(0) >
                                 70 ? (
                                 <h5 style={{ color: 'red' }}>
                                   {'    --    '}
                                   Video:
                                   {tryValue(() => {
-                                    return (node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100;
+                                    return ((node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100).toFixed(0);
                                   })}
                                   %{' '}
                                 </h5>
@@ -290,7 +328,7 @@ export default function Settings() {
                                   {'    --    '}
                                   Video:
                                   {tryValue(() => {
-                                    return (node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100;
+                                    return ((node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100).toFixed(0);
                                   })}
                                   %
                                 </h5>
@@ -300,13 +338,13 @@ export default function Settings() {
                           {'     '}
                           <td>
                             {tryValue(() => {
-                              return (node.perfmon.fsSize[2].used / node.perfmon.fsSize[3].size).toFixed(2) * 100 >
+                              return ((node.perfmon.fsSize[2].used / node.perfmon.fsSize[2].size).toFixed(2) * 100).toFixed(0) >
                                 70 ? (
                                 <h5 style={{ color: 'red' }}>
                                   {'    --    '}
                                   Buddy:
                                   {tryValue(() => {
-                                    return (node.perfmon.fsSize[2].used / node.perfmon.fsSize[3].size).toFixed(2) * 100;
+                                    return ((node.perfmon.fsSize[2].used / node.perfmon.fsSize[2].size).toFixed(2) * 100).toFixed(0);
                                   })}
                                   %{' '}
                                 </h5>
@@ -315,7 +353,7 @@ export default function Settings() {
                                   {'    --    '}
                                   Buddy:
                                   {tryValue(() => {
-                                    return (node.perfmon.fsSize[2].used / node.perfmon.fsSize[3].size).toFixed(2) * 100;
+                                    return ((node.perfmon.fsSize[2].used / node.perfmon.fsSize[2].size).toFixed(2) * 100).toFixed(0);
                                   })}
                                   %
                                 </h5>
@@ -327,11 +365,14 @@ export default function Settings() {
                           <Button variant="outline-primary" size="sm" onClick={() => handleEditNodeModal(node.name)}>
                             Configure
                           </Button>{' '}
-                          <Button variant="outline-primary" size="sm" onClick={() => handleSystemInfoNodeModal()}>
+                          <Button variant="outline-primary" size="sm" onClick={() => handleSystemInfoNodeModal(node.name)}>
                             Information
                           </Button>{' '}
-                          <Button variant="outline-primary" size="sm" onClick={() => handleNodeChartModal()}>
+                          <Button variant="outline-primary" size="sm" onClick={() => handleNodeChartModal(node.name)}>
                             Charts
+                          </Button>{' '}
+                          <Button variant="outline-primary" size="sm" onClick={() => handleOpenNodeCameraConfigModal(node.name)}>
+                            Config Camera
                           </Button>{' '}
                         </td>
                         <td>
@@ -373,6 +414,7 @@ export default function Settings() {
       <NodeManagerNewNodeModal />
       <NodeManagerEditNodeModal />
       <NodeChartModal />
+      <NodeCameraSettingModal/>
     </Container>
   );
 }
