@@ -25,14 +25,126 @@ export default function Settings() {
       payload: { editNodeModal: true },
     });
   };
+  const getCameraNetworkSettings = (param) => {
 
+let cameras = ['camera1','camera2','camera3']
+  console.log("Network")
+  cameras.map((camera, i) =>  
+  fetch('http://10.10.30.10:3001/api/cameraConfig/networkSettings/' + param +'/' + camera)
+        .then((response) =>  response.json())
+        .then((json) => {
+          
+          console.log(json)
+          if(camera==='camera3'){dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera3NetworkSettings: json },
+          });}
+          else if(camera==='camera2'){dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera2NetworkSettings: json },
+          });}
+            else{dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera1NetworkSettings: json },
+          });}
+          
+
+
+        })
+
+)
+
+
+  }
+  const getCameraSettings = (param) => {
+  let cameras = ['camera1','camera2','camera3']
+  console.log("Settings")
+  cameras.map((camera, i) =>  
+  fetch('http://10.10.30.10:3001/api/cameraConfig/settings/' + param +'/' + camera)
+        .then((response) =>  response.json())
+        .then((json) => {
+          
+          console.log(json)
+          if(camera==='camera3'){dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera3Settings: json },
+          });}
+          else if(camera==='camera2'){dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera2Settings: json },
+          });}
+            else{dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera1Settings: json },
+          });}
+          
+
+
+        })
+
+)
+
+
+
+
+}
+const getCameraTimes = (param) => {
+  let cameras = ['camera1','camera2','camera3']
+  console.log("TIME")
+  cameras.map((camera, i) =>  
+  fetch('http://10.10.30.10:3001/api/cameraConfig/time/' + param +'/' + camera)
+        .then((response) =>  response.json())
+        .then((json) => {
+          
+          console.log(json)
+          if(camera==='camera3'){dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera3Time: json },
+          });}
+          else if(camera==='camera2'){dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera2Time: json },
+          });}
+            else{dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera1Time: json },
+          });}
+          
+
+
+        })
+
+)
+
+
+
+
+}
 const getCameraConfigs = (param) => {
 let cameras = ['camera1','camera2','camera3']
 let cameraConfigs = []
   cameras.map((camera, i) =>{
     fetch('http://10.10.30.10:3001/api/cameraConfig/videoColorConfig/' + param +'/' + camera)
-        .then((response) => console.log(response))
-        
+        .then((response) =>  response.json())
+        .then((json) => {
+          console.log(json)
+          if(camera==='camera3'){dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera3Config: json },
+          });}
+          else if(camera==='camera2'){dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera2Config: json },
+          });}
+            else{dispatch({
+            type: 'setState',
+            payload: { currentNodeCamera1Config: json },
+          });}
+          
+
+
+        })
+       
 
   })
 }
@@ -67,7 +179,7 @@ const handleOpenNodeCameraConfigModal = (param) =>{
     });
 
   let perfMonTimerJob = null;
-
+let perfMonChartTimerJob = null;
   const getSinglePerfmonData = (node) =>
     fetch('http://10.10.30.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
@@ -85,8 +197,12 @@ const handleOpenNodeCameraConfigModal = (param) =>{
           }
         });
       });
-  function fetchCurrentNodePerfMon() {
-    fetch('http://10.10.30.10:3001/api/perfmons/' + state.currentNodeInfo.name)
+  function fetchCurrentNodePerfMon(node) {
+
+    fetch('http://10.10.30.10:3001/api/perfmons/' + tryValue(() => {
+                            return node})
+
+                            )
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -114,17 +230,23 @@ const handleOpenNodeCameraConfigModal = (param) =>{
 
     getSinglePerfmonData(node);
 getCameraConfigs(node)
+getCameraNetworkSettings(node)
+getCameraTimes(node)
+getCameraSettings(node)
     perfMonTimerJob = setInterval(() => {
       getSinglePerfmonData(node);
 
     }, 60000);
+   
   };
 
-  const handleNodeChartModal = () => {
-    fetchCurrentNodePerfMon();
-    setInterval(() => {
-      fetchCurrentNodePerfMon();
-    }, 5000);
+  const handleNodeChartModal = (param) => {
+    clearInterval(perfMonChartTimerJob);
+    getNodeInfo(param);
+    fetchCurrentNodePerfMon(param);
+    perfMonChartTimerJob = setInterval(() => {
+      fetchCurrentNodePerfMon(state.currentNodeInfo.name);
+    }, 20000);
     dispatch({
       type: 'setState',
       payload: { nodeSettingsChartPerfMonModal: true },
@@ -166,7 +288,7 @@ getCameraConfigs(node)
             <Table striped bordered hover variant="dark" responsive>
               <tbody>
                 <tr>
-                  <td>Nodes: 45/50</td>
+                  <td>Nodes: {state.numberOfNodesUp}/{state.numberOfNodes}</td>
                   <td>Live Feeds: 6</td>
                   <td>More Info: 6</td>
                 </tr>

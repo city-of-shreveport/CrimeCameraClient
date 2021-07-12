@@ -74,7 +74,8 @@ export default function App() {
 
   function fetchCurrentPerfMonData(nodedata) {
     var nodeArray = [];
-
+    var numberOfNodesUp = 0;
+    var totalNumberOfNodes = nodedata.length;
     for (let i = 0; i < nodedata.length; i++) {
       fetch('http://10.10.30.10:3001/api/perfmons/' + nodedata[i].name)
         .then((response) => response.json())
@@ -87,6 +88,7 @@ export default function App() {
             nodeDataPerfMon.nodeStatus = false;
           } else {
             nodeDataPerfMon.nodeStatus = true;
+            numberOfNodesUp++
           }
 
           nodeArray.push(nodeDataPerfMon);
@@ -94,7 +96,7 @@ export default function App() {
         .then(() => {
           dispatch({
             type: 'setState',
-            payload: { nodes: nodeArray },
+            payload: { nodes: nodeArray, numberOfNodes: totalNumberOfNodes, numberOfNodesUp: numberOfNodesUp},
           });
         });
     }
