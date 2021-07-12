@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-
+import Navbar from 'react-bootstrap/Navbar'
 
 
 
@@ -50,7 +50,22 @@ const handleCloseNodeCameraConfigModal = () =>{
       centered
       size="lg"
     >
+      <Navbar bg="dark" variant="dark">
+    <Navbar.Brand href="#home">
+      <img
+        alt=""
+        src="/logo.svg"
+        width="30"
+        height="30"
+        className="d-inline-block align-top"
+      />{' '}
+      {tryValue(() => {
+          return state.currentNodeInfo.name
+        })}
+    </Navbar.Brand>
+  </Navbar>
     <CardDeck>
+  
    <Card className="text-center">
         <Card.Img variant="top" src={camera1IMG} />
         <Card.Body>

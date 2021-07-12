@@ -45,7 +45,7 @@ export default function Home() {
 
                 {state.videoPlayerActive ? (
                   <ReactPlayer
-                    url={'http://10.10.30.10:8000/streams/' + state.currentNodeInfo.name + '-camera1.flv'}
+                    url={'http://10.10.30.10:8001/' + state.currentNodeInfo.name + '/camera1.flv'}
                     playing={true}
                     controls={false}
                     width="100%"
@@ -71,7 +71,7 @@ export default function Home() {
                 {'  '}
                 {state.videoPlayerActive ? (
                   <ReactPlayer
-                    url={'http://10.10.30.10:8000/streams/' + state.currentNodeInfo.name + '-camera2.flv'}
+                    url={'http://10.10.30.10:8001/' + state.currentNodeInfo.name + '/camera2.flv'}
                     playing={true}
                     controls={false}
                     width="100%"
@@ -103,7 +103,7 @@ export default function Home() {
                 })}
                 {state.videoPlayerActive ? (
                   <ReactPlayer
-                    url={'http://10.10.30.10:8000/streams/' + state.currentNodeInfo.name + '-camera3.flv'}
+                    url={'http://10.10.30.10:8001/' + state.currentNodeInfo.name + '/camera3.flv'}
                     playing={true}
                     controls={false}
                     width="100%"

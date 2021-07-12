@@ -102,16 +102,16 @@ export default function NodeManagerSystemInfoModal() {
       size="lg"
     >
       <div className="NodePerfMonLineChartDiv">
-        <Line data={dataLoad} options={options} />;
+        <Line data={dataLoad} options={options} />
       </div>
       <div className="NodePerfMonLineChartDiv">
-        <Line data={data} options={options} />;
+        <Line data={data} options={options} />
       </div>
       <div className="NodePerfMonLineChartDiv">
-        <Line data={dataCPUTemp} options={options} />;
+        <Line data={dataCPUTemp} options={options} />
       </div>
       <div className="NodePerfMonLineChartDiv">
-        <Line data={dataFsSize} options={options} />;
+        <Line data={dataFsSize} options={options} />
       </div>
     </Modal>
   );
