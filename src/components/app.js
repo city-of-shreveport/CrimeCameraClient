@@ -8,7 +8,6 @@ import SystemManager from './SystemSettings/settingsSystemManager';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
 import { IoCameraOutline } from 'react-icons/io5';
-
 export default function App() {
   const [state, dispatch] = useContext(GlobalContext);
 
