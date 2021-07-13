@@ -22,6 +22,7 @@ const initialState = {
   currentNodePerfmonAdded: false,
   currentNodeSinglePerfmon: {},
   editNodeModal: false,
+  homeMapModalVideoStreamer: false,
   homeSelectedNode: 'NONE',
   homeSettingsModal: false,
   homeStreamingModal: false,

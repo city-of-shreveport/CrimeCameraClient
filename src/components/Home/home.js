@@ -3,6 +3,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Map from '../Home/map';
+import GoogleMap from '../Home/googleMap'
 import Nav from 'react-bootstrap/Nav';
 import React, { useContext } from 'react';
 import ReactPlayer from 'react-player';
@@ -21,7 +22,7 @@ export default function Home() {
             <CardGroup>
               <Card className="text-center gmapsCard" bg="dark" text="light">
                 <Card.Body>
-                  <Map isMarkerShown />
+                  <GoogleMap />
                 </Card.Body>
               </Card>
             </CardGroup>
