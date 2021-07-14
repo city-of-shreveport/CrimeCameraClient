@@ -15,16 +15,23 @@ const GMap = () => {
     fetch('http://10.10.30.10:3001/api/streams/start/' + json.name + '/' + json.config.ip).then((response) => {});
     dispatch({
       type: 'setState',
-      payload: { previousNode: tryValue(() => {
-                  return state.currentNodeInfo.name
-                }), currentNodeInfo: json, videoPlayerActive: true },
+      payload: {
+        previousNode: tryValue(() => {
+          return state.currentNodeInfo.name;
+        }),
+        currentNodeInfo: json,
+        videoPlayerActive: true,
+      },
     });
   };
 
   const stopStream = () => {
-    fetch('http://10.10.30.10:3001/api/streams/stop/' + tryValue(() => {
-                  return state.currentNodeInfo.name
-                })).then((response) => {});
+    fetch(
+      'http://10.10.30.10:3001/api/streams/stop/' +
+        tryValue(() => {
+          return state.currentNodeInfo.name;
+        })
+    ).then((response) => {});
   };
 
   function fetchCurrentPerfMonData(nodedata) {

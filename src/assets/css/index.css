@@ -99,8 +99,7 @@ code {
 .modal-content {
   min-width: 100% !important;
 }
-.customModalCameraConfigNode{
-
+.customModalCameraConfigNode {
   min-width: 80% !important;
   height: auto;
 }
@@ -138,5 +137,15 @@ code {
 .NodePerfMonLineChartDiv {
   max-height: 200px;
 }
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap:  5px;
+}
+.grid-item{
 
-
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  font-size: 30px;
+  text-align: center;
+  color:  black;
+}
