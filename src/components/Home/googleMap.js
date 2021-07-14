@@ -1,24 +1,19 @@
 
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import React, { useEffect, useRef, useContext } from 'react';
+import React, {  useRef, useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
 import tryValue from '../../helperFunctions';
 import GoogleMapReact from 'google-map-react';
 import ReactPlayer from 'react-player';
-import PropTypes from 'prop-types';
 import isEmpty from 'lodash.isempty';
 let nodes = []
 var nodeStatus = false
 
 
-const infoWindoContent = "<div className='chartBox'>"+
-  "<img id='imgCamera1' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/CrimeCamera001/camera1' alt='Logo' />"+
-  "<img id='imgCamera2' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/CrimeCamera001/camera2' alt='Logo' />"+
-  "<img id='imgCamera3' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/CrimeCamera001/camera3' alt='Logo' />"+
-  
-"</div>"
+export default function GoogleMap(){
+    const [state, dispatch] = useContext(GlobalContext);
+
+
 const handleApiLoaded = (map, maps) => {
 
 const markers = [];
@@ -47,7 +42,13 @@ const markers = [];
       fontSize: "18px",
     }
     }));
-
+const infoWindoContent ="<h4>"+ node.name+"</h4"+ 
+"<div className='chartBox'>"+
+  "<img id='imgCamera1' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/"  + node.name  + "/camera1' alt='Logo' />"+
+  "<img id='imgCamera2' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/"  + node.name  + "/camera2' alt='Logo' />"+
+  "<img id='imgCamera3' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/"  + node.name + "/camera3' alt='Logo' />"+
+  
+"</div>"
     infowindows.push(new maps.InfoWindow({
       content: infoWindoContent,
     }));
@@ -73,8 +74,7 @@ function getDifferenceInMinutes(date1, date2) {
 }
 
 
-export default function GoogleMap(){
-    const [state, dispatch] = useContext(GlobalContext);
+
     fetch('http://10.10.30.10:3001/api/nodes')
         .then((response) => response.json())
         .then((json) => {nodes=json});
