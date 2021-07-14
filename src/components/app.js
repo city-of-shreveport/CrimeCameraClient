@@ -87,7 +87,7 @@ export default function App() {
             nodeDataPerfMon.nodeStatus = false;
           } else {
             nodeDataPerfMon.nodeStatus = true;
-            numberOfNodesUp++
+            numberOfNodesUp++;
           }
 
           nodeArray.push(nodeDataPerfMon);
@@ -95,7 +95,7 @@ export default function App() {
         .then(() => {
           dispatch({
             type: 'setState',
-            payload: { nodes: nodeArray, numberOfNodes: totalNumberOfNodes, numberOfNodesUp: numberOfNodesUp},
+            payload: { nodes: nodeArray, numberOfNodes: totalNumberOfNodes, numberOfNodesUp: numberOfNodesUp },
           });
         });
     }

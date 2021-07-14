@@ -15,7 +15,7 @@ import tryValue from '../../helperFunctions';
 import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
 import NodeChartModal from './nodeManagerNodePerfMonCharts.js';
-import NodeCameraSettingModal from './settingsNodeCameraSettingsModal'
+import NodeCameraSettingModal from './settingsNodeCameraSettingsModal';
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
   const handleEditNodeModal = (node) => {
@@ -26,131 +26,115 @@ export default function Settings() {
     });
   };
   const getCameraNetworkSettings = (param) => {
-
-let cameras = ['camera1','camera2','camera3']
-  console.log("Network")
-  cameras.map((camera, i) =>  
-  fetch('http://10.10.30.10:3001/api/cameraConfig/networkSettings/' + param +'/' + camera)
-        .then((response) =>  response.json())
+    let cameras = ['camera1', 'camera2', 'camera3'];
+    console.log('Network');
+    cameras.map((camera, i) =>
+      fetch('http://10.10.30.10:3001/api/cameraConfig/networkSettings/' + param + '/' + camera)
+        .then((response) => response.json())
         .then((json) => {
-          
-          console.log(json)
-          if(camera==='camera3'){dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera3NetworkSettings: json },
-          });}
-          else if(camera==='camera2'){dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera2NetworkSettings: json },
-          });}
-            else{dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera1NetworkSettings: json },
-          });}
-          
-
-
+          console.log(json);
+          if (camera === 'camera3') {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera3NetworkSettings: json },
+            });
+          } else if (camera === 'camera2') {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera2NetworkSettings: json },
+            });
+          } else {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera1NetworkSettings: json },
+            });
+          }
         })
-
-)
-
-
-  }
+    );
+  };
   const getCameraSettings = (param) => {
-  let cameras = ['camera1','camera2','camera3']
-  console.log("Settings")
-  cameras.map((camera, i) =>  
-  fetch('http://10.10.30.10:3001/api/cameraConfig/settings/' + param +'/' + camera)
-        .then((response) =>  response.json())
+    let cameras = ['camera1', 'camera2', 'camera3'];
+    console.log('Settings');
+    cameras.map((camera, i) =>
+      fetch('http://10.10.30.10:3001/api/cameraConfig/settings/' + param + '/' + camera)
+        .then((response) => response.json())
         .then((json) => {
-          
-          console.log(json)
-          if(camera==='camera3'){dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera3Settings: json },
-          });}
-          else if(camera==='camera2'){dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera2Settings: json },
-          });}
-            else{dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera1Settings: json },
-          });}
-          
-
-
+          console.log(json);
+          if (camera === 'camera3') {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera3Settings: json },
+            });
+          } else if (camera === 'camera2') {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera2Settings: json },
+            });
+          } else {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera1Settings: json },
+            });
+          }
         })
-
-)
-
-
-
-
-}
-const getCameraTimes = (param) => {
-  let cameras = ['camera1','camera2','camera3']
-  console.log("TIME")
-  cameras.map((camera, i) =>  
-  fetch('http://10.10.30.10:3001/api/cameraConfig/time/' + param +'/' + camera)
-        .then((response) =>  response.json())
+    );
+  };
+  const getCameraTimes = (param) => {
+    let cameras = ['camera1', 'camera2', 'camera3'];
+    console.log('TIME');
+    cameras.map((camera, i) =>
+      fetch('http://10.10.30.10:3001/api/cameraConfig/time/' + param + '/' + camera)
+        .then((response) => response.json())
         .then((json) => {
-          
-          console.log(json)
-          if(camera==='camera3'){dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera3Time: json },
-          });}
-          else if(camera==='camera2'){dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera2Time: json },
-          });}
-            else{dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera1Time: json },
-          });}
-          
-
-
+          console.log(json);
+          if (camera === 'camera3') {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera3Time: json },
+            });
+          } else if (camera === 'camera2') {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera2Time: json },
+            });
+          } else {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera1Time: json },
+            });
+          }
         })
-
-)
-
-
-
-
-}
-const getCameraConfigs = (param) => {
-let cameras = ['camera1','camera2','camera3']
-let cameraConfigs = []
-  cameras.map((camera, i) =>{
-    fetch('http://10.10.30.10:3001/api/cameraConfig/videoColorConfig/' + param +'/' + camera)
-        .then((response) =>  response.json())
+    );
+  };
+  const getCameraConfigs = (param) => {
+    let cameras = ['camera1', 'camera2', 'camera3'];
+    let cameraConfigs = [];
+    cameras.map((camera, i) => {
+      fetch('http://10.10.30.10:3001/api/cameraConfig/videoColorConfig/' + param + '/' + camera)
+        .then((response) => response.json())
         .then((json) => {
-          console.log(json)
-          if(camera==='camera3'){dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera3Config: json },
-          });}
-          else if(camera==='camera2'){dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera2Config: json },
-          });}
-            else{dispatch({
-            type: 'setState',
-            payload: { currentNodeCamera1Config: json },
-          });}
-          
+          console.log(json);
+          if (camera === 'camera3') {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera3Config: json },
+            });
+          } else if (camera === 'camera2') {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera2Config: json },
+            });
+          } else {
+            dispatch({
+              type: 'setState',
+              payload: { currentNodeCamera1Config: json },
+            });
+          }
+        });
+    });
+  };
 
-
-        })
-       
-
-  })
-}
-
-
-const handleOpenNodeCameraConfigModal = (param) =>{
+  const handleOpenNodeCameraConfigModal = (param) => {
     getNodeInfo(param);
     clearInterval(perfMonTimerJob);
 
@@ -162,15 +146,7 @@ const handleOpenNodeCameraConfigModal = (param) =>{
         nodeCameraSettingsoModal: true,
       },
     });
-
-
-
-}
-    
-
-
-
-
+  };
 
   const handleSystemInfoNodeModal = () =>
     dispatch({
@@ -179,17 +155,16 @@ const handleOpenNodeCameraConfigModal = (param) =>{
     });
 
   let perfMonTimerJob = null;
-let perfMonChartTimerJob = null;
+  let perfMonChartTimerJob = null;
   const getSinglePerfmonData = (node) =>
     fetch('http://10.10.30.10:3001/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
-
         const rowLen = json.length;
         // eslint-disable-next-line
         json.map((perfmon, i) => {
           if (rowLen === 0) {
-            console.log(perfmon)
+            console.log(perfmon);
             dispatch({
               type: 'setState',
               payload: { currentNodeSinglePerfmon: perfmon, currentNodePerfmonAdded: true },
@@ -198,18 +173,18 @@ let perfMonChartTimerJob = null;
         });
       });
   function fetchCurrentNodePerfMon(node) {
-
-    fetch('http://10.10.30.10:3001/api/perfmons/' + tryValue(() => {
-                            return node})
-
-                            )
+    fetch(
+      'http://10.10.30.10:3001/api/perfmons/' +
+        tryValue(() => {
+          return node;
+        })
+    )
       .then((response) => response.json())
       .then((json) => {
         dispatch({
           type: 'setState',
           payload: { currentNodePerfmon: json },
         });
-
       });
   }
 
@@ -229,15 +204,13 @@ let perfMonChartTimerJob = null;
       });
 
     getSinglePerfmonData(node);
-getCameraConfigs(node)
-getCameraNetworkSettings(node)
-getCameraTimes(node)
-getCameraSettings(node)
+    getCameraConfigs(node);
+    getCameraNetworkSettings(node);
+    getCameraTimes(node);
+    getCameraSettings(node);
     perfMonTimerJob = setInterval(() => {
       getSinglePerfmonData(node);
-
     }, 60000);
-   
   };
 
   const handleNodeChartModal = (param) => {
@@ -288,7 +261,9 @@ getCameraSettings(node)
             <Table striped bordered hover variant="dark" responsive>
               <tbody>
                 <tr>
-                  <td>Nodes: {state.numberOfNodesUp}/{state.numberOfNodes}</td>
+                  <td>
+                    Nodes: {state.numberOfNodesUp}/{state.numberOfNodes}
+                  </td>
                   <td>Live Feeds: 6</td>
                   <td>More Info: 6</td>
                 </tr>
@@ -411,13 +386,16 @@ getCameraSettings(node)
                         <td>
                           <td>
                             {tryValue(() => {
-                              return ((node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100).toFixed(0) >
-                                70 ? (
+                              return (
+                                (node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100
+                              ).toFixed(0) > 70 ? (
                                 <h5 style={{ color: 'red' }}>
                                   {' '}
                                   Root:
                                   {tryValue(() => {
-                                    return ((node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100).toFixed(0);
+                                    return (
+                                      (node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100
+                                    ).toFixed(0);
                                   })}
                                   %{' '}
                                 </h5>
@@ -426,7 +404,9 @@ getCameraSettings(node)
                                   {' '}
                                   Root:
                                   {tryValue(() => {
-                                    return ((node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100).toFixed(0);
+                                    return (
+                                      (node.perfmon.fsSize[0].used / node.perfmon.fsSize[0].size).toFixed(2) * 100
+                                    ).toFixed(0);
                                   })}
                                   %{' '}
                                 </h5>
@@ -435,13 +415,16 @@ getCameraSettings(node)
                           </td>{' '}
                           <td>
                             {tryValue(() => {
-                              return ((node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100).toFixed(0) >
-                                70 ? (
+                              return (
+                                (node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100
+                              ).toFixed(0) > 70 ? (
                                 <h5 style={{ color: 'red' }}>
                                   {'    --    '}
                                   Video:
                                   {tryValue(() => {
-                                    return ((node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100).toFixed(0);
+                                    return (
+                                      (node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100
+                                    ).toFixed(0);
                                   })}
                                   %{' '}
                                 </h5>
@@ -450,7 +433,9 @@ getCameraSettings(node)
                                   {'    --    '}
                                   Video:
                                   {tryValue(() => {
-                                    return ((node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100).toFixed(0);
+                                    return (
+                                      (node.perfmon.fsSize[3].used / node.perfmon.fsSize[3].size).toFixed(2) * 100
+                                    ).toFixed(0);
                                   })}
                                   %
                                 </h5>
@@ -460,13 +445,16 @@ getCameraSettings(node)
                           {'     '}
                           <td>
                             {tryValue(() => {
-                              return ((node.perfmon.fsSize[2].used / node.perfmon.fsSize[2].size).toFixed(2) * 100).toFixed(0) >
-                                70 ? (
+                              return (
+                                (node.perfmon.fsSize[2].used / node.perfmon.fsSize[2].size).toFixed(2) * 100
+                              ).toFixed(0) > 70 ? (
                                 <h5 style={{ color: 'red' }}>
                                   {'    --    '}
                                   Buddy:
                                   {tryValue(() => {
-                                    return ((node.perfmon.fsSize[2].used / node.perfmon.fsSize[2].size).toFixed(2) * 100).toFixed(0);
+                                    return (
+                                      (node.perfmon.fsSize[2].used / node.perfmon.fsSize[2].size).toFixed(2) * 100
+                                    ).toFixed(0);
                                   })}
                                   %{' '}
                                 </h5>
@@ -475,7 +463,9 @@ getCameraSettings(node)
                                   {'    --    '}
                                   Buddy:
                                   {tryValue(() => {
-                                    return ((node.perfmon.fsSize[2].used / node.perfmon.fsSize[2].size).toFixed(2) * 100).toFixed(0);
+                                    return (
+                                      (node.perfmon.fsSize[2].used / node.perfmon.fsSize[2].size).toFixed(2) * 100
+                                    ).toFixed(0);
                                   })}
                                   %
                                 </h5>
@@ -487,13 +477,21 @@ getCameraSettings(node)
                           <Button variant="outline-primary" size="sm" onClick={() => handleEditNodeModal(node.name)}>
                             Configure
                           </Button>{' '}
-                          <Button variant="outline-primary" size="sm" onClick={() => handleSystemInfoNodeModal(node.name)}>
+                          <Button
+                            variant="outline-primary"
+                            size="sm"
+                            onClick={() => handleSystemInfoNodeModal(node.name)}
+                          >
                             Information
                           </Button>{' '}
                           <Button variant="outline-primary" size="sm" onClick={() => handleNodeChartModal(node.name)}>
                             Charts
                           </Button>{' '}
-                          <Button variant="outline-primary" size="sm" onClick={() => handleOpenNodeCameraConfigModal(node.name)}>
+                          <Button
+                            variant="outline-primary"
+                            size="sm"
+                            onClick={() => handleOpenNodeCameraConfigModal(node.name)}
+                          >
                             Config Camera
                           </Button>{' '}
                         </td>
@@ -536,7 +534,7 @@ getCameraSettings(node)
       <NodeManagerNewNodeModal />
       <NodeManagerEditNodeModal />
       <NodeChartModal />
-      <NodeCameraSettingModal/>
+      <NodeCameraSettingModal />
     </Container>
   );
 }

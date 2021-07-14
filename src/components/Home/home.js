@@ -3,7 +3,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Map from '../Home/map';
-import GoogleMap from '../Home/googleMap'
+import GoogleMap from '../Home/googleMap';
 import Nav from 'react-bootstrap/Nav';
 import React, { useContext } from 'react';
 import ReactPlayer from 'react-player';
