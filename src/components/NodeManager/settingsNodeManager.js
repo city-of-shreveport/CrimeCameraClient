@@ -108,7 +108,9 @@ export default function Settings() {
   };
   const getCameraConfigs = (param) => {
     let cameras = ['camera1', 'camera2', 'camera3'];
+    // eslint-disable-next-line
     let cameraConfigs = [];
+    // eslint-disable-next-line
     cameras.map((camera, i) => {
       fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/videoColorConfig/' + param + '/' + camera)
         .then((response) => response.json())

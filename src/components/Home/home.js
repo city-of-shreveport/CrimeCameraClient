@@ -2,6 +2,7 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+// eslint-disable-next-line
 import Map from '../Home/map';
 import GoogleMap from '../Home/googleMap';
 import Nav from 'react-bootstrap/Nav';
@@ -13,58 +14,73 @@ import { GlobalContext } from '../../contexts/globalContext';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-  var playing = false
-function onBufferHandler(i) {
-            console.log('onBufferHandler');
-            console.log(i);
-            
-          }
-          function onPlayHander(i){
-            console.log('onPlayHander');
-             console.log(i);
-          }
-           function onProgressHandler(i){
-            console.log('onProgressHandler');
-            if(i.loaded){
-              setTimeout(() => {
-                dispatch({
-                type: 'setState',
-                payload: {
-                  videoStreamingplayerPlaying: true,
-                
-                  
-                },
-              })
-              }, 2000);
-               
-             console.log(i.loaded);
-            }
-          }
-    function onDurationHandler(i){
-            console.log('onDurationHandler');
-             console.log(i);
-          }
+  // eslint-disable-next-line
+  var playing = false;
 
-    function onReady(i) {
-            console.log('onReady');
-             console.log(i);
-          }
-     function onBufferEnd(i) {
-            console.log('onBufferEnd');
-             console.log(i);
-          }
-    function  onStart(i) {
-            console.log('onStart');
-             console.log(i);
-          }
-    function onDuration(i) {
-            console.log('onDuration');
-             console.log(i);
-          }
-            function getSecondsLoaded  (i) {
-            console.log('getSecondsLoaded');
-             console.log(i);
-          }   
+  // eslint-disable-next-line
+  function onBufferHandler(i) {
+    console.log('onBufferHandler');
+    console.log(i);
+  }
+
+  // eslint-disable-next-line
+  function onPlayHander(i) {
+    console.log('onPlayHander');
+    console.log(i);
+  }
+
+  function onProgressHandler(i) {
+    console.log('onProgressHandler');
+    if (i.loaded) {
+      setTimeout(() => {
+        dispatch({
+          type: 'setState',
+          payload: {
+            videoStreamingplayerPlaying: true,
+          },
+        });
+      }, 2000);
+
+      console.log(i.loaded);
+    }
+  }
+
+  // eslint-disable-next-line
+  function onDurationHandler(i) {
+    console.log('onDurationHandler');
+    console.log(i);
+  }
+
+  // eslint-disable-next-line
+  function onReady(i) {
+    console.log('onReady');
+    console.log(i);
+  }
+
+  // eslint-disable-next-line
+  function onBufferEnd(i) {
+    console.log('onBufferEnd');
+    console.log(i);
+  }
+
+  // eslint-disable-next-line
+  function onStart(i) {
+    console.log('onStart');
+    console.log(i);
+  }
+
+  // eslint-disable-next-line
+  function onDuration(i) {
+    console.log('onDuration');
+    console.log(i);
+  }
+
+  // eslint-disable-next-line
+  function getSecondsLoaded(i) {
+    console.log('getSecondsLoaded');
+    console.log(i);
+  }
+
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
@@ -103,13 +119,7 @@ function onBufferHandler(i) {
                     muted={true}
                     width="100%"
                     height="auto"
-                     
-            onProgress={(i) => onProgressHandler(i)}
-            
-
-            
-           
-            
+                    onProgress={(i) => onProgressHandler(i)}
                   />
                 ) : (
                   <></>
@@ -137,7 +147,6 @@ function onBufferHandler(i) {
                     width="100%"
                     height="auto"
                     onProgress={(i) => onProgressHandler(i)}
-
                   />
                 ) : (
                   <></>
@@ -172,8 +181,6 @@ function onBufferHandler(i) {
                     width="100%"
                     height="auto"
                     onProgress={(i) => onProgressHandler(i)}
-            
-
                   />
                 ) : (
                   <></>

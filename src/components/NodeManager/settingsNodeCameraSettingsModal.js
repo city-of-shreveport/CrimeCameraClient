@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
+// eslint-disable-next-line
 import Table from 'react-bootstrap/Table';
 import tryValue from '../../helperFunctions';
 import { GlobalContext } from '../../contexts/globalContext';

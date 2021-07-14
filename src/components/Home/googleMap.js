@@ -1,9 +1,11 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+// eslint-disable-next-line
 import React, { useRef, useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
 import tryValue from '../../helperFunctions';
 import GoogleMapReact from 'google-map-react';
+// eslint-disable-next-line
 import ReactPlayer from 'react-player';
 import isEmpty from 'lodash.isempty';
 let nodes = [];
@@ -18,8 +20,10 @@ export default function GoogleMap() {
     const infowindows = [];
     let nodeIcon = '';
     var prev_infowindow = false;
+    // eslint-disable-next-line
     var current_infowindow = false;
 
+    // eslint-disable-next-line
     nodes.map((node) => {
       var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
 
@@ -150,6 +154,7 @@ export default function GoogleMap() {
     });
   };
 
+  // eslint-disable-next-line
   const mapStyles = {
     width: '100%',
     height: '100%',
@@ -165,6 +170,8 @@ export default function GoogleMap() {
     .then((json) => {
       nodes = json;
     });
+
+  // eslint-disable-next-line
   const handleCloseHomeMapVideoStreamerModal = (node) => {
     dispatch({
       type: 'setState',
@@ -172,6 +179,7 @@ export default function GoogleMap() {
     });
   };
 
+  // eslint-disable-next-line
   const handleOpenVideoStreamer = (node) => {
     console.log(node['node']);
     fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node['node'])
@@ -204,6 +212,8 @@ export default function GoogleMap() {
       </Card>
     </div>
   );
+
+  // eslint-disable-next-line
   const displayMarkers = () => {
     return state.nodes.map((node, index) => {
       return (

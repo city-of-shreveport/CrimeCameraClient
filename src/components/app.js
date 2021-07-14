@@ -78,6 +78,7 @@ export default function App() {
     for (let i = 0; i < nodedata.length; i++) {
       fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedata[i].name)
         .then((response) => response.json())
+        // eslint-disable-next-line
         .then((json) => {
           let nodeDataPerfMon = nodedata[i];
           nodeDataPerfMon.perfmon = json[0];
@@ -92,6 +93,7 @@ export default function App() {
 
           nodeArray.push(nodeDataPerfMon);
         })
+        // eslint-disable-next-line
         .then(() => {
           dispatch({
             type: 'setState',
