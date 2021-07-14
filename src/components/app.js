@@ -76,7 +76,7 @@ export default function App() {
     var numberOfNodesUp = 0;
     var totalNumberOfNodes = nodedata.length;
     for (let i = 0; i < nodedata.length; i++) {
-      fetch('http://10.10.30.10:3001/api/perfmons/' + nodedata[i].name)
+      fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedata[i].name)
         .then((response) => response.json())
         .then((json) => {
           let nodeDataPerfMon = nodedata[i];
@@ -103,7 +103,7 @@ export default function App() {
 
   useEffect(() => {
     function refreshStreamerStats() {
-      fetch('http://10.10.30.10:3001/api/perfMons/CrimeCameraSystem')
+      fetch('http://rtcc-server.shreveport-it.org/api/perfMons/CrimeCameraSystem')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -114,7 +114,7 @@ export default function App() {
 
       let currentStreams = [];
 
-      fetch('http://10.10.30.10:3001/api/streams/streamingserverstats')
+      fetch('http://rtcc-server.shreveport-it.org/api/streams/streamingserverstats')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -123,7 +123,7 @@ export default function App() {
           });
         });
 
-      fetch('http://10.10.30.10:3001/api/streams/streamstatistics/10.10.30.10')
+      fetch('http://rtcc-server.shreveport-it.org/api/streams/streamstatistics/10.10.30.10')
         .then((response) => response.json())
         .then((json) => {
           try {
@@ -157,7 +157,7 @@ export default function App() {
     }
 
     function refreshData() {
-      fetch('http://10.10.30.10:3001/api/servers')
+      fetch('http://rtcc-server.shreveport-it.org/api/servers')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -166,7 +166,7 @@ export default function App() {
           });
         });
 
-      fetch('http://10.10.30.10:3001/api/nodes')
+      fetch('http://rtcc-server.shreveport-it.org/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           fetchCurrentPerfMonData(json);
