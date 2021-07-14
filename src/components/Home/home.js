@@ -12,8 +12,59 @@ import tryValue from '../../helperFunctions';
 import { GlobalContext } from '../../contexts/globalContext';
 
 export default function Home() {
-  const [state] = useContext(GlobalContext);
+  const [state, dispatch] = useContext(GlobalContext);
+  var playing = false
+function onBufferHandler(i) {
+            console.log('onBufferHandler');
+            console.log(i);
+            
+          }
+          function onPlayHander(i){
+            console.log('onPlayHander');
+             console.log(i);
+          }
+           function onProgressHandler(i){
+            console.log('onProgressHandler');
+            if(i.loaded){
+              setTimeout(() => {
+                dispatch({
+                type: 'setState',
+                payload: {
+                  videoStreamingplayerPlaying: true,
+                
+                  
+                },
+              })
+              }, 2000);
+               
+             console.log(i.loaded);
+            }
+          }
+    function onDurationHandler(i){
+            console.log('onDurationHandler');
+             console.log(i);
+          }
 
+    function onReady(i) {
+            console.log('onReady');
+             console.log(i);
+          }
+     function onBufferEnd(i) {
+            console.log('onBufferEnd');
+             console.log(i);
+          }
+    function  onStart(i) {
+            console.log('onStart');
+             console.log(i);
+          }
+    function onDuration(i) {
+            console.log('onDuration');
+             console.log(i);
+          }
+            function getSecondsLoaded  (i) {
+            console.log('getSecondsLoaded');
+             console.log(i);
+          }   
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
@@ -46,12 +97,19 @@ export default function Home() {
 
                 {state.videoPlayerActive ? (
                   <ReactPlayer
-                    url={'http://10.10.30.10:8001/' + state.currentNodeInfo.name + '/camera1.flv'}
+                    url={state.videoStreamingURLS.camera1}
                     playing={true}
-                    controls={false}
+                    controls={true}
+                    muted={true}
                     width="100%"
                     height="auto"
-                    fileConfig={{ attributes: { poster: '../../../public/logo512.png' } }}
+                     
+            onProgress={(i) => onProgressHandler(i)}
+            
+
+            
+           
+            
                   />
                 ) : (
                   <></>
@@ -72,11 +130,14 @@ export default function Home() {
                 {'  '}
                 {state.videoPlayerActive ? (
                   <ReactPlayer
-                    url={'http://10.10.30.10:8001/' + state.currentNodeInfo.name + '/camera2.flv'}
+                    url={state.videoStreamingURLS.camera2}
                     playing={true}
-                    controls={false}
+                    controls={true}
+                    muted={true}
                     width="100%"
                     height="auto"
+                    onProgress={(i) => onProgressHandler(i)}
+
                   />
                 ) : (
                   <></>
@@ -104,11 +165,15 @@ export default function Home() {
                 })}
                 {state.videoPlayerActive ? (
                   <ReactPlayer
-                    url={'http://10.10.30.10:8001/' + state.currentNodeInfo.name + '/camera3.flv'}
+                    url={state.videoStreamingURLS.camera3}
                     playing={true}
-                    controls={false}
+                    controls={true}
+                    muted={true}
                     width="100%"
                     height="auto"
+                    onProgress={(i) => onProgressHandler(i)}
+            
+
                   />
                 ) : (
                   <></>

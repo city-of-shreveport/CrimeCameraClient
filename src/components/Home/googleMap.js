@@ -15,24 +15,21 @@ export default function GoogleMap() {
 
 
   const handleApiLoaded = (map, maps) => {
+    var bounds = new maps.LatLngBounds();
     const markers = [];
     const infowindows = [];
     let nodeIcon = ''
     var prev_infowindow =false; 
     var current_infowindow = false;
-    const startStreaming =() => {
-    
-prev_infowindow.setContent("asdfasdfasdfasdf");
-          
 
-
-}
     nodes.map((node) => {
       var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
 
       if (difference < 15) {nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png'}
         if (difference > 15) {nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png'}
+          var myLatLng = new maps.LatLng(node.config.locationLat, node.config.locationLong);
         markers.push(
+
           new maps.Marker({
             node: node.name,
             position: {
@@ -52,9 +49,10 @@ prev_infowindow.setContent("asdfasdfasdfasdf");
               
             },
           })
+          
         );
-
-
+bounds.extend(myLatLng)
+map.fitBounds(bounds);
 
 
         infowindows.push(
@@ -66,10 +64,55 @@ prev_infowindow.setContent("asdfasdfasdfasdf");
     });
 
     markers.forEach((marker, i) => {
-      function helloAlert(){
-alert('hello')
 
-}
+const startStream = (json) => {
+    dispatch({
+      type: 'setState',
+      payload: {
+        previousNode: tryValue(() => {
+          return state.currentNodeInfo.name;
+        }),
+        currentNodeInfo: json,
+        videoPlayerActive: true,
+        videoStreamingURLS: {camera1:'http://10.10.30.10:8001/' + json.name + '/camera1.flv',
+        camera2: 'http://10.10.30.10:8001/' + json.name + '/camera2.flv',
+        camera3: 'http://10.10.30.10:8001/' + json.name + '/camera3.flv'},
+      }
+    });
+    
+  };
+
+  const stopStream = () => {
+    dispatch({
+                type: 'setState',
+                payload: {
+                  videoStreamingplayerPlaying: false,
+                
+                  
+                },
+              })
+  };
+
+  function fetchCurrentPerfMonData(nodedata) {
+    fetch('http://10.10.30.10:3001/api/perfmons/' + nodedata.name)
+      .then((response) => response.json())
+      .then((json) => {
+        nodedata.perfmon = json[0];
+      })
+      .then(() => {
+        startStream(nodedata);
+      });
+  }
+
+  const getNodeInfo = (node) => {
+
+
+    fetch('http://10.10.30.10:3001/api/nodes/' + node)
+      .then((response) => response.json())
+      .then((json) => {
+        fetchCurrentPerfMonData(json);
+      });
+  };
               const infoWindoContent = "<button id='helloAlert'>Start Streaming</button>"+
                                 "<div class='grid-container'>"+
                                   "<div class='grid-item'>"+
@@ -97,7 +140,10 @@ alert('hello')
                                   "</div>"+
                                 
                             "</div>"
-      marker.addListener('click', () => {
+
+                           
+                                
+                            marker.addListener('mouseover', () => {
         if( prev_infowindow ) {
            prev_infowindow.close();
         }
@@ -107,6 +153,11 @@ alert('hello')
 
         infowindows[i].open(map, marker);
         current_infowindow = infowindows[i]
+      });
+      marker.addListener('click', () => {
+        stopStream();
+
+        getNodeInfo(marker.node)
       });
     });
   };
@@ -187,6 +238,7 @@ alert('hello')
           bootstrapURLKeys={{ key: 'AIzaSyAxgBe1BLPLfPIPwK0ucb6-SeqkZdckChI' }}
           defaultCenter={{ lat: 32.46, lng: -93.7550222 }}
           defaultZoom={12}
+          layerTypes={['TrafficLayer', 'TransitLayer']}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         >
