@@ -123,7 +123,7 @@ export default function App() {
           });
         });
 
-      fetch('http://rtcc-server.shreveport-it.org/api/streams/streamstatistics/10.10.30.10')
+      fetch('http://rtcc-server.shreveport-it.org/api/streams/streamstatistics/10.10.30.12')
         .then((response) => response.json())
         .then((json) => {
           try {
@@ -146,7 +146,7 @@ export default function App() {
           }
         });
 
-      fetch('http://10.10.30.10:8000/api/streams')
+      fetch('http://10.10.30.12:8000/api/streams')
         .then((response) => response.json())
         .then((json) => {
           dispatch({

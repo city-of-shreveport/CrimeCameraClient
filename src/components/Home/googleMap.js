@@ -67,9 +67,9 @@ export default function GoogleMap() {
             currentNodeInfo: json,
             videoPlayerActive: true,
             videoStreamingURLS: {
-              camera1: 'http://10.10.30.10:8001/' + json.name + '/camera1.flv',
-              camera2: 'http://10.10.30.10:8001/' + json.name + '/camera2.flv',
-              camera3: 'http://10.10.30.10:8001/' + json.name + '/camera3.flv',
+              camera1: 'http://10.10.30.12:8001/' + json.name + '/camera1.flv',
+              camera2: 'http://10.10.30.12:8001/' + json.name + '/camera2.flv',
+              camera3: 'http://10.10.30.12:8001/' + json.name + '/camera3.flv',
             },
           },
         });
