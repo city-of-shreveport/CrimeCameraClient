@@ -176,14 +176,14 @@ export default function App() {
     }
 
     refreshData();
-    refreshStreamerStats();
+    //refreshStreamerStats();
 
     setInterval(() => {
       refreshData();
     }, 365000);
 
     setInterval(() => {
-      refreshStreamerStats();
+      //refreshStreamerStats();
     }, 10000);
     // eslint-disable-next-line
   }, []);
