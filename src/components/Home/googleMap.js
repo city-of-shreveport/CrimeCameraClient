@@ -113,25 +113,9 @@ export default function GoogleMap() {
         });
     };
 
-    setInterval(() => {
-          markers.forEach((marker, i) => {
-      marker.addListener('click', () => {
-        dispatch({
-        type: 'setState',
-        payload: {
-          videoStreamingplayerPlaying: false,
-          videoPlayerStreamingActive: false,
-        },
-      });
 
-        getNodeInfo(marker.node);
-      });
-
-    });
-    }, 10000);
     markers.forEach((marker, i) => {
       marker.addListener('click', () => {
-        console.log(marker)
         dispatch({
         type: 'setState',
         payload: {

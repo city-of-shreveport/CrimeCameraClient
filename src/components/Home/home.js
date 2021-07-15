@@ -23,9 +23,22 @@ export default function Home() {
   // eslint-disable-next-line
 
 
+  
+  // eslint-disable-next-line
+  function onBufferHandler(i) {
+    console.log('onBufferHandler');
+    console.log(i);
+  }
+
+  // eslint-disable-next-line
+  function onPlayHander(i) {
+    console.log('onPlayHander');
+    console.log(i);
+  }
+
   function onProgressHandler(i) {
     console.log('onProgressHandler');
-    if (i.loadedSeconds > 10 && state.videoStreamingplayerPlaying===false) {
+    if (i.loadedSeconds > 10) {
       console.log(i.loadedSeconds);
       dispatch({
         type: 'setState',
@@ -82,6 +95,14 @@ export default function Home() {
         },
       });
     }
+  let camera1VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera1';
+
+  let camera2VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera2';
+
+  let camera3VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera3';
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
@@ -115,7 +136,8 @@ export default function Home() {
                 })}
 
                 {state.videoPlayerStreamingActive ? (
-                 <div className='snapashotImage'> <ReactPlayer
+                 <div className='snapashotImage'> 
+                  <ReactPlayer
                     url={state.videoStreamingURLS.camera1}
                     playing={state.videoStreamingplayerPlaying}
                     controls={true}
@@ -127,6 +149,8 @@ export default function Home() {
                   /></div>
                 ) : (
                   <div className='snapashotImage'><Image className='snapashotImage' src={state.VideoSnapShotURLS.camera1} rounded/></div>
+              
+           
                 )}
               </Card>
               <Card bg="dark" text="light">
@@ -143,7 +167,8 @@ export default function Home() {
                 })}
                 {'  '}
                 {state.videoPlayerStreamingActive ? (
-                  <div className='snapashotImage'><ReactPlayer
+                  <div className='snapashotImage'>
+                  <ReactPlayer
                     url={state.videoStreamingURLS.camera2}
                     playing={state.videoStreamingplayerPlaying}
                     controls={true}
@@ -154,6 +179,7 @@ export default function Home() {
                   /></div>
                 ) : (
                   <div className='snapashotImage'><Image  className='snapashotImage' src={state.VideoSnapShotURLS.camera1} rounded/></div>
+            
                 )}
               </Card>
               <Card bg="dark" text="light">
@@ -177,7 +203,8 @@ export default function Home() {
                   );
                 })}
                 {state.videoPlayerStreamingActive ? (
-                  <div className='snapashotImage'><ReactPlayer
+                  <div className='snapashotImage'>
+                  <ReactPlayer
                     url={state.videoStreamingURLS.camera3}
                     playing={state.videoStreamingplayerPlaying}
                     controls={true}
@@ -188,6 +215,8 @@ export default function Home() {
                   /></div>
                 ) : (
                   <div className='snapashotImage'><Image className='snapashotImage' src={state.VideoSnapShotURLS.camera1} rounded /></div>
+                
+                  
                 )}
               </Card>
             </Col>
