@@ -59,9 +59,7 @@ export default function GoogleMap() {
         })
       );
     });
-
-    markers.forEach((marker, i) => {
-      const startStream = (json) => {
+   const startStream = (json) => {
         dispatch({
           type: 'setState',
           payload: {
@@ -69,44 +67,42 @@ export default function GoogleMap() {
               return state.currentNodeInfo.name;
             }),
             currentNodeInfo: json,
+            videoPlayerStreamingActive: true,
             videoPlayerActive: true,
             videoStreamingURLS: {
-              camera1: 'http://10.10.30.12:8001/' + json.name + '/camera1.flv',
-              camera2: 'http://10.10.30.12:8001/' + json.name + '/camera2.flv',
-              camera3: 'http://10.10.30.12:8001/' + json.name + '/camera3.flv',
+              camera1: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera1.flv',
+              camera2: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera2.flv',
+              camera3: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera3.flv',
             },
           },
         });
       };
 
       const stopStream = () => {
+        
         dispatch({
           type: 'setState',
           payload: {
+           
             videoStreamingplayerPlaying: false,
+            videoPlayerStreamingActive: false
           },
         });
       };
 
-      function fetchCurrentPerfMonData(nodedata) {
-        fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedata.name)
-          .then((response) => response.json())
-          .then((json) => {
-            nodedata.perfmon = json[0];
-          })
-          .then(() => {
-            startStream(nodedata);
-          });
-      }
+  
 
       const getNodeInfo = (node) => {
         fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node)
           .then((response) => response.json())
           .then((json) => {
-            fetchCurrentPerfMonData(json);
+            startStream(json);
           });
       };
-      const infoWindoContent =
+      const infoWindoContent = (node) => {
+       
+
+        return(
         "<button id='helloAlert'>Start Streaming</button>" +
         "<div class='grid-container'>" +
         "<div class='grid-item'>" +
@@ -120,28 +116,32 @@ export default function GoogleMap() {
         '</div>' +
         "<div class='grid-item'>" +
         "<img id='imgCamera1' width='200' height='150' src='http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" +
-        marker.node +
+        node +
         "/camera1' alt='Logo' />" +
         '</div>' +
         "<div class='grid-item'>" +
         "<img id='imgCamera1' width='200' height='150' src='http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" +
-        marker.node +
+        node +
         "/camera2' alt='Logo' />" +
         '</div>' +
         "<div class='grid-item'>" +
         "<img id='imgCamera1' width='200' height='150' src='http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" +
-        marker.node +
+        node +
         "/camera3' alt='Logo' />" +
         '</div>' +
-        '</div>';
-
+        '</div>'
+        )
+}
+    markers.forEach((marker, i) => {
+      
+   
       marker.addListener('mouseover', () => {
         if (prev_infowindow) {
           prev_infowindow.close();
         }
 
         prev_infowindow = infowindows[i];
-        infowindows[i].setContent(infoWindoContent);
+        infowindows[i].setContent(infoWindoContent(marker.node));
 
         infowindows[i].open(map, marker);
         current_infowindow = infowindows[i];
@@ -172,13 +172,7 @@ export default function GoogleMap() {
     });
 
   // eslint-disable-next-line
-  const handleCloseHomeMapVideoStreamerModal = (node) => {
-    dispatch({
-      type: 'setState',
-      payload: { homeMapModalVideoStreamer: false },
-    });
-  };
-
+  
   // eslint-disable-next-line
   const handleOpenVideoStreamer = (node) => {
     console.log(node['node']);
@@ -195,6 +189,7 @@ export default function GoogleMap() {
             }),
             currentNodeInfo: json,
             videoPlayerActive: true,
+
           },
         });
       });
