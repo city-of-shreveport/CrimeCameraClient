@@ -33,14 +33,14 @@ export default function Home() {
 
   function onProgressHandler(i) {
     console.log('onProgressHandler');
-    if(i.loadedSeconds>10){
-    console.log(i.loadedSeconds)
-    dispatch({
-          type: 'setState',
-          payload: {
-            videoStreamingplayerPlaying: true,
-          },
-        });
+    if (i.loadedSeconds > 10) {
+      console.log(i.loadedSeconds);
+      dispatch({
+        type: 'setState',
+        payload: {
+          videoStreamingplayerPlaying: true,
+        },
+      });
     }
   }
 
@@ -54,9 +54,7 @@ export default function Home() {
   function onReady(i) {
     console.log('onReady');
     console.log(i);
-     setTimeout(() => {
-        
-      }, 5000);
+    setTimeout(() => {}, 5000);
   }
 
   // eslint-disable-next-line
@@ -82,17 +80,14 @@ export default function Home() {
     console.log('getSecondsLoaded');
     console.log(i);
   }
-let camera1VideoUrl = "http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" +
-        state.currentNodeInfo.name +
-        "/camera1"
-        
-        let camera2VideoUrl = "http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" +
-        state.currentNodeInfo.name +
-        "/camera2"
-       
-       let camera3VideoUrl = "http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" +
-        state.currentNodeInfo.name +
-        "/camera3"
+  let camera1VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera1';
+
+  let camera2VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera2';
+
+  let camera3VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera3';
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
@@ -133,8 +128,6 @@ let camera1VideoUrl = "http://rtcc-server.shreveport-it.org/api/cameraConfig/sna
                     height="auto"
                     onProgress={(i) => onProgressHandler(i)}
                     onReady={(i) => onReady(i)}
-                    
-                    
                   />
                 ) : (
                   <Image src={camera1VideoUrl} rounded />
