@@ -37,22 +37,25 @@ export default function RecordingViewer() {
           <Card.Body>
             <Row className="justify-content-center align-items-center">
               <Col xs={4}>
+                <p>CrimeCamera001/camera1</p>
                 <video
-                  style={{ maxWidth: '30vw', maxHeight: '24vh' }}
+                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
                   src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
                 ></video>
               </Col>
               <Col xs={4}>
+                <p>CrimeCamera001/camera2</p>
                 <video
-                  style={{ maxWidth: '30vw', maxHeight: '24vh' }}
+                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
                   src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
                 ></video>
               </Col>
               <Col xs={4}>
+                <p>CrimeCamera001/camera3</p>
                 <video
-                  style={{ maxWidth: '30vw', maxHeight: '24vh' }}
+                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
                   src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
                 ></video>
@@ -67,22 +70,25 @@ export default function RecordingViewer() {
           <Card.Body>
             <Row className="justify-content-center align-items-center">
               <Col xs={4}>
+                <p>CrimeCamera002/camera1</p>
                 <video
-                  style={{ maxWidth: '30vw', maxHeight: '24vh' }}
+                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
                   src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
                 ></video>
               </Col>
               <Col xs={4}>
+                <p>CrimeCamera002/camera2</p>
                 <video
-                  style={{ maxWidth: '30vw', maxHeight: '24vh' }}
+                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
                   src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
                 ></video>
               </Col>
               <Col xs={4}>
+                <p>CrimeCamera002/camera3</p>
                 <video
-                  style={{ maxWidth: '30vw', maxHeight: '24vh' }}
+                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
                   src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
                 ></video>
@@ -97,22 +103,25 @@ export default function RecordingViewer() {
           <Card.Body>
             <Row className="justify-content-center align-items-center">
               <Col xs={4}>
+                <p>CrimeCamera003/camera1</p>
                 <video
-                  style={{ maxWidth: '30vw', maxHeight: '24vh' }}
+                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
                   src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
                 ></video>
               </Col>
               <Col xs={4}>
+                <p>CrimeCamera003/camera2</p>
                 <video
-                  style={{ maxWidth: '30vw', maxHeight: '24vh' }}
+                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
                   src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
                 ></video>
               </Col>
               <Col xs={4}>
+                <p>CrimeCamera003/camera3</p>
                 <video
-                  style={{ maxWidth: '30vw', maxHeight: '24vh' }}
+                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
                   src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
                 ></video>
@@ -140,8 +149,6 @@ export default function RecordingViewer() {
             ></Card>
           </CardGroup>
         </Card>
-
-        <Button onClick={``}>Submit</Button>
       </Modal>
     </Container>
   );
