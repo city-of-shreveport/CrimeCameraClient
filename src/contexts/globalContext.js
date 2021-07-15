@@ -66,12 +66,9 @@ const initialState = {
   videoStreamingplayerPlaying: false,
   videoStreamingURLS: {},
   VideoSnapShotURLS: {},
+
   // RecordingViewer
-  RecordingViewerFileURLLists: {},
-  RecordingViewerIsPlaying: false,
   RecordingViewerModalOpen: false,
-  RecordingViewerSelectedDateTime: '',
-  RecordingViewerSelectedNodes: [],
 };
 
 const reducer = (state, action) => {
