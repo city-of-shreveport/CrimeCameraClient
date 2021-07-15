@@ -104,6 +104,7 @@ export default function App() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line
     function refreshStreamerStats() {
       fetch('http://rtcc-server.shreveport-it.org/api/perfMons/CrimeCameraSystem')
         .then((response) => response.json())

@@ -19,6 +19,7 @@ export default function GoogleMap() {
     const markers = [];
     const infowindows = [];
     let nodeIcon = '';
+    // eslint-disable-next-line
     var prev_infowindow = false;
     // eslint-disable-next-line
     var current_infowindow = false;
@@ -71,62 +72,55 @@ export default function GoogleMap() {
           videoStreamingURLS: {
             camera1: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera1.flv',
             camera2: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera2.flv',
-            camera3: 'http://rtcc-server.shreveport-it.org:8000/' + json.name+ '/camera3.flv',
+            camera3: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera3.flv',
           },
           VideoSnapShotURLS: {
-            camera1: "http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" + json.name +"/camera1",
-            camera2: "http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" + json.name +"/camera2",
-            camera3: "http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" + json.name +"/camera3",
+            camera1: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + json.name + '/camera1',
+            camera2: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + json.name + '/camera2',
+            camera3: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + json.name + '/camera3',
           },
         },
       });
     };
 
-    const stopStream = () => {
-      
-    };
+    // eslint-disable-next-line
+    const stopStream = () => {};
 
-  function fetchCurrentPerfMonData(nodedata) {
-    fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedata.name)
-      .then((response) => response.json())
-      .then((json) => {
-        nodedata.perfmon = json[0];
-      dispatch({
-        type: 'setState',
-        payload: {
-          currentNodeInfo: json
-        },
-      });
-        startStream(nodedata);
-      })
-
-  }
-
+    function fetchCurrentPerfMonData(nodedata) {
+      fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedata.name)
+        .then((response) => response.json())
+        .then((json) => {
+          nodedata.perfmon = json[0];
+          dispatch({
+            type: 'setState',
+            payload: {
+              currentNodeInfo: json,
+            },
+          });
+          startStream(nodedata);
+        });
+    }
 
     const getNodeInfo = (node) => {
       fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node)
         .then((response) => response.json())
         .then((json) => {
-       
-     
-          fetchCurrentPerfMonData(json)
+          fetchCurrentPerfMonData(json);
         });
     };
-
 
     markers.forEach((marker, i) => {
       marker.addListener('click', () => {
         dispatch({
-        type: 'setState',
-        payload: {
-          videoStreamingplayerPlaying: false,
-          videoPlayerStreamingActive: false,
-        },
-      });
+          type: 'setState',
+          payload: {
+            videoStreamingplayerPlaying: false,
+            videoPlayerStreamingActive: false,
+          },
+        });
 
         getNodeInfo(marker.node);
       });
-
     });
   };
 

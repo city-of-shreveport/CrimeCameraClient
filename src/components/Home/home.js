@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
@@ -19,11 +19,8 @@ export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
   // eslint-disable-next-line
 
-
   // eslint-disable-next-line
 
-
-  
   // eslint-disable-next-line
   function onBufferHandler(i) {
     console.log('onBufferHandler');
@@ -86,27 +83,28 @@ export default function Home() {
     console.log(i);
   }
 
-
-    function switchToStreaming(){
-      dispatch({
-        type: 'setState',
-        payload: {
-          videoPlayerStreamingActive: true,
-        },
-      });
-    }
+  function switchToStreaming() {
+    dispatch({
+      type: 'setState',
+      payload: {
+        videoPlayerStreamingActive: true,
+      },
+    });
+  }
+  // eslint-disable-next-line
   let camera1VideoUrl =
     'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera1';
 
+  // eslint-disable-next-line
   let camera2VideoUrl =
     'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera2';
 
+  // eslint-disable-next-line
   let camera3VideoUrl =
     'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera3';
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
-      
         <Row className="justify-content-md-center">
           <Col>
             <CardGroup>
@@ -119,7 +117,7 @@ export default function Home() {
           </Col>
           {state.videoPlayerActive ? (
             <Col xs={2}>
-            <Button onClick={() => switchToStreaming()}>Start Streaming</Button>
+              <Button onClick={() => switchToStreaming()}>Start Streaming</Button>
               <h4 style={{ color: 'white' }}>{state.currentNodeInfo.name}</h4>
 
               <Card bg="dark" text="light">
@@ -136,21 +134,22 @@ export default function Home() {
                 })}
 
                 {state.videoPlayerStreamingActive ? (
-                 <div className='snapashotImage'> 
-                  <ReactPlayer
-                    url={state.videoStreamingURLS.camera1}
-                    playing={state.videoStreamingplayerPlaying}
-                    controls={true}
-                    muted={true}
-                    width="100%"
-                    height="auto"
-                    onProgress={(i) => onProgressHandler(i)}
-                    onReady={(i) => onReady(i)}
-                  /></div>
+                  <div className="snapashotImage">
+                    <ReactPlayer
+                      url={state.videoStreamingURLS.camera1}
+                      playing={state.videoStreamingplayerPlaying}
+                      controls={true}
+                      muted={true}
+                      width="100%"
+                      height="auto"
+                      onProgress={(i) => onProgressHandler(i)}
+                      onReady={(i) => onReady(i)}
+                    />
+                  </div>
                 ) : (
-                  <div className='snapashotImage'><Image className='snapashotImage' src={state.VideoSnapShotURLS.camera1} rounded/></div>
-              
-           
+                  <div className="snapashotImage">
+                    <Image className="snapashotImage" src={state.VideoSnapShotURLS.camera1} rounded />
+                  </div>
                 )}
               </Card>
               <Card bg="dark" text="light">
@@ -167,19 +166,21 @@ export default function Home() {
                 })}
                 {'  '}
                 {state.videoPlayerStreamingActive ? (
-                  <div className='snapashotImage'>
-                  <ReactPlayer
-                    url={state.videoStreamingURLS.camera2}
-                    playing={state.videoStreamingplayerPlaying}
-                    controls={true}
-                    muted={true}
-                    width="100%"
-                    height="auto"
-                    onProgress={(i) => onProgressHandler(i)}
-                  /></div>
+                  <div className="snapashotImage">
+                    <ReactPlayer
+                      url={state.videoStreamingURLS.camera2}
+                      playing={state.videoStreamingplayerPlaying}
+                      controls={true}
+                      muted={true}
+                      width="100%"
+                      height="auto"
+                      onProgress={(i) => onProgressHandler(i)}
+                    />
+                  </div>
                 ) : (
-                  <div className='snapashotImage'><Image  className='snapashotImage' src={state.VideoSnapShotURLS.camera1} rounded/></div>
-            
+                  <div className="snapashotImage">
+                    <Image className="snapashotImage" src={state.VideoSnapShotURLS.camera1} rounded />
+                  </div>
                 )}
               </Card>
               <Card bg="dark" text="light">
@@ -203,20 +204,21 @@ export default function Home() {
                   );
                 })}
                 {state.videoPlayerStreamingActive ? (
-                  <div className='snapashotImage'>
-                  <ReactPlayer
-                    url={state.videoStreamingURLS.camera3}
-                    playing={state.videoStreamingplayerPlaying}
-                    controls={true}
-                    muted={true}
-                    width="100%"
-                    height="auto"
-                    onProgress={(i) => onProgressHandler(i)}
-                  /></div>
+                  <div className="snapashotImage">
+                    <ReactPlayer
+                      url={state.videoStreamingURLS.camera3}
+                      playing={state.videoStreamingplayerPlaying}
+                      controls={true}
+                      muted={true}
+                      width="100%"
+                      height="auto"
+                      onProgress={(i) => onProgressHandler(i)}
+                    />
+                  </div>
                 ) : (
-                  <div className='snapashotImage'><Image className='snapashotImage' src={state.VideoSnapShotURLS.camera1} rounded /></div>
-                
-                  
+                  <div className="snapashotImage">
+                    <Image className="snapashotImage" src={state.VideoSnapShotURLS.camera1} rounded />
+                  </div>
                 )}
               </Card>
             </Col>
