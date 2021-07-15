@@ -1,9 +1,11 @@
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+// eslint-disable-next-line
 import React, { useRef, useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
 import tryValue from '../../helperFunctions';
 import GoogleMapReact from 'google-map-react';
+// eslint-disable-next-line
 import ReactPlayer from 'react-player';
 import isEmpty from 'lodash.isempty';
 let nodes = [];
@@ -12,156 +14,139 @@ var nodeStatus = false;
 export default function GoogleMap() {
   const [state, dispatch] = useContext(GlobalContext);
 
-
-
   const handleApiLoaded = (map, maps) => {
     var bounds = new maps.LatLngBounds();
     const markers = [];
     const infowindows = [];
-    let nodeIcon = ''
-    var prev_infowindow =false; 
+    let nodeIcon = '';
+    var prev_infowindow = false;
+    // eslint-disable-next-line
     var current_infowindow = false;
 
+    // eslint-disable-next-line
     nodes.map((node) => {
       var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
 
-      if (difference < 15) {nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png'}
-        if (difference > 15) {nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png'}
-          var myLatLng = new maps.LatLng(node.config.locationLat, node.config.locationLong);
-        markers.push(
-
-          new maps.Marker({
-            node: node.name,
-            position: {
-              lat: node.config.locationLat,
-              lng: node.config.locationLong,
-              
-            },
-            map,
-            icon: {url: nodeIcon,
-            labelOrigin: { x: 33, y: 17}
-          },
-            label: {
-              text: node.name.substr(node.name.length - 3),
-              
-              color: 'black',
-
-              
-            },
-          })
-          
-        );
-bounds.extend(myLatLng)
-map.fitBounds(bounds);
-
-
-        infowindows.push(
-          new maps.InfoWindow({
-            content: '',
-          })
-        );
-      
-    });
-
-    markers.forEach((marker, i) => {
-
-const startStream = (json) => {
-    dispatch({
-      type: 'setState',
-      payload: {
-        previousNode: tryValue(() => {
-          return state.currentNodeInfo.name;
-        }),
-        currentNodeInfo: json,
-        videoPlayerActive: true,
-        videoStreamingURLS: {camera1:'http://10.10.30.10:8001/' + json.name + '/camera1.flv',
-        camera2: 'http://10.10.30.10:8001/' + json.name + '/camera2.flv',
-        camera3: 'http://10.10.30.10:8001/' + json.name + '/camera3.flv'},
+      if (difference < 15) {
+        nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png';
       }
-    });
-    
-  };
+      if (difference > 15) {
+        nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png';
+      }
+      var myLatLng = new maps.LatLng(node.config.locationLat, node.config.locationLong);
+      markers.push(
+        new maps.Marker({
+          node: node.name,
+          position: {
+            lat: node.config.locationLat,
+            lng: node.config.locationLong,
+          },
+          map,
+          icon: { url: nodeIcon, labelOrigin: { x: 33, y: 17 } },
+          label: {
+            text: node.name.substr(node.name.length - 3),
 
-  const stopStream = () => {
-    dispatch({
-                type: 'setState',
-                payload: {
-                  videoStreamingplayerPlaying: false,
-                
-                  
-                },
-              })
-  };
+            color: 'black',
+          },
+        })
+      );
+      bounds.extend(myLatLng);
+      map.fitBounds(bounds);
+
+      infowindows.push(
+        new maps.InfoWindow({
+          content: '',
+        })
+      );
+    });
+    const startStream = (json) => {
+      dispatch({
+        type: 'setState',
+        payload: {
+          previousNode: tryValue(() => {
+            return state.currentNodeInfo.name;
+          }),
+          currentNodeInfo: json,
+          videoPlayerActive: true,
+          videoStreamingURLS: {
+            camera1: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera1.flv',
+            camera2: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera2.flv',
+            camera3: 'http://rtcc-server.shreveport-it.org:8000/' + json.name+ '/camera3.flv',
+          },
+          VideoSnapShotURLS: {
+            camera1: "http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" + json.name +"/camera1",
+            camera2: "http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" + json.name +"/camera2",
+            camera3: "http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/" + json.name +"/camera3",
+          },
+        },
+      });
+    };
+
+    const stopStream = () => {
+      
+    };
 
   function fetchCurrentPerfMonData(nodedata) {
-    fetch('http://10.10.30.10:3001/api/perfmons/' + nodedata.name)
+    fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedata.name)
       .then((response) => response.json())
       .then((json) => {
         nodedata.perfmon = json[0];
-      })
-      .then(() => {
-        startStream(nodedata);
+      dispatch({
+        type: 'setState',
+        payload: {
+          currentNodeInfo: json
+        },
       });
+        startStream(nodedata);
+      })
+
   }
 
-  const getNodeInfo = (node) => {
 
+    const getNodeInfo = (node) => {
+      fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node)
+        .then((response) => response.json())
+        .then((json) => {
+       
+     
+          fetchCurrentPerfMonData(json)
+        });
+    };
 
-    fetch('http://10.10.30.10:3001/api/nodes/' + node)
-      .then((response) => response.json())
-      .then((json) => {
-        fetchCurrentPerfMonData(json);
-      });
-  };
-              const infoWindoContent = "<button id='helloAlert'>Start Streaming</button>"+
-                                "<div class='grid-container'>"+
-                                  "<div class='grid-item'>"+
-                                    "Camera 1"+
-                                  "</div>"+
-                                  "<div class='grid-item'>"+
-                                    "Camera 2"+
-                                  "</div>"+
-                                
-                                  "<div class='grid-item'>"+
-                                    "Camera 3"+
-                                  "</div>"+
-                                  "<div class='grid-item'>"+
-                                    "<img id='imgCamera1' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/" + marker.node +
-                                      "/camera1' alt='Logo' />"+
-                                  "</div>"+
-                                  "<div class='grid-item'>"+
-                                    "<img id='imgCamera1' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/" + marker.node +
-                                      "/camera2' alt='Logo' />"+
-                                  "</div>"+
-                                
-                                  "<div class='grid-item'>"+
-                                    "<img id='imgCamera1' width='200' height='150' src='http://10.10.30.10:3001/api/cameraConfig/snapshot/" + marker.node +
-                                      "/camera3' alt='Logo' />"+
-                                  "</div>"+
-                                
-                            "</div>"
-
-                           
-                                
-                            marker.addListener('mouseover', () => {
-        if( prev_infowindow ) {
-           prev_infowindow.close();
-        }
-
-        prev_infowindow = infowindows[i];
-          infowindows[i].setContent(infoWindoContent);
-
-        infowindows[i].open(map, marker);
-        current_infowindow = infowindows[i]
-      });
+    setInterval(() => {
+          markers.forEach((marker, i) => {
       marker.addListener('click', () => {
-        stopStream();
-
-        getNodeInfo(marker.node)
+        dispatch({
+        type: 'setState',
+        payload: {
+          videoStreamingplayerPlaying: false,
+          videoPlayerStreamingActive: false,
+        },
       });
+
+        getNodeInfo(marker.node);
+      });
+
+    });
+    }, 10000);
+    markers.forEach((marker, i) => {
+      marker.addListener('click', () => {
+        console.log(marker)
+        dispatch({
+        type: 'setState',
+        payload: {
+          videoStreamingplayerPlaying: false,
+          videoPlayerStreamingActive: false,
+        },
+      });
+
+        getNodeInfo(marker.node);
+      });
+
     });
   };
 
+  // eslint-disable-next-line
   const mapStyles = {
     width: '100%',
     height: '100%',
@@ -172,21 +157,18 @@ const startStream = (json) => {
     return diffInMs / (1000 * 60);
   }
 
-  fetch('http://10.10.30.10:3001/api/nodes')
+  fetch('http://rtcc-server.shreveport-it.org/api/nodes')
     .then((response) => response.json())
     .then((json) => {
       nodes = json;
     });
-  const handleCloseHomeMapVideoStreamerModal = (node) => {
-    dispatch({
-      type: 'setState',
-      payload: { homeMapModalVideoStreamer: false },
-    });
-  };
 
+  // eslint-disable-next-line
+
+  // eslint-disable-next-line
   const handleOpenVideoStreamer = (node) => {
     console.log(node['node']);
-    fetch('http://10.10.30.10:3001/api/nodes/' + node['node'])
+    fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node['node'])
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -205,18 +187,19 @@ const startStream = (json) => {
   };
   const AnyReactComponent = ({ text, status, node }) => (
     <div>
-    <Card className="text-center">
-  <Card.Header>Featured</Card.Header>
-  <Card.Body>
-    <Card.Title>Special title treatment</Card.Title>
-    <Card.Text>
-      With supporting text below as a natural lead-in to additional content.
-    </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
-  </Card.Body>
-  <Card.Footer className="text-muted">2 days ago</Card.Footer>
-</Card></div>
+      <Card className="text-center">
+        <Card.Header>Featured</Card.Header>
+        <Card.Body>
+          <Card.Title>Special title treatment</Card.Title>
+          <Card.Text>With supporting text below as a natural lead-in to additional content.</Card.Text>
+          <Button variant="primary">Go somewhere</Button>
+        </Card.Body>
+        <Card.Footer className="text-muted">2 days ago</Card.Footer>
+      </Card>
+    </div>
   );
+
+  // eslint-disable-next-line
   const displayMarkers = () => {
     return state.nodes.map((node, index) => {
       return (
@@ -241,9 +224,7 @@ const startStream = (json) => {
           layerTypes={['TrafficLayer', 'TransitLayer']}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-        >
-       
-        </GoogleMapReact>
+        ></GoogleMapReact>
       )}
     </div>
   );

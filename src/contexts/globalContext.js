@@ -61,9 +61,11 @@ const initialState = {
   users: [],
   videoPlayer: {},
   videoPlayerActive: false,
+  videoPlayerStreamingActive: false,
   videoPlayersState: {},
   videoStreamingplayerPlaying: false,
-  videoStreamingURLS:{},
+  videoStreamingURLS: {},
+  VideoSnapShotURLS: {},
   // RecordingViewer
   RecordingViewerFileURLLists: {},
   RecordingViewerIsPlaying: false,

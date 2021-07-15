@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
+// eslint-disable-next-line
 import Table from 'react-bootstrap/Table';
 import tryValue from '../../helperFunctions';
 import { GlobalContext } from '../../contexts/globalContext';
@@ -15,21 +16,21 @@ export default function SettingsNodeCard() {
   const [state, dispatch] = useContext(GlobalContext);
 
   let camera1IMG =
-    'http://10.10.30.10:3001/api/cameraConfig/snapshot/' +
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' +
     tryValue(() => {
       return state.currentNodeInfo.name;
     }) +
     '/camera1';
 
   let camera2IMG =
-    'http://10.10.30.10:3001/api/cameraConfig/snapshot/' +
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' +
     tryValue(() => {
       return state.currentNodeInfo.name;
     }) +
     '/camera2';
 
   let camera3IMG =
-    'http://10.10.30.10:3001/api/cameraConfig/snapshot/' +
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' +
     tryValue(() => {
       return state.currentNodeInfo.name;
     }) +

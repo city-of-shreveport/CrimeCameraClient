@@ -29,7 +29,7 @@ export default function Settings() {
     let cameras = ['camera1', 'camera2', 'camera3'];
     console.log('Network');
     cameras.map((camera, i) =>
-      fetch('http://10.10.30.10:3001/api/cameraConfig/networkSettings/' + param + '/' + camera)
+      fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/networkSettings/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -56,7 +56,7 @@ export default function Settings() {
     let cameras = ['camera1', 'camera2', 'camera3'];
     console.log('Settings');
     cameras.map((camera, i) =>
-      fetch('http://10.10.30.10:3001/api/cameraConfig/settings/' + param + '/' + camera)
+      fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/settings/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -83,7 +83,7 @@ export default function Settings() {
     let cameras = ['camera1', 'camera2', 'camera3'];
     console.log('TIME');
     cameras.map((camera, i) =>
-      fetch('http://10.10.30.10:3001/api/cameraConfig/time/' + param + '/' + camera)
+      fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/time/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -108,9 +108,11 @@ export default function Settings() {
   };
   const getCameraConfigs = (param) => {
     let cameras = ['camera1', 'camera2', 'camera3'];
+    // eslint-disable-next-line
     let cameraConfigs = [];
+    // eslint-disable-next-line
     cameras.map((camera, i) => {
-      fetch('http://10.10.30.10:3001/api/cameraConfig/videoColorConfig/' + param + '/' + camera)
+      fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/videoColorConfig/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -157,7 +159,7 @@ export default function Settings() {
   let perfMonTimerJob = null;
   let perfMonChartTimerJob = null;
   const getSinglePerfmonData = (node) =>
-    fetch('http://10.10.30.10:3001/api/perfmons/' + node)
+    fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
         const rowLen = json.length;
@@ -174,7 +176,7 @@ export default function Settings() {
       });
   function fetchCurrentNodePerfMon(node) {
     fetch(
-      'http://10.10.30.10:3001/api/perfmons/' +
+      'http://rtcc-server.shreveport-it.org/api/perfmons/' +
         tryValue(() => {
           return node;
         })
@@ -189,7 +191,7 @@ export default function Settings() {
   }
 
   const getNodeInfo = (node) => {
-    fetch('http://10.10.30.10:3001/api/nodes/' + node)
+    fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({

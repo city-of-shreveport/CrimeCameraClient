@@ -37,7 +37,7 @@ export default function RecordingViewer() {
   };
 
   const submitForm = () => {
-    fetch(`http://10.10.30.10:3001/api/videos/recordings`, {
+    fetch(`http://rtcc-server.shreveport-it.org/api/videos/recordings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -152,7 +152,7 @@ export default function RecordingViewer() {
                         <video
                           style={{ maxWidth: '30vw', maxHeight: '25vh' }}
                           controls
-                          src={`http://10.10.30.10:3001/api/videos/stream/${key}/${recording.fileLocation}`}
+                          src={`http://rtcc-server.shreveport-it.org/api/videos/stream/${key}/${recording.fileLocation}`}
                         ></video>
                       </Col>
                     );
