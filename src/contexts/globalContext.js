@@ -68,7 +68,16 @@ const initialState = {
   VideoSnapShotURLS: {},
 
   // RecordingViewer
-  RecordingViewerModalOpen: false,
+  RecordingViewerDateModalOpen: false,
+  RecordingViewerTimeModalOpen: false,
+  RecordingViewerNode1ModalOpen: false,
+  RecordingViewerNode2ModalOpen: false,
+  RecordingViewerNode3ModalOpen: false,
+  RecordingViewerDateButtonEnabled: true,
+  RecordingViewerTimeButtonEnabled: false,
+  RecordingViewerNode1ButtonEnabled: false,
+  RecordingViewerNode2ButtonEnabled: false,
+  RecordingViewerNode3ButtonEnabled: false,
 };
 
 const reducer = (state, action) => {
