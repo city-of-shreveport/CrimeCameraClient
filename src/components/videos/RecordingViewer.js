@@ -91,19 +91,52 @@ export default function RecordingViewer() {
   };
 
   const handleSelectNode1 = (node) => {
+    var date = moment(state.RecordingViewerDateSelected).format('YYYY-MM-DD');
+    var time = state.RecordingViewerTimeSelected.value;
+    var hours = new Date(`${date} ${time}`).getHours();
+    hours = ('0' + hours).slice(-2);
+    var minutes = new Date(`${date} ${time}`).getMinutes();
+    minutes = ('0' + minutes).slice(-2);
+    var file = `${date}-${hours}-${minutes}.mp4`;
+
     setState({
+      RecordingViewerNode1Camera1URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera1/${file}`,
+      RecordingViewerNode1Camera2URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera2/${file}`,
+      RecordingViewerNode1Camera3URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera3/${file}`,
       RecordingViewerNode1Selected: node,
     });
   };
 
   const handleSelectNode2 = (node) => {
+    var date = moment(state.RecordingViewerDateSelected).format('YYYY-MM-DD');
+    var time = state.RecordingViewerTimeSelected.value;
+    var hours = new Date(`${date} ${time}`).getHours();
+    hours = ('0' + hours).slice(-2);
+    var minutes = new Date(`${date} ${time}`).getMinutes();
+    minutes = ('0' + minutes).slice(-2);
+    var file = `${date}-${hours}-${minutes}.mp4`;
+
     setState({
+      RecordingViewerNode2Camera1URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera1/${file}`,
+      RecordingViewerNode2Camera2URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera2/${file}`,
+      RecordingViewerNode2Camera3URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera3/${file}`,
       RecordingViewerNode2Selected: node,
     });
   };
 
   const handleSelectNode3 = (node) => {
+    var date = moment(state.RecordingViewerDateSelected).format('YYYY-MM-DD');
+    var time = state.RecordingViewerTimeSelected.value;
+    var hours = new Date(`${date} ${time}`).getHours();
+    hours = ('0' + hours).slice(-2);
+    var minutes = new Date(`${date} ${time}`).getMinutes();
+    minutes = ('0' + minutes).slice(-2);
+    var file = `${date}-${hours}-${minutes}.mp4`;
+
     setState({
+      RecordingViewerNode3Camera1URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera1/${file}`,
+      RecordingViewerNode3Camera2URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera2/${file}`,
+      RecordingViewerNode3Camera3URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera3/${file}`,
       RecordingViewerNode3Selected: node,
     });
   };
@@ -205,27 +238,39 @@ export default function RecordingViewer() {
           <Card.Body>
             <Row className="justify-content-center align-items-center">
               <Col xs={4}>
-                <p>CrimeCamera001/camera1</p>
+                {state.RecordingViewerNode1Selected ? (
+                  <p>{state.RecordingViewerNode1Selected.value} / Camera 1</p>
+                ) : (
+                  <p>{'Node 1 / Camera 1'}</p>
+                )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
-                  src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                  src={state.RecordingViewerNode1Camera1URL}
                 ></video>
               </Col>
               <Col xs={4}>
-                <p>CrimeCamera001/camera2</p>
+                {state.RecordingViewerNode1Selected ? (
+                  <p>{state.RecordingViewerNode1Selected.value} / Camera 2</p>
+                ) : (
+                  <p>{'Node 1 / Camera 2'}</p>
+                )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
-                  src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                  src={state.RecordingViewerNode1Camera2URL}
                 ></video>
               </Col>
               <Col xs={4}>
-                <p>CrimeCamera001/camera3</p>
+                {state.RecordingViewerNode1Selected ? (
+                  <p>{state.RecordingViewerNode1Selected.value} / Camera 3</p>
+                ) : (
+                  <p>{'Node 1 / Camera 3'}</p>
+                )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
-                  src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                  src={state.RecordingViewerNode1Camera3URL}
                 ></video>
               </Col>
             </Row>
@@ -238,27 +283,39 @@ export default function RecordingViewer() {
           <Card.Body>
             <Row className="justify-content-center align-items-center">
               <Col xs={4}>
-                <p>CrimeCamera002/camera1</p>
+                {state.RecordingViewerNode2Selected ? (
+                  <p>{state.RecordingViewerNode2Selected.value} / Camera 1</p>
+                ) : (
+                  <p>{'Node 2 / Camera 1'}</p>
+                )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
-                  src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                  src={state.RecordingViewerNode2Camera1URL}
                 ></video>
               </Col>
               <Col xs={4}>
-                <p>CrimeCamera002/camera2</p>
+                {state.RecordingViewerNode2Selected ? (
+                  <p>{state.RecordingViewerNode2Selected.value} / Camera 2</p>
+                ) : (
+                  <p>{'Node 2 / Camera 2'}</p>
+                )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
-                  src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                  src={state.RecordingViewerNode2Camera2URL}
                 ></video>
               </Col>
               <Col xs={4}>
-                <p>CrimeCamera002/camera3</p>
+                {state.RecordingViewerNode2Selected ? (
+                  <p>{state.RecordingViewerNode2Selected.value} / Camera 3</p>
+                ) : (
+                  <p>{'Node 2 / Camera 3'}</p>
+                )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
-                  src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                  src={state.RecordingViewerNode2Camera3URL}
                 ></video>
               </Col>
             </Row>
@@ -271,27 +328,39 @@ export default function RecordingViewer() {
           <Card.Body>
             <Row className="justify-content-center align-items-center">
               <Col xs={4}>
-                <p>CrimeCamera003/camera1</p>
+                {state.RecordingViewerNode3Selected ? (
+                  <p>{state.RecordingViewerNode3Selected.value} / Camera 1</p>
+                ) : (
+                  <p>{'Node 3 / Camera 1'}</p>
+                )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
-                  src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                  src={state.RecordingViewerNode3Camera1URL}
                 ></video>
               </Col>
               <Col xs={4}>
-                <p>CrimeCamera003/camera2</p>
+                {state.RecordingViewerNode3Selected ? (
+                  <p>{state.RecordingViewerNode3Selected.value} / Camera 2</p>
+                ) : (
+                  <p>{'Node 3 / Camera 2'}</p>
+                )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
-                  src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                  src={state.RecordingViewerNode3Camera2URL}
                 ></video>
               </Col>
               <Col xs={4}>
-                <p>CrimeCamera003/camera3</p>
+                {state.RecordingViewerNode3Selected ? (
+                  <p>{state.RecordingViewerNode3Selected.value} / Camera 3</p>
+                ) : (
+                  <p>{'Node 3 / Camera 3'}</p>
+                )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
-                  src={`http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4`}
+                  src={state.RecordingViewerNode3Camera3URL}
                 ></video>
               </Col>
             </Row>
