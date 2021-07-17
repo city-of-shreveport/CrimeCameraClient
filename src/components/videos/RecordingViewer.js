@@ -1,4 +1,6 @@
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Button from 'react-bootstrap/Button';
+import Calendar from 'react-calendar';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
@@ -6,6 +8,9 @@ import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
+import Select from 'react-select';
+import moment from 'moment';
+import { Carousel } from 'react-responsive-carousel';
 import { GlobalContext } from '../../contexts/globalContext';
 
 export default function RecordingViewer() {
@@ -18,6 +23,165 @@ export default function RecordingViewer() {
     });
   };
 
+  const handleSelectNodes = () => {
+    setState({ RecordingViewerFormIsLoading: true });
+    fetch('http://rtcc-server.shreveport-it.org/api/videos/')
+      .then((response) => response.json())
+      .then((json) => {
+        var dates = json.map((video) => video.dateTime);
+        var dateStrings = dates.map((date) => {
+          return moment(date).format('L');
+        });
+        var uniqueDateStrings = [...new Set(dateStrings)];
+
+        setState({
+          RecordingViewerVideos: json,
+          RecordingViewerVideoUniqueDates: uniqueDateStrings,
+          RecordingViewerModalOpen: true,
+          RecordingViewerFormIsLoading: false,
+          RecordingViewerCurrentSlide: 0,
+        });
+      });
+  };
+
+  const handleSelectDate = (date) => {
+    var selectedDate = moment(date).format('L');
+    var availableTimes = state.RecordingViewerVideos.map((video) => {
+      var videoDate = moment(video.dateTime).format('L');
+      if (videoDate === selectedDate) {
+        return moment(video.dateTime).format('LT');
+      } else {
+        return undefined;
+      }
+    });
+    var filteredAvailableTimes = availableTimes.filter((time) => time !== undefined);
+    var uniqueAvailableTimes = [...new Set(filteredAvailableTimes)];
+
+    setState({
+      RecordingViewerDateSelected: date,
+      RecordingViewerTimeSelected: null,
+      RecordingViewerAvailableTimes: uniqueAvailableTimes,
+      RecordingViewerCurrentSlide: 1,
+    });
+  };
+
+  const handleSelectTime = (time) => {
+    var selectedDate = moment(state.RecordingViewerDateSelected).format('L');
+    var selectedTime = time.value;
+    var availableNodes = state.RecordingViewerVideos.map((video) => {
+      var videoDate = moment(video.dateTime).format('L');
+      var videoTime = moment(video.dateTime).format('LT');
+      if (videoDate === selectedDate && videoTime === selectedTime) {
+        return video.node;
+      } else {
+        return undefined;
+      }
+    });
+    var filteredAvailableNodes = availableNodes.filter((node) => node !== undefined);
+    var uniqueAvailableNodes = [...new Set(filteredAvailableNodes)];
+
+    setState({
+      RecordingViewerNode1Selected: null,
+      RecordingViewerNode2Selected: null,
+      RecordingViewerNode3Selected: null,
+      RecordingViewerTimeSelected: time,
+      RecordingViewerAvailableNodes: uniqueAvailableNodes,
+      RecordingViewerCurrentSlide: 2,
+    });
+  };
+
+  const handleSelectNode1 = (node) => {
+    setState({
+      RecordingViewerNode1Selected: node,
+    });
+  };
+
+  const handleSelectNode2 = (node) => {
+    setState({
+      RecordingViewerNode2Selected: node,
+    });
+  };
+
+  const handleSelectNode3 = (node) => {
+    setState({
+      RecordingViewerNode3Selected: node,
+    });
+  };
+
+  const dateHasNoVideos = (date) => {
+    return state.RecordingViewerVideoUniqueDates.includes(moment(date).format('L')) ? false : true;
+  };
+
+  const prevSlide = () => {
+    setState({
+      RecordingViewerCurrentSlide: state.RecordingViewerCurrentSlide - 1,
+    });
+  };
+
+  const renderTimeOptions = () => {
+    if (state.RecordingViewerAvailableTimes.length > 0) {
+      return (
+        <Select
+          value={state.RecordingViewerTimeSelected}
+          options={state.RecordingViewerAvailableTimes.map((item) => {
+            return { value: item, label: item };
+          })}
+          onChange={(value) => handleSelectTime(value)}
+        />
+      );
+    } else {
+      return null;
+    }
+  };
+
+  const renderNode1Options = () => {
+    if (state.RecordingViewerAvailableNodes.length > 0) {
+      return (
+        <Select
+          value={state.RecordingViewerNode1Selected}
+          options={state.RecordingViewerAvailableNodes.map((item) => {
+            return { value: item, label: item };
+          })}
+          onChange={(value) => handleSelectNode1(value)}
+        />
+      );
+    } else {
+      return null;
+    }
+  };
+
+  const renderNode2Options = () => {
+    if (state.RecordingViewerAvailableNodes.length > 0) {
+      return (
+        <Select
+          value={state.RecordingViewerNode2Selected}
+          options={state.RecordingViewerAvailableNodes.map((item) => {
+            return { value: item, label: item };
+          })}
+          onChange={(value) => handleSelectNode2(value)}
+        />
+      );
+    } else {
+      return null;
+    }
+  };
+
+  const renderNode3Options = () => {
+    if (state.RecordingViewerAvailableNodes.length > 0) {
+      return (
+        <Select
+          value={state.RecordingViewerNode3Selected}
+          options={state.RecordingViewerAvailableNodes.map((item) => {
+            return { value: item, label: item };
+          })}
+          onChange={(value) => handleSelectNode3(value)}
+        />
+      );
+    } else {
+      return null;
+    }
+  };
+
   return (
     <Container fluid className="bg-dark">
       <Row>
@@ -25,7 +189,11 @@ export default function RecordingViewer() {
           <Card.Body>
             <Row className="justify-content-center align-items-center">
               <Col xs={12}>
-                <Button onClick={() => setState({ RecordingViewerModalOpen: true })}>Select Nodes</Button>
+                {state.RecordingViewerFormIsLoading ? (
+                  <Button disabled>Loading Videos...</Button>
+                ) : (
+                  <Button onClick={() => handleSelectNodes()}>Select Nodes</Button>
+                )}
               </Col>
             </Row>
           </Card.Body>
@@ -134,17 +302,63 @@ export default function RecordingViewer() {
       <Modal
         show={state.RecordingViewerModalOpen}
         onHide={() => setState({ RecordingViewerModalOpen: false })}
-        size="md"
+        size="lg"
         centered
         style={{ maxHeight: '90%', minWidth: '100%' }}
       >
         <Card className="text-center" bg="dark" text="light">
           <CardGroup>
             <Card
-              style={{ minHeight: '60vh', maxHeight: '50vh', overflow: 'scroll' }}
               className="text-center"
               text="dark"
-            ></Card>
+              style={{ minHeight: '500px', maxHeight: '50vh', overflow: 'scroll' }}
+            >
+              <Carousel
+                autoPlay={false}
+                showArrows={false}
+                showStatus={false}
+                showIndicators={false}
+                showThumbs={false}
+                useKeyboardArrows={false}
+                selectedItem={state.RecordingViewerCurrentSlide}
+              >
+                <div style={{ minHeight: '500px', maxHeight: '50vh' }}>
+                  <h4>Select Date</h4>
+                  <Calendar
+                    onChange={(date) => handleSelectDate(date)}
+                    value={state.RecordingViewerDateSelected}
+                    tileDisabled={({ date }) => dateHasNoVideos(date)}
+                  />
+                </div>
+                <div style={{ minHeight: '500px', maxHeight: '50vh' }}>
+                  <h4>Select Time</h4>
+                  <button style={{ marginBottom: '10px' }} onClick={prevSlide}>
+                    Previous
+                  </button>
+                  <div style={{ width: '50%', margin: 'auto' }}>{renderTimeOptions()}</div>
+                </div>
+                <div style={{ minHeight: '500px', maxHeight: '50vh' }}>
+                  <h4>Select Nodes</h4>
+                  <button style={{ marginBottom: '10px' }} onClick={prevSlide}>
+                    Previous
+                  </button>
+                  <div style={{ width: '100%' }}>
+                    <div style={{ width: '33%', display: 'inline-block' }}>
+                      <h5>Node 1</h5>
+                      {renderNode1Options()}
+                    </div>
+                    <div style={{ width: '33%', display: 'inline-block' }}>
+                      <h5>Node 2</h5>
+                      {renderNode2Options()}
+                    </div>
+                    <div style={{ width: '33%', display: 'inline-block' }}>
+                      <h5>Node 3</h5>
+                      {renderNode3Options()}
+                    </div>
+                  </div>
+                </div>
+              </Carousel>
+            </Card>
           </CardGroup>
         </Card>
       </Modal>
