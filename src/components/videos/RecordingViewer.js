@@ -35,11 +35,23 @@ export default function RecordingViewer() {
         var uniqueDateStrings = [...new Set(dateStrings)];
 
         setState({
-          RecordingViewerVideos: json,
-          RecordingViewerVideoUniqueDates: uniqueDateStrings,
-          RecordingViewerModalOpen: true,
-          RecordingViewerFormIsLoading: false,
           RecordingViewerCurrentSlide: 0,
+          RecordingViewerFormIsLoading: false,
+          RecordingViewerModalOpen: true,
+          RecordingViewerNode1Camera1URL: '',
+          RecordingViewerNode1Camera2URL: '',
+          RecordingViewerNode1Camera3URL: '',
+          RecordingViewerNode1Selected: '',
+          RecordingViewerNode2Camera1URL: '',
+          RecordingViewerNode2Camera2URL: '',
+          RecordingViewerNode2Camera3URL: '',
+          RecordingViewerNode2Selected: '',
+          RecordingViewerNode3Camera1URL: '',
+          RecordingViewerNode3Camera2URL: '',
+          RecordingViewerNode3Camera3URL: '',
+          RecordingViewerNode3Selected: '',
+          RecordingViewerVideoUniqueDates: uniqueDateStrings,
+          RecordingViewerVideos: json,
         });
       });
   };
@@ -58,10 +70,22 @@ export default function RecordingViewer() {
     var uniqueAvailableTimes = [...new Set(filteredAvailableTimes)];
 
     setState({
-      RecordingViewerDateSelected: date,
-      RecordingViewerTimeSelected: null,
       RecordingViewerAvailableTimes: uniqueAvailableTimes,
       RecordingViewerCurrentSlide: 1,
+      RecordingViewerDateSelected: date,
+      RecordingViewerNode1Camera1URL: '',
+      RecordingViewerNode1Camera2URL: '',
+      RecordingViewerNode1Camera3URL: '',
+      RecordingViewerNode1Selected: '',
+      RecordingViewerNode2Camera1URL: '',
+      RecordingViewerNode2Camera2URL: '',
+      RecordingViewerNode2Camera3URL: '',
+      RecordingViewerNode2Selected: '',
+      RecordingViewerNode3Camera1URL: '',
+      RecordingViewerNode3Camera2URL: '',
+      RecordingViewerNode3Camera3URL: '',
+      RecordingViewerNode3Selected: '',
+      RecordingViewerTimeSelected: '',
     });
   };
 
@@ -81,12 +105,21 @@ export default function RecordingViewer() {
     var uniqueAvailableNodes = [...new Set(filteredAvailableNodes)];
 
     setState({
-      RecordingViewerNode1Selected: null,
-      RecordingViewerNode2Selected: null,
-      RecordingViewerNode3Selected: null,
-      RecordingViewerTimeSelected: time,
       RecordingViewerAvailableNodes: uniqueAvailableNodes,
       RecordingViewerCurrentSlide: 2,
+      RecordingViewerNode1Camera1URL: '',
+      RecordingViewerNode1Camera2URL: '',
+      RecordingViewerNode1Camera3URL: '',
+      RecordingViewerNode1Selected: '',
+      RecordingViewerNode2Camera1URL: '',
+      RecordingViewerNode2Camera2URL: '',
+      RecordingViewerNode2Camera3URL: '',
+      RecordingViewerNode2Selected: '',
+      RecordingViewerNode3Camera1URL: '',
+      RecordingViewerNode3Camera2URL: '',
+      RecordingViewerNode3Camera3URL: '',
+      RecordingViewerNode3Selected: '',
+      RecordingViewerTimeSelected: time,
     });
   };
 
@@ -246,7 +279,7 @@ export default function RecordingViewer() {
                     </a>
                   </p>
                 ) : (
-                  <p>{'Node 1 / Camera 1'}</p>
+                  <p>{'-'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
@@ -265,7 +298,7 @@ export default function RecordingViewer() {
                     </a>
                   </p>
                 ) : (
-                  <p>{'Node 1 / Camera 2'}</p>
+                  <p>{'-'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
@@ -284,7 +317,7 @@ export default function RecordingViewer() {
                     </a>
                   </p>
                 ) : (
-                  <p>{'Node 1 / Camera 3'}</p>
+                  <p>{'-'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
@@ -312,7 +345,7 @@ export default function RecordingViewer() {
                     </a>
                   </p>
                 ) : (
-                  <p>{'Node 2 / Camera 1'}</p>
+                  <p>{'-'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
@@ -331,7 +364,7 @@ export default function RecordingViewer() {
                     </a>
                   </p>
                 ) : (
-                  <p>{'Node 2 / Camera 2'}</p>
+                  <p>{'-'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
@@ -350,7 +383,7 @@ export default function RecordingViewer() {
                     </a>
                   </p>
                 ) : (
-                  <p>{'Node 2 / Camera 3'}</p>
+                  <p>{'-'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
@@ -378,7 +411,7 @@ export default function RecordingViewer() {
                     </a>
                   </p>
                 ) : (
-                  <p>{'Node 3 / Camera 1'}</p>
+                  <p>{'-'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
@@ -397,7 +430,7 @@ export default function RecordingViewer() {
                     </a>
                   </p>
                 ) : (
-                  <p>{'Node 3 / Camera 2'}</p>
+                  <p>{'-'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
@@ -416,7 +449,7 @@ export default function RecordingViewer() {
                     </a>
                   </p>
                 ) : (
-                  <p>{'Node 3 / Camera 3'}</p>
+                  <p>{'-'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
