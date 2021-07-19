@@ -239,37 +239,58 @@ export default function RecordingViewer() {
             <Row className="justify-content-center align-items-center">
               <Col xs={4}>
                 {state.RecordingViewerNode1Selected ? (
-                  <p>{state.RecordingViewerNode1Selected.value} / Camera 1</p>
+                  <p>
+                    {state.RecordingViewerNode1Selected.value} / Camera 1{' '}
+                    <a href={`${state.RecordingViewerNode1Camera1URL}/download`} download>
+                      📥
+                    </a>
+                  </p>
                 ) : (
                   <p>{'Node 1 / Camera 1'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   src={state.RecordingViewerNode1Camera1URL}
                 ></video>
               </Col>
               <Col xs={4}>
                 {state.RecordingViewerNode1Selected ? (
-                  <p>{state.RecordingViewerNode1Selected.value} / Camera 2</p>
+                  <p>
+                    {state.RecordingViewerNode1Selected.value} / Camera 2{' '}
+                    <a href={`${state.RecordingViewerNode1Camera2URL}/download`} download>
+                      📥
+                    </a>
+                  </p>
                 ) : (
                   <p>{'Node 1 / Camera 2'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   src={state.RecordingViewerNode1Camera2URL}
                 ></video>
               </Col>
               <Col xs={4}>
                 {state.RecordingViewerNode1Selected ? (
-                  <p>{state.RecordingViewerNode1Selected.value} / Camera 3</p>
+                  <p>
+                    {state.RecordingViewerNode1Selected.value} / Camera 3{' '}
+                    <a href={`${state.RecordingViewerNode1Camera3URL}/download`} download>
+                      📥
+                    </a>
+                  </p>
                 ) : (
                   <p>{'Node 1 / Camera 3'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   src={state.RecordingViewerNode1Camera3URL}
                 ></video>
               </Col>
@@ -284,37 +305,58 @@ export default function RecordingViewer() {
             <Row className="justify-content-center align-items-center">
               <Col xs={4}>
                 {state.RecordingViewerNode2Selected ? (
-                  <p>{state.RecordingViewerNode2Selected.value} / Camera 1</p>
+                  <p>
+                    {state.RecordingViewerNode2Selected.value} / Camera 1{' '}
+                    <a href={`${state.RecordingViewerNode2Camera1URL}/download`} download>
+                      📥
+                    </a>
+                  </p>
                 ) : (
                   <p>{'Node 2 / Camera 1'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   src={state.RecordingViewerNode2Camera1URL}
                 ></video>
               </Col>
               <Col xs={4}>
                 {state.RecordingViewerNode2Selected ? (
-                  <p>{state.RecordingViewerNode2Selected.value} / Camera 2</p>
+                  <p>
+                    {state.RecordingViewerNode2Selected.value} / Camera 2{' '}
+                    <a href={`${state.RecordingViewerNode2Camera2URL}/download`} download>
+                      📥
+                    </a>
+                  </p>
                 ) : (
                   <p>{'Node 2 / Camera 2'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   src={state.RecordingViewerNode2Camera2URL}
                 ></video>
               </Col>
               <Col xs={4}>
                 {state.RecordingViewerNode2Selected ? (
-                  <p>{state.RecordingViewerNode2Selected.value} / Camera 3</p>
+                  <p>
+                    {state.RecordingViewerNode2Selected.value} / Camera 3{' '}
+                    <a href={`${state.RecordingViewerNode2Camera3URL}/download`} download>
+                      📥
+                    </a>
+                  </p>
                 ) : (
                   <p>{'Node 2 / Camera 3'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   src={state.RecordingViewerNode2Camera3URL}
                 ></video>
               </Col>
@@ -329,37 +371,58 @@ export default function RecordingViewer() {
             <Row className="justify-content-center align-items-center">
               <Col xs={4}>
                 {state.RecordingViewerNode3Selected ? (
-                  <p>{state.RecordingViewerNode3Selected.value} / Camera 1</p>
+                  <p>
+                    {state.RecordingViewerNode3Selected.value} / Camera 1{' '}
+                    <a href={`${state.RecordingViewerNode3Camera1URL}/download`} download>
+                      📥
+                    </a>
+                  </p>
                 ) : (
                   <p>{'Node 3 / Camera 1'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   src={state.RecordingViewerNode3Camera1URL}
                 ></video>
               </Col>
               <Col xs={4}>
                 {state.RecordingViewerNode3Selected ? (
-                  <p>{state.RecordingViewerNode3Selected.value} / Camera 2</p>
+                  <p>
+                    {state.RecordingViewerNode3Selected.value} / Camera 2{' '}
+                    <a href={`${state.RecordingViewerNode3Camera2URL}/download`} download>
+                      📥
+                    </a>
+                  </p>
                 ) : (
                   <p>{'Node 3 / Camera 2'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   src={state.RecordingViewerNode3Camera2URL}
                 ></video>
               </Col>
               <Col xs={4}>
                 {state.RecordingViewerNode3Selected ? (
-                  <p>{state.RecordingViewerNode3Selected.value} / Camera 3</p>
+                  <p>
+                    {state.RecordingViewerNode3Selected.value} / Camera 3{' '}
+                    <a href={`${state.RecordingViewerNode3Camera3URL}/download`} download>
+                      📥
+                    </a>
+                  </p>
                 ) : (
                   <p>{'Node 3 / Camera 3'}</p>
                 )}
                 <video
                   style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
                   controls
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   src={state.RecordingViewerNode3Camera3URL}
                 ></video>
               </Col>
