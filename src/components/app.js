@@ -75,14 +75,17 @@ export default function App() {
     var nodeArray = [];
     var numberOfNodesUp = 0;
     var totalNumberOfNodes = nodedata.length;
-    for (let i = 0; i < nodedata.length; i++) {
-      fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedata[i].name)
+
+      nodedata.map((nodedataitem) => {
+
+        setTimeout(() => {
+      fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedataitem.name)
         .then((response) => response.json())
         // eslint-disable-next-line
         .then((json) => {
-          let nodeDataPerfMon = nodedata[i];
+          let nodeDataPerfMon = nodedataitem;
           nodeDataPerfMon.perfmon = json[0];
-          var difference = getDifferenceInMinutes(new Date(nodedata[i].lastCheckIn), new Date());
+          var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
 
           if (difference > 15) {
             nodeDataPerfMon.nodeStatus = false;
@@ -100,10 +103,13 @@ export default function App() {
             payload: { nodes: nodeArray, numberOfNodes: totalNumberOfNodes, numberOfNodesUp: numberOfNodesUp },
           });
         });
-    }
+         },3000)
+    })
+       
   }
 
   useEffect(() => {
+    // eslint-disable-next-line
     function refreshStreamerStats() {
       fetch('http://rtcc-server.shreveport-it.org/api/perfMons/CrimeCameraSystem')
         .then((response) => response.json())

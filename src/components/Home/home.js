@@ -1,12 +1,11 @@
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
-
+import ReactDOM from 'react-dom'
 // eslint-disable-next-line
-import Map from '../Home/map';
 import GoogleMap from '../Home/googleMap';
 import Nav from 'react-bootstrap/Nav';
 import React, { useContext } from 'react';
@@ -17,13 +16,8 @@ import { GlobalContext } from '../../contexts/globalContext';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-  // eslint-disable-next-line
-
-
-  // eslint-disable-next-line
-
-
   
+
   // eslint-disable-next-line
   function onBufferHandler(i) {
     console.log('onBufferHandler');
@@ -36,17 +30,20 @@ export default function Home() {
     console.log(i);
   }
 
-  function onProgressHandler(i) {
-    console.log('onProgressHandler');
-    if (i.loadedSeconds > 10) {
-      console.log(i.loadedSeconds);
-      dispatch({
-        type: 'setState',
-        payload: {
-          videoStreamingplayerPlaying: true,
-        },
-      });
-    }
+
+function onEnded(i){
+ console.log('onEnded');
+    console.log(i);
+
+
+
+}
+  function onProgressHandler(i, player) {
+    console.log(i.loadedSeconds)
+console.log(player)
+    
+
+    
   }
 
   // eslint-disable-next-line
@@ -58,8 +55,61 @@ export default function Home() {
   // eslint-disable-next-line
   function onReady(i) {
     console.log('onReady');
-    console.log(i);
-    setTimeout(() => {}, 5000);
+    console.log(i.props.name);
+
+
+
+    if(state.videoStreamingplayerPlaying===false){
+    switch(i.props.name) {
+        case 'player1':
+           dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers:{
+                videoStreamerPlayer1Buffer: true,
+                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
+                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
+                }
+              },
+            });
+          break;
+        case 'player2':
+          dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers:{
+                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
+                videoStreamerPlayer2Buffer: true,
+                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
+                }
+              },
+            });
+          break;
+          case 'player3':
+          dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers:{
+                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
+                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
+                videoStreamerPlayer3Buffer: true,
+                }
+              },
+            });
+          break;
+        default:
+          // code block
+      } 
+      if(state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer3Buffer===true){
+      dispatch({
+        type: 'setState',
+        payload: {
+          videoStreamingplayerPlaying: true,
+        },
+      });
+
+    }  
+    }
   }
 
   // eslint-disable-next-line
@@ -86,27 +136,28 @@ export default function Home() {
     console.log(i);
   }
 
-
-    function switchToStreaming(){
-      dispatch({
-        type: 'setState',
-        payload: {
-          videoPlayerStreamingActive: true,
-        },
-      });
-    }
+  function switchToStreaming() {
+    dispatch({
+      type: 'setState',
+      payload: {
+        videoPlayerStreamingActive: true,
+      },
+    });
+  }
+  // eslint-disable-next-line
   let camera1VideoUrl =
     'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera1';
 
+  // eslint-disable-next-line
   let camera2VideoUrl =
     'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera2';
 
+  // eslint-disable-next-line
   let camera3VideoUrl =
     'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera3';
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
-      
         <Row className="justify-content-md-center">
           <Col>
             <CardGroup>
@@ -119,7 +170,7 @@ export default function Home() {
           </Col>
           {state.videoPlayerActive ? (
             <Col xs={2}>
-            <Button onClick={() => switchToStreaming()}>Start Streaming</Button>
+              <Button onClick={() => switchToStreaming()}>Start Streaming</Button>
               <h4 style={{ color: 'white' }}>{state.currentNodeInfo.name}</h4>
 
               <Card bg="dark" text="light">
@@ -136,21 +187,25 @@ export default function Home() {
                 })}
 
                 {state.videoPlayerStreamingActive ? (
-                 <div className='snapashotImage'> 
-                  <ReactPlayer
-                    url={state.videoStreamingURLS.camera1}
-                    playing={state.videoStreamingplayerPlaying}
-                    controls={true}
-                    muted={true}
-                    width="100%"
-                    height="auto"
-                    onProgress={(i) => onProgressHandler(i)}
-                    onReady={(i) => onReady(i)}
-                  /></div>
+                  <div className="snapashotImage">
+                    <ReactPlayer
+                      url={state.videoStreamingURLS.camera1}
+                      playing={state.videoStreamingplayerPlaying}
+                      controls={false}
+                      name="player1"
+                      muted={true}
+                      width="100%"
+                      height="auto"
+                      onProgress={(i) => onProgressHandler(i, 'player1')}
+                      onReady={(i) => onReady(i)}
+                      onEnded={(i) => onEnded(i)}
+                      onDuration= {(i) => onDurationHandler(i)}
+                    />
+                  </div>
                 ) : (
-                  <div className='snapashotImage'><Image className='snapashotImage' src={state.VideoSnapShotURLS.camera1} rounded/></div>
-              
-           
+                  <div className="snapashotImage">
+                    <Image className="snapashotImage" src={state.VideoSnapShotURLS.camera1} rounded />
+                  </div>
                 )}
               </Card>
               <Card bg="dark" text="light">
@@ -167,19 +222,26 @@ export default function Home() {
                 })}
                 {'  '}
                 {state.videoPlayerStreamingActive ? (
-                  <div className='snapashotImage'>
-                  <ReactPlayer
-                    url={state.videoStreamingURLS.camera2}
-                    playing={state.videoStreamingplayerPlaying}
-                    controls={true}
-                    muted={true}
-                    width="100%"
-                    height="auto"
-                    onProgress={(i) => onProgressHandler(i)}
-                  /></div>
+                  <div className="snapashotImage">
+                    <ReactPlayer
+                      url={state.videoStreamingURLS.camera2}
+
+                      playing={state.videoStreamingplayerPlaying}
+                      controls={false}
+                      name="player2"
+                      muted={true}
+                      width="100%"
+                      height="auto"
+                      onProgress={(i) => onProgressHandler(i, 'player2')}
+                      onReady={(i) => onReady(i)}
+                      onEnded={(i) => onEnded(i)}
+                      onDuration= {(i) => onDurationHandler(i)}
+                    />
+                  </div>
                 ) : (
-                  <div className='snapashotImage'><Image  className='snapashotImage' src={state.VideoSnapShotURLS.camera1} rounded/></div>
-            
+                  <div className="snapashotImage">
+                    <Image className="snapashotImage" src={state.VideoSnapShotURLS.camera1} rounded />
+                  </div>
                 )}
               </Card>
               <Card bg="dark" text="light">
@@ -203,20 +265,25 @@ export default function Home() {
                   );
                 })}
                 {state.videoPlayerStreamingActive ? (
-                  <div className='snapashotImage'>
-                  <ReactPlayer
-                    url={state.videoStreamingURLS.camera3}
-                    playing={state.videoStreamingplayerPlaying}
-                    controls={true}
-                    muted={true}
-                    width="100%"
-                    height="auto"
-                    onProgress={(i) => onProgressHandler(i)}
-                  /></div>
+                  <div className="snapashotImage">
+                    <ReactPlayer
+                      url={state.videoStreamingURLS.camera3}
+                      playing={state.videoStreamingplayerPlaying}
+                      controls={false}
+                      name="player3"
+                      muted={true}
+                      width="100%"
+                      height="auto"
+                      onProgress={(i) => onProgressHandler(i, 'player3')}
+                      onReady={(i) => onReady(i)}
+                      onEnded={(i) => onEnded(i)}
+                      onDuration= {(i) => onDurationHandler(i)}
+                    />
+                  </div>
                 ) : (
-                  <div className='snapashotImage'><Image className='snapashotImage' src={state.VideoSnapShotURLS.camera1} rounded /></div>
-                
-                  
+                  <div className="snapashotImage">
+                    <Image className="snapashotImage" src={state.VideoSnapShotURLS.camera1} rounded />
+                  </div>
                 )}
               </Card>
             </Col>
