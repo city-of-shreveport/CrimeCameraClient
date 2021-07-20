@@ -19,9 +19,66 @@ export default function Home() {
     console.log('onEnded');
     console.log(i);
   }
+
   function onProgressHandler(i, player) {
     console.log(i.loadedSeconds);
     console.log(player);
+
+    if (i.loadedSeconds > 5) {
+      if (state.videoStreamingplayerPlaying === false) {
+        switch (player) {
+          case 'player1':
+            dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers: {
+                  videoStreamerPlayer1Buffer: true,
+                  videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
+                  videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
+                },
+              },
+            });
+            break;
+          case 'player2':
+            dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers: {
+                  videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
+                  videoStreamerPlayer2Buffer: true,
+                  videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
+                },
+              },
+            });
+            break;
+          case 'player3':
+            dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers: {
+                  videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
+                  videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
+                  videoStreamerPlayer3Buffer: true,
+                },
+              },
+            });
+            break;
+          default:
+        }
+        if (
+          state.videStremingPlayers.videoStreamerPlayer1Buffer === true &&
+          state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
+          state.videStremingPlayers.videoStreamerPlayer3Buffer === true
+        ) {
+          dispatch({
+            type: 'setState',
+            payload: {
+              videoStreamingplayerPlaying: true,
+            },
+          });
+        }
+      }
+    }
   }
 
   function onDurationHandler(i) {
@@ -29,60 +86,9 @@ export default function Home() {
     console.log(i);
   }
 
-  if (i.loadedSeconds > 5) {
-    if (state.videoStreamingplayerPlaying === false) {
-      switch (player) {
-        case 'player1':
-          dispatch({
-            type: 'setState',
-            payload: {
-              videStremingPlayers: {
-                videoStreamerPlayer1Buffer: true,
-                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
-                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
-              },
-            },
-          });
-          break;
-        case 'player2':
-          dispatch({
-            type: 'setState',
-            payload: {
-              videStremingPlayers: {
-                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
-                videoStreamerPlayer2Buffer: true,
-                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
-              },
-            },
-          });
-          break;
-        case 'player3':
-          dispatch({
-            type: 'setState',
-            payload: {
-              videStremingPlayers: {
-                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
-                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
-                videoStreamerPlayer3Buffer: true,
-              },
-            },
-          });
-          break;
-        default:
-      }
-      if (
-        state.videStremingPlayers.videoStreamerPlayer1Buffer === true &&
-        state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
-        state.videStremingPlayers.videoStreamerPlayer3Buffer === true
-      ) {
-        dispatch({
-          type: 'setState',
-          payload: {
-            videoStreamingplayerPlaying: true,
-          },
-        });
-      }
-    }
+  function onReady(i) {
+    console.log('onReady');
+    console.log(i.props.name);
   }
 
   function switchToStreaming() {
@@ -94,25 +100,6 @@ export default function Home() {
     });
   }
 
-  function switchToStreaming() {
-    dispatch({
-      type: 'setState',
-      payload: {
-        videoPlayerStreamingActive: true,
-      },
-    });
-  }
-  // eslint-disable-next-line
-  let camera1VideoUrl =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera1';
-
-  // eslint-disable-next-line
-  let camera2VideoUrl =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera2';
-
-  // eslint-disable-next-line
-  let camera3VideoUrl =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera3';
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
