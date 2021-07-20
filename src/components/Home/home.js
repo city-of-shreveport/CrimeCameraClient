@@ -3,10 +3,8 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import Image from 'react-bootstrap/Image';
-import ReactDOM from 'react-dom'
-// eslint-disable-next-line
 import GoogleMap from '../Home/googleMap';
+import Image from 'react-bootstrap/Image';
 import Nav from 'react-bootstrap/Nav';
 import React, { useContext } from 'react';
 import ReactPlayer from 'react-player';
@@ -16,124 +14,78 @@ import { GlobalContext } from '../../contexts/globalContext';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-  
 
-  // eslint-disable-next-line
-  function onBufferHandler(i) {
-    console.log('onBufferHandler');
+  function onEnded(i) {
+    console.log('onEnded');
     console.log(i);
   }
-
-  // eslint-disable-next-line
-  function onPlayHander(i) {
-    console.log('onPlayHander');
-    console.log(i);
-  }
-
-
-function onEnded(i){
- console.log('onEnded');
-    console.log(i);
-
-
-
-}
   function onProgressHandler(i, player) {
-    console.log(i.loadedSeconds)
-console.log(player)
-    
-
-    
+    console.log(i.loadedSeconds);
+    console.log(player);
   }
 
-  // eslint-disable-next-line
   function onDurationHandler(i) {
     console.log('onDurationHandler');
     console.log(i);
   }
 
-  // eslint-disable-next-line
   function onReady(i) {
     console.log('onReady');
     console.log(i.props.name);
 
-
-
-    if(state.videoStreamingplayerPlaying===false){
-    switch(i.props.name) {
+    if (state.videoStreamingplayerPlaying === false) {
+      switch (i.props.name) {
         case 'player1':
-           dispatch({
-              type: 'setState',
-              payload: {
-                videStremingPlayers:{
+          dispatch({
+            type: 'setState',
+            payload: {
+              videStremingPlayers: {
                 videoStreamerPlayer1Buffer: true,
                 videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
                 videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
-                }
               },
-            });
+            },
+          });
           break;
         case 'player2':
           dispatch({
-              type: 'setState',
-              payload: {
-                videStremingPlayers:{
+            type: 'setState',
+            payload: {
+              videStremingPlayers: {
                 videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
                 videoStreamerPlayer2Buffer: true,
                 videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
-                }
               },
-            });
+            },
+          });
           break;
-          case 'player3':
+        case 'player3':
           dispatch({
-              type: 'setState',
-              payload: {
-                videStremingPlayers:{
+            type: 'setState',
+            payload: {
+              videStremingPlayers: {
                 videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
                 videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
                 videoStreamerPlayer3Buffer: true,
-                }
               },
-            });
+            },
+          });
           break;
         default:
-          // code block
-      } 
-      if(state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer3Buffer===true){
-      dispatch({
-        type: 'setState',
-        payload: {
-          videoStreamingplayerPlaying: true,
-        },
-      });
-
-    }  
+      }
+      if (
+        state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
+        state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
+        state.videStremingPlayers.videoStreamerPlayer3Buffer === true
+      ) {
+        dispatch({
+          type: 'setState',
+          payload: {
+            videoStreamingplayerPlaying: true,
+          },
+        });
+      }
     }
-  }
-
-  // eslint-disable-next-line
-  function onBufferEnd(i) {
-    console.log('onBufferEnd');
-    console.log(i);
-  }
-
-  // eslint-disable-next-line
-  function onStart(i) {
-    console.log('onStart');
-    console.log(i);
-  }
-
-  // eslint-disable-next-line
-  function onDuration(i) {
-    console.log('onDuration');
-    console.log(i);
-  }
-
-  // eslint-disable-next-line
-  function getSecondsLoaded(i) {
-    console.log('getSecondsLoaded');
-    console.log(i);
   }
 
   function switchToStreaming() {
@@ -144,17 +96,7 @@ console.log(player)
       },
     });
   }
-  // eslint-disable-next-line
-  let camera1VideoUrl =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera1';
 
-  // eslint-disable-next-line
-  let camera2VideoUrl =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera2';
-
-  // eslint-disable-next-line
-  let camera3VideoUrl =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera3';
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
@@ -172,7 +114,6 @@ console.log(player)
             <Col xs={2}>
               <Button onClick={() => switchToStreaming()}>Start Streaming</Button>
               <h4 style={{ color: 'white' }}>{state.currentNodeInfo.name}</h4>
-
               <Card bg="dark" text="light">
                 {tryValue(() => {
                   return state.currentNodeInfo.perfmon.cameraStatus.camera1 ? (
@@ -185,7 +126,6 @@ console.log(player)
                     </Nav.Link>
                   );
                 })}
-
                 {state.videoPlayerStreamingActive ? (
                   <div className="snapashotImage">
                     <ReactPlayer
@@ -199,7 +139,7 @@ console.log(player)
                       onProgress={(i) => onProgressHandler(i, 'player1')}
                       onReady={(i) => onReady(i)}
                       onEnded={(i) => onEnded(i)}
-                      onDuration= {(i) => onDurationHandler(i)}
+                      onDuration={(i) => onDurationHandler(i)}
                     />
                   </div>
                 ) : (
@@ -225,7 +165,6 @@ console.log(player)
                   <div className="snapashotImage">
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera2}
-
                       playing={state.videoStreamingplayerPlaying}
                       controls={false}
                       name="player2"
@@ -235,7 +174,7 @@ console.log(player)
                       onProgress={(i) => onProgressHandler(i, 'player2')}
                       onReady={(i) => onReady(i)}
                       onEnded={(i) => onEnded(i)}
-                      onDuration= {(i) => onDurationHandler(i)}
+                      onDuration={(i) => onDurationHandler(i)}
                     />
                   </div>
                 ) : (
@@ -277,7 +216,7 @@ console.log(player)
                       onProgress={(i) => onProgressHandler(i, 'player3')}
                       onReady={(i) => onReady(i)}
                       onEnded={(i) => onEnded(i)}
-                      onDuration= {(i) => onDurationHandler(i)}
+                      onDuration={(i) => onDurationHandler(i)}
                     />
                   </div>
                 ) : (

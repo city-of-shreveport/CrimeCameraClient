@@ -8,6 +8,7 @@ import SystemManager from './SystemSettings/settingsSystemManager';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
 import { IoCameraOutline } from 'react-icons/io5';
+
 export default function App() {
   const [state, dispatch] = useContext(GlobalContext);
 
@@ -76,93 +77,78 @@ export default function App() {
     var numberOfNodesUp = 0;
     var totalNumberOfNodes = nodedata.length;
 
-      nodedata.map((nodedataitem) => {
+    // eslint-disable-next-line
+    nodedata.map((nodedataitem) => {
+      setTimeout(() => {
+        fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedataitem.name)
+          .then((response) => response.json())
+          .then((json) => {
+            let nodeDataPerfMon = nodedataitem;
+            nodeDataPerfMon.perfmon = json[0];
+            var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
 
-        setTimeout(() => {
-      fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedataitem.name)
-        .then((response) => response.json())
-        // eslint-disable-next-line
-        .then((json) => {
-          let nodeDataPerfMon = nodedataitem;
-          nodeDataPerfMon.perfmon = json[0];
-          var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
+            if (difference > 15) {
+              nodeDataPerfMon.nodeStatus = false;
+            } else {
+              nodeDataPerfMon.nodeStatus = true;
+              numberOfNodesUp++;
+            }
 
-          if (difference > 15) {
-            nodeDataPerfMon.nodeStatus = false;
-          } else {
-            nodeDataPerfMon.nodeStatus = true;
-            numberOfNodesUp++;
-          }
-
-          nodeArray.push(nodeDataPerfMon);
-        })
-        // eslint-disable-next-line
-        .then(() => {
-          dispatch({
-            type: 'setState',
-            payload: { nodes: nodeArray, numberOfNodes: totalNumberOfNodes, numberOfNodesUp: numberOfNodesUp },
+            nodeArray.push(nodeDataPerfMon);
+          })
+          .then(() => {
+            dispatch({
+              type: 'setState',
+              payload: { nodes: nodeArray, numberOfNodes: totalNumberOfNodes, numberOfNodesUp: numberOfNodesUp },
+            });
           });
-        });
-         },3000)
-    })
-       
+      }, 3000);
+    });
   }
 
   useEffect(() => {
-    // eslint-disable-next-line
-    function refreshStreamerStats() {
-      fetch('http://rtcc-server.shreveport-it.org/api/perfMons/CrimeCameraSystem')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'setState',
-            payload: { serverstatistics: json },
-          });
+    let currentStreams = [];
+
+    fetch('http://rtcc-server.shreveport-it.org/api/streams/streamingserverstats')
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: 'setState',
+          payload: { restreamerserverstatistics: json },
         });
+      });
 
-      let currentStreams = [];
-
-      fetch('http://rtcc-server.shreveport-it.org/api/streams/streamingserverstats')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'setState',
-            payload: { restreamerserverstatistics: json },
-          });
-        });
-
-      fetch('http://rtcc-server.shreveport-it.org/api/streams/streamstatistics/10.10.30.12')
-        .then((response) => response.json())
-        .then((json) => {
-          try {
-            Object.keys(json.streams).forEach(function (key) {
-              currentStreams.push({
-                streamName: key,
-                streamInfo: json.streams[key],
-              });
-
-              dispatch({
-                type: 'setState',
-                payload: { restreamerStreamsStats: currentStreams },
-              });
+    fetch('http://rtcc-server.shreveport-it.org/api/streams/streamstatistics/10.10.30.12')
+      .then((response) => response.json())
+      .then((json) => {
+        try {
+          Object.keys(json.streams).forEach(function (key) {
+            currentStreams.push({
+              streamName: key,
+              streamInfo: json.streams[key],
             });
-          } catch (e) {
+
             dispatch({
               type: 'setState',
               payload: { restreamerStreamsStats: currentStreams },
             });
-          }
-        });
-
-      fetch('http://10.10.30.12:8000/api/streams')
-        .then((response) => response.json())
-        .then((json) => {
+          });
+        } catch (e) {
           dispatch({
             type: 'setState',
-            payload: { streams: json },
+            payload: { restreamerStreamsStats: currentStreams },
           });
+        }
+      });
+
+    fetch('http://10.10.30.12:8000/api/streams')
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: 'setState',
+          payload: { streams: json },
         });
-    }
+      });
 
     function refreshData() {
       fetch('http://rtcc-server.shreveport-it.org/api/servers')
@@ -181,16 +167,12 @@ export default function App() {
         });
     }
 
-    refreshData();
-    //refreshStreamerStats();
-
     setInterval(() => {
       refreshData();
     }, 365000);
 
-    setInterval(() => {
-      //refreshStreamerStats();
-    }, 10000);
+    refreshData();
+
     // eslint-disable-next-line
   }, []);
 
