@@ -22,9 +22,14 @@ export default function Home() {
   function onProgressHandler(i, player) {
     console.log(i.loadedSeconds);
     console.log(player);
+  }
 
-    if(i.loadedSeconds>5 ){
+  function onDurationHandler(i) {
+    console.log('onDurationHandler');
+    console.log(i);
+  }
 
+  if (i.loadedSeconds > 5) {
     if (state.videoStreamingplayerPlaying === false) {
       switch (player) {
         case 'player1':
@@ -77,23 +82,8 @@ export default function Home() {
           },
         });
       }
-
     }
-
-    }
-}
-  function onDurationHandler(i) {
-    console.log('onDurationHandler');
-    console.log(i);
   }
-
-  function onReady(i) {
-    console.log('onReady');
-    console.log(i.props.name);
-
-    
-    }
-  
 
   function switchToStreaming() {
     dispatch({
@@ -104,6 +94,25 @@ export default function Home() {
     });
   }
 
+  function switchToStreaming() {
+    dispatch({
+      type: 'setState',
+      payload: {
+        videoPlayerStreamingActive: true,
+      },
+    });
+  }
+  // eslint-disable-next-line
+  let camera1VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera1';
+
+  // eslint-disable-next-line
+  let camera2VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera2';
+
+  // eslint-disable-next-line
+  let camera3VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera3';
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
