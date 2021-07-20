@@ -66,11 +66,19 @@ const initialState = {
   videoStreamingplayerPlaying: false,
   videoStreamingURLS: {},
   VideoSnapShotURLS: {},
+<<<<<<< HEAD
   videStremingPlayers:{
     videoStreamerPlayer1Buffer: false,
     videoStreamerPlayer2Buffer: false,
     videoStreamerPlayer3Buffer: false,
     },
+=======
+  videStremingPlayers: {
+    videoStreamerPlayer1Buffer: false,
+    videoStreamerPlayer2Buffer: false,
+    videoStreamerPlayer3Buffer: false,
+  },
+>>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
   // RecordingViewer
   RecordingViewerAvailableNodes: [],
   RecordingViewerAvailableTimes: [],
