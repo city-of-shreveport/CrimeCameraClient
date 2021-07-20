@@ -24,104 +24,94 @@ export default function GoogleMap() {
     // eslint-disable-next-line
     var current_infowindow = false;
 
-    // eslint-disable-next-line
-    nodes.map((node) => {
-      var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
-
-      if (difference < 15) {
-        nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png';
+    // eslint-disable-next-line\
+    
+    var timesRunGetNodes = 0;
+    var intervalGetNodes = setInterval(() => {
+      timesRunGetNodes += 1;
+      if(timesRunGetNodes === 10){
+          clearInterval(intervalGetNodes);
       }
-      if (difference > 15) {
-        nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png';
-      }
-      var myLatLng = new maps.LatLng(node.config.locationLat, node.config.locationLong);
-      markers.push(
-        new maps.Marker({
-          node: node.name,
-          position: {
-            lat: node.config.locationLat,
-            lng: node.config.locationLong,
-          },
-          map,
-          icon: { url: nodeIcon, labelOrigin: { x: 33, y: 17 } },
-          label: {
-            text: node.name.substr(node.name.length - 3),
+      state.nodes.map((node) => {
+        var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
 
-            color: 'black',
-          },
-        })
-      );
-      bounds.extend(myLatLng);
-      map.fitBounds(bounds);
+        if (difference < 15) {
+          nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png';
+        }
+        if (difference > 15) {
+          nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png';
+        }
+        var myLatLng = new maps.LatLng(node.config.locationLat, node.config.locationLong);
 
-      infowindows.push(
-        new maps.InfoWindow({
-          content: '',
-        })
-      );
-    });
-    const startStream = (json) => {
-      dispatch({
-        type: 'setState',
-        payload: {
-          previousNode: tryValue(() => {
-            return state.currentNodeInfo.name;
-          }),
-          currentNodeInfo: json,
-          videoPlayerActive: true,
-          videoStreamingURLS: {
-            camera1: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera1.flv',
-            camera2: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera2.flv',
-            camera3: 'http://rtcc-server.shreveport-it.org:8000/' + json.name + '/camera3.flv',
-          },
-          VideoSnapShotURLS: {
-            camera1: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + json.name + '/camera1',
-            camera2: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + json.name + '/camera2',
-            camera3: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + json.name + '/camera3',
-          },
-        },
-      });
-    };
-
-    // eslint-disable-next-line
-    const stopStream = () => {};
-
-    function fetchCurrentPerfMonData(nodedata) {
-      fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedata.name)
-        .then((response) => response.json())
-        .then((json) => {
-          nodedata.perfmon = json[0];
-          dispatch({
-            type: 'setState',
-            payload: {
-              currentNodeInfo: json,
+        if(markers.indexOf({node:node.name})===-1){
+        markers.push(
+          new maps.Marker({
+            node: node.name,
+            position: {
+              lat: node.config.locationLat,
+              lng: node.config.locationLong,
             },
-          });
-          startStream(nodedata);
-        });
-    }
+            map,
+            icon: { url: nodeIcon, labelOrigin: { x: 33, y: 17 } },
+            label: {
+              text: node.name.substr(node.name.length - 3),
 
-    const getNodeInfo = (node) => {
-      fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node)
-        .then((response) => response.json())
-        .then((json) => {
-          fetchCurrentPerfMonData(json);
-        });
-    };
+              color: 'black',
+            },
+          })
+        );
+        bounds.extend(myLatLng);
+        
+
+        }
+        map.fitBounds(bounds);
+      });
+
 
     markers.forEach((marker, i) => {
       marker.addListener('click', () => {
         dispatch({
           type: 'setState',
           payload: {
+            previousNode: tryValue(() => {
+            return state.currentNodeInfo.name;
+          }),
             videoStreamingplayerPlaying: false,
             videoPlayerStreamingActive: false,
+            currentNodeInfo:{name: marker.node},
+            videoPlayerActive: true,
+            videoStreamingURLS: {
+            camera1: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera1.flv',
+            camera2: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera2.flv',
+            camera3: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera3.flv',
+          },
+          VideoSnapShotURLS: {
+            camera1: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera1',
+            camera2: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera2',
+            camera3: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera3',
+          },
           },
         });
-
-        getNodeInfo(marker.node);
+        console.log(marker.node)
+        
       });
     });
+
+
+
+        }, 1000);
+
+
+
+
+
+
+    // eslint-disable-next-line
+
+
+
+
+
   };
 
   // eslint-disable-next-line
@@ -135,34 +125,8 @@ export default function GoogleMap() {
     return diffInMs / (1000 * 60);
   }
 
-  fetch('http://rtcc-server.shreveport-it.org/api/nodes')
-    .then((response) => response.json())
-    .then((json) => {
-      nodes = json;
-    });
 
-  // eslint-disable-next-line
 
-  // eslint-disable-next-line
-  const handleOpenVideoStreamer = (node) => {
-    console.log(node['node']);
-    fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node['node'])
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-
-        dispatch({
-          type: 'setState',
-          payload: {
-            previousNode: tryValue(() => {
-              return state.currentNodeInfo.name;
-            }),
-            currentNodeInfo: json,
-            videoPlayerActive: true,
-          },
-        });
-      });
-  };
   const AnyReactComponent = ({ text, status, node }) => (
     <div>
       <Card className="text-center">

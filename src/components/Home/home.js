@@ -4,9 +4,8 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
-
+import ReactDOM from 'react-dom'
 // eslint-disable-next-line
-import Map from '../Home/map';
 import GoogleMap from '../Home/googleMap';
 import Nav from 'react-bootstrap/Nav';
 import React, { useContext } from 'react';
@@ -17,9 +16,7 @@ import { GlobalContext } from '../../contexts/globalContext';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-  // eslint-disable-next-line
-
-  // eslint-disable-next-line
+  
 
   // eslint-disable-next-line
   function onBufferHandler(i) {
@@ -33,17 +30,20 @@ export default function Home() {
     console.log(i);
   }
 
-  function onProgressHandler(i) {
-    console.log('onProgressHandler');
-    if (i.loadedSeconds > 10) {
-      console.log(i.loadedSeconds);
-      dispatch({
-        type: 'setState',
-        payload: {
-          videoStreamingplayerPlaying: true,
-        },
-      });
-    }
+
+function onEnded(i){
+ console.log('onEnded');
+    console.log(i);
+
+
+
+}
+  function onProgressHandler(i, player) {
+    console.log(i.loadedSeconds)
+console.log(player)
+    
+
+    
   }
 
   // eslint-disable-next-line
@@ -55,8 +55,61 @@ export default function Home() {
   // eslint-disable-next-line
   function onReady(i) {
     console.log('onReady');
-    console.log(i);
-    setTimeout(() => {}, 5000);
+    console.log(i.props.name);
+
+
+
+    if(state.videoStreamingplayerPlaying===false){
+    switch(i.props.name) {
+        case 'player1':
+           dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers:{
+                videoStreamerPlayer1Buffer: true,
+                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
+                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
+                }
+              },
+            });
+          break;
+        case 'player2':
+          dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers:{
+                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
+                videoStreamerPlayer2Buffer: true,
+                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
+                }
+              },
+            });
+          break;
+          case 'player3':
+          dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers:{
+                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
+                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
+                videoStreamerPlayer3Buffer: true,
+                }
+              },
+            });
+          break;
+        default:
+          // code block
+      } 
+      if(state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer3Buffer===true){
+      dispatch({
+        type: 'setState',
+        payload: {
+          videoStreamingplayerPlaying: true,
+        },
+      });
+
+    }  
+    }
   }
 
   // eslint-disable-next-line
@@ -138,12 +191,15 @@ export default function Home() {
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera1}
                       playing={state.videoStreamingplayerPlaying}
-                      controls={true}
+                      controls={false}
+                      name="player1"
                       muted={true}
                       width="100%"
                       height="auto"
-                      onProgress={(i) => onProgressHandler(i)}
+                      onProgress={(i) => onProgressHandler(i, 'player1')}
                       onReady={(i) => onReady(i)}
+                      onEnded={(i) => onEnded(i)}
+                      onDuration= {(i) => onDurationHandler(i)}
                     />
                   </div>
                 ) : (
@@ -169,12 +225,17 @@ export default function Home() {
                   <div className="snapashotImage">
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera2}
+
                       playing={state.videoStreamingplayerPlaying}
-                      controls={true}
+                      controls={false}
+                      name="player2"
                       muted={true}
                       width="100%"
                       height="auto"
-                      onProgress={(i) => onProgressHandler(i)}
+                      onProgress={(i) => onProgressHandler(i, 'player2')}
+                      onReady={(i) => onReady(i)}
+                      onEnded={(i) => onEnded(i)}
+                      onDuration= {(i) => onDurationHandler(i)}
                     />
                   </div>
                 ) : (
@@ -208,11 +269,15 @@ export default function Home() {
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera3}
                       playing={state.videoStreamingplayerPlaying}
-                      controls={true}
+                      controls={false}
+                      name="player3"
                       muted={true}
                       width="100%"
                       height="auto"
-                      onProgress={(i) => onProgressHandler(i)}
+                      onProgress={(i) => onProgressHandler(i, 'player3')}
+                      onReady={(i) => onReady(i)}
+                      onEnded={(i) => onEnded(i)}
+                      onDuration= {(i) => onDurationHandler(i)}
                     />
                   </div>
                 ) : (
