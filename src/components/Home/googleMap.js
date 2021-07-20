@@ -71,6 +71,11 @@ export default function GoogleMap() {
                 camera2: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera2',
                 camera3: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera3',
               },
+              videStremingPlayers: {
+                videoStreamerPlayer1Buffer: false,
+                videoStreamerPlayer2Buffer: false,
+                videoStreamerPlayer3Buffer: false,
+              },
             },
           });
           console.log(marker.node);

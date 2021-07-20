@@ -7,10 +7,12 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import React, { useContext } from 'react';
+import ReactPlayer from 'react-player';
 import Row from 'react-bootstrap/Row';
 import Select from 'react-select';
 import moment from 'moment';
 import { Carousel } from 'react-responsive-carousel';
+import { FaPlay, FaPause } from 'react-icons/fa';
 import { GlobalContext } from '../../contexts/globalContext';
 
 export default function RecordingViewer() {
@@ -38,17 +40,17 @@ export default function RecordingViewer() {
           RecordingViewerCurrentSlide: 0,
           RecordingViewerFormIsLoading: false,
           RecordingViewerModalOpen: true,
-          RecordingViewerNode1Camera1URL: '',
-          RecordingViewerNode1Camera2URL: '',
-          RecordingViewerNode1Camera3URL: '',
+          RecordingViewerNode1Camera1URL: '/camera.mp4',
+          RecordingViewerNode1Camera2URL: '/camera.mp4',
+          RecordingViewerNode1Camera3URL: '/camera.mp4',
           RecordingViewerNode1Selected: '',
-          RecordingViewerNode2Camera1URL: '',
-          RecordingViewerNode2Camera2URL: '',
-          RecordingViewerNode2Camera3URL: '',
+          RecordingViewerNode2Camera1URL: '/camera.mp4',
+          RecordingViewerNode2Camera2URL: '/camera.mp4',
+          RecordingViewerNode2Camera3URL: '/camera.mp4',
           RecordingViewerNode2Selected: '',
-          RecordingViewerNode3Camera1URL: '',
-          RecordingViewerNode3Camera2URL: '',
-          RecordingViewerNode3Camera3URL: '',
+          RecordingViewerNode3Camera1URL: '/camera.mp4',
+          RecordingViewerNode3Camera2URL: '/camera.mp4',
+          RecordingViewerNode3Camera3URL: '/camera.mp4',
           RecordingViewerNode3Selected: '',
           RecordingViewerVideoUniqueDates: uniqueDateStrings,
           RecordingViewerVideos: json,
@@ -73,17 +75,17 @@ export default function RecordingViewer() {
       RecordingViewerAvailableTimes: uniqueAvailableTimes,
       RecordingViewerCurrentSlide: 1,
       RecordingViewerDateSelected: date,
-      RecordingViewerNode1Camera1URL: '',
-      RecordingViewerNode1Camera2URL: '',
-      RecordingViewerNode1Camera3URL: '',
+      RecordingViewerNode1Camera1URL: '/camera.mp4',
+      RecordingViewerNode1Camera2URL: '/camera.mp4',
+      RecordingViewerNode1Camera3URL: '/camera.mp4',
       RecordingViewerNode1Selected: '',
-      RecordingViewerNode2Camera1URL: '',
-      RecordingViewerNode2Camera2URL: '',
-      RecordingViewerNode2Camera3URL: '',
+      RecordingViewerNode2Camera1URL: '/camera.mp4',
+      RecordingViewerNode2Camera2URL: '/camera.mp4',
+      RecordingViewerNode2Camera3URL: '/camera.mp4',
       RecordingViewerNode2Selected: '',
-      RecordingViewerNode3Camera1URL: '',
-      RecordingViewerNode3Camera2URL: '',
-      RecordingViewerNode3Camera3URL: '',
+      RecordingViewerNode3Camera1URL: '/camera.mp4',
+      RecordingViewerNode3Camera2URL: '/camera.mp4',
+      RecordingViewerNode3Camera3URL: '/camera.mp4',
       RecordingViewerNode3Selected: '',
       RecordingViewerTimeSelected: '',
     });
@@ -107,17 +109,17 @@ export default function RecordingViewer() {
     setState({
       RecordingViewerAvailableNodes: uniqueAvailableNodes,
       RecordingViewerCurrentSlide: 2,
-      RecordingViewerNode1Camera1URL: '',
-      RecordingViewerNode1Camera2URL: '',
-      RecordingViewerNode1Camera3URL: '',
+      RecordingViewerNode1Camera1URL: '/camera.mp4',
+      RecordingViewerNode1Camera2URL: '/camera.mp4',
+      RecordingViewerNode1Camera3URL: '/camera.mp4',
       RecordingViewerNode1Selected: '',
-      RecordingViewerNode2Camera1URL: '',
-      RecordingViewerNode2Camera2URL: '',
-      RecordingViewerNode2Camera3URL: '',
+      RecordingViewerNode2Camera1URL: '/camera.mp4',
+      RecordingViewerNode2Camera2URL: '/camera.mp4',
+      RecordingViewerNode2Camera3URL: '/camera.mp4',
       RecordingViewerNode2Selected: '',
-      RecordingViewerNode3Camera1URL: '',
-      RecordingViewerNode3Camera2URL: '',
-      RecordingViewerNode3Camera3URL: '',
+      RecordingViewerNode3Camera1URL: '/camera.mp4',
+      RecordingViewerNode3Camera2URL: '/camera.mp4',
+      RecordingViewerNode3Camera3URL: '/camera.mp4',
       RecordingViewerNode3Selected: '',
       RecordingViewerTimeSelected: time,
     });
@@ -248,29 +250,102 @@ export default function RecordingViewer() {
     }
   };
 
+  const renderPlayPauseControl = () => {
+    if (state.RecordingViewerIsPlaying === true) {
+      return (
+        <FaPause
+          size="3em"
+          className="amber-text pr-3"
+          onClick={() => {
+            setState({ RecordingViewerIsPlaying: false });
+          }}
+        />
+      );
+    } else {
+      return (
+        <FaPlay
+          size="3em"
+          className="amber-text pr-3"
+          onClick={() => {
+            setState({ RecordingViewerIsPlaying: true });
+          }}
+        />
+      );
+    }
+  };
+
+  const player1Reference = (ref) => {
+    state.RecordingViewerPlayer1Reference = ref;
+  };
+
+  const player2Reference = (ref) => {
+    state.RecordingViewerPlayer2Reference = ref;
+  };
+
+  const player3Reference = (ref) => {
+    state.RecordingViewerPlayer3Reference = ref;
+  };
+
+  const player4Reference = (ref) => {
+    state.RecordingViewerPlayer4Reference = ref;
+  };
+
+  const player5Reference = (ref) => {
+    state.RecordingViewerPlayer5Reference = ref;
+  };
+
+  const player6Reference = (ref) => {
+    state.RecordingViewerPlayer6Reference = ref;
+  };
+
+  const player7Reference = (ref) => {
+    state.RecordingViewerPlayer7Reference = ref;
+  };
+
+  const player8Reference = (ref) => {
+    state.RecordingViewerPlayer8Reference = ref;
+  };
+
+  const player9Reference = (ref) => {
+    state.RecordingViewerPlayer9Reference = ref;
+  };
+
+  const handleSeekMouseDown = (e) => {
+    setState({ RecordingViewerIsSeeking: true });
+  };
+
+  const handleSeekChange = (e) => {
+    setState({ RecordingViewerDurationPlayed: parseFloat(e.target.value) });
+  };
+
+  const handleSeekMouseUp = (e) => {
+    setState({ RecordingViewerIsSeeking: false });
+    state.RecordingViewerPlayer1Reference.seekTo(parseFloat(e.target.value));
+    state.RecordingViewerPlayer2Reference.seekTo(parseFloat(e.target.value));
+    state.RecordingViewerPlayer3Reference.seekTo(parseFloat(e.target.value));
+    state.RecordingViewerPlayer4Reference.seekTo(parseFloat(e.target.value));
+    state.RecordingViewerPlayer5Reference.seekTo(parseFloat(e.target.value));
+    state.RecordingViewerPlayer6Reference.seekTo(parseFloat(e.target.value));
+    state.RecordingViewerPlayer7Reference.seekTo(parseFloat(e.target.value));
+    state.RecordingViewerPlayer8Reference.seekTo(parseFloat(e.target.value));
+    state.RecordingViewerPlayer9Reference.seekTo(parseFloat(e.target.value));
+  };
+
   return (
     <Container fluid className="bg-dark">
-      <Row>
+      <Row key="key1">
         <Card className="text-center" bg="dark" text="light">
           <Card.Body>
             <Row className="justify-content-center align-items-center">
-              <Col xs={12}>
+              <Col xs={3}>
                 {state.RecordingViewerFormIsLoading ? (
                   <Button disabled>Loading Videos...</Button>
                 ) : (
                   <Button onClick={() => handleSelectNodes()}>Select Nodes</Button>
                 )}
               </Col>
-            </Row>
-          </Card.Body>
-        </Card>
-      </Row>
 
-      <Row key="key1">
-        <Card className="text-center" bg="dark" text="light">
-          <Card.Body>
-            <Row className="justify-content-center align-items-center">
-              <Col xs={4}>
+              <Col xs={3}>
                 {state.RecordingViewerNode1Selected ? (
                   <p>
                     {state.RecordingViewerNode1Selected.value} / Camera 1{' '}
@@ -281,15 +356,16 @@ export default function RecordingViewer() {
                 ) : (
                   <p>{'-'}</p>
                 )}
-                <video
-                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
-                  controls
-                  disablePictureInPicture
-                  controlsList="nodownload"
-                  src={state.RecordingViewerNode1Camera1URL}
-                ></video>
+                <ReactPlayer
+                  ref={player1Reference}
+                  playing={state.RecordingViewerIsPlaying}
+                  width="100%"
+                  height="100%"
+                  url={state.RecordingViewerNode1Camera1URL}
+                  controls={false}
+                />
               </Col>
-              <Col xs={4}>
+              <Col xs={3}>
                 {state.RecordingViewerNode1Selected ? (
                   <p>
                     {state.RecordingViewerNode1Selected.value} / Camera 2{' '}
@@ -300,15 +376,16 @@ export default function RecordingViewer() {
                 ) : (
                   <p>{'-'}</p>
                 )}
-                <video
-                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
-                  controls
-                  disablePictureInPicture
-                  controlsList="nodownload"
-                  src={state.RecordingViewerNode1Camera2URL}
-                ></video>
+                <ReactPlayer
+                  ref={player2Reference}
+                  playing={state.RecordingViewerIsPlaying}
+                  width="100%"
+                  height="100%"
+                  url={state.RecordingViewerNode1Camera2URL}
+                  controls={false}
+                />
               </Col>
-              <Col xs={4}>
+              <Col xs={3}>
                 {state.RecordingViewerNode1Selected ? (
                   <p>
                     {state.RecordingViewerNode1Selected.value} / Camera 3{' '}
@@ -319,13 +396,14 @@ export default function RecordingViewer() {
                 ) : (
                   <p>{'-'}</p>
                 )}
-                <video
-                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
-                  controls
-                  disablePictureInPicture
-                  controlsList="nodownload"
-                  src={state.RecordingViewerNode1Camera3URL}
-                ></video>
+                <ReactPlayer
+                  ref={player3Reference}
+                  playing={state.RecordingViewerIsPlaying}
+                  width="100%"
+                  height="100%"
+                  url={state.RecordingViewerNode1Camera3URL}
+                  controls={false}
+                />
               </Col>
             </Row>
           </Card.Body>
@@ -336,7 +414,9 @@ export default function RecordingViewer() {
         <Card className="text-center" bg="dark" text="light">
           <Card.Body>
             <Row className="justify-content-center align-items-center">
-              <Col xs={4}>
+              <Col xs={3}>{renderPlayPauseControl()}</Col>
+
+              <Col xs={3}>
                 {state.RecordingViewerNode2Selected ? (
                   <p>
                     {state.RecordingViewerNode2Selected.value} / Camera 1{' '}
@@ -347,15 +427,16 @@ export default function RecordingViewer() {
                 ) : (
                   <p>{'-'}</p>
                 )}
-                <video
-                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
-                  controls
-                  disablePictureInPicture
-                  controlsList="nodownload"
-                  src={state.RecordingViewerNode2Camera1URL}
-                ></video>
+                <ReactPlayer
+                  ref={player4Reference}
+                  playing={state.RecordingViewerIsPlaying}
+                  width="100%"
+                  height="100%"
+                  url={state.RecordingViewerNode2Camera1URL}
+                  controls={false}
+                />
               </Col>
-              <Col xs={4}>
+              <Col xs={3}>
                 {state.RecordingViewerNode2Selected ? (
                   <p>
                     {state.RecordingViewerNode2Selected.value} / Camera 2{' '}
@@ -366,15 +447,16 @@ export default function RecordingViewer() {
                 ) : (
                   <p>{'-'}</p>
                 )}
-                <video
-                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
-                  controls
-                  disablePictureInPicture
-                  controlsList="nodownload"
-                  src={state.RecordingViewerNode2Camera2URL}
-                ></video>
+                <ReactPlayer
+                  ref={player5Reference}
+                  playing={state.RecordingViewerIsPlaying}
+                  width="100%"
+                  height="100%"
+                  url={state.RecordingViewerNode2Camera2URL}
+                  controls={false}
+                />
               </Col>
-              <Col xs={4}>
+              <Col xs={3}>
                 {state.RecordingViewerNode2Selected ? (
                   <p>
                     {state.RecordingViewerNode2Selected.value} / Camera 3{' '}
@@ -385,13 +467,14 @@ export default function RecordingViewer() {
                 ) : (
                   <p>{'-'}</p>
                 )}
-                <video
-                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
-                  controls
-                  disablePictureInPicture
-                  controlsList="nodownload"
-                  src={state.RecordingViewerNode2Camera3URL}
-                ></video>
+                <ReactPlayer
+                  ref={player6Reference}
+                  playing={state.RecordingViewerIsPlaying}
+                  width="100%"
+                  height="100%"
+                  url={state.RecordingViewerNode2Camera3URL}
+                  controls={false}
+                />
               </Col>
             </Row>
           </Card.Body>
@@ -402,7 +485,20 @@ export default function RecordingViewer() {
         <Card className="text-center" bg="dark" text="light">
           <Card.Body>
             <Row className="justify-content-center align-items-center">
-              <Col xs={4}>
+              <Col xs={3}>
+                <input
+                  type="range"
+                  min={0}
+                  max={0.999999}
+                  step="any"
+                  value={state.RecordingViewerDurationPlayed}
+                  onMouseUp={handleSeekMouseUp}
+                  onMouseDown={handleSeekMouseDown}
+                  onChange={handleSeekChange}
+                />
+              </Col>
+
+              <Col xs={3}>
                 {state.RecordingViewerNode3Selected ? (
                   <p>
                     {state.RecordingViewerNode3Selected.value} / Camera 1{' '}
@@ -413,15 +509,16 @@ export default function RecordingViewer() {
                 ) : (
                   <p>{'-'}</p>
                 )}
-                <video
-                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
-                  controls
-                  disablePictureInPicture
-                  controlsList="nodownload"
-                  src={state.RecordingViewerNode3Camera1URL}
-                ></video>
+                <ReactPlayer
+                  ref={player7Reference}
+                  playing={state.RecordingViewerIsPlaying}
+                  width="100%"
+                  height="100%"
+                  url={state.RecordingViewerNode3Camera1URL}
+                  controls={false}
+                />
               </Col>
-              <Col xs={4}>
+              <Col xs={3}>
                 {state.RecordingViewerNode3Selected ? (
                   <p>
                     {state.RecordingViewerNode3Selected.value} / Camera 2{' '}
@@ -432,15 +529,16 @@ export default function RecordingViewer() {
                 ) : (
                   <p>{'-'}</p>
                 )}
-                <video
-                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
-                  controls
-                  disablePictureInPicture
-                  controlsList="nodownload"
-                  src={state.RecordingViewerNode3Camera2URL}
-                ></video>
+                <ReactPlayer
+                  ref={player8Reference}
+                  playing={state.RecordingViewerIsPlaying}
+                  width="100%"
+                  height="100%"
+                  url={state.RecordingViewerNode3Camera2URL}
+                  controls={false}
+                />
               </Col>
-              <Col xs={4}>
+              <Col xs={3}>
                 {state.RecordingViewerNode3Selected ? (
                   <p>
                     {state.RecordingViewerNode3Selected.value} / Camera 3{' '}
@@ -451,13 +549,14 @@ export default function RecordingViewer() {
                 ) : (
                   <p>{'-'}</p>
                 )}
-                <video
-                  style={{ maxWidth: '30vw', maxHeight: '20vh', minHeight: '20vh' }}
-                  controls
-                  disablePictureInPicture
-                  controlsList="nodownload"
-                  src={state.RecordingViewerNode3Camera3URL}
-                ></video>
+                <ReactPlayer
+                  ref={player9Reference}
+                  playing={state.RecordingViewerIsPlaying}
+                  width="100%"
+                  height="100%"
+                  url={state.RecordingViewerNode3Camera3URL}
+                  controls={false}
+                />
               </Col>
             </Row>
           </Card.Body>

@@ -22,19 +22,11 @@ export default function Home() {
   function onProgressHandler(i, player) {
     console.log(i.loadedSeconds);
     console.log(player);
-  }
 
-  function onDurationHandler(i) {
-    console.log('onDurationHandler');
-    console.log(i);
-  }
-
-  function onReady(i) {
-    console.log('onReady');
-    console.log(i.props.name);
+    if(i.loadedSeconds>5 ){
 
     if (state.videoStreamingplayerPlaying === false) {
-      switch (i.props.name) {
+      switch (player) {
         case 'player1':
           dispatch({
             type: 'setState',
@@ -74,7 +66,7 @@ export default function Home() {
         default:
       }
       if (
-        state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
+        state.videStremingPlayers.videoStreamerPlayer1Buffer === true &&
         state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
         state.videStremingPlayers.videoStreamerPlayer3Buffer === true
       ) {
@@ -85,8 +77,23 @@ export default function Home() {
           },
         });
       }
+
     }
+
+    }
+}
+  function onDurationHandler(i) {
+    console.log('onDurationHandler');
+    console.log(i);
   }
+
+  function onReady(i) {
+    console.log('onReady');
+    console.log(i.props.name);
+
+    
+    }
+  
 
   function switchToStreaming() {
     dispatch({
@@ -131,7 +138,7 @@ export default function Home() {
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera1}
                       playing={state.videoStreamingplayerPlaying}
-                      controls={false}
+                      controls={true}
                       name="player1"
                       muted={true}
                       width="100%"
@@ -166,7 +173,7 @@ export default function Home() {
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera2}
                       playing={state.videoStreamingplayerPlaying}
-                      controls={false}
+                      controls={true}
                       name="player2"
                       muted={true}
                       width="100%"
@@ -208,7 +215,7 @@ export default function Home() {
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera3}
                       playing={state.videoStreamingplayerPlaying}
-                      controls={false}
+                      controls={true}
                       name="player3"
                       muted={true}
                       width="100%"
