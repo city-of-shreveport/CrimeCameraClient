@@ -44,7 +44,16 @@ export default function SettingsNodeCard() {
       },
     });
   };
+const syncCameraTime = (camera) => {
+    fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/settime/'+  tryValue(() => {
+      return state.currentNodeInfo.name;
+    }) + '/' + camera)
+      .then((response) => console.log(response))
+    
 
+
+
+}
   return (
     <Modal
       dialogClassName="customModalCameraConfigNode"
@@ -189,7 +198,7 @@ export default function SettingsNodeCard() {
               <Button variant="primary" size="sm">
                 Update
               </Button>{' '}
-              <Button variant="primary" size="sm">
+              <Button variant="primary" size="sm" onClick={() => syncCameraTime('camera1')}>
                 Sync Time
               </Button>
             </div>
@@ -327,7 +336,7 @@ export default function SettingsNodeCard() {
               <Button variant="primary" size="sm">
                 Update
               </Button>{' '}
-              <Button variant="primary" size="sm">
+              <Button variant="primary" size="sm" onClick={() => syncCameraTime('camera2')}>
                 Sync Time
               </Button>
             </div>
@@ -465,7 +474,7 @@ export default function SettingsNodeCard() {
               <Button variant="primary" size="sm">
                 Update
               </Button>{' '}
-              <Button variant="primary" size="sm">
+              <Button variant="primary" size="sm" onClick={() => syncCameraTime('camera3')}>
                 Sync Time
               </Button>
             </div>
