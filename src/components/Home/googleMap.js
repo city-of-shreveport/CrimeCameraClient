@@ -10,107 +10,21 @@ export default function GoogleMap() {
     var bounds = new maps.LatLngBounds();
     const markers = [];
     let nodeIcon = '';
-<<<<<<< HEAD
+
     // eslint-disable-next-line
     var prev_infowindow = false;
     // eslint-disable-next-line
     var current_infowindow = false;
 
-    // eslint-disable-next-line\
+
     
-    var timesRunGetNodes = 0;
-    var intervalGetNodes = setInterval(() => {
-      timesRunGetNodes += 1;
-      if(timesRunGetNodes === 10){
-          clearInterval(intervalGetNodes);
-      }
-      state.nodes.map((node) => {
-        var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
-
-        if (difference < 15) {
-          nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png';
-        }
-        if (difference > 15) {
-          nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png';
-        }
-        var myLatLng = new maps.LatLng(node.config.locationLat, node.config.locationLong);
-
-        if(markers.indexOf({node:node.name})===-1){
-        markers.push(
-          new maps.Marker({
-            node: node.name,
-            position: {
-              lat: node.config.locationLat,
-              lng: node.config.locationLong,
-            },
-            map,
-            icon: { url: nodeIcon, labelOrigin: { x: 33, y: 17 } },
-            label: {
-              text: node.name.substr(node.name.length - 3),
-
-              color: 'black',
-            },
-          })
-        );
-        bounds.extend(myLatLng);
-        
-
-        }
-        map.fitBounds(bounds);
-      });
-
-
-    markers.forEach((marker, i) => {
-      marker.addListener('click', () => {
-        dispatch({
-          type: 'setState',
-          payload: {
-            previousNode: tryValue(() => {
-            return state.currentNodeInfo.name;
-          }),
-            videoStreamingplayerPlaying: false,
-            videoPlayerStreamingActive: false,
-            currentNodeInfo:{name: marker.node},
-            videoPlayerActive: true,
-            videoStreamingURLS: {
-            camera1: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera1.flv',
-            camera2: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera2.flv',
-            camera3: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera3.flv',
-          },
-          VideoSnapShotURLS: {
-            camera1: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera1',
-            camera2: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera2',
-            camera3: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera3',
-          },
-          },
-        });
-        console.log(marker.node)
-        
-      });
-    });
-
-
-
-        }, 1000);
-
-
-
-
-
-
-    // eslint-disable-next-line
-
-
-
-
-
-  };
+  
 
   // eslint-disable-next-line
   const mapStyles = {
     width: '100%',
     height: '100%',
-=======
+  }
     var timesRunGetNodes = 0;
     var intervalGetNodes = setInterval(() => {
       timesRunGetNodes += 1;
@@ -178,7 +92,6 @@ export default function GoogleMap() {
         });
       });
     }, 1000);
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
   };
 
   function getDifferenceInMinutes(date1, date2) {
@@ -186,40 +99,9 @@ export default function GoogleMap() {
     return diffInMs / (1000 * 60);
   }
 
-<<<<<<< HEAD
 
 
-  const AnyReactComponent = ({ text, status, node }) => (
-    <div>
-      <Card className="text-center">
-        <Card.Header>Featured</Card.Header>
-        <Card.Body>
-          <Card.Title>Special title treatment</Card.Title>
-          <Card.Text>With supporting text below as a natural lead-in to additional content.</Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-        <Card.Footer className="text-muted">2 days ago</Card.Footer>
-      </Card>
-    </div>
-  );
 
-  // eslint-disable-next-line
-  const displayMarkers = () => {
-    return state.nodes.map((node, index) => {
-      return (
-        <AnyReactComponent
-          lat={node.config.locationLat}
-          lng={node.config.locationLong}
-          text={node.name.substr(node.name.length - 3)}
-          node={node.name}
-          status={nodeStatus}
-        />
-      );
-    });
-  };
-
-=======
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
   return (
     <div id="googleMapDIV" style={{ height: '90vh', width: '100%' }}>
       {!isEmpty(state.nodes) && (

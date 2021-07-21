@@ -3,14 +3,11 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-<<<<<<< HEAD
+
 import Image from 'react-bootstrap/Image';
 import ReactDOM from 'react-dom'
 // eslint-disable-next-line
-=======
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
 import GoogleMap from '../Home/googleMap';
-import Image from 'react-bootstrap/Image';
 import Nav from 'react-bootstrap/Nav';
 import React, { useContext } from 'react';
 import ReactPlayer from 'react-player';
@@ -20,17 +17,16 @@ import { GlobalContext } from '../../contexts/globalContext';
 
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
-<<<<<<< HEAD
+
   
 
   // eslint-disable-next-line
   function onBufferHandler(i) {
     console.log('onBufferHandler');
-=======
 
+}
   function onEnded(i) {
     console.log('onEnded');
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
     console.log(i);
   }
   function onProgressHandler(i, player) {
@@ -38,26 +34,14 @@ export default function Home() {
     console.log(player);
   }
 
-<<<<<<< HEAD
-
-function onEnded(i){
- console.log('onEnded');
-    console.log(i);
 
 
-
-}
   function onProgressHandler(i, player) {
     console.log(i.loadedSeconds)
-console.log(player)
-    
-
-    
+    console.log(player)
   }
 
   // eslint-disable-next-line
-=======
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
   function onDurationHandler(i) {
     console.log('onDurationHandler');
     console.log(i);
@@ -67,7 +51,7 @@ console.log(player)
     console.log('onReady');
     console.log(i.props.name);
 
-<<<<<<< HEAD
+
 
 
     if(state.videoStreamingplayerPlaying===false){
@@ -139,7 +123,7 @@ console.log(player)
   function onDuration(i) {
     console.log('onDuration');
     console.log(i);
-=======
+
     if (state.videoStreamingplayerPlaying === false) {
       switch (i.props.name) {
         case 'player1':
@@ -193,7 +177,7 @@ console.log(player)
         });
       }
     }
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
+
   }
 
   function switchToStreaming() {
@@ -205,7 +189,7 @@ console.log(player)
     });
   }
 
-<<<<<<< HEAD
+
   function switchToStreaming() {
     dispatch({
       type: 'setState',
@@ -225,8 +209,7 @@ console.log(player)
   // eslint-disable-next-line
   let camera3VideoUrl =
     'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera3';
-=======
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
+
   return (
     <>
       <Container fluid className="homeContainer bg-dark">
@@ -269,11 +252,9 @@ console.log(player)
                       onProgress={(i) => onProgressHandler(i, 'player1')}
                       onReady={(i) => onReady(i)}
                       onEnded={(i) => onEnded(i)}
-<<<<<<< HEAD
+
                       onDuration= {(i) => onDurationHandler(i)}
-=======
                       onDuration={(i) => onDurationHandler(i)}
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
                     />
                   </div>
                 ) : (
@@ -299,10 +280,6 @@ console.log(player)
                   <div className="snapashotImage">
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera2}
-<<<<<<< HEAD
-
-=======
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
                       playing={state.videoStreamingplayerPlaying}
                       controls={false}
                       name="player2"
@@ -312,11 +289,8 @@ console.log(player)
                       onProgress={(i) => onProgressHandler(i, 'player2')}
                       onReady={(i) => onReady(i)}
                       onEnded={(i) => onEnded(i)}
-<<<<<<< HEAD
                       onDuration= {(i) => onDurationHandler(i)}
-=======
                       onDuration={(i) => onDurationHandler(i)}
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
                     />
                   </div>
                 ) : (
@@ -358,11 +332,8 @@ console.log(player)
                       onProgress={(i) => onProgressHandler(i, 'player3')}
                       onReady={(i) => onReady(i)}
                       onEnded={(i) => onEnded(i)}
-<<<<<<< HEAD
                       onDuration= {(i) => onDurationHandler(i)}
-=======
                       onDuration={(i) => onDurationHandler(i)}
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
                     />
                   </div>
                 ) : (

@@ -77,7 +77,6 @@ export default function App() {
     var numberOfNodesUp = 0;
     var totalNumberOfNodes = nodedata.length;
 
-<<<<<<< HEAD
       nodedata.map((nodedataitem) => {
 
         setTimeout(() => {
@@ -121,41 +120,10 @@ export default function App() {
             payload: { serverstatistics: json },
           });
         });
-
+}
       let currentStreams = [];
-=======
-    // eslint-disable-next-line
-    nodedata.map((nodedataitem) => {
-      setTimeout(() => {
-        fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedataitem.name)
-          .then((response) => response.json())
-          .then((json) => {
-            let nodeDataPerfMon = nodedataitem;
-            nodeDataPerfMon.perfmon = json[0];
-            var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
 
-            if (difference > 15) {
-              nodeDataPerfMon.nodeStatus = false;
-            } else {
-              nodeDataPerfMon.nodeStatus = true;
-              numberOfNodesUp++;
-            }
 
-            nodeArray.push(nodeDataPerfMon);
-          })
-          .then(() => {
-            dispatch({
-              type: 'setState',
-              payload: { nodes: nodeArray, numberOfNodes: totalNumberOfNodes, numberOfNodesUp: numberOfNodesUp },
-            });
-          });
-      }, 3000);
-    });
-  }
-
-  useEffect(() => {
-    let currentStreams = [];
->>>>>>> 090e412112711dc7fdff3275b77e7a67e798ecd1
 
     fetch('http://rtcc-server.shreveport-it.org/api/streams/streamingserverstats')
       .then((response) => response.json())
