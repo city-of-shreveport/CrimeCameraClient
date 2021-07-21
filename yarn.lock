@@ -9777,7 +9777,7 @@ react-overlays@^5.0.1:
 
 react-player@^2.9.0:
   version "2.9.0"
-  resolved "https://registry.npmjs.org/react-player/-/react-player-2.9.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.9.0.tgz#ef7fe7073434087565f00ff219824e1e02c4b046"
   integrity sha512-jNUkTfMmUhwPPAktAdIqiBcVUKsFKrVGH6Ocutj6535CNfM91yrvWxHg6fvIX8Y/fjYUPoejddwh7qboNV9vGA==
   dependencies:
     deepmerge "^4.0.0"
@@ -9807,11 +9807,6 @@ react-responsive-carousel@^3.2.19:
     classnames "^2.2.5"
     prop-types "^15.5.8"
     react-easy-swipe "^0.0.21"
-
-react-script-tag@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/react-script-tag/-/react-script-tag-1.1.2.tgz"
-  integrity sha512-4oR9ntvGfX4igiP77vK310ru5Oa77xO7CeYB3Xi9lu0qsikpGpK1Kq1WMFocvy8U4fQFq8ovtrZS/8adfCziFw==
 
 react-scripts@4.0.3:
   version "4.0.3"

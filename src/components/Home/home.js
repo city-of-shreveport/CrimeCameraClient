@@ -4,6 +4,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
+
 import Image from 'react-bootstrap/Image';
 import ReactDOM from 'react-dom'
 // eslint-disable-next-line
@@ -29,6 +30,7 @@ export default function Home() {
     console.log('onEnded');
     console.log(i);
   }
+
   function onProgressHandler(i, player) {
     console.log(i.loadedSeconds);
     console.log(player);
@@ -39,6 +41,61 @@ export default function Home() {
   function onProgressHandler(i, player) {
     console.log(i.loadedSeconds)
     console.log(player)
+    if(state.videoStreamingplayerPlaying===false){
+      if (i.loadedSeconds > 5) {
+        if (state.videoStreamingplayerPlaying === false) {
+         switch (player) {
+          case 'player1':
+            dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers: {
+                  videoStreamerPlayer1Buffer: true,
+                  videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
+                  videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
+                },
+              },
+            });
+            break;
+          case 'player2':
+            dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers: {
+                  videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
+                  videoStreamerPlayer2Buffer: true,
+                  videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
+                },
+              },
+            });
+            break;
+          case 'player3':
+            dispatch({
+              type: 'setState',
+              payload: {
+                videStremingPlayers: {
+                  videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
+                  videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
+                  videoStreamerPlayer3Buffer: true,
+                },
+              },
+            });
+          break;
+       
+          // code block
+        } 
+           
+      if(state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer3Buffer===true){
+        dispatch({
+          type: 'setState',
+          payload: {
+            videoStreamingplayerPlaying: true,
+          },
+        });
+
+      }  
+      }
+      }
   }
 
   // eslint-disable-next-line
@@ -54,70 +111,17 @@ export default function Home() {
 
 
 
-    if(state.videoStreamingplayerPlaying===false){
-    switch(i.props.name) {
-        case 'player1':
-           dispatch({
-              type: 'setState',
-              payload: {
-                videStremingPlayers:{
-                videoStreamerPlayer1Buffer: true,
-                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
-                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
-                }
-              },
-            });
-          break;
-        case 'player2':
-          dispatch({
-              type: 'setState',
-              payload: {
-                videStremingPlayers:{
-                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
-                videoStreamerPlayer2Buffer: true,
-                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
-                }
-              },
-            });
-          break;
-          case 'player3':
-          dispatch({
-              type: 'setState',
-              payload: {
-                videStremingPlayers:{
-                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
-                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
-                videoStreamerPlayer3Buffer: true,
-                }
-              },
-            });
-          break;
-        default:
-          // code block
-      } 
-      if(state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer3Buffer===true){
-      dispatch({
-        type: 'setState',
-        payload: {
-          videoStreamingplayerPlaying: true,
-        },
-      });
 
-    }  
-    }
+
+         
+
+    
+
   }
 
-  // eslint-disable-next-line
-  function onBufferEnd(i) {
-    console.log('onBufferEnd');
-    console.log(i);
-  }
 
-  // eslint-disable-next-line
-  function onStart(i) {
-    console.log('onStart');
-    console.log(i);
-  }
+
+
 
   // eslint-disable-next-line
   function onDuration(i) {
@@ -127,66 +131,34 @@ export default function Home() {
     if (state.videoStreamingplayerPlaying === false) {
       switch (i.props.name) {
         case 'player1':
+            break;
+          default:
+        }
+        if (
+          state.videStremingPlayers.videoStreamerPlayer1Buffer === true &&
+          state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
+          state.videStremingPlayers.videoStreamerPlayer3Buffer === true
+        ) {
           dispatch({
             type: 'setState',
             payload: {
-              videStremingPlayers: {
-                videoStreamerPlayer1Buffer: true,
-                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
-                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
-              },
+              videoStreamingplayerPlaying: true,
             },
           });
-          break;
-        case 'player2':
-          dispatch({
-            type: 'setState',
-            payload: {
-              videStremingPlayers: {
-                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
-                videoStreamerPlayer2Buffer: true,
-                videoStreamerPlayer3Buffer: state.videStremingPlayers.videoStreamerPlayer3Buffer,
-              },
-            },
-          });
-          break;
-        case 'player3':
-          dispatch({
-            type: 'setState',
-            payload: {
-              videStremingPlayers: {
-                videoStreamerPlayer1Buffer: state.videStremingPlayers.videoStreamerPlayer1Buffer,
-                videoStreamerPlayer2Buffer: state.videStremingPlayers.videoStreamerPlayer2Buffer,
-                videoStreamerPlayer3Buffer: true,
-              },
-            },
-          });
-          break;
-        default:
-      }
-      if (
-        state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
-        state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
-        state.videStremingPlayers.videoStreamerPlayer3Buffer === true
-      ) {
-        dispatch({
-          type: 'setState',
-          payload: {
-            videoStreamingplayerPlaying: true,
-          },
-        });
+        }
       }
     }
 
   }
 
-  function switchToStreaming() {
-    dispatch({
-      type: 'setState',
-      payload: {
-        videoPlayerStreamingActive: true,
-      },
-    });
+  function onDurationHandler(i) {
+    console.log('onDurationHandler');
+    console.log(i);
+  }
+
+  function onReady(i) {
+    console.log('onReady');
+    console.log(i.props.name);
   }
 
 
@@ -198,9 +170,6 @@ export default function Home() {
       },
     });
   }
-  // eslint-disable-next-line
-  let camera1VideoUrl =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera1';
 
   // eslint-disable-next-line
   let camera2VideoUrl =
@@ -244,7 +213,7 @@ export default function Home() {
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera1}
                       playing={state.videoStreamingplayerPlaying}
-                      controls={false}
+                      controls={true}
                       name="player1"
                       muted={true}
                       width="100%"
@@ -281,7 +250,7 @@ export default function Home() {
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera2}
                       playing={state.videoStreamingplayerPlaying}
-                      controls={false}
+                      controls={true}
                       name="player2"
                       muted={true}
                       width="100%"
@@ -324,7 +293,7 @@ export default function Home() {
                     <ReactPlayer
                       url={state.videoStreamingURLS.camera3}
                       playing={state.videoStreamingplayerPlaying}
-                      controls={false}
+                      controls={true}
                       name="player3"
                       muted={true}
                       width="100%"

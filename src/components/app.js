@@ -77,6 +77,7 @@ export default function App() {
     var numberOfNodesUp = 0;
     var totalNumberOfNodes = nodedata.length;
 
+
       nodedata.map((nodedataitem) => {
 
         setTimeout(() => {
@@ -109,21 +110,10 @@ export default function App() {
        
   }
 
+
+
   useEffect(() => {
-    // eslint-disable-next-line
-    function refreshStreamerStats() {
-      fetch('http://rtcc-server.shreveport-it.org/api/perfMons/CrimeCameraSystem')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'setState',
-            payload: { serverstatistics: json },
-          });
-        });
-}
-      let currentStreams = [];
-
-
+    let currentStreams = [];
 
     fetch('http://rtcc-server.shreveport-it.org/api/streams/streamingserverstats')
       .then((response) => response.json())

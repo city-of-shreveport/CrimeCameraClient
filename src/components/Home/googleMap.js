@@ -11,6 +11,7 @@ export default function GoogleMap() {
     const markers = [];
     let nodeIcon = '';
 
+
     // eslint-disable-next-line
     var prev_infowindow = false;
     // eslint-disable-next-line
@@ -25,6 +26,7 @@ export default function GoogleMap() {
     width: '100%',
     height: '100%',
   }
+
     var timesRunGetNodes = 0;
     var intervalGetNodes = setInterval(() => {
       timesRunGetNodes += 1;
@@ -86,6 +88,11 @@ export default function GoogleMap() {
                 camera2: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera2',
                 camera3: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera3',
               },
+              videStremingPlayers: {
+                videoStreamerPlayer1Buffer: false,
+                videoStreamerPlayer2Buffer: false,
+                videoStreamerPlayer3Buffer: false,
+              },
             },
           });
           console.log(marker.node);
@@ -98,8 +105,6 @@ export default function GoogleMap() {
     const diffInMs = Math.abs(date2 - date1);
     return diffInMs / (1000 * 60);
   }
-
-
 
 
   return (
