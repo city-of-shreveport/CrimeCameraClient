@@ -19,27 +19,30 @@ import { GlobalContext } from '../../contexts/globalContext';
 export default function Home() {
   const [state, dispatch] = useContext(GlobalContext);
 
+const player1Reference = (ref) => {
+    state.RecordingViewerPlayer1Reference = ref;
+  };
+
+  const player2Reference = (ref) => {
+    state.RecordingViewerPlayer2Reference = ref;
+  };
+
+  const player3Reference = (ref) => {
+    state.RecordingViewerPlayer3Reference = ref;
+  };
+
+    //state.RecordingViewerPlayer2Reference.seekTo(parseFloat(e.target.value));
+    //state.RecordingViewerPlayer3Reference.seekTo(parseFloat(e.target.value));
   
 
   // eslint-disable-next-line
-  function onBufferHandler(i) {
-    console.log('onBufferHandler');
 
-}
-  function onEnded(i) {
-    console.log('onEnded');
-    console.log(i);
-  }
 
-  function onProgressHandler(i, player) {
-    console.log(i.loadedSeconds);
-    console.log(player);
-  }
 
 
 
   function onProgressHandler(i, player) {
-   
+
     if(state.videoStreamingplayerPlaying===false){
       if (i.loadedSeconds > 5) {
         if (state.videoStreamingplayerPlaying === false) {
@@ -85,6 +88,13 @@ export default function Home() {
         } 
            
       if(state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer2Buffer===true && state.videStremingPlayers.videoStreamerPlayer3Buffer===true){
+        
+setTimeout(() => {
+      state.RecordingViewerPlayer1Reference.getInternalPlayer('flv').destroy() 
+      state.RecordingViewerPlayer2Reference.getInternalPlayer('flv').destroy() 
+      state.RecordingViewerPlayer3Reference.getInternalPlayer('flv').destroy() 
+    }, 6000);
+
         dispatch({
           type: 'setState',
           payload: {
@@ -97,79 +107,27 @@ export default function Home() {
       }
   }
 
-  // eslint-disable-next-line
-  function onDurationHandler(i) {
-    console.log('onDurationHandler');
-    console.log(i);
-  }
-
-  function onReady(i) {
-    console.log('onReady');
-    console.log(i.props.name);
+}
 
 
 
-
-
-
-         
-
-    
-
-  }
-
-
-
-
-
-  // eslint-disable-next-line
-  function onDuration(i) {
-    console.log('onDuration');
-    console.log(i);
-
-    if (state.videoStreamingplayerPlaying === false) {
-      switch (i.props.name) {
-        case 'player1':
-            break;
-          default:
-        }
-        if (
-          state.videStremingPlayers.videoStreamerPlayer1Buffer === true &&
-          state.videStremingPlayers.videoStreamerPlayer2Buffer === true &&
-          state.videStremingPlayers.videoStreamerPlayer3Buffer === true
-        ) {
-          dispatch({
-            type: 'setState',
-            payload: {
-              videoStreamingplayerPlaying: true,
-            },
-          });
-        }
-      }
-    }
-
-  }
-
-  function onDurationHandler(i) {
-    console.log('onDurationHandler');
-    console.log(i);
-  }
-
-  function onReady(i) {
-    console.log('onReady');
-    console.log(i.props.name);
-  }
 
 
   function switchToStreaming() {
+   
+          {tryValue(() => {state.RecordingViewerPlayer2Reference.getInternalPlayer('flv').destroy()})}
+         {tryValue(() => {state.RecordingViewerPlayer3Reference.getInternalPlayer('flv').destroy()})}
     dispatch({
       type: 'setState',
       payload: {
         videoPlayerStreamingActive: true,
       },
     });
+
   }
 
+let camera1VideoUrl =
+    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera1';
   // eslint-disable-next-line
   let camera2VideoUrl =
     'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera2';
@@ -177,6 +135,9 @@ export default function Home() {
   // eslint-disable-next-line
   let camera3VideoUrl =
     'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + state.currentNodeInfo.name + '/camera3';
+
+
+
 
   return (
     <>
@@ -210,6 +171,7 @@ export default function Home() {
                 {state.videoPlayerStreamingActive ? (
                   <div className="snapashotImage">
                     <ReactPlayer
+                    ref={player1Reference}
                       url={state.videoStreamingURLS.camera1}
                       playing={state.videoStreamingplayerPlaying}
                       controls={true}
@@ -218,11 +180,7 @@ export default function Home() {
                       width="100%"
                       height="auto"
                       onProgress={(i) => onProgressHandler(i, 'player1')}
-                      onReady={(i) => onReady(i)}
-                      onEnded={(i) => onEnded(i)}
 
-                      onDuration= {(i) => onDurationHandler(i)}
-                      onDuration={(i) => onDurationHandler(i)}
                     />
                   </div>
                 ) : (
@@ -247,6 +205,7 @@ export default function Home() {
                 {state.videoPlayerStreamingActive ? (
                   <div className="snapashotImage">
                     <ReactPlayer
+                    ref={player2Reference}
                       url={state.videoStreamingURLS.camera2}
                       playing={state.videoStreamingplayerPlaying}
                       controls={true}
@@ -255,10 +214,6 @@ export default function Home() {
                       width="100%"
                       height="auto"
                       onProgress={(i) => onProgressHandler(i, 'player2')}
-                      onReady={(i) => onReady(i)}
-                      onEnded={(i) => onEnded(i)}
-                      onDuration= {(i) => onDurationHandler(i)}
-                      onDuration={(i) => onDurationHandler(i)}
                     />
                   </div>
                 ) : (
@@ -290,6 +245,7 @@ export default function Home() {
                 {state.videoPlayerStreamingActive ? (
                   <div className="snapashotImage">
                     <ReactPlayer
+                    ref={player3Reference}
                       url={state.videoStreamingURLS.camera3}
                       playing={state.videoStreamingplayerPlaying}
                       controls={true}
@@ -298,10 +254,6 @@ export default function Home() {
                       width="100%"
                       height="auto"
                       onProgress={(i) => onProgressHandler(i, 'player3')}
-                      onReady={(i) => onReady(i)}
-                      onEnded={(i) => onEnded(i)}
-                      onDuration= {(i) => onDurationHandler(i)}
-                      onDuration={(i) => onDurationHandler(i)}
                     />
                   </div>
                 ) : (

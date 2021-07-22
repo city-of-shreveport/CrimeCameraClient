@@ -26,7 +26,7 @@ export default function GoogleMap() {
     width: '100%',
     height: '100%',
   }
-
+    var status = ''
     var timesRunGetNodes = 0;
     var intervalGetNodes = setInterval(() => {
       timesRunGetNodes += 1;
@@ -39,9 +39,11 @@ export default function GoogleMap() {
         var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
         if (difference < 15) {
           nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png';
+          status = 'up'
         }
         if (difference > 15) {
           nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png';
+          status = 'down'
         }
         var myLatLng = new maps.LatLng(node.config.locationLat, node.config.locationLong);
         if (markers.indexOf({ node: node.name }) === -1) {
@@ -59,6 +61,7 @@ export default function GoogleMap() {
 
                 color: 'black',
               },
+              status:status
             })
           );
           bounds.extend(myLatLng);
@@ -67,15 +70,16 @@ export default function GoogleMap() {
       });
 
       markers.forEach((marker, i) => {
+        if(marker.status==='up'){
         marker.addListener('click', () => {
-          dispatch({
+            setTimeout(() => {
+      dispatch({
             type: 'setState',
             payload: {
               previousNode: tryValue(() => {
                 return state.currentNodeInfo.name;
               }),
-              videoStreamingplayerPlaying: false,
-              videoPlayerStreamingActive: false,
+              
               currentNodeInfo: { name: marker.node },
               videoPlayerActive: true,
               videoStreamingURLS: {
@@ -88,16 +92,38 @@ export default function GoogleMap() {
                 camera2: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera2',
                 camera3: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera3',
               },
+              
+            },
+          });
+    }, 1500);
+          dispatch({
+            type: 'setState',
+            payload: {
+              videoPlayerReset: true,
+              videoPlayerActive: false,
               videStremingPlayers: {
                 videoStreamerPlayer1Buffer: false,
                 videoStreamerPlayer2Buffer: false,
                 videoStreamerPlayer3Buffer: false,
               },
-            },
-          });
+              videoStreamingplayerPlaying: false,
+              videoPlayerStreamingActive: false,
+              videoStreamingURLS: {
+                camera1: ' ',
+                camera2: ' ',
+                camera3: ' ',
+              },
+              VideoSnapShotURLS: {
+                camera1: ' ',
+                camera2: '  ',
+                camera3: '  ',
+              },
+            }
+          })
+
           console.log(marker.node);
         });
-      });
+      }});
     }, 1000);
   };
 

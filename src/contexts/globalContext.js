@@ -62,6 +62,7 @@ const initialState = {
   users: [],
   videoPlayer: {},
   videoPlayerActive: false,
+  videoPlayerReset: false,
   videoPlayerStreamingActive: false,
   videoPlayersState: {},
   videoStreamingplayerPlaying: false,

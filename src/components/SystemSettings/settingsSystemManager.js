@@ -173,31 +173,7 @@ fetch('http://rtcc-server.shreveport-it.org/api/servers')
             </Table>
           </Card>
         </Col>
-        <Col sm={3}>
-          <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
-            <Card.Title>Mongo Servers</Card.Title>
-            <Table striped bordered hover variant="dark" size="sm">
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Status</td>
-                  <td>Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                {Mongos.map((server) => (
-                  <tr>
-                    <td>{server.name}</td>
-                    <td>
-                      <Badge variant="danger">Danger</Badge>{' '}
-                    </td>
-                    <td>Configure</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Card>
-        </Col>
+        
 <Col sm={3}>
           <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
             <Card.Title>ReStreamers</Card.Title>
