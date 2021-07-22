@@ -39,8 +39,7 @@ export default function Home() {
 
 
   function onProgressHandler(i, player) {
-    console.log(i.loadedSeconds)
-    console.log(player)
+   
     if(state.videoStreamingplayerPlaying===false){
       if (i.loadedSeconds > 5) {
         if (state.videoStreamingplayerPlaying === false) {

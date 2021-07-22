@@ -20,7 +20,8 @@ export default function SystemManager() {
   let Restreamers = [];
   let Clients = [];
   let Servers = [];
-
+  let nodestreams = []
+let streams = []
   // eslint-disable-next-line
   {
     state.servers.map(
@@ -33,18 +34,59 @@ export default function SystemManager() {
       )
     );
   }
+  setInterval(() => {
+      
+fetch('http://rtcc-server.shreveport-it.org/api/servers')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'setState',
+            payload: { servers: json },
+          });
+            json.map((server, i) =>{
 
-  const stopStream = (node) => {
-    let nodeNameRaw = node.split('-');
-    let nodeName = nodeNameRaw[0];
+              if(server.service==='Restreamer'){
+                fetch('http://' + server.zeroTierIP  + ':8000/api/streams')
+                .then((response) => response.json())
+                .then((json) => {
+                    
+                 for(i=0; i<Object.keys(json).length;i++){
+                    nodestreams.push(json[Object.keys(json)[i]])
 
-    fetch('http://rtcc-server.shreveport-it.org/api/streams/stop/' + nodeName)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log('stopped');
-      });
-  };
 
+
+                 }
+                  
+                }).then(() => {
+                  nodestreams.map((stream,i) =>{
+                    streams.push(stream.camera1)
+                    streams.push(stream.camera2)
+                    streams.push(stream.camera3)
+                    
+
+
+
+
+                  })
+                 
+                   })
+               
+               
+                fetch('http://' + server.zeroTierIP  + ':8000/api/server')
+                .then((response) => response.json())
+                .then((json) => {
+                    console.log(json)
+                     console.log(streams)
+                  dispatch({
+                    type: 'setState',
+                    payload: { restreamerServerStats: json },
+                  });
+                });
+              }
+            })
+        });
+
+    }, 15000);
   const handleAddServer = () =>
     dispatch({
       type: 'setState',
@@ -81,10 +123,9 @@ export default function SystemManager() {
             </Table>
           </Card>
         </Col>
-
         <Col sm={3}>
           <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
-            <Card.Title>Rec Center 1</Card.Title>
+            <Card.Title>Client Servers</Card.Title>
             <Table striped bordered hover variant="dark" size="sm">
               <thead>
                 <tr>
@@ -94,12 +135,73 @@ export default function SystemManager() {
                 </tr>
               </thead>
               <tbody>
-                <tr></tr>
+                {Clients.map((server) => (
+                  <tr>
+                    <td>{server.name}</td>
+                    <td>
+                      <Badge variant="danger">Danger</Badge>{' '}
+                    </td>
+                    <td>Configure</td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </Card>
         </Col>
-        <Col sm={5}>
+        <Col sm={3}>
+          <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
+            <Card.Title>Mongo Servers</Card.Title>
+            <Table striped bordered hover variant="dark" size="sm">
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Status</td>
+                  <td>Actions</td>
+                </tr>
+              </thead>
+              <tbody>
+                {Mongos.map((server) => (
+                  <tr>
+                    <td>{server.name}</td>
+                    <td>
+                      <Badge variant="danger">Danger</Badge>{' '}
+                    </td>
+                    <td>Configure</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Card>
+        </Col>
+<Col sm={3}>
+          <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
+            <Card.Title>ReStreamers</Card.Title>
+            <Table striped bordered hover variant="dark" size="sm">
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Status</td>
+                  <td>Actions</td>
+                </tr>
+              </thead>
+              <tbody>
+                {Restreamers.map((server) => (
+                  <tr>
+                    <td>{server.name}</td>
+                    <td>
+                      <Badge variant="danger">Danger</Badge>{' '}
+                    </td>
+                    <td>Configure</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Card>
+        </Col>
+      </Row>
+      <br />
+      <Row>
+        <Col sm={12}>
           <Card bg="dark" text="light" border="light" className="text-center systemSettingsServerCard">
             <ServerLineChart />
           </Card>
@@ -108,7 +210,7 @@ export default function SystemManager() {
       </Row>
       <Row>
         <Col>
-          <Card bg="dark" text="light" border="light" className="text-center systemSettingsServerCard">
+          <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
             <Card.Title>Streams</Card.Title>
             <Table striped bordered hover variant="dark" size="sm">
               <thead>
@@ -122,11 +224,11 @@ export default function SystemManager() {
                 </tr>
               </thead>
               <tbody>
-                {state.restreamerStreamsStats.map((stream) => (
+                {tryValue(() => {streams.map((stream) => (
                   <tr>
                     <td>
                       {tryValue(() => {
-                        return stream.streamName;
+                        return stream.publisher.stream;
                       })}
                     </td>
                     <td>
@@ -158,17 +260,15 @@ export default function SystemManager() {
                         })}
                       </Moment>
                     </td>
-                    <td>
-                      <Button onClick={() => stopStream(stream.streamName)}></Button>
-                    </td>
+                   
                   </tr>
-                ))}
+                ))})}
               </tbody>
             </Table>
           </Card>
         </Col>
         <Col sm>
-          <Card bg="dark" text="light" border="light" className="text-center systemSettingsServerCard">
+          <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
             <Card.Title>Restream Status</Card.Title>
             <Table striped bordered hover variant="dark" size="sm">
               <thead>
@@ -188,48 +288,48 @@ export default function SystemManager() {
                 <tr>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[19].cpu.load;
+                      return state.restreamerServerStats.cpu.load;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return (state.restreamerserverstatistics[19].net.inbytes * 0.000001).toFixed(2);
+                      return (state.restreamerServerStats.net.inbytes * 0.000001).toFixed(2);
                     })}
                     /
                     {tryValue(() => {
-                      return (state.restreamerserverstatistics[19].net.outbytes * 0.000001).toFixed(2);
+                      return (state.restreamerServerStats.net.outbytes * 0.000001).toFixed(2);
                     })}
                   </td>
 
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[19].nodejs.uptime;
+                      return state.restreamerServerStats.nodejs.uptime;
                     })}
                   </td>
 
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[19].clients.active;
+                      return state.restreamerServerStats.clients.active;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[19].clients.idle;
+                      return state.restreamerServerStats.clients.idle;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[19].clients.rtmp;
+                      return state.restreamerServerStats.clients.rtmp;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[19].clients.http;
+                      return state.restreamerServerStats.clients.http;
                     })}
                   </td>
                   <td>
                     {tryValue(() => {
-                      return state.restreamerserverstatistics[19].clients.ws;
+                      return state.restreamerServerStats.clients.ws;
                     })}
                   </td>
                 </tr>
@@ -242,27 +342,7 @@ export default function SystemManager() {
             </Row>
           </Card>
         </Col>
-        <Col sm={3}>
-          <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
-            <Card.Title>General Stats</Card.Title>
-            <Table striped bordered hover variant="dark" size="sm">
-              <tbody>
-                <tr>
-                  <td>Connected Users</td>
-                  <td>12</td>
-                </tr>
-                <tr>
-                  <td>Server CPU</td>
-                  <td>35%</td>
-                </tr>
-                <tr>
-                  <td>Server Memory</td>
-                  <td>78%</td>
-                </tr>
-              </tbody>
-            </Table>
-          </Card>
-        </Col>
+        
       </Row>
       <NewServerModal />
     </Container>

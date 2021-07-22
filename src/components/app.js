@@ -115,56 +115,23 @@ export default function App() {
   useEffect(() => {
     let currentStreams = [];
 
-    fetch('http://rtcc-server.shreveport-it.org/api/streams/streamingserverstats')
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch({
-          type: 'setState',
-          payload: { restreamerserverstatistics: json },
-        });
-      });
 
-    fetch('http://rtcc-server.shreveport-it.org/api/streams/streamstatistics/10.10.30.12')
-      .then((response) => response.json())
-      .then((json) => {
-        try {
-          Object.keys(json.streams).forEach(function (key) {
-            currentStreams.push({
-              streamName: key,
-              streamInfo: json.streams[key],
-            });
 
-            dispatch({
-              type: 'setState',
-              payload: { restreamerStreamsStats: currentStreams },
-            });
-          });
-        } catch (e) {
-          dispatch({
-            type: 'setState',
-            payload: { restreamerStreamsStats: currentStreams },
-          });
-        }
-      });
 
-    fetch('http://10.10.30.12:8000/api/streams')
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch({
-          type: 'setState',
-          payload: { streams: json },
-        });
-      });
 
+
+
+
+   
+function refreshStreamingData(){
+  let nodestreams = []
+  let streams = []
+
+
+}
     function refreshData() {
-      fetch('http://rtcc-server.shreveport-it.org/api/servers')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'setState',
-            payload: { servers: json },
-          });
-        });
+
+      
 
       fetch('http://rtcc-server.shreveport-it.org/api/nodes')
         .then((response) => response.json())
@@ -176,7 +143,10 @@ export default function App() {
     setInterval(() => {
       refreshData();
     }, 365000);
-
+    setInterval(() => {
+      refreshStreamingData();
+    }, 30000);
+refreshStreamingData()
     refreshData();
 
     // eslint-disable-next-line
