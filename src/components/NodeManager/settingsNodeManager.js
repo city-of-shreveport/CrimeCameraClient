@@ -16,6 +16,8 @@ import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
 import NodeChartModal from './nodeManagerNodePerfMonCharts.js';
 import NodeCameraSettingModal from './settingsNodeCameraSettingsModal';
+import { FiCamera } from 'react-icons/fi';
+import { FiCameraOff } from 'react-icons/fi';
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
   const handleEditNodeModal = (node) => {
@@ -247,7 +249,14 @@ export default function Settings() {
       },
     });
   };
-
+const cameraIconOn = props => {
+  return (
+    <div>
+      <FiCamera color="green" fontSize="1.5em"/>
+      <div>props.value</div>
+    </div>
+  )
+}
   return (
     <Container fluid className="settingsDIV bg-dark">
       <br />
@@ -277,7 +286,7 @@ export default function Settings() {
 
       <Row className="justify-content-md-center">
         <Col>
-          <Card bg="dark" text="light">
+          <Card bg="dark" text="light" className='nodeTableCard'>
             <div className="nodeTableOverflow">
               <Table striped bordered hover variant="dark" responsive>
                 <thead>
@@ -348,42 +357,48 @@ export default function Settings() {
                                 F
                               </h5>
                             );
-                          })}
+                          })}{' '}
                         </td>
-                        <td>
+                        <td>{' '}1{' '}
                           {tryValue(() => {
                             return node.perfmon.cameraStatus.camera1 ? (
-                              <Button variant="outline-success" size="sm">
-                                Camera 1
-                              </Button>
+                              
+                                <FiCamera color="green" fontSize="1.5em"/>
+                                
+                              
+                              
+                              
                             ) : (
-                              <Button variant="outline-danger" size="sm">
-                                Camera 1
-                              </Button>
+                          
+                                <FiCameraOff color="red" fontSize="1.5em" />
+                               
+                              
+                               
+                             
                             );
-                          })}
+                          })}{' '}2{' '}
                           {tryValue(() => {
                             return node.perfmon.cameraStatus.camera2 ? (
-                              <Button variant="outline-success" size="sm">
-                                Camera 2
-                              </Button>
+                           
+                                <FiCamera color="green" fontSize="1.5em"/>
+                              
                             ) : (
-                              <Button variant="outline-danger" size="sm">
-                                Camera 2
-                              </Button>
+                           
+                                <FiCameraOff color="red" fontSize="1.5em" />
+                                
                             );
-                          })}
+                          })}{' '}3{' '}
                           {tryValue(() => {
                             return node.perfmon.cameraStatus.camera3 ? (
-                              <Button variant="outline-success" size="sm">
-                                Camera 3
-                              </Button>
+                             
+                                <FiCamera color="green" fontSize="1.5em"/>
+                               
                             ) : (
-                              <Button variant="outline-danger" size="sm">
-                                Camera 3
-                              </Button>
+                         
+                                <FiCameraOff color="red" fontSize="1.5em" />
+                               
                             );
-                          })}
+                          })}{' '}
                         </td>
                         <td>
                           <td>
@@ -413,7 +428,7 @@ export default function Settings() {
                                   %{' '}
                                 </h5>
                               );
-                            })}
+                            })}{' '}
                           </td>{' '}
                           <td>
                             {tryValue(() => {
@@ -479,13 +494,7 @@ export default function Settings() {
                           <Button variant="outline-primary" size="sm" onClick={() => handleEditNodeModal(node.name)}>
                             Configure
                           </Button>{' '}
-                          <Button
-                            variant="outline-primary"
-                            size="sm"
-                            onClick={() => handleSystemInfoNodeModal(node.name)}
-                          >
-                            Information
-                          </Button>{' '}
+                          
                           <Button variant="outline-primary" size="sm" onClick={() => handleNodeChartModal(node.name)}>
                             Charts
                           </Button>{' '}
@@ -515,14 +524,10 @@ export default function Settings() {
           </Card>
         </Col>
 
-        {tryValue(() => {
-          return state.currentNodeInfo.name;
-        }) === null ? (
-          <div></div>
-        ) : (
+     
           <Col xs={2}>
-            <systemInformation />
-            <Card bg="dark" text="light">
+           
+            <Card bg="dark" text="light" className='nodeManageSystemInfoCard'>
               <Card.Header>System Information</Card.Header>
               <Card.Text></Card.Text>
               <Card.Body>
@@ -530,7 +535,7 @@ export default function Settings() {
               </Card.Body>
             </Card>
           </Col>
-        )}
+      
       </Row>
 
       <NodeManagerNewNodeModal />

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
 // import Moment from 'react-moment';
 import moment from 'moment';
@@ -10,22 +10,40 @@ defaults.font.color = 'white';
 
 export default function LineChart() {
   const [state] = useContext(GlobalContext);
-
-  let chartLables = [];
-  let currentLoad = [];
-  let mem = [];
-  let fsSize = [];
-  let cputemp = [];
-
+let dataSets = [];
+  let labels = []
+    let cputemp = [];
+    let chartLables = [];
+    let currentLoad = [];
+    let mem = [];
+    let fsSize = [];
   // eslint-disable-next-line
-  state.serverstatistics.map((streamStat, i) => {
-    let createdTime = moment(streamStat.createdAt).format('HH:mm');
-    currentLoad.push(streamStat.currentLoad.currentLoad.toFixed(2));
-    mem.push((streamStat.mem.used / streamStat.mem.total).toFixed(2) * 100);
-    fsSize.push((streamStat.fsSize[0].used / streamStat.fsSize[0].size).toFixed(2) * 100);
-    cputemp.push(streamStat.cpuTemperature.main);
-    chartLables.push(createdTime);
-  });
+  state.servers.map((server,i) =>{
+    labels.push(server);
+
+
+    fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + server)
+        .then((response) => response.json())
+        // eslint-disable-next-line
+        .then((json) => {
+          json.map((streamStat, i) => {
+            let createdTime = moment(streamStat.createdAt).format('HH:mm');
+            currentLoad.push(streamStat.currentLoad.currentLoad.toFixed(2));
+            mem.push((streamStat.mem.used / streamStat.mem.total).toFixed(2) * 100);
+            fsSize.push((streamStat.fsSize[0].used / streamStat.fsSize[0].size).toFixed(2) * 100);
+            cputemp.push(streamStat.cpuTemperature.main);
+          });
+        })
+
+  })
+    
+
+
+
+            
+      
+
+  
 
   const options = {
     scales: {
@@ -67,6 +85,5 @@ export default function LineChart() {
       },
     ],
   };
-  console.log(data);
-  return <Line data={data} options={options} />;
+  return <Bar data={data} options={options} />;
 }

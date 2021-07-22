@@ -46,7 +46,7 @@ html {
 
 .settingsDIV {
   min-width: 100%;
-  height: 80vh;
+  min-height: 800px;
 }
 
 .timesListGroup {
@@ -67,17 +67,25 @@ html {
   max-height: 300px;
   overflow-y: scroll;
 }
+.nodeTableCard{
+  min-height: 70vh;
 
+
+}
 .nodeListOffLineHomePage {
   max-height: 300px;
   overflow-y: scroll;
 }
 
 .nodeTableOverflow {
-  max-height: 90%px;
+  max-height: 80vh;
   overflow-y: scroll;
 }
+.nodeManageSystemInfoCard{
+  min-height: 65vh;
+  overflow-y: scroll;
 
+}
 .chartBox {
   height: 95%;
   width: 100%;
@@ -120,12 +128,14 @@ code {
 }
 
 .systemSettingsServerCard {
-  min-height: 20vh;
+  min-height: 25vh;
+  max-height: 25vh;
   overflow: scroll;
 }
 
 .systemSettingsStreamsCard {
-  height: 80%;
+  min-height: 25vh;
+  max-height: 25vh;
   overflow: scroll;
 }
 

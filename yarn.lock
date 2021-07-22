@@ -9799,6 +9799,11 @@ react-refresh@^0.8.3:
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
 
+react-responsive-button@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-responsive-button/-/react-responsive-button-0.2.1.tgz#c92e8a60b1e234655c42a0c8a2d404dc8db2aa0b"
+  integrity sha512-p2/TBeNpLaCOfZjdbKF6MisBxpjhdz/X9O1BUJzjE8bjqm4i8RDZFp3hdAju99lyocH05FQMCQT7Dis/ncmXqA==
+
 react-responsive-carousel@^3.2.19:
   version "3.2.19"
   resolved "https://registry.yarnpkg.com/react-responsive-carousel/-/react-responsive-carousel-3.2.19.tgz#ded0d5888b0a605cf28f0db3fad04bbbb2ff3616"

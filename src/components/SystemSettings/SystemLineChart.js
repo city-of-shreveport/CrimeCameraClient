@@ -4,6 +4,8 @@ import { defaults } from 'react-chartjs-2';
 // import Moment from 'react-moment';
 import moment from 'moment';
 import { GlobalContext } from '../../contexts/globalContext';
+import tryValue from '../../helperFunctions';
+
 defaults.animation = false;
 defaults.font.size = 16;
 defaults.font.color = 'white';
@@ -21,7 +23,8 @@ export default function LineChart() {
   let ws = [];
 
   // eslint-disable-next-line
-  state.restreamerserverstatistics.map((streamStat, i) => {
+  tryValue(() => {
+  state.restreamerServerStats.map((streamStat, i) => {
     let createdTime = moment(streamStat.createdAt).format('HH:mm');
     chartLables.push(createdTime);
     accepted.push(streamStat.clients.accepted);
@@ -32,7 +35,7 @@ export default function LineChart() {
     http.push(streamStat.clients.http);
     ws.push(streamStat.clients.ws);
   });
-
+})
   const options = {
     scales: {
       yAxes: [
