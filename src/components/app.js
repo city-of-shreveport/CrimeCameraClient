@@ -131,6 +131,57 @@ function refreshStreamingData(){
 }
     function refreshData() {
 
+  let streams = []
+fetch('http://rtcc-server.shreveport-it.org/api/servers')
+        .then((response) => response.json())
+        .then((json) => {
+          dispatch({
+            type: 'setState',
+            payload: { servers: json },
+          });
+            json.map((server, i) =>{
+
+              if(server.service==='Restreamer'){
+                console.log(server)
+                fetch('http://' + server.zeroTierIP  + ':8000/api/streams')
+                .then((response) => response.json())
+                .then((json) => {
+                    console.log(Object.keys(json).length)
+                 console.log(Object.keys(json)[0]);
+                 console.log(Object.keys(json)[1]);
+                 for(i=0; i<Object.keys(json).length;i++){
+                    console.log(json[Object.keys(json)[i]])
+                    streams.push(json[Object.keys(json)[i]])
+
+
+
+                 }
+                  dispatch({
+                    type: 'setState',
+                    payload: { restreamerStreams: streams },
+                  });
+                });
+                fetch('http://' + server.zeroTierIP  + ':8000/api/server')
+                .then((response) => response.json())
+                .then((json) => {
+                    console.log(json)
+                  dispatch({
+                    type: 'setState',
+                    payload: { restreamerServerStats: json },
+                  });
+                });
+              }
+            })
+        });
+
+}
+    function refreshData() {
+state.restreamerStreams.map(
+      (stream) => (
+        // eslint-disable-next-line
+        console.log(stream.subscribers)
+      )
+    );
       
 
       fetch('http://rtcc-server.shreveport-it.org/api/nodes')
@@ -145,7 +196,10 @@ function refreshStreamingData(){
     }, 365000);
     setInterval(() => {
       refreshStreamingData();
+
     }, 30000);
+
+   
 refreshStreamingData()
     refreshData();
 

@@ -45,6 +45,7 @@ const initialState = {
   perfmons: [],
   previousNode: '',
   restreamerStreams:[],
+  restreamerStreams: [],
   restreamerServerStats: [],
   selectedNode: 'NONE',
   servers: [],

@@ -23,7 +23,19 @@ export default function LineChart() {
   let ws = [];
 
   // eslint-disable-next-line
+  tryValue(() => {
+  state.restreamerServerStats.map((streamStat, i) => {
+    let createdTime = moment(streamStat.createdAt).format('HH:mm');
+    chartLables.push(createdTime);
+    accepted.push(streamStat.clients.accepted);
+    active.push(streamStat.clients.active);
+    idle.push(streamStat.clients.idle);
+    rtmp.push(streamStat.clients.rtmp);
 
+    http.push(streamStat.clients.http);
+    ws.push(streamStat.clients.ws);
+  });
+})
   const options = {
     scales: {
       yAxes: [
