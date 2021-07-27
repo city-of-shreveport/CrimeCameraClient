@@ -54,7 +54,16 @@ export default function StreamingPlayer() {
 
 
     function onProgressHandler(i, player) {
+console.log(i.playedSeconds)
 
+if(state.videoPlayerReset===true && state.videoPlayerResetInitial===true){
+tryValue(() => {state.StreamingViewerPlayer1Reference.getInternalPlayer('flv').destroy()})
+tryValue(() => {state.StreamingViewerPlayer2Reference.getInternalPlayer('flv').destroy()})
+tryValue(() => {state.StreamingViewerPlayer3Reference.getInternalPlayer('flv').destroy()})
+
+
+
+}
     if(state.videoStreamingplayerPlaying===false){
       if (i.loadedSeconds > 5) {
         if (state.videoStreamingplayerPlaying === false) {
@@ -159,7 +168,21 @@ let camera1VideoUrl =
 
 
    
+const onPauseHandler = (i,player)=> {
 
+console.log("Paused")
+
+
+}
+
+
+const onDurationHandler = (i,player)=> {
+
+console.log(i)
+
+
+
+}
 const onEndedHandler = (i,player)=> {
 
 console.log("ENDED")
@@ -188,13 +211,14 @@ console.log("ENDED")
                       url={state.videoStreamingURLS.camera1}
                       playing={state.videoStreamingplayer1Playing}
                       controls={true}
-                      name="player2"
+                      name="player1"
                       muted={true}
                       width="100%"
                       height="auto"
                       onProgress={(i) => onProgressHandler(i, 'player1')}
-                      onPause={(i) => onEndedHandler(i, player1Reference)}
-                      onEnded={(i) => onEndedHandler(i, player1Reference)}
+                      onPause={(i) => onEndedHandler(i, state.StreamingViewerPlayer1Reference)}
+                      onEnded={(i) => onEndedHandler(i, state.StreamingViewerPlayer1Reference)}
+                      onDuration={(i) => onDurationHandler(i, state.StreamingViewerPlayer1Reference)}
                     />
                   </div>
                 ) : (
@@ -270,7 +294,7 @@ console.log("ENDED")
                       width="100%"
                       height="auto"
                       onProgress={(i) => onProgressHandler(i, 'player3')}
-                      onPause={(i) => onEndedHandler(i, player1Reference)}
+                      onPause={(i) => onPauseHandler(i, player1Reference)}
                       onEnded={(i) => onEndedHandler(i, player1Reference)}
                     />
                   </div>

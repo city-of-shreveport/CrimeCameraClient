@@ -72,8 +72,7 @@ export default function GoogleMap() {
         if(marker.status==='up'){
         marker.addListener('click', () => {
             
-            setTimeout(() => {
-      dispatch({
+            dispatch({
             type: 'setState',
             payload: {
               previousNode: tryValue(() => {
@@ -81,8 +80,35 @@ export default function GoogleMap() {
               }),
                
               currentNodeInfo: { name: marker.node },
-            videoPlayerActive: true,
-              videoStreamingURLS: {
+              videoPlayerReset: true,
+              videoPlayerResetInitial: true,
+              videoStreamingplayer3Playing: false,
+              videoStreamingplayer2Playing: false,
+              videoStreamingplayer1Playing:false,
+              videStremingPlayers: {
+                videoStreamerPlayer1Buffer: false,
+                videoStreamerPlayer2Buffer: false,
+                videoStreamerPlayer3Buffer: false,
+              },
+            }
+
+
+            })
+
+           setTimeout(() => {
+          dispatch({
+            type: 'setState',
+            payload: {
+              videoPlayerResetInitial: false,
+              videoPlayerActive: true,
+              videoPlayerReset: false,
+
+
+              videoPlayerStreamingActive: false,
+             
+              
+
+               videoStreamingURLS: {
                 camera1: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera1.flv',
                 camera2: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera2.flv',
                 camera3: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera3.flv',
@@ -92,41 +118,9 @@ export default function GoogleMap() {
                 camera2: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera2',
                 camera3: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera3',
               },
-              
-            },
-          });
-    }, 2000);
-
-           
-          dispatch({
-            type: 'setState',
-            payload: {
-videoStreamingplayer3Playing: false,
-videoStreamingplayer2Playing: false,
-videoStreamingplayer1Playing:false,
-
-
-              videoPlayerStreamingActive: false,
-             
-              videStremingPlayers: {
-                videoStreamerPlayer1Buffer: false,
-                videoStreamerPlayer2Buffer: false,
-                videoStreamerPlayer3Buffer: false,
-              },
-              videoStreamingplayerPlaying: false,
-              videoStreamingURLS: {
-                camera1: ' ',
-                camera2: ' ',
-                camera3: ' ',
-              },
-              VideoSnapShotURLS: {
-                camera1: ' ',
-                camera2: '  ',
-                camera3: '  ',
-              },
             }
           })
-
+        },3000)
           console.log(marker.node);
         });
       }});

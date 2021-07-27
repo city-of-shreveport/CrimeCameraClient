@@ -63,6 +63,7 @@ const initialState = {
   videoPlayer: {},
   videoPlayerActive: false,
   videoPlayerReset: false,
+  videoPlayerResetInitial: null,
   videoPlayerStreamingActive: false,
   videoPlayersState: {},
   videoStreamingplayer1Playing: false,
