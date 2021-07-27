@@ -65,9 +65,14 @@ const initialState = {
   videoPlayerReset: false,
   videoPlayerStreamingActive: false,
   videoPlayersState: {},
-  videoStreamingplayerPlaying: false,
+  videoStreamingplayer1Playing: false,
+    videoStreamingplayer2Playing: false,
+      videoStreamingplayer3Playing: false,
   videoStreamingURLS: {},
   VideoSnapShotURLS: {},
+StreamingViewerPlayer1Reference: null,
+StreamingViewerPlayer2Reference: null,
+StreamingViewerPlayer3Reference: null,
 
 
   videStremingPlayers:{

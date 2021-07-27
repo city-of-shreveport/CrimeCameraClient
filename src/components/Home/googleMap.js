@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import isEmpty from 'lodash.isempty';
 import tryValue from '../../helperFunctions';
 import { GlobalContext } from '../../contexts/globalContext';
-
 export default function GoogleMap() {
   const [state, dispatch] = useContext(GlobalContext);
   const handleApiLoaded = (map, maps) => {
@@ -72,6 +71,7 @@ export default function GoogleMap() {
       markers.forEach((marker, i) => {
         if(marker.status==='up'){
         marker.addListener('click', () => {
+            
             setTimeout(() => {
       dispatch({
             type: 'setState',
@@ -79,9 +79,9 @@ export default function GoogleMap() {
               previousNode: tryValue(() => {
                 return state.currentNodeInfo.name;
               }),
-              
+               
               currentNodeInfo: { name: marker.node },
-              videoPlayerActive: true,
+            videoPlayerActive: true,
               videoStreamingURLS: {
                 camera1: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera1.flv',
                 camera2: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera2.flv',
@@ -95,19 +95,25 @@ export default function GoogleMap() {
               
             },
           });
-    }, 1500);
+    }, 2000);
+
+           
           dispatch({
             type: 'setState',
             payload: {
-              videoPlayerReset: true,
-              videoPlayerActive: false,
+videoStreamingplayer3Playing: false,
+videoStreamingplayer2Playing: false,
+videoStreamingplayer1Playing:false,
+
+
+              videoPlayerStreamingActive: false,
+             
               videStremingPlayers: {
                 videoStreamerPlayer1Buffer: false,
                 videoStreamerPlayer2Buffer: false,
                 videoStreamerPlayer3Buffer: false,
               },
               videoStreamingplayerPlaying: false,
-              videoPlayerStreamingActive: false,
               videoStreamingURLS: {
                 camera1: ' ',
                 camera2: ' ',
