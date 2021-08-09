@@ -81,7 +81,7 @@ export default function App() {
       nodedata.map((nodedataitem) => {
 
         setTimeout(() => {
-      fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + nodedataitem.name)
+      fetch('http://10.10.30.20/api/perfmons/' + nodedataitem.name)
         .then((response) => response.json())
         // eslint-disable-next-line
         .then((json) => {
@@ -132,7 +132,7 @@ function refreshStreamingData(){
     function refreshData() {
 
   let streams = []
-fetch('http://rtcc-server.shreveport-it.org/api/servers')
+fetch('http://10.10.30.20/api/servers')
         .then((response) => response.json())
         .then((json) => {
           dispatch({
@@ -184,7 +184,7 @@ state.restreamerStreams.map(
     );
       
 
-      fetch('http://rtcc-server.shreveport-it.org/api/nodes')
+      fetch('http://10.10.30.20/api/nodes')
         .then((response) => response.json())
         .then((json) => {
           fetchCurrentPerfMonData(json);

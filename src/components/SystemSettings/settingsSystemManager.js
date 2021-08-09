@@ -106,6 +106,7 @@ fetch('http://rtcc-server.shreveport-it.org/api/servers')
                   <td>Name</td>
                   <td>Status</td>
                   <td>Actions</td>
+                  <td>Version</td>
                 </tr>
               </thead>
               <tbody>
@@ -193,6 +194,10 @@ fetch('http://rtcc-server.shreveport-it.org/api/servers')
                       <Badge variant="danger">Danger</Badge>{' '}
                     </td>
                     <td>Configure</td>
+                     <td>{tryValue(() => {
+                              return server.softwareVersion;
+                            })}
+                     </td>
                   </tr>
                 ))}
               </tbody>

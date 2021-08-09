@@ -135,7 +135,7 @@ export default function GoogleMap() {
 
   return (
     <div id="googleMapDIV" style={{ height: '90vh', width: '100%' }}>
-      {!isEmpty(state.nodes) && (
+      
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyAxgBe1BLPLfPIPwK0ucb6-SeqkZdckChI' }}
           defaultCenter={{ lat: 32.46, lng: -93.7550222 }}
@@ -144,7 +144,7 @@ export default function GoogleMap() {
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         ></GoogleMapReact>
-      )}
+   
     </div>
   );
 }

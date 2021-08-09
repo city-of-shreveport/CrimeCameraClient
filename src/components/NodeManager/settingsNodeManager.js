@@ -299,6 +299,7 @@ const cameraIconOn = props => {
                     <tr>Drives</tr>
                     <th>Actions</th>
                     <th>Updated</th>
+                    <th>Version</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -510,6 +511,13 @@ const cameraIconOn = props => {
                           <Moment fromNow>
                             {tryValue(() => {
                               return node.perfmon.createdAt;
+                            })}
+                          </Moment>
+                        </td>
+                        <td>
+                          <Moment fromNow>
+                            {tryValue(() => {
+                              return node.config.softwareVersion;
                             })}
                           </Moment>
                         </td>
