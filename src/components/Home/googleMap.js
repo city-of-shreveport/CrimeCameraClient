@@ -98,9 +98,9 @@ export default function GoogleMap() {
                   videoPlayerStreamingActive: false,
 
                   videoStreamingURLS: {
-                    camera1: 'http://rtcc-server.shreveport-it.org:3000:8000/' + marker.node + '/camera1.flv',
-                    camera2: 'http://rtcc-server.shreveport-it.org:3000:8000/' + marker.node + '/camera2.flv',
-                    camera3: 'http://rtcc-server.shreveport-it.org:3000:8000/' + marker.node + '/camera3.flv',
+                    camera1: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera1.flv',
+                    camera2: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera2.flv',
+                    camera3: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera3.flv',
                   },
                   VideoSnapShotURLS: {
                     camera1:
