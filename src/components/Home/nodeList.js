@@ -9,13 +9,15 @@ export default function NodeList() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const startStream = (json) => {
-    fetch('http://rtcc-server.shreveport-it.org/api/streams/start/' + json.name + '/' + json.config.ip).then(
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/streams/start/' + json.name + '/' + json.config.ip).then(
       (response) => {}
     );
   };
 
   const stopStream = () => {
-    fetch('http://rtcc-server.shreveport-it.org/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {});
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/streams/stop/' + state.currentNodeInfo.name).then(
+      (response) => {}
+    );
   };
 
   const handleViewVideosComponent = () => {
@@ -25,7 +27,7 @@ export default function NodeList() {
   let perfMonTimerJob = null;
 
   const getNodeInfo = (node) => {
-    fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node)
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({

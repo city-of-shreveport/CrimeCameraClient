@@ -27,7 +27,7 @@ export default function RecordingViewer() {
 
   const handleSelectNodes = () => {
     setState({ RecordingViewerFormIsLoading: true });
-    fetch('http://rtcc-server.shreveport-it.org/api/videos/')
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/videos/')
       .then((response) => response.json())
       .then((json) => {
         var dates = json.map((video) => video.dateTime);
@@ -135,9 +135,9 @@ export default function RecordingViewer() {
     var file = `${date}-${hours}-${minutes}.mp4`;
 
     setState({
-      RecordingViewerNode1Camera1URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera1/${file}`,
-      RecordingViewerNode1Camera2URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera2/${file}`,
-      RecordingViewerNode1Camera3URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera3/${file}`,
+      RecordingViewerNode1Camera1URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera1/${file}`,
+      RecordingViewerNode1Camera2URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera2/${file}`,
+      RecordingViewerNode1Camera3URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera3/${file}`,
       RecordingViewerNode1Selected: node,
     });
   };
@@ -152,9 +152,9 @@ export default function RecordingViewer() {
     var file = `${date}-${hours}-${minutes}.mp4`;
 
     setState({
-      RecordingViewerNode2Camera1URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera1/${file}`,
-      RecordingViewerNode2Camera2URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera2/${file}`,
-      RecordingViewerNode2Camera3URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera3/${file}`,
+      RecordingViewerNode2Camera1URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera1/${file}`,
+      RecordingViewerNode2Camera2URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera2/${file}`,
+      RecordingViewerNode2Camera3URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera3/${file}`,
       RecordingViewerNode2Selected: node,
     });
   };
@@ -169,9 +169,9 @@ export default function RecordingViewer() {
     var file = `${date}-${hours}-${minutes}.mp4`;
 
     setState({
-      RecordingViewerNode3Camera1URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera1/${file}`,
-      RecordingViewerNode3Camera2URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera2/${file}`,
-      RecordingViewerNode3Camera3URL: `http://rtcc-server.shreveport-it.org/api/videos/stream/${node.value}/camera3/${file}`,
+      RecordingViewerNode3Camera1URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera1/${file}`,
+      RecordingViewerNode3Camera2URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera2/${file}`,
+      RecordingViewerNode3Camera3URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera3/${file}`,
       RecordingViewerNode3Selected: node,
     });
   };

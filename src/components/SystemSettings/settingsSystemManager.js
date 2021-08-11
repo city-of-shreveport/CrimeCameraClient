@@ -20,8 +20,8 @@ export default function SystemManager() {
   let Restreamers = [];
   let Clients = [];
   let Servers = [];
-  let nodestreams = []
-let streams = []
+  let nodestreams = [];
+  let streams = [];
   // eslint-disable-next-line
   {
     state.servers.map(
@@ -35,57 +35,44 @@ let streams = []
     );
   }
   setInterval(() => {
-      
-fetch('http://rtcc-server.shreveport-it.org/api/servers')
-        .then((response) => response.json())
-        .then((json) => {
-          dispatch({
-            type: 'setState',
-            payload: { servers: json },
-          });
-            json.map((server, i) =>{
-
-              if(server.service==='Restreamer'){
-                fetch('http://' + server.zeroTierIP  + ':8000/api/streams')
-                .then((response) => response.json())
-                .then((json) => {
-                    
-                 for(i=0; i<Object.keys(json).length;i++){
-                    nodestreams.push(json[Object.keys(json)[i]])
-
-
-
-                 }
-                  
-                }).then(() => {
-                  nodestreams.map((stream,i) =>{
-                    streams.push(stream.camera1)
-                    streams.push(stream.camera2)
-                    streams.push(stream.camera3)
-                    
-
-
-
-                  })
-                 
-                   })
-               
-               
-                fetch('http://' + server.zeroTierIP  + ':8000/api/server')
-                .then((response) => response.json())
-                .then((json) => {
-                    console.log(json)
-                     console.log(streams)
-                  dispatch({
-                    type: 'setState',
-                    payload: { restreamerServerStats: json },
-                  });
-                });
-              }
-            })
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/servers')
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: 'setState',
+          payload: { servers: json },
         });
+        json.map((server, i) => {
+          if (server.service === 'Restreamer') {
+            fetch('http://' + server.zeroTierIP + ':8000/api/streams')
+              .then((response) => response.json())
+              .then((json) => {
+                for (i = 0; i < Object.keys(json).length; i++) {
+                  nodestreams.push(json[Object.keys(json)[i]]);
+                }
+              })
+              .then(() => {
+                nodestreams.map((stream, i) => {
+                  streams.push(stream.camera1);
+                  streams.push(stream.camera2);
+                  streams.push(stream.camera3);
+                });
+              });
 
-    }, 15000);
+            fetch('http://' + server.zeroTierIP + ':8000/api/server')
+              .then((response) => response.json())
+              .then((json) => {
+                console.log(json);
+                console.log(streams);
+                dispatch({
+                  type: 'setState',
+                  payload: { restreamerServerStats: json },
+                });
+              });
+          }
+        });
+      });
+  }, 15000);
   const handleAddServer = () =>
     dispatch({
       type: 'setState',
@@ -159,7 +146,6 @@ fetch('http://rtcc-server.shreveport-it.org/api/servers')
                 </tr>
               </thead>
               <tbody>
-                
                 {Mongos.map((server) => (
                   <tr>
                     <td>{server.name}</td>
@@ -173,8 +159,8 @@ fetch('http://rtcc-server.shreveport-it.org/api/servers')
             </Table>
           </Card>
         </Col>
-        
-<Col sm={3}>
+
+        <Col sm={3}>
           <Card bg="dark" text="light" border="light" className="text-center systemSettingsStreamsCard">
             <Card.Title>ReStreamers</Card.Title>
             <Table striped bordered hover variant="dark" size="sm">
@@ -225,45 +211,46 @@ fetch('http://rtcc-server.shreveport-it.org/api/servers')
                 </tr>
               </thead>
               <tbody>
-                {tryValue(() => {streams.map((stream) => (
-                  <tr>
-                    <td>
-                      {tryValue(() => {
-                        return stream.publisher.stream;
-                      })}
-                    </td>
-                    <td>
-                      {tryValue(() => {
-                        return stream.streamInfo.publisher.app;
-                      })}
-                    </td>
-
-                    <td>
-                      {tryValue(() => {
-                        return stream.streamInfo.publisher.clientId;
-                      })}
-                    </td>
-
-                    <td>
-                      {tryValue(() => {
-                        return stream.streamInfo.publisher.bytes;
-                      })}
-                    </td>
-                    <td>
-                      {tryValue(() => {
-                        return stream.streamInfo.publisher.ip;
-                      })}
-                    </td>
-                    <td>
-                      <Moment fromNow>
+                {tryValue(() => {
+                  streams.map((stream) => (
+                    <tr>
+                      <td>
                         {tryValue(() => {
-                          return stream.streamInfo.publisher.connectCreated;
+                          return stream.publisher.stream;
                         })}
-                      </Moment>
-                    </td>
-                   
-                  </tr>
-                ))})}
+                      </td>
+                      <td>
+                        {tryValue(() => {
+                          return stream.streamInfo.publisher.app;
+                        })}
+                      </td>
+
+                      <td>
+                        {tryValue(() => {
+                          return stream.streamInfo.publisher.clientId;
+                        })}
+                      </td>
+
+                      <td>
+                        {tryValue(() => {
+                          return stream.streamInfo.publisher.bytes;
+                        })}
+                      </td>
+                      <td>
+                        {tryValue(() => {
+                          return stream.streamInfo.publisher.ip;
+                        })}
+                      </td>
+                      <td>
+                        <Moment fromNow>
+                          {tryValue(() => {
+                            return stream.streamInfo.publisher.connectCreated;
+                          })}
+                        </Moment>
+                      </td>
+                    </tr>
+                  ));
+                })}
               </tbody>
             </Table>
           </Card>
@@ -343,7 +330,6 @@ fetch('http://rtcc-server.shreveport-it.org/api/servers')
             </Row>
           </Card>
         </Col>
-        
       </Row>
       <NewServerModal />
     </Container>

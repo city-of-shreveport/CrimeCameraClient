@@ -10,40 +10,30 @@ defaults.font.color = 'white';
 
 export default function LineChart() {
   const [state] = useContext(GlobalContext);
-let dataSets = [];
-  let labels = []
-    let cputemp = [];
-    let chartLables = [];
-    let currentLoad = [];
-    let mem = [];
-    let fsSize = [];
+  let dataSets = [];
+  let labels = [];
+  let cputemp = [];
+  let chartLables = [];
+  let currentLoad = [];
+  let mem = [];
+  let fsSize = [];
   // eslint-disable-next-line
-  state.servers.map((server,i) =>{
+  state.servers.map((server, i) => {
     labels.push(server);
 
-
-    fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + server)
-        .then((response) => response.json())
-        // eslint-disable-next-line
-        .then((json) => {
-          json.map((streamStat, i) => {
-            let createdTime = moment(streamStat.createdAt).format('HH:mm');
-            currentLoad.push(streamStat.currentLoad.currentLoad.toFixed(2));
-            mem.push((streamStat.mem.used / streamStat.mem.total).toFixed(2) * 100);
-            fsSize.push((streamStat.fsSize[0].used / streamStat.fsSize[0].size).toFixed(2) * 100);
-            cputemp.push(streamStat.cpuTemperature.main);
-          });
-        })
-
-  })
-    
-
-
-
-            
-      
-
-  
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/perfmons/' + server)
+      .then((response) => response.json())
+      // eslint-disable-next-line
+      .then((json) => {
+        json.map((streamStat, i) => {
+          let createdTime = moment(streamStat.createdAt).format('HH:mm');
+          currentLoad.push(streamStat.currentLoad.currentLoad.toFixed(2));
+          mem.push((streamStat.mem.used / streamStat.mem.total).toFixed(2) * 100);
+          fsSize.push((streamStat.fsSize[0].used / streamStat.fsSize[0].size).toFixed(2) * 100);
+          cputemp.push(streamStat.cpuTemperature.main);
+        });
+      });
+  });
 
   const options = {
     scales: {

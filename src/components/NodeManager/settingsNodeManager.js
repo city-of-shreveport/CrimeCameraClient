@@ -31,7 +31,7 @@ export default function Settings() {
     let cameras = ['camera1', 'camera2', 'camera3'];
     console.log('Network');
     cameras.map((camera, i) =>
-      fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/networkSettings/' + param + '/' + camera)
+      fetch('http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/networkSettings/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -58,7 +58,7 @@ export default function Settings() {
     let cameras = ['camera1', 'camera2', 'camera3'];
     console.log('Settings');
     cameras.map((camera, i) =>
-      fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/settings/' + param + '/' + camera)
+      fetch('http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/settings/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -85,7 +85,7 @@ export default function Settings() {
     let cameras = ['camera1', 'camera2', 'camera3'];
     console.log('TIME');
     cameras.map((camera, i) =>
-      fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/time/' + param + '/' + camera)
+      fetch('http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/time/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -114,7 +114,7 @@ export default function Settings() {
     let cameraConfigs = [];
     // eslint-disable-next-line
     cameras.map((camera, i) => {
-      fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/videoColorConfig/' + param + '/' + camera)
+      fetch('http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/videoColorConfig/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -161,7 +161,7 @@ export default function Settings() {
   let perfMonTimerJob = null;
   let perfMonChartTimerJob = null;
   const getSinglePerfmonData = (node) =>
-    fetch('http://rtcc-server.shreveport-it.org/api/perfmons/' + node)
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
         const rowLen = json.length;
@@ -178,7 +178,7 @@ export default function Settings() {
       });
   function fetchCurrentNodePerfMon(node) {
     fetch(
-      'http://rtcc-server.shreveport-it.org/api/perfmons/' +
+      'http://rtcc-server.shreveport-it.org:3000/api/perfmons/' +
         tryValue(() => {
           return node;
         })
@@ -193,7 +193,7 @@ export default function Settings() {
   }
 
   const getNodeInfo = (node) => {
-    fetch('http://rtcc-server.shreveport-it.org/api/nodes/' + node)
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({
@@ -249,14 +249,14 @@ export default function Settings() {
       },
     });
   };
-const cameraIconOn = props => {
-  return (
-    <div>
-      <FiCamera color="green" fontSize="1.5em"/>
-      <div>props.value</div>
-    </div>
-  )
-}
+  const cameraIconOn = (props) => {
+    return (
+      <div>
+        <FiCamera color="green" fontSize="1.5em" />
+        <div>props.value</div>
+      </div>
+    );
+  };
   return (
     <Container fluid className="settingsDIV bg-dark">
       <br />
@@ -286,7 +286,7 @@ const cameraIconOn = props => {
 
       <Row className="justify-content-md-center">
         <Col>
-          <Card bg="dark" text="light" className='nodeTableCard'>
+          <Card bg="dark" text="light" className="nodeTableCard">
             <div className="nodeTableOverflow">
               <Table striped bordered hover variant="dark" responsive>
                 <thead>
@@ -359,44 +359,30 @@ const cameraIconOn = props => {
                             );
                           })}{' '}
                         </td>
-                        <td>{' '}1{' '}
+                        <td>
+                          {' '}
+                          1{' '}
                           {tryValue(() => {
                             return node.perfmon.cameraStatus.camera1 ? (
-                              
-                                <FiCamera color="green" fontSize="1.5em"/>
-                                
-                              
-                              
-                              
+                              <FiCamera color="green" fontSize="1.5em" />
                             ) : (
-                          
-                                <FiCameraOff color="red" fontSize="1.5em" />
-                               
-                              
-                               
-                             
+                              <FiCameraOff color="red" fontSize="1.5em" />
                             );
-                          })}{' '}2{' '}
+                          })}{' '}
+                          2{' '}
                           {tryValue(() => {
                             return node.perfmon.cameraStatus.camera2 ? (
-                           
-                                <FiCamera color="green" fontSize="1.5em"/>
-                              
+                              <FiCamera color="green" fontSize="1.5em" />
                             ) : (
-                           
-                                <FiCameraOff color="red" fontSize="1.5em" />
-                                
+                              <FiCameraOff color="red" fontSize="1.5em" />
                             );
-                          })}{' '}3{' '}
+                          })}{' '}
+                          3{' '}
                           {tryValue(() => {
                             return node.perfmon.cameraStatus.camera3 ? (
-                             
-                                <FiCamera color="green" fontSize="1.5em"/>
-                               
+                              <FiCamera color="green" fontSize="1.5em" />
                             ) : (
-                         
-                                <FiCameraOff color="red" fontSize="1.5em" />
-                               
+                              <FiCameraOff color="red" fontSize="1.5em" />
                             );
                           })}{' '}
                         </td>
@@ -494,7 +480,6 @@ const cameraIconOn = props => {
                           <Button variant="outline-primary" size="sm" onClick={() => handleEditNodeModal(node.name)}>
                             Configure
                           </Button>{' '}
-                          
                           <Button variant="outline-primary" size="sm" onClick={() => handleNodeChartModal(node.name)}>
                             Charts
                           </Button>{' '}
@@ -524,18 +509,15 @@ const cameraIconOn = props => {
           </Card>
         </Col>
 
-     
-          <Col xs={2}>
-           
-            <Card bg="dark" text="light" className='nodeManageSystemInfoCard'>
-              <Card.Header>System Information</Card.Header>
-              <Card.Text></Card.Text>
-              <Card.Body>
-                {state.cameraSettingsComponent ? <SettingsSysInfoEditCard /> : <SettingsSysInfoCard />}
-              </Card.Body>
-            </Card>
-          </Col>
-      
+        <Col xs={2}>
+          <Card bg="dark" text="light" className="nodeManageSystemInfoCard">
+            <Card.Header>System Information</Card.Header>
+            <Card.Text></Card.Text>
+            <Card.Body>
+              {state.cameraSettingsComponent ? <SettingsSysInfoEditCard /> : <SettingsSysInfoCard />}
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
 
       <NodeManagerNewNodeModal />

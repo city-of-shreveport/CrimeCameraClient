@@ -25,7 +25,7 @@ export default function SystemSettingsNewServerFormModal() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch('http://rtcc-server.shreveport-it.org/api/servers', requestOptions)
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/servers', requestOptions)
       .then((response) => response.json())
       .then((data) => {});
   };
