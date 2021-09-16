@@ -31,7 +31,7 @@ export default function SettingsNodesSettingsCard() {
       body: JSON.stringify(formDataObject),
     };
 
-    fetch('http://10.10.200.10:3001/api/nodes/' + state.currentNodeInfo.name, requestOptions)
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes/' + state.currentNodeInfo.name, requestOptions)
       .then((response) => response.json())
       .then((data) => {});
   };

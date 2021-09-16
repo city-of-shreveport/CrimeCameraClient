@@ -1,8 +1,8 @@
 import GoogleMapReact from 'google-map-react';
 import React, { useContext } from 'react';
-import isEmpty from 'lodash.isempty';
 import tryValue from '../../helperFunctions';
 import { GlobalContext } from '../../contexts/globalContext';
+
 export default function GoogleMap() {
   const [state, dispatch] = useContext(GlobalContext);
   const handleApiLoaded = (map, maps) => {
@@ -10,22 +10,17 @@ export default function GoogleMap() {
     const markers = [];
     let nodeIcon = '';
 
-
     // eslint-disable-next-line
     var prev_infowindow = false;
     // eslint-disable-next-line
     var current_infowindow = false;
 
-
-    
-  
-
-  // eslint-disable-next-line
-  const mapStyles = {
-    width: '100%',
-    height: '100%',
-  }
-    var status = ''
+    // eslint-disable-next-line
+    const mapStyles = {
+      width: '100%',
+      height: '100%',
+    };
+    var status = '';
     var timesRunGetNodes = 0;
     var intervalGetNodes = setInterval(() => {
       timesRunGetNodes += 1;
@@ -38,11 +33,11 @@ export default function GoogleMap() {
         var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
         if (difference < 15) {
           nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png';
-          status = 'up'
+          status = 'up';
         }
         if (difference > 15) {
           nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png';
-          status = 'down'
+          status = 'down';
         }
         var myLatLng = new maps.LatLng(node.config.locationLat, node.config.locationLong);
         if (markers.indexOf({ node: node.name }) === -1) {
@@ -60,7 +55,7 @@ export default function GoogleMap() {
 
                 color: 'black',
               },
-              status:status
+              status: status,
             })
           );
           bounds.extend(myLatLng);
@@ -69,61 +64,59 @@ export default function GoogleMap() {
       });
 
       markers.forEach((marker, i) => {
-        if(marker.status==='up'){
-        marker.addListener('click', () => {
-            
+        if (marker.status === 'up') {
+          marker.addListener('click', () => {
             dispatch({
-            type: 'setState',
-            payload: {
-              previousNode: tryValue(() => {
-                return state.currentNodeInfo.name;
-              }),
-               
-              currentNodeInfo: { name: marker.node },
-              videoPlayerReset: true,
-              videoPlayerResetInitial: true,
-              videoStreamingplayer3Playing: false,
-              videoStreamingplayer2Playing: false,
-              videoStreamingplayer1Playing:false,
-              videStremingPlayers: {
-                videoStreamerPlayer1Buffer: false,
-                videoStreamerPlayer2Buffer: false,
-                videoStreamerPlayer3Buffer: false,
+              type: 'setState',
+              payload: {
+                previousNode: tryValue(() => {
+                  return state.currentNodeInfo.name;
+                }),
+
+                currentNodeInfo: { name: marker.node },
+                videoPlayerReset: true,
+                videoPlayerResetInitial: true,
+                videoStreamingplayer3Playing: false,
+                videoStreamingplayer2Playing: false,
+                videoStreamingplayer1Playing: false,
+                videStremingPlayers: {
+                  videoStreamerPlayer1Buffer: false,
+                  videoStreamerPlayer2Buffer: false,
+                  videoStreamerPlayer3Buffer: false,
+                },
               },
-            }
+            });
 
+            setTimeout(() => {
+              dispatch({
+                type: 'setState',
+                payload: {
+                  videoPlayerResetInitial: false,
+                  videoPlayerActive: true,
+                  videoPlayerReset: false,
 
-            })
+                  videoPlayerStreamingActive: false,
 
-           setTimeout(() => {
-          dispatch({
-            type: 'setState',
-            payload: {
-              videoPlayerResetInitial: false,
-              videoPlayerActive: true,
-              videoPlayerReset: false,
-
-
-              videoPlayerStreamingActive: false,
-             
-              
-
-               videoStreamingURLS: {
-                camera1: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera1.flv',
-                camera2: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera2.flv',
-                camera3: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera3.flv',
-              },
-              VideoSnapShotURLS: {
-                camera1: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera1',
-                camera2: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera2',
-                camera3: 'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera3',
-              },
-            }
-          })
-        },3000)
-          console.log(marker.node);
-        });
-      }});
+                  videoStreamingURLS: {
+                    camera1: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera1.flv',
+                    camera2: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera2.flv',
+                    camera3: 'http://rtcc-server.shreveport-it.org:8000/' + marker.node + '/camera3.flv',
+                  },
+                  VideoSnapShotURLS: {
+                    camera1:
+                      'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera1',
+                    camera2:
+                      'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera2',
+                    camera3:
+                      'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera3',
+                  },
+                },
+              });
+            }, 3000);
+            console.log(marker.node);
+          });
+        }
+      });
     }, 1000);
   };
 
@@ -132,19 +125,16 @@ export default function GoogleMap() {
     return diffInMs / (1000 * 60);
   }
 
-
   return (
     <div id="googleMapDIV" style={{ height: '90vh', width: '100%' }}>
-      
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyAxgBe1BLPLfPIPwK0ucb6-SeqkZdckChI' }}
-          defaultCenter={{ lat: 32.46, lng: -93.7550222 }}
-          defaultZoom={12}
-          layerTypes={['TrafficLayer', 'TransitLayer']}
-          yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-        ></GoogleMapReact>
-   
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: 'AIzaSyAxgBe1BLPLfPIPwK0ucb6-SeqkZdckChI' }}
+        defaultCenter={{ lat: 32.46, lng: -93.7550222 }}
+        defaultZoom={12}
+        layerTypes={['TrafficLayer', 'TransitLayer']}
+        yesIWantToUseGoogleMapApiInternals
+        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+      ></GoogleMapReact>
     </div>
   );
 }

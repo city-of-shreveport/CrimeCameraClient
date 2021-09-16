@@ -18,6 +18,7 @@ import NodeChartModal from './nodeManagerNodePerfMonCharts.js';
 import NodeCameraSettingModal from './settingsNodeCameraSettingsModal';
 import { FiCamera } from 'react-icons/fi';
 import { FiCameraOff } from 'react-icons/fi';
+
 export default function Settings() {
   const [state, dispatch] = useContext(GlobalContext);
   const handleEditNodeModal = (node) => {
@@ -152,12 +153,6 @@ export default function Settings() {
     });
   };
 
-  const handleSystemInfoNodeModal = () =>
-    dispatch({
-      type: 'setState',
-      payload: { systemInfoModal: true },
-    });
-
   let perfMonTimerJob = null;
   let perfMonChartTimerJob = null;
   const getSinglePerfmonData = (node) =>
@@ -249,14 +244,7 @@ export default function Settings() {
       },
     });
   };
-const cameraIconOn = props => {
-  return (
-    <div>
-      <FiCamera color="green" fontSize="1.5em"/>
-      <div>props.value</div>
-    </div>
-  )
-}
+
   return (
     <Container fluid className="settingsDIV bg-dark">
       <br />
@@ -286,7 +274,7 @@ const cameraIconOn = props => {
 
       <Row className="justify-content-md-center">
         <Col>
-          <Card bg="dark" text="light" className='nodeTableCard'>
+          <Card bg="dark" text="light" className="nodeTableCard">
             <div className="nodeTableOverflow">
               <Table striped bordered hover variant="dark" responsive>
                 <thead>
@@ -360,44 +348,30 @@ const cameraIconOn = props => {
                             );
                           })}{' '}
                         </td>
-                        <td>{' '}1{' '}
+                        <td>
+                          {' '}
+                          1{' '}
                           {tryValue(() => {
                             return node.perfmon.cameraStatus.camera1 ? (
-                              
-                                <FiCamera color="green" fontSize="1.5em"/>
-                                
-                              
-                              
-                              
+                              <FiCamera color="green" fontSize="1.5em" />
                             ) : (
-                          
-                                <FiCameraOff color="red" fontSize="1.5em" />
-                               
-                              
-                               
-                             
+                              <FiCameraOff color="red" fontSize="1.5em" />
                             );
-                          })}{' '}2{' '}
+                          })}{' '}
+                          2{' '}
                           {tryValue(() => {
                             return node.perfmon.cameraStatus.camera2 ? (
-                           
-                                <FiCamera color="green" fontSize="1.5em"/>
-                              
+                              <FiCamera color="green" fontSize="1.5em" />
                             ) : (
-                           
-                                <FiCameraOff color="red" fontSize="1.5em" />
-                                
+                              <FiCameraOff color="red" fontSize="1.5em" />
                             );
-                          })}{' '}3{' '}
+                          })}{' '}
+                          3{' '}
                           {tryValue(() => {
                             return node.perfmon.cameraStatus.camera3 ? (
-                             
-                                <FiCamera color="green" fontSize="1.5em"/>
-                               
+                              <FiCamera color="green" fontSize="1.5em" />
                             ) : (
-                         
-                                <FiCameraOff color="red" fontSize="1.5em" />
-                               
+                              <FiCameraOff color="red" fontSize="1.5em" />
                             );
                           })}{' '}
                         </td>
@@ -495,7 +469,6 @@ const cameraIconOn = props => {
                           <Button variant="outline-primary" size="sm" onClick={() => handleEditNodeModal(node.name)}>
                             Configure
                           </Button>{' '}
-                          
                           <Button variant="outline-primary" size="sm" onClick={() => handleNodeChartModal(node.name)}>
                             Charts
                           </Button>{' '}
@@ -532,18 +505,15 @@ const cameraIconOn = props => {
           </Card>
         </Col>
 
-     
-          <Col xs={2}>
-           
-            <Card bg="dark" text="light" className='nodeManageSystemInfoCard'>
-              <Card.Header>System Information</Card.Header>
-              <Card.Text></Card.Text>
-              <Card.Body>
-                {state.cameraSettingsComponent ? <SettingsSysInfoEditCard /> : <SettingsSysInfoCard />}
-              </Card.Body>
-            </Card>
-          </Col>
-      
+        <Col xs={2}>
+          <Card bg="dark" text="light" className="nodeManageSystemInfoCard">
+            <Card.Header>System Information</Card.Header>
+            <Card.Text></Card.Text>
+            <Card.Body>
+              {state.cameraSettingsComponent ? <SettingsSysInfoEditCard /> : <SettingsSysInfoCard />}
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
 
       <NodeManagerNewNodeModal />

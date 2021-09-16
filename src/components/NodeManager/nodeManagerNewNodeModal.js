@@ -25,7 +25,7 @@ export default function NodeManagerNewNodeModal() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch('http://10.10.200.10:3001/api/nodes', requestOptions)
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes', requestOptions)
       .then((response) => response.json())
       .then((data) => {});
   };

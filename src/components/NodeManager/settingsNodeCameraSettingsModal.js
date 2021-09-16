@@ -44,16 +44,16 @@ export default function SettingsNodeCard() {
       },
     });
   };
-const syncCameraTime = (camera) => {
-    fetch('http://rtcc-server.shreveport-it.org/api/cameraConfig/settime/'+  tryValue(() => {
-      return state.currentNodeInfo.name;
-    }) + '/' + camera)
-      .then((response) => console.log(response))
-    
-
-
-
-}
+  const syncCameraTime = (camera) => {
+    fetch(
+      'http://rtcc-server.shreveport-it.org/api/cameraConfig/settime/' +
+        tryValue(() => {
+          return state.currentNodeInfo.name;
+        }) +
+        '/' +
+        camera
+    ).then((response) => console.log(response));
+  };
   return (
     <Modal
       dialogClassName="customModalCameraConfigNode"

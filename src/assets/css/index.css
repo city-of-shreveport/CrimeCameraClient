@@ -67,10 +67,8 @@ html {
   max-height: 300px;
   overflow-y: scroll;
 }
-.nodeTableCard{
+.nodeTableCard {
   min-height: 70vh;
-
-
 }
 .nodeListOffLineHomePage {
   max-height: 300px;
@@ -81,10 +79,9 @@ html {
   max-height: 80vh;
   overflow-y: scroll;
 }
-.nodeManageSystemInfoCard{
+.nodeManageSystemInfoCard {
   min-height: 65vh;
   overflow-y: scroll;
-
 }
 .chartBox {
   height: 95%;

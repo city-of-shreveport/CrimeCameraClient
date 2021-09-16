@@ -44,7 +44,6 @@ const initialState = {
   numberOfNodesUp: 0,
   perfmons: [],
   previousNode: '',
-  restreamerStreams:[],
   restreamerStreams: [],
   restreamerServerStats: [],
   selectedNode: 'NONE',
@@ -56,7 +55,7 @@ const initialState = {
   showNodesList: false,
   showSettings: false,
   streamingstats: [],
-  streams:[],
+  streams: [],
   systemInfoModal: false,
   systemSettingsNewServerFormModal: false,
   users: [],
@@ -67,20 +66,13 @@ const initialState = {
   videoPlayerStreamingActive: false,
   videoPlayersState: {},
   videoStreamingplayer1Playing: false,
-    videoStreamingplayer2Playing: false,
-      videoStreamingplayer3Playing: false,
+  videoStreamingplayer2Playing: false,
+  videoStreamingplayer3Playing: false,
   videoStreamingURLS: {},
   VideoSnapShotURLS: {},
-StreamingViewerPlayer1Reference: null,
-StreamingViewerPlayer2Reference: null,
-StreamingViewerPlayer3Reference: null,
-
-
-  videStremingPlayers:{
-    videoStreamerPlayer1Buffer: false,
-    videoStreamerPlayer2Buffer: false,
-    videoStreamerPlayer3Buffer: false,
-    },
+  StreamingViewerPlayer1Reference: null,
+  StreamingViewerPlayer2Reference: null,
+  StreamingViewerPlayer3Reference: null,
 
   videStremingPlayers: {
     videoStreamerPlayer1Buffer: false,

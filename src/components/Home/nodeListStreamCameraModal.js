@@ -9,17 +9,22 @@ export default function NodeListStreamCameraModal() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const handleStreamModalClose = () => {
-    fetch('http://10.10.200.10:3001/api/streams/stop/' + state.currentNodeInfo.name).then((response) => {
-      dispatch({
-        type: 'setState',
-        payload: { homeStreamingModal: false },
-      });
-    });
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/streams/stop/' + state.currentNodeInfo.name).then(
+      (response) => {
+        dispatch({
+          type: 'setState',
+          payload: { homeStreamingModal: false },
+        });
+      }
+    );
   };
 
-  let rtmpURL1 = 'http://10.10.30.12:8000/streams/' + state.currentNodeInfo.name + '-camera1/index.m3u8';
-  let rtmpURL2 = 'http://10.10.30.12:8000/streams/' + state.currentNodeInfo.name + '-camera2/index.m3u8';
-  let rtmpURL3 = 'http://10.10.30.12:8000/streams/' + state.currentNodeInfo.name + '-camera3/index.m3u8';
+  let rtmpURL1 =
+    'http://rtcc-server.shreveport-it.org:8000/streams/' + state.currentNodeInfo.name + '-camera1/index.m3u8';
+  let rtmpURL2 =
+    'http://rtcc-server.shreveport-it.org:8000/streams/' + state.currentNodeInfo.name + '-camera2/index.m3u8';
+  let rtmpURL3 =
+    'http://rtcc-server.shreveport-it.org:8000/streams/' + state.currentNodeInfo.name + '-camera3/index.m3u8';
 
   return (
     <Modal
