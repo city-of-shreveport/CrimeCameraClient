@@ -114,6 +114,13 @@ const initialState = {
   RecordingViewerTimeSelected: undefined,
   RecordingViewerVideoUniqueDates: [],
   RecordingViewerVideos: [],
+
+  // SystemManager
+  systemManagerServerFormName: 'Hostname',
+  systemManagerServerFormType: 'Server',
+  systemManagerServerFormIP: '192.168.0.1',
+  systemManagerServerFormIsShowing: false,
+  systemManagerServerList: [],
 };
 
 const reducer = (state, action) => {
