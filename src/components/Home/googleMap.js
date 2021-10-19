@@ -104,11 +104,11 @@ export default function GoogleMap() {
                   },
                   VideoSnapShotURLS: {
                     camera1:
-                      'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera1',
+                      'http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/snapshot/' + marker.node + '/camera1',
                     camera2:
-                      'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera2',
+                      'http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/snapshot/' + marker.node + '/camera2',
                     camera3:
-                      'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' + marker.node + '/camera3',
+                      'http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/snapshot/' + marker.node + '/camera3',
                   },
                 },
               });

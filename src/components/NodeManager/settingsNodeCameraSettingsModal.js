@@ -16,21 +16,21 @@ export default function SettingsNodeCard() {
   const [state, dispatch] = useContext(GlobalContext);
 
   let camera1IMG =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' +
+    'http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/snapshot/' +
     tryValue(() => {
       return state.currentNodeInfo.name;
     }) +
     '/camera1';
 
   let camera2IMG =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' +
+    'http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/snapshot/' +
     tryValue(() => {
       return state.currentNodeInfo.name;
     }) +
     '/camera2';
 
   let camera3IMG =
-    'http://rtcc-server.shreveport-it.org/api/cameraConfig/snapshot/' +
+    'http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/snapshot/' +
     tryValue(() => {
       return state.currentNodeInfo.name;
     }) +
@@ -46,7 +46,7 @@ export default function SettingsNodeCard() {
   };
   const syncCameraTime = (camera) => {
     fetch(
-      'http://rtcc-server.shreveport-it.org/api/cameraConfig/settime/' +
+      'http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/settime/' +
         tryValue(() => {
           return state.currentNodeInfo.name;
         }) +
