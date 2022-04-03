@@ -31,6 +31,7 @@ export default function GoogleMap() {
       // eslint-disable-next-line
       state.nodes.map((node) => {
         var difference = getDifferenceInMinutes(new Date(node.lastCheckIn), new Date());
+        if (difference < 7200) {
         if (difference < 15) {
           nodeIcon = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png';
           status = 'up';
@@ -62,7 +63,7 @@ export default function GoogleMap() {
           bounds.extend(myLatLng);
         }
         map.fitBounds(bounds);
-        
+      }
       });
 
       markers.forEach((marker, i) => {

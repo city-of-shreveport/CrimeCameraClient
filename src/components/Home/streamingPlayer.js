@@ -171,34 +171,16 @@ export default function StreamingPlayer() {
       
       </Card>
       <Card bg="dark" text="light">
-        {tryValue(() => {
-          return state.currentNodeInfo.perfmon.cameraStatus.camera3 ? (
-            <Nav.Link>
-              <h5 style={{ color: 'green' }}>Camera 3: OK </h5>
-            </Nav.Link>
-          ) : (
-            tryValue(() => {
-              return state.currentNodeInfo.perfmon.cameraStatus.camera3 ? (
-                <Nav.Link>
-                  <h5 style={{ color: 'green' }}>Camera 3: OK </h5>
-                </Nav.Link>
-              ) : (
-                <Nav.Link>
-                  <h5 style={{ color: 'red' }}>Camera 3: Bad </h5>
-                </Nav.Link>
-              );
-            })
-          );
-        })}
+        
    
-          <div className="snapashotImage">
+         
             <img
                width="300"
                height="200"
               alt="stream"
               src={state.videoStreamingURLS.camera1}
             />
-          </div>
+      
        
       </Card>
     </Container>
