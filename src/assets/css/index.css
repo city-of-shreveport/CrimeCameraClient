@@ -1,0 +1,165 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+  background-color: black;
+}
+
+.checkedInTime {
+  font-size: 12px;
+}
+
+.videoPlayerDIV {
+  max-height: 800px;
+  width: 100%;
+}
+
+.videoPlayerCalendarCOL {
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.homeContainer {
+  overflow: hidden;
+}
+
+.timePickerVideos {
+  max-height: 600px;
+}
+
+.settingsDIV {
+  min-width: 100%;
+  min-height: 800px;
+}
+
+.timesListGroup {
+  max-height: 280px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.react-calendar {
+  min-width: 100%;
+}
+
+.marginLogidIn {
+  margin-right: 10px;
+}
+
+.nodeListHomePage {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.nodeTableCard{
+  min-height: 70vh;
+
+
+}
+.nodeListOffLineHomePage {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.nodeTableOverflow {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+.nodeManageSystemInfoCard{
+  min-height: 65vh;
+  overflow-y: scroll;
+
+}
+.chartBox {
+  height: 95%;
+  width: 100%;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.custom-modal-streaming {
+  min-width: 95% !important;
+  height: auto;
+}
+
+.modal-content {
+  min-width: 100% !important;
+}
+.customModalCameraConfigNode {
+  min-width: 80% !important;
+  height: auto;
+}
+.customModalNewNode {
+  min-width: 40%;
+  height: auto;
+}
+
+.SystemLineChart {
+  height: 200px;
+}
+
+.gmapsCard {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.systemSettingsServerCard {
+  min-height: 25vh;
+  max-height: 25vh;
+  overflow: scroll;
+}
+
+.systemSettingsStreamsCard {
+  min-height: 25vh;
+  max-height: 25vh;
+  overflow: scroll;
+}
+
+.SystemSettingsLinerChartGroup {
+  height: 22vh;
+  overflow: scroll;
+}
+
+.NodePerfMonLineChartDiv {
+  max-height: 200px;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 5px;
+}
+.grid-item {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  font-size: 30px;
+  text-align: center;
+  color: black;
+}
+
+.snapashotImage {
+  width: 100%;
+  height: 200px;
+}

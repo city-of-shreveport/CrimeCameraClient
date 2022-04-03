@@ -141,7 +141,6 @@ const GMap = () => {
         });
     }
 
-
     infowindow = new window.google.maps.InfoWindow();
   }, []);
 

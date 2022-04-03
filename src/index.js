@@ -1,5 +1,5 @@
-import './css/index.css';
-import './css/videoplayer.css';
+import './assets/css/index.css';
+import './assets/css/videoplayer.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-calendar/dist/Calendar.css';
 import App from './components/app';
@@ -12,17 +12,3 @@ ReactDOM.render(
   </GlobalContextProvider>,
   document.getElementById('root')
 );
-
-const reportWebVitals = (onPerfEntry) => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry);
-      getFID(onPerfEntry);
-      getFCP(onPerfEntry);
-      getLCP(onPerfEntry);
-      getTTFB(onPerfEntry);
-    });
-  }
-};
-
-reportWebVitals();
