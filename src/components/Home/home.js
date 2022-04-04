@@ -34,14 +34,16 @@ export default function Home() {
               </Card>
             </CardGroup>
           </Col>
-            <div id='liveCameras'></div>
+          {state.videoPlayerActive ? (
             <Col xs={3}>
              
               <h4 style={{ color: 'white' }}>{state.currentNodeInfo.name}</h4>
 
               <StreamingPlayer />
             </Col>
-          
+          ) : (
+            <></>
+          )}
         </Row>
       </Container>
     </>
