@@ -10,6 +10,7 @@ defaults.animation = false;
 defaults.font.size = 16;
 defaults.font.color = 'white';
 
+
 export default function LineChart() {
   const [state] = useContext(GlobalContext);
 

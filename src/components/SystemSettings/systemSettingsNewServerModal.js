@@ -8,6 +8,7 @@ import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import { GlobalContext } from '../../contexts/globalContext';
 
+
 let formDataObject = {};
 
 export default function SystemSettingsNewServerFormModal() {

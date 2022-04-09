@@ -11,6 +11,7 @@ import SettingsSysInfoCard from './settingsModalSySInfoCard';
 import SettingsSysInfoEditCard from './settingsModalSySInfoEditCard';
 import { GlobalContext } from '../../contexts/globalContext';
 
+
 export default function SettingsModal() {
   const [state, dispatch] = useContext(GlobalContext);
 

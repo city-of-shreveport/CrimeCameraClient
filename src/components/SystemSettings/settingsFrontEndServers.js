@@ -4,6 +4,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import React, { useContext } from 'react';
 import { GlobalContext } from '../../contexts/globalContext';
 
+
 export default function SettingsFrontEndServers() {
   const [state] = useContext(GlobalContext);
 

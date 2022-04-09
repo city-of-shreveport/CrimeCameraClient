@@ -4,6 +4,7 @@ import { defaults } from 'react-chartjs-2';
 
 defaults.animation = false;
 
+
 const data = {
   labels: ['CPU', 'Memory', 'Drive'],
   datasets: [

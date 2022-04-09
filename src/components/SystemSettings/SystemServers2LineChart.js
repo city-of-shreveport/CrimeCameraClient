@@ -2,6 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
 
+
 defaults.animation = false;
 
 const data = {

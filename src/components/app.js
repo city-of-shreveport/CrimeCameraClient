@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NodeManager from './NodeManager/settingsNodeManager';
 import React, { useContext, useEffect } from 'react';
 import RecordingViewer from './videos/RecordingViewer';
-import SystemManager from './system/SystemManager';
+import SystemManager from './SystemSettings/settingsSystemManager';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
 import { IoCameraOutline } from 'react-icons/io5';
