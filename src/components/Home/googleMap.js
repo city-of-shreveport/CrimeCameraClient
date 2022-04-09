@@ -72,51 +72,25 @@ export default function GoogleMap() {
             dispatch({
               type: 'setState',
               payload: {
-                previousNode: tryValue(() => {
-                  return state.currentNodeInfo.name;
-                }),
-
-                currentNodeInfo: { name: marker.node },
-                videoPlayerReset: true,
-                videoPlayerResetInitial: true,
-                videoStreamingplayer3Playing: false,
-                videoStreamingplayer2Playing: false,
-                videoStreamingplayer1Playing: false,
-                videStremingPlayers: {
-                  videoStreamerPlayer1Buffer: false,
-                  videoStreamerPlayer2Buffer: false,
-                  videoStreamerPlayer3Buffer: false,
+                
+                currentNodeInfo: { 
+                  name: marker.node,
+                  ip: marker.nodeIP 
                 },
+                modalChooseVideoBoxShow: true,
+                clickedcamera1: "http://"+ marker.nodeIP  +":8090/camera1.mjpeg",
+                clickedcamera2: "http://"+ marker.nodeIP  +":8090/camera2.mjpeg",
+                clickedcamera3: "http://"+ marker.nodeIP  +":8090/camera3.mjpeg",
               },
             });
 
-            setTimeout(() => {
-              dispatch({
-                type: 'setState',
-                payload: {
-                  videoPlayerResetInitial: false,
-                  videoPlayerActive: true,
-                  videoPlayerReset: false,
-
-                  videoPlayerStreamingActive: false,
-
-                  videoStreamingURLS: {
-                    camera1: 'http://'+ marker.nodeIP +':8090/camera1.mjpeg',
-                    camera2: 'http://'+ marker.nodeIP +':8090/camera2.mjpeg',
-                    camera3: 'http://'+ marker.nodeIP +':8090/camera3.mjpeg',
-                  },
-                  VideoSnapShotURLS: {
-                    camera1:
-                      'http://'+ marker.nodeIP +':8090/camera1.jpg',
-                    camera2:
-                    'http://'+ marker.nodeIP +':8090/camera2.jpg',
-                    camera3:
-                    'http://'+ marker.nodeIP +':8090/camera3.jpg',
-                  },
-                },
-              });
-            }, 3000);
+        
+         
+            
+     
+          
             console.log(marker.node);
+       
           });
         }
       });
@@ -129,7 +103,7 @@ export default function GoogleMap() {
   }
 
   return (
-    <div id="googleMapDIV" style={{ height: '90vh', width: '100%' }}>
+    <div id="googleMapDIV" style={{ height: '70vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: 'AIzaSyAxgBe1BLPLfPIPwK0ucb6-SeqkZdckChI' }}
         defaultCenter={{ lat: 32.46, lng: -93.7550222 }}

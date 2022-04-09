@@ -5,6 +5,12 @@ export const GlobalContext = createContext();
 const initialState = {
   // General
   camButtonSelected: '',
+  chooseRowOne: false,
+  chooseRowTwo: false,
+  chooseRowThree: false,
+  clickedcamera1: " ",
+  clickedcamera2: " ",
+  clickedcamera3: " ",
   currentNodeInfo: {},
   currentNodeCamera1Config: {},
   currentNodeCamera3Config: {},
@@ -42,9 +48,9 @@ const initialState = {
   nodes: [],
   numberOfNodes: 0,
   numberOfNodesUp: 0,
+  modalChooseVideoBoxShow: false,
   perfmons: [],
   previousNode: '',
-  restreamerStreams:[],
   restreamerStreams: [],
   restreamerServerStats: [],
   selectedNode: 'NONE',
@@ -56,7 +62,7 @@ const initialState = {
   showNodesList: false,
   showSettings: false,
   streamingstats: [],
-  streams:[],
+  streams: [],
   systemInfoModal: false,
   systemSettingsNewServerFormModal: false,
   users: [],
@@ -67,20 +73,26 @@ const initialState = {
   videoPlayerStreamingActive: false,
   videoPlayersState: {},
   videoStreamingplayer1Playing: false,
-    videoStreamingplayer2Playing: false,
-      videoStreamingplayer3Playing: false,
-  videoStreamingURLS: {},
+  videoStreamingplayer2Playing: false,
+  videoStreamingplayer3Playing: false,
+  videoStreamingURLS: {
+    camera1:"",
+    camera2:"",
+    camera3:"",
+    camera4:"",
+    camera5:"",
+    camera6:"",
+    camera7:"",
+    camera8:"",
+    camera9:""
+  },
+  videoStreamingCamera1Name:"",
+  videoStreamingCamera2Name:"",
+  videoStreamingCamera3Name:"",
   VideoSnapShotURLS: {},
-StreamingViewerPlayer1Reference: null,
-StreamingViewerPlayer2Reference: null,
-StreamingViewerPlayer3Reference: null,
-
-
-  videStremingPlayers:{
-    videoStreamerPlayer1Buffer: false,
-    videoStreamerPlayer2Buffer: false,
-    videoStreamerPlayer3Buffer: false,
-    },
+  StreamingViewerPlayer1Reference: null,
+  StreamingViewerPlayer2Reference: null,
+  StreamingViewerPlayer3Reference: null,
 
   videStremingPlayers: {
     videoStreamerPlayer1Buffer: false,
@@ -122,6 +134,13 @@ StreamingViewerPlayer3Reference: null,
   RecordingViewerTimeSelected: undefined,
   RecordingViewerVideoUniqueDates: [],
   RecordingViewerVideos: [],
+
+  // SystemManager
+  systemManagerServerFormName: 'Hostname',
+  systemManagerServerFormType: 'Server',
+  systemManagerServerFormIP: '192.168.0.1',
+  systemManagerServerFormIsShowing: false,
+  systemManagerServerList: [],
 };
 
 const reducer = (state, action) => {

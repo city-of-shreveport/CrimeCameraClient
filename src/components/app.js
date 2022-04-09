@@ -120,7 +120,7 @@ export default function App() {
 
     setInterval(() => {
       refreshData();
-    }, 3000000);
+    }, 300000);
 
     refreshData();
 

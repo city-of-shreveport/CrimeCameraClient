@@ -128,12 +128,16 @@ export default function RecordingViewer() {
   const handleSelectNode1 = (node) => {
     var date = moment(state.RecordingViewerDateSelected).format('YYYY-MM-DD');
     var time = state.RecordingViewerTimeSelected.value;
-    var hours = new Date(`${date} ${time}`).getHours();
-    hours = ('0' + hours).slice(-2);
-    var minutes = new Date(`${date} ${time}`).getMinutes();
-    minutes = ('0' + minutes).slice(-2);
+    var hoursraw = time.split(":");
+    var hours = hoursraw[0];
+    var minutesraw = time.split(":")
+   
+    console.log(minutesraw[1])
+    var mindigits = minutesraw[1].split(" ")
+    console.log(mindigits[0])
+    var minutes = mindigits[0];
     var file = `${date}-${hours}-${minutes}.mp4`;
-
+    
     setState({
       RecordingViewerNode1Camera1URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera1/${file}`,
       RecordingViewerNode1Camera2URL: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${node.value}/camera2/${file}`,
@@ -145,10 +149,14 @@ export default function RecordingViewer() {
   const handleSelectNode2 = (node) => {
     var date = moment(state.RecordingViewerDateSelected).format('YYYY-MM-DD');
     var time = state.RecordingViewerTimeSelected.value;
-    var hours = new Date(`${date} ${time}`).getHours();
-    hours = ('0' + hours).slice(-2);
-    var minutes = new Date(`${date} ${time}`).getMinutes();
-    minutes = ('0' + minutes).slice(-2);
+    var hoursraw = time.split(":");
+    var hours = hoursraw[0];
+    var minutesraw = time.split(":")
+   
+    console.log(minutesraw[1])
+    var mindigits = minutesraw[1].split(" ")
+    console.log(mindigits[0])
+    var minutes = mindigits[0];
     var file = `${date}-${hours}-${minutes}.mp4`;
 
     setState({
@@ -162,10 +170,14 @@ export default function RecordingViewer() {
   const handleSelectNode3 = (node) => {
     var date = moment(state.RecordingViewerDateSelected).format('YYYY-MM-DD');
     var time = state.RecordingViewerTimeSelected.value;
-    var hours = new Date(`${date} ${time}`).getHours();
-    hours = ('0' + hours).slice(-2);
-    var minutes = new Date(`${date} ${time}`).getMinutes();
-    minutes = ('0' + minutes).slice(-2);
+    var hoursraw = time.split(":");
+    var hours = hoursraw[0];
+    var minutesraw = time.split(":")
+   
+    console.log(minutesraw[1])
+    var mindigits = minutesraw[1].split(" ")
+    console.log(mindigits[0])
+    var minutes = mindigits[0];
     var file = `${date}-${hours}-${minutes}.mp4`;
 
     setState({
