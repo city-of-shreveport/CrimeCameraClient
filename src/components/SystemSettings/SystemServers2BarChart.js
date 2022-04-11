@@ -24,6 +24,7 @@ const data = {
       borderColor: 'rgba(54, 162, 235, 1)',
     },
     {
+      
       label: 'FrontEnd003',
       data: [54, 45, 34, 54],
       fill: false,

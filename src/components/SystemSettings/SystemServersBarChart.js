@@ -22,6 +22,7 @@ const data = {
       backgroundColor: 'rgba(153, 102, 255, 0.5)',
       borderColor: 'Red',
     },
+    
     {
       label: 'Restreamer003',
       data: [54, 45, 34, 54],

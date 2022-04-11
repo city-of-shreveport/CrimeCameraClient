@@ -22,6 +22,8 @@ export default function LineChart() {
   state.servers.map((server, i) => {
     labels.push(server);
 
+
+    
     fetch('http://rtcc-server.shreveport-it.org:3000/api/perfmons/' + server)
       .then((response) => response.json())
       // eslint-disable-next-line

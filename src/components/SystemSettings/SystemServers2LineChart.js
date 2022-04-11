@@ -23,6 +23,7 @@ const data = {
       borderColor: 'Red',
     },
     {
+      
       label: 'Disks',
       data: [54, 45, 34, 54, 54, 45, 34, 54],
       fill: false,

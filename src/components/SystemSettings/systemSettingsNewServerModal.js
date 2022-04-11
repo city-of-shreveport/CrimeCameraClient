@@ -31,6 +31,7 @@ export default function SystemSettingsNewServerFormModal() {
       .then((data) => {});
   };
 
+  
   const handleAddServer = () =>
     dispatch({
       type: 'setState',

@@ -14,6 +14,8 @@ import { Container } from 'semantic-ui-react';
 import { GlobalContext } from '../../contexts/globalContext';
 
 
+
+
 export default function SystemManager() {
   const [state, dispatch] = useContext(GlobalContext);
 
