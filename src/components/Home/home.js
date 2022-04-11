@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import GoogleMap from '../Home/googleMap';
 import React, { useContext } from 'react';
@@ -69,216 +70,9 @@ export default function Home() {
   });
 }
 const handleSelect=(e)=>{
-     console.log(e);
-      
-      var selected = e;
-      selected = selected.split("-")
-      var camera =selected[0]
-      var time = selected[1]
     
-     fetch('http://rtcc-server.shreveport-it.org:3000/api/videos/getlatestVideo/' +  state.currentNodeInfo.name +"/" +  camera  +"/" + time)
-     .then((response) => response.json())
-     // eslint-disable-next-line
-     .then((json) => {
-       console.log(json)
-       
     
-        if(camera==="camera1"){
-          if(json.length===1){
-          dispatch({
-            type: 'setState',
-            payload: {
-              
-              
-              Recordingcamera1File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[0].fileLocation}/download`,
-              Recordingcamera1file1Name: json[0].fileLocation,
-              
-             
-            },
-          });
-          }
-            if(json.length===2){
-          dispatch({
-            type: 'setState',
-            payload: {
-              
-              Recordingcamera1File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[0].fileLocation}/download`,
-              Recordingcamera1file1Name: json[0].fileLocation,
-              Recordingcamera1File2: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[1].fileLocation}/download`,
-              Recordingcamera1file2Name: json[1].fileLocation,
-              
-             
-            },
-          });
-        }
-        if(json.length===3){
-          dispatch({
-            type: 'setState',
-            payload: {
-              Recordingcamera1File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[0].fileLocation}/download`,
-              Recordingcamera1file1Name: json[0].fileLocation,
-              Recordingcamera1File2: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[1].fileLocation}/download`,
-              Recordingcamera1file2Name: json[1].fileLocation,
-              Recordingcamera1File3: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[2].fileLocation}/download`,
-              Recordingcamera1file3Name: json[2].fileLocation,
-              
-            
-             
-            },
-          });
-        }
-        if(json.length===4){
-          dispatch({
-            type: 'setState',
-            payload: {
-              Recordingcamera1File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[0].fileLocation}/download`,
-              Recordingcamera1file1Name: json[0].fileLocation,
-              Recordingcamera1File2: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[1].fileLocation}/download`,
-              Recordingcamera1file2Name: json[1].fileLocation,
-              Recordingcamera1File3: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[2].fileLocation}/download`,
-              Recordingcamera1file3Name: json[2].fileLocation,
-              Recordingcamera1File4: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera1/${json[3].fileLocation}/download`,
-              Recordingcamera1file4Name: json[3].fileLocation,
-              
-              
-             
-            },
-          });
-        }
-      }
-      if(camera==="camera2"){
-        if(json.length===1){
-        dispatch({
-          type: 'setState',
-          payload: {
-            
-            
-            
-            Recordingcamera2File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[0].fileLocation}/download`,
-            Recordingcamera2file1Name: json[0].fileLocation,
-           
-          },
-        });
-        }
-          if(json.length===2){
-        dispatch({
-          type: 'setState',
-          payload: {
-            
-           
-            Recordingcamera2File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[0].fileLocation}/download`,
-            Recordingcamera2file1Name: json[0].fileLocation,
-            Recordingcamera2File2: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[1].fileLocation}/download`,
-            Recordingcamera2file2Name: json[1].fileLocation,
-           
-          },
-        });
-      }
-      if(json.length===3){
-        dispatch({
-          type: 'setState',
-          payload: {
-           
-            
-            Recordingcamera2File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[0].fileLocation}/download`,
-            Recordingcamera2file1Name: json[0].fileLocation,
-            Recordingcamera2File2: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[1].fileLocation}/download`,
-            Recordingcamera2file2Name: json[1].fileLocation,
-            Recordingcamera2File3: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[2].fileLocation}/download`,
-            Recordingcamera2file3Name: json[2].fileLocation,
-           
-          },
-        });
-      }
-      if(json.length===4){
-        dispatch({
-          type: 'setState',
-          payload: {
-           
-            
-            ecordingcamera2File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[0].fileLocation}/download`,
-            Recordingcamera2file1Name: json[0].fileLocation,
-            Recordingcamera2File2: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[1].fileLocation}/download`,
-            Recordingcamera2file2Name: json[1].fileLocation,
-            Recordingcamera2File3: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[2].fileLocation}/download`,
-            Recordingcamera2file3Name: json[2].fileLocation,
-            Recordingcamera2File4: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera2/${json[3].fileLocation}/download`,
-            Recordingcamera2file4Name: json[3].fileLocation
-           
-          },
-        });
-      }
-    }
-    if(camera==="camera3"){
-      if(json.length===1){
-      dispatch({
-        type: 'setState',
-        payload: {
-          
-          
-          
-          Recordingcamera3File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[0].fileLocation}/download`,
-          Recordingcamera3file1Name: json[0].fileLocation,
-         
-        },
-      });
-      }
-        if(json.length===2){
-      dispatch({
-        type: 'setState',
-        payload: {
-          
-         
-          Recordingcamera3File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[0].fileLocation}/download`,
-          Recordingcamera3file1Name: json[0].fileLocation,
-          Recordingcamera3File2: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[1].fileLocation}/download`,
-          Recordingcamera3file2Name: json[1].fileLocation,
-         
-        },
-      });
-    }
-    if(json.length===3){
-      dispatch({
-        type: 'setState',
-        payload: {
-         
-          
-          Recordingcamera3File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[0].fileLocation}/download`,
-          Recordingcamera3file1Name: json[0].fileLocation,
-          Recordingcamera3File2: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[1].fileLocation}/download`,
-          Recordingcamera3file2Name: json[1].fileLocation,
-          Recordingcamera3File3: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[2].fileLocation}/download`,
-          Recordingcamera3file3Name: json[2].fileLocation,
-         
-        },
-      });
-    }
-    if(json.length===4){
-      dispatch({
-        type: 'setState',
-        payload: {
-         
-          
-          ecordingcamera3File1: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[0].fileLocation}/download`,
-          Recordingcamera3file1Name: json[0].fileLocation,
-          Recordingcamera3File2: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[1].fileLocation}/download`,
-          Recordingcamera3file2Name: json[1].fileLocation,
-          Recordingcamera3File3: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[2].fileLocation}/download`,
-          Recordingcamera3file3Name: json[2].fileLocation,
-          Recordingcamera3File4: `http://rtcc-server.shreveport-it.org:3000/api/videos/stream/${state.currentNodeInfo.name}/camera3/${json[3].fileLocation}/download`,
-          Recordingcamera3file4Name: json[3].fileLocation
-         
-        },
-      });
-    }
   }
-    
-      
-      })
-     //Recordingcamera1File1
-     //Recordingcamera1file1Name
-    }
-
 
 
 
@@ -394,90 +188,89 @@ return (
             <></>
           )}
         </Row>
-        <Modal show={state.modalChooseVideoBoxShow} onHide={handleClose}>
+        <Modal show={state.modalChooseVideoBoxShow} onHide={handleClose} dialogClassName="modal-45w">
         <Modal.Header>
-          <Modal.Title>Stream To</Modal.Title>
+        <Modal.Title>{state.currentNodeInfo.name} </Modal.Title>
+
        
-        <ButtonGroup aria-label="Basic example">
+       
+        <ButtonGroup aria-label="Basic example" >
         <Button variant="primary" onClick={chooseRowOne}>
-            Row 1
+        Stream To Row 1
           </Button>
           <Button variant="light" >
             
           </Button>
           <Button variant="primary" onClick={chooseRowTwo}>
-          Row 2
+          Stream To Row 2
           </Button>
           <Button variant="light" >
             
             </Button>
           <Button variant="primary" onClick={chooseRowThree}>
-          Row 3
+          Stream To Row 3
           </Button>
           </ButtonGroup>
           </Modal.Header>
         <Modal.Body>
           <Card.Title>Download Videos</Card.Title>
 <CardGroup>
-  <Card>
-  <Card.Img variant="top" src={state.clickedcamera1} />
+  <Card className="text-center">
+  
     <Card.Body>
       <Card.Title>Camera 1</Card.Title>
-      <DropdownButton title="Choose Time" id="dropdown-menu-align-right" onSelect={handleSelect}>
-              <Dropdown.Item eventKey="camera1-15">15 Min</Dropdown.Item>
-              <Dropdown.Item eventKey="camera1-30">30 Min</Dropdown.Item>
-              <Dropdown.Item eventKey="camera1-45">45 Min</Dropdown.Item>
-              <Dropdown.Item eventKey="camera1-60">60 Min</Dropdown.Item>
-             <Dropdown.Divider />
-             <Dropdown.Item eventKey="custom">Custom</Dropdown.Item>
-      </DropdownButton>
-     <a href={state.Recordingcamera1File1}>{state.Recordingcamera1file1Name}</a><br></br>
-     <a href={state.Recordingcamera1File2}>{state.Recordingcamera1file2Name}</a><br></br>
-     <a href={state.Recordingcamera1File3}>{state.Recordingcamera1file3Name}</a><br></br>
-     <a href={state.Recordingcamera1File4}>{state.Recordingcamera1file4Name}</a>
+      
+      <ListGroup>
+  <ListGroup.Item><a href={state.Recordingcamera1File1}>{state.Recordingcamera1file1Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera1File2}>{state.Recordingcamera1file2Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera1File3}>{state.Recordingcamera1file3Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera1File4}>{state.Recordingcamera1file4Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera1File5}>{state.Recordingcamera1file5Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera1File6}>{state.Recordingcamera1file6Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera1File7}>{state.Recordingcamera1file7Name}</a></ListGroup.Item>
+</ListGroup>
+<Card.Img variant="top" src={state.clickedcamera1} />
     </Card.Body>
    
   </Card>
 
 
 
-  <Card>
-    <Card.Img variant="top" src={state.clickedcamera2} />
+  <Card className="text-center">
+    
     <Card.Body>
     <Card.Title>Camera 2</Card.Title>
-    <DropdownButton title="Choose Time" id="dropdown-menu-align-right" onSelect={handleSelect}>
-              <Dropdown.Item eventKey="camera2-15">15 Min</Dropdown.Item>
-              <Dropdown.Item eventKey="camera2-30">30 Min</Dropdown.Item>
-              <Dropdown.Item eventKey="camera2-45">45 Min</Dropdown.Item>
-              <Dropdown.Item eventKey="camera2-60">60 Min</Dropdown.Item>
-             <Dropdown.Divider />
-             <Dropdown.Item eventKey="custom">Custom</Dropdown.Item>
-      </DropdownButton>
-      <a href={state.Recordingcamera2File1}>{state.Recordingcamera2file1Name}</a><br></br>
-     <a href={state.Recordingcamera2File2}>{state.Recordingcamera2file2Name}</a><br></br>
-     <a href={state.Recordingcamera2File3}>{state.Recordingcamera2file3Name}</a><br></br>
-     <a href={state.Recordingcamera2File4}>{state.Recordingcamera2file4Name}</a>
+    
+      <ListGroup>
+  <ListGroup.Item><a href={state.Recordingcamera2File1}>{state.Recordingcamera2file1Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera2File2}>{state.Recordingcamera2file2Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera2File3}>{state.Recordingcamera2file3Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera2File4}>{state.Recordingcamera2file4Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera2File5}>{state.Recordingcamera2file5Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera2File6}>{state.Recordingcamera2file6Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera2File7}>{state.Recordingcamera2file7Name}</a></ListGroup.Item>
+</ListGroup>
+<Card.Img variant="top" src={state.clickedcamera2} />
     </Card.Body>
 
   </Card>
 
 
-  <Card>
-    <Card.Img variant="top" src={state.clickedcamera3} />
+  <Card className="text-center">
+   
     <Card.Body>
       <Card.Title>Camera 3</Card.Title>
-      <DropdownButton title="Choose Time" id="dropdown-menu-align-right" onSelect={handleSelect}>
-              <Dropdown.Item eventKey="camera3-15">15 Min</Dropdown.Item>
-              <Dropdown.Item eventKey="camera3-30">30 Min</Dropdown.Item>
-              <Dropdown.Item eventKey="camera3-45">45 Min</Dropdown.Item>
-              <Dropdown.Item eventKey="camera3-60">60 Min</Dropdown.Item>
-             <Dropdown.Divider />
-             <Dropdown.Item eventKey="custom">Custom</Dropdown.Item>
-      </DropdownButton>
-      <a href={state.Recordingcamera3File1}>{state.Recordingcamera3file1Name}</a><br></br>
-     <a href={state.Recordingcamera3File2}>{state.Recordingcamera3file2Name}</a><br></br>
-     <a href={state.Recordingcamera3File3}>{state.Recordingcamera3file3Name}</a><br></br>
-     <a href={state.Recordingcamera3File4}>{state.Recordingcamera3file4Name}</a>
+      
+      <ListGroup>
+  <ListGroup.Item><a href={state.Recordingcamera3File1}>{state.Recordingcamera3file1Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera3File2}>{state.Recordingcamera3file2Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera3File3}>{state.Recordingcamera3file3Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera3File4}>{state.Recordingcamera3file4Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera3File5}>{state.Recordingcamera3file5Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera3File6}>{state.Recordingcamera3file6Name}</a></ListGroup.Item>
+  <ListGroup.Item><a href={state.Recordingcamera3File7}>{state.Recordingcamera3file7Name}</a></ListGroup.Item>
+</ListGroup>
+<Card.Img variant="top" src={state.clickedcamera3} />
     </Card.Body>
  
   </Card>

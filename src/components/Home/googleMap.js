@@ -2,9 +2,12 @@ import GoogleMapReact from 'google-map-react';
 import React, { useContext } from 'react';
 import tryValue from '../../helperFunctions';
 import { GlobalContext } from '../../contexts/globalContext';
-
+var cameras = ["camera1","camera2","camera3"]
+var currentCamera = "";
 export default function GoogleMap() {
   const [state, dispatch] = useContext(GlobalContext);
+  
+  
   const handleApiLoaded = (map, maps) => {
     var bounds = new maps.LatLngBounds();
     const markers = [];
@@ -69,10 +72,12 @@ export default function GoogleMap() {
       markers.forEach((marker, i) => {
         if (marker.status === 'up') {
           marker.addListener('click', () => {
-            dispatch({
-              type: 'setState',
-              payload: {
-                
+            
+
+            for(i=0;i<cameras.length;i++){
+              console.log(cameras[i])
+              currentCamera = cameras[i];
+              var payload = {
                 currentNodeInfo: { 
                   name: marker.node,
                   ip: marker.nodeIP 
@@ -80,9 +85,125 @@ export default function GoogleMap() {
                 modalChooseVideoBoxShow: true,
                 clickedcamera1: "http://"+ marker.nodeIP  +":8090/camera1.mjpeg",
                 clickedcamera2: "http://"+ marker.nodeIP  +":8090/camera2.mjpeg",
-                clickedcamera3: "http://"+ marker.nodeIP  +":8090/camera3.mjpeg",
-              },
-            });
+                clickedcamera3: "http://"+ marker.nodeIP  +":8090/camera3.mjpeg"
+                }
+
+
+
+              fetch('http://10.10.30.21:3000/api/videos/getlatestVideos/' +  marker.node)
+              .then((response) => response.json())
+                // eslint-disable-next-line
+                .then((json) => {      
+                 
+                 if(json.camera1.length>6){
+                        console.log(json.camera1)
+                    
+                          var fileNameTime1 = json.camera1[0].fileLocation.split("-");
+                          var min1 = fileNameTime1[4].split(".")
+                          var fileNameTime2 = json.camera1[1].fileLocation.split("-");
+                          var min2 = fileNameTime2[4].split(".")
+                          var fileNameTime3 = json.camera1[2].fileLocation.split("-");
+                          var min3 = fileNameTime3[4].split(".")
+                          var fileNameTime4 = json.camera1[3].fileLocation.split("-");
+                          var min4 = fileNameTime4[4].split(".")
+                          var fileNameTime5 = json.camera1[4].fileLocation.split("-");
+                          var min5 = fileNameTime5[4].split(".")
+                          var fileNameTime6 = json.camera1[5].fileLocation.split("-");
+                          var min6 = fileNameTime6[4].split(".")
+                          var fileNameTime7 = json.camera1[6].fileLocation.split("-");
+                          var min7 = fileNameTime7[4].split(".")
+                          payload.Recordingcamera1File1= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera1/${json.camera1[0].fileLocation}/download`;
+                          payload.Recordingcamera1file1Name= fileNameTime1[1] + "/" + fileNameTime1[2] + "/" + fileNameTime1[0] + "  " + fileNameTime1[3] + ":" + min1[0];
+                          payload.Recordingcamera1File2= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera1/${json.camera1[1].fileLocation}/download`;
+                          payload.Recordingcamera1file2Name= fileNameTime2[1] + "/" + fileNameTime2[2] + "/" + fileNameTime2[0] + "  " + fileNameTime2[3] + ":" + min2[0];
+                          payload.Recordingcamera1File3= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera1/${json.camera1[2].fileLocation}/download`;
+                          payload.Recordingcamera1file3Name= fileNameTime3[1] + "/" + fileNameTime3[2] + "/" + fileNameTime3[0] + "  " + fileNameTime3[3] + ":" + min3[0];
+                          payload.Recordingcamera1File4= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera1/${json.camera1[3].fileLocation}/download`;
+                          payload.Recordingcamera1file4Name= fileNameTime4[1] + "/" + fileNameTime4[2] + "/" + fileNameTime4[0] + "  " + fileNameTime4[3] + ":" + min4[0];
+                          payload.Recordingcamera1File5= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera1/${json.camera1[4].fileLocation}/download`;
+                          payload.Recordingcamera1file5Name= fileNameTime5[1] + "/" + fileNameTime5[2] + "/" + fileNameTime5[0] + "  " + fileNameTime5[3] + ":" + min5[0];
+                          payload.Recordingcamera1File6= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera1/${json.camera1[5].fileLocation}/download`;
+                          payload.Recordingcamera1file6Name= fileNameTime6[1] + "/" + fileNameTime6[2] + "/" + fileNameTime6[0] + "  " + fileNameTime6[3] + ":" + min6[0];
+                          payload.Recordingcamera1File7= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera1/${json.camera1[6].fileLocation}/download`;
+                          payload.Recordingcamera1file7Name= fileNameTime7[1] + "/" + fileNameTime7[2] + "/" + fileNameTime7[0] + "  " + fileNameTime7[3] + ":" + min7[0];
+                     
+                 }
+
+
+                 if(json.camera2.length>6){
+
+                          var fileNameTime1 = json.camera2[0].fileLocation.split("-");
+                          var min1 = fileNameTime1[4].split(".")
+                          var fileNameTime2 = json.camera2[1].fileLocation.split("-");
+                          var min2 = fileNameTime2[4].split(".")
+                          var fileNameTime3 = json.camera2[2].fileLocation.split("-");
+                          var min3 = fileNameTime3[4].split(".")
+                          var fileNameTime4 = json.camera2[3].fileLocation.split("-");
+                          var min4 = fileNameTime4[4].split(".")
+                          var fileNameTime5 = json.camera2[4].fileLocation.split("-");
+                          var min5 = fileNameTime5[4].split(".")
+                          var fileNameTime6 = json.camera2[5].fileLocation.split("-");
+                          var min6 = fileNameTime6[4].split(".")
+                          var fileNameTime7 = json.camera2[6].fileLocation.split("-");
+                          var min7 = fileNameTime7[4].split(".")
+                          payload.Recordingcamera2File1= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera2/${json.camera2[0].fileLocation}/download`;
+                          payload.Recordingcamera2file1Name= fileNameTime1[1] + "/" + fileNameTime1[2] + "/" + fileNameTime1[0] + "  " + fileNameTime1[3] + ":" + min1[0];
+                          payload.Recordingcamera2File2= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera2/${json.camera2[1].fileLocation}/download`;
+                          payload.Recordingcamera2file2Name= fileNameTime2[1] + "/" + fileNameTime2[2] + "/" + fileNameTime2[0] + "  " + fileNameTime2[3] + ":" + min2[0];
+                          payload.Recordingcamera2File3= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera2/${json.camera2[2].fileLocation}/download`;
+                          payload.Recordingcamera2file3Name= fileNameTime3[1] + "/" + fileNameTime3[2] + "/" + fileNameTime3[0] + "  " + fileNameTime3[3] + ":" + min3[0];
+                          payload.Recordingcamera2File4= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera2/${json.camera2[3].fileLocation}/download`;
+                          payload.Recordingcamera2file4Name= fileNameTime4[1] + "/" + fileNameTime4[2] + "/" + fileNameTime4[0] + "  " + fileNameTime4[3] + ":" + min4[0];
+                          payload.Recordingcamera2File5= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera2/${json.camera2[4].fileLocation}/download`;
+                          payload.Recordingcamera2file5Name= fileNameTime5[1] + "/" + fileNameTime5[2] + "/" + fileNameTime5[0] + "  " + fileNameTime5[3] + ":" + min5[0];
+                          payload.Recordingcamera2File6= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera2/${json.camera2[5].fileLocation}/download`;
+                          payload.Recordingcamera2file6Name= fileNameTime6[1] + "/" + fileNameTime6[2] + "/" + fileNameTime6[0] + "  " + fileNameTime6[3] + ":" + min6[0];
+                          payload.Recordingcamera2File7= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera2/${json.camera2[6].fileLocation}/download`;
+                          payload.Recordingcamera2file7Name= fileNameTime7[1] + "/" + fileNameTime7[2] + "/" + fileNameTime7[0] + "  " + fileNameTime7[3] + ":" + min7[0];
+                 }
+
+                 if(json.camera3.length>6){
+
+                          var fileNameTime1 = json.camera3[0].fileLocation.split("-");
+                          var min1 = fileNameTime1[4].split(".")
+                          var fileNameTime2 = json.camera3[1].fileLocation.split("-");
+                          var min2 = fileNameTime2[4].split(".")
+                          var fileNameTime3 = json.camera3[2].fileLocation.split("-");
+                          var min3 = fileNameTime3[4].split(".")
+                          var fileNameTime4 = json.camera3[3].fileLocation.split("-");
+                          var min4 = fileNameTime4[4].split(".")
+                          var fileNameTime5 = json.camera3[4].fileLocation.split("-");
+                          var min5 = fileNameTime5[4].split(".")
+                          var fileNameTime6 = json.camera3[5].fileLocation.split("-");
+                          var min6 = fileNameTime6[4].split(".")
+                          var fileNameTime7 = json.camera3[6].fileLocation.split("-");
+                          var min7 = fileNameTime7[4].split(".")
+                          payload.Recordingcamera3File1= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera3/${json.camera3[0].fileLocation}/download`;
+                          payload.Recordingcamera3file1Name= fileNameTime1[1] + "/" + fileNameTime1[2] + "/" + fileNameTime1[0] + "  " + fileNameTime1[3] + ":" + min1[0];
+                          payload.Recordingcamera3File2= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera3/${json.camera3[1].fileLocation}/download`;
+                          payload.Recordingcamera3file2Name= fileNameTime2[1] + "/" + fileNameTime2[2] + "/" + fileNameTime2[0] + "  " + fileNameTime2[3] + ":" + min2[0];
+                          payload.Recordingcamera3File3= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera3/${json.camera3[2].fileLocation}/download`;
+                          payload.Recordingcamera3file3Name= fileNameTime3[1] + "/" + fileNameTime3[2] + "/" + fileNameTime3[0] + "  " + fileNameTime3[3] + ":" + min3[0];
+                          payload.Recordingcamera3File4= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera3/${json.camera3[3].fileLocation}/download`;
+                          payload.Recordingcamera3file4Name= fileNameTime4[1] + "/" + fileNameTime4[2] + "/" + fileNameTime4[0] + "  " + fileNameTime4[3] + ":" + min4[0];
+                          payload.Recordingcamera3File5= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera3/${json.camera3[4].fileLocation}/download`;
+                          payload.Recordingcamera3file5Name= fileNameTime5[1] + "/" + fileNameTime5[2] + "/" + fileNameTime5[0] + "  " + fileNameTime5[3] + ":" + min5[0];
+                          payload.Recordingcamera3File6= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera3/${json.camera3[5].fileLocation}/download`;
+                          payload.Recordingcamera3file6Name= fileNameTime6[1] + "/" + fileNameTime6[2] + "/" + fileNameTime6[0] + "  " + fileNameTime6[3] + ":" + min6[0];
+                          payload.Recordingcamera3File7= `http://10.10.30.21:3000/api/videos/stream/${marker.node}/camera3/${json.camera3[6].fileLocation}/download`;
+                          payload.Recordingcamera3file7Name= fileNameTime7[1] + "/" + fileNameTime7[2] + "/" + fileNameTime7[0] + "  " + fileNameTime7[3] + ":" + min7[0];
+                        
+                        }
+                 
+                  }).then(() => {      
+                    dispatch({
+                      type: 'setState',
+                      payload: payload,
+                    })
+                  })
+                  
+              }
+            
 
         
          

@@ -1,10 +1,11 @@
 import Home from './Home/home';
+import Loading from './loading';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NodeManager from './NodeManager/settingsNodeManager';
 import React, { useContext, useEffect } from 'react';
 import RecordingViewer from './videos/RecordingViewer';
-import SystemManager from './SystemSettings/settingsSystemManager';
+import SystemManager from './system/SystemManager';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
 import { IoCameraOutline } from 'react-icons/io5';
@@ -19,6 +20,7 @@ export default function App() {
           type: 'setState',
           payload: {
             showHome: true,
+            showLoading: false,
             showNodeManager: false,
             showRecordingViewer: false,
             showSystemManager: false,
@@ -63,6 +65,7 @@ export default function App() {
         });
         break;
       default:
+
         break;
     }
   }
@@ -71,7 +74,8 @@ export default function App() {
     const diffInMs = Math.abs(date2 - date1);
     return diffInMs / (1000 * 60);
   }
-
+  var setSHowHome = false;
+  var setSHowLoading = true;
   function fetchCurrentPerfMonData(nodedata) {
     var nodeArray = [];
     var numberOfNodesUp = 0;
@@ -100,9 +104,19 @@ export default function App() {
           })
           // eslint-disable-next-line
           .then(() => {
+            if(nodeArray.length==totalNumberOfNodes){
+              setSHowHome = true;
+              setSHowLoading = false;
+            }
             dispatch({
               type: 'setState',
-              payload: { nodes: nodeArray, numberOfNodes: totalNumberOfNodes, numberOfNodesUp: numberOfNodesUp },
+              payload: { 
+                nodes: nodeArray, 
+                numberOfNodes: totalNumberOfNodes, 
+                numberOfNodesUp: numberOfNodesUp,
+                showHome: setSHowHome,
+                showLoading: setSHowLoading,
+              },
             });
           });
      
@@ -147,6 +161,8 @@ export default function App() {
           <Navbar.Text></Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
+      
+      {state.showLoading && <Loading />}
       {state.showHome && <Home />}
       {state.showRecordingViewer && <RecordingViewer />}
       {state.showNodeManager && <NodeManager />}
