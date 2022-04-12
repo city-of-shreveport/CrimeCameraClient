@@ -35,7 +35,7 @@ export default function StreamingPlayer() {
             <img
             width="300"
             height="200"
-              alt="stream"
+              alt="stream2"
               src={state.videoStreamingURLS.camera2}
             />
         
@@ -44,7 +44,7 @@ export default function StreamingPlayer() {
             <img
                 width="300"
                 height="200"
-              alt="stream"
+              alt="stream3"
               src={state.videoStreamingURLS.camera3}
             />
       </Card>
@@ -57,7 +57,7 @@ export default function StreamingPlayer() {
               <img
               width="300"
               height="200"
-                alt="stream"
+                alt="stream4"
                 src={state.videoStreamingURLS.camera4}
               />
         
@@ -67,7 +67,7 @@ export default function StreamingPlayer() {
               <img
               width="300"
               height="200"
-                alt="stream"
+                alt="stream5"
                 src={state.videoStreamingURLS.camera5}
               />
         
@@ -76,7 +76,7 @@ export default function StreamingPlayer() {
               <img
                 width="300"
                 height="200"
-                alt="stream"
+                alt="stream6"
                 src={state.videoStreamingURLS.camera6}
               />
         </Card>
@@ -89,7 +89,7 @@ export default function StreamingPlayer() {
           <img
             width="300"
             height="200"
-            alt="stream"
+            alt="stream7"
             src={state.videoStreamingURLS.camera7}
           />
       
@@ -99,7 +99,7 @@ export default function StreamingPlayer() {
           <img
           width="300"
           height="200"
-            alt="stream"
+            alt="stream8"
             src={state.videoStreamingURLS.camera8}
           />
       
@@ -108,7 +108,7 @@ export default function StreamingPlayer() {
           <img
               width="300"
               height="200"
-            alt="stream"
+            alt="stream9"
             src={state.videoStreamingURLS.camera9}
           />
     </Card>

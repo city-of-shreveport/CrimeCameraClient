@@ -84,8 +84,8 @@ export default function GoogleMap() {
                 },
                 modalChooseVideoBoxShow: true,
                 clickedcamera1: "http://"+ marker.nodeIP  +":8090/camera1.mjpeg",
-                clickedcamera2: "http://"+ marker.nodeIP  +":8090/camera2.mjpeg",
-                clickedcamera3: "http://"+ marker.nodeIP  +":8090/camera3.mjpeg"
+                clickedcamera2: "http://"+ marker.nodeIP  +":8091/camera1.mjpeg",
+                clickedcamera3: "http://"+ marker.nodeIP  +":8092/camera1.mjpeg"
                 }
 
 
