@@ -5,3 +5,7 @@ export default function tryValue(tryFunction) {
     return null;
   }
 }
+
+export function createRTCConnection(gridNumber, state) {
+   
+}

@@ -12,109 +12,84 @@ import { GlobalContext } from '../../contexts/globalContext';
 export default function StreamingPlayer() {
   const [state, dispatch] = useContext(GlobalContext);
 
-
   return (
     <Container>
+      <Row>
+        <Col>
+          <Card bg="dark" text="light">
+            <h3>{state.Node1}</h3>
+          </Card>
+        </Col>
+      </Row>
 
-  <Row>
-    <Col>
-   
-        <Card bg="dark" text="light">
-        <h3>{state.videoStreamingCamera1Name}</h3>
-            
-            <img
-              width="300"
-              height="200"
-              alt="stream"
-              src={state.videoStreamingURLS.camera1}
-            />
-        
-      </Card>
-      <Card bg="dark" text="light">
-          
-            <img
-            width="300"
-            height="200"
-              alt="stream2"
-              src={state.videoStreamingURLS.camera2}
-            />
-        
-      </Card>
-      <Card bg="dark" text="light">
-            <img
-                width="300"
-                height="200"
-              alt="stream3"
-              src={state.videoStreamingURLS.camera3}
-            />
-      </Card>
-    
-    </Col>
-    <Col>
-    
-      <Card bg="dark" text="light">
-      <h3>{state.videoStreamingCamera2Name}</h3>
-              <img
-              width="300"
-              height="200"
-                alt="stream4"
-                src={state.videoStreamingURLS.camera4}
-              />
-        
-        </Card>
-        <Card bg="dark" text="light">
-          
-              <img
-              width="300"
-              height="200"
-                alt="stream5"
-                src={state.videoStreamingURLS.camera5}
-              />
-        
-        </Card>
-        <Card bg="dark" text="light">
-              <img
-                width="300"
-                height="200"
-                alt="stream6"
-                src={state.videoStreamingURLS.camera6}
-              />
-        </Card>
-    
-    </Col>
-    <Col>
-    
-      <Card bg="dark" text="light">
-      <h3>{state.videoStreamingCamera3Name}</h3>
-          <img
-            width="300"
-            height="200"
-            alt="stream7"
-            src={state.videoStreamingURLS.camera7}
-          />
-      
-    </Card>
-    <Card bg="dark" text="light">
-        
-          <img
-          width="300"
-          height="200"
-            alt="stream8"
-            src={state.videoStreamingURLS.camera8}
-          />
-      
-    </Card>
-    <Card bg="dark" text="light">
-          <img
-              width="300"
-              height="200"
-            alt="stream9"
-            src={state.videoStreamingURLS.camera9}
-          />
-    </Card>
-   </Col>
-  </Row>
-      
+      <Row>
+        <Col>
+          <Card bg="dark" text="light">
+            <video width="300" id="video1"></video>
+          </Card>
+        </Col>
+        <Col>
+          <Card bg="dark" text="light">
+            <video width="300" id="video2"></video>
+          </Card>
+        </Col>
+        <Col>
+          <Card bg="dark" text="light">
+            <video width="300" id="video3"></video>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Card bg="dark" text="light">
+            <h3>{state.Node2}</h3>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          <Card bg="dark" text="light">
+            <video width="300" id="video1"></video>
+          </Card>
+        </Col>
+        <Col>
+          <Card bg="dark" text="light">
+            <video width="300" id="video2"></video>
+          </Card>
+        </Col>
+        <Col>
+          <Card bg="dark" text="light">
+            <video width="300" id="video3"></video>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          <Card bg="dark" text="light">
+            <h3>{state.Node3}</h3>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          <Card bg="dark" text="light">
+            <video width="300" id="video1"></video>
+          </Card>
+        </Col>
+        <Col>
+          <Card bg="dark" text="light">
+            <video width="300" id="video2"></video>
+          </Card>
+        </Col>
+        <Col>
+          <Card bg="dark" text="light">
+            <video width="300" id="video3"></video>
+          </Card>
+        </Col>
+      </Row>
     </Container>
   );
 }
