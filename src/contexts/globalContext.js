@@ -4,6 +4,7 @@ export const GlobalContext = createContext();
 
 const initialState = {
   // General
+  streamingNodes: [],
   camButtonSelected: '',
   chooseRowOne: false,
   chooseRowTwo: false,

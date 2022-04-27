@@ -72,10 +72,10 @@ export default function Home() {
         },
   });
 }
+
 const handleSelect=(e)=>{
-    
-    
-  }
+
+}
 
 
 
@@ -93,36 +93,20 @@ function handleShow() {
   });
 }
 
-function chooseRowOne() {
-  dispatch({
-    type: 'setState',
-    payload: {
-      videoPlayerActive: true,
-      modalChooseVideoBoxShow: false,
-    },
-  });
-} 
-function chooseRowTwo() {
-  dispatch({
-    type: 'setState',
-    payload: {
-      videoPlayerActive: true,
-      modalChooseVideoBoxShow: false,
-    },
-  });
-} 
+function addRow() {
+  var currentStreamingNodes = state.streamingNodes ? state.streamingNodes : [];
 
+  currentStreamingNodes.push(state.selectedNodeObj);
 
-function chooseRowThree() {
   dispatch({
     type: 'setState',
     payload: {
-      videoStreamingCamera3Name: state.currentNodeInfo.name,
-      videoPlayerActive: true,
-      modalChooseVideoBoxShow: false,
+      streamingNodes: currentStreamingNodes,
+      modalChooseVideoBoxShow: false
     },
   });
 }
+
 return (
     <>
       <Container fluid className="homeContainer bg-dark">
@@ -145,27 +129,14 @@ return (
 
         <Modal show={state.modalChooseVideoBoxShow} onHide={handleClose} dialogClassName="modal-45w">
         <Modal.Header>
-        <Modal.Title>{state.currentNodeInfo.name} </Modal.Title>
+        <Modal.Title>{state.selectedNodeObj ? state.selectedNodeObj.name : ""} </Modal.Title>
        
-        <ButtonGroup aria-label="Basic example" >
-        <Button variant="primary" onClick={chooseRowOne}>
-        Stream To Row 1
-          </Button>
-          <Button variant="light" >
-            
-          </Button>
-          <Button variant="primary" onClick={chooseRowTwo}>
-          Stream To Row 2
-          </Button>
-          <Button variant="light" >
-            
-            </Button>
-          <Button variant="primary" onClick={chooseRowThree}>
-          Stream To Row 3
-          </Button>
-          </ButtonGroup>
+        <ButtonGroup aria-label="Basic example">
+          <Button variant="primary" onClick={addRow}> Begin Streaming </Button>
+        </ButtonGroup>
           </Modal.Header>
         <Modal.Body>
+
           <Card.Title>Download Videos</Card.Title>
 <CardGroup>
   <Card className="text-center">
