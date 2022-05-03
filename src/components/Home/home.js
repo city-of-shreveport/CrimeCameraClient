@@ -94,7 +94,7 @@ function handleShow() {
 }
 
 function addRow() {
-  var currentStreamingNodes = state.streamingNodes ? state.streamingNodes : [];
+  var currentStreamingNodes = state.streamingNodes;
 
   currentStreamingNodes[state.selectedNodeObj.name] = state.selectedNodeObj;
 
