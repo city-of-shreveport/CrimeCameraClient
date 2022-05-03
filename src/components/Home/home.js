@@ -23,7 +23,7 @@ export default function Home() {
     dispatch({
       type: 'setState',
       payload: {
-        videoPlayerStreamingActive: true,
+        videoPlayerStreamingActive: false,
       },
     });
   }
@@ -39,6 +39,9 @@ export default function Home() {
           }),
 
           modalChooseVideoBoxShow: false,
+          rowOneNodeIP: '',
+          rowTwoNodeIP: '',
+          rowThreeNodeIP: '',
           
           Recordingcamera1File1: ``,
           Recordingcamera1file1Name: '',
@@ -69,10 +72,10 @@ export default function Home() {
         },
   });
 }
+
 const handleSelect=(e)=>{
-    
-    
-  }
+
+}
 
 
 
@@ -90,79 +93,28 @@ function handleShow() {
   });
 }
 
-function chooseRowOne() {
-  dispatch({
-    type: 'setState',
-    payload: {
-      videoStreamingCamera1Name: state.currentNodeInfo.name,
-      videoStreamingURLS: {
-      camera1: 'http://192.168.1.251:8083/stream/Node052/channel/0/hls/live/index.m3u8',
-      camera2: 'http://192.168.1.251:8083/stream/Node052/channel/1/hls/live/index.m3u8',
-      camera3: 'http://192.168.1.251:8083/stream/Node052/channel/2/hls/live/index.m3u8',
-      camera4: state.videoStreamingURLS.camera4,
-      camera5: state.videoStreamingURLS.camera5,
-      camera6: state.videoStreamingURLS.camera6,
-      camera7: state.videoStreamingURLS.camera7,
-      camera8: state.videoStreamingURLS.camera8,
-      camera9: state.videoStreamingURLS.camera9,
-    },          
-                   
-                   
-      videoPlayerActive: true,
-      modalChooseVideoBoxShow: false,
-     
-    },
-  });
-} 
-function chooseRowTwo() {
-  dispatch({
-    type: 'setState',
-    payload: {
-      videoStreamingCamera2Name: state.currentNodeInfo.name,
-videoStreamingURLS: {
-      camera1: state.videoStreamingURLS.camera1,
-      camera2: state.videoStreamingURLS.camera2,
-      camera3: state.videoStreamingURLS.camera3,
-      camera4: 'http://192.168.1.251:8083/stream/068/channel/0/webrtc',
-      camera5: 'http://192.168.1.251:8083/stream/068/channel/1/webrtc',
-      camera6: 'http://192.168.1.251:8083/stream/068/channel/2/webrtc',
-      camera7: state.videoStreamingURLS.camera7,
-      camera8: state.videoStreamingURLS.camera8,
-      camera9: state.videoStreamingURLS.camera9,
-},
-      videoPlayerActive: true,
-      modalChooseVideoBoxShow: false,
-     
-    },
-  });
-} 
+function addRow() {
+  var currentStreamingNodes = state.streamingNodes ? state.streamingNodes : [];
 
+  currentStreamingNodes[state.selectedNodeObj.name] = state.selectedNodeObj;
 
-function chooseRowThree() {
   dispatch({
     type: 'setState',
     payload: {
-      videoStreamingCamera3Name: state.currentNodeInfo.name,
-      videoStreamingURLS: {
-        camera1: state.videoStreamingURLS.camera1,
-      camera2: state.videoStreamingURLS.camera2,
-      camera3: state.videoStreamingURLS.camera3,
-      camera4: state.videoStreamingURLS.camera4,
-      camera5: state.videoStreamingURLS.camera5,
-      camera6: state.videoStreamingURLS.camera6,
-      camera7: 'http://192.168.1.251:8083/stream/041/channel/0/webrtc',
-      camera8: 'http://192.168.1.251:8083/stream/041/channel/1/webrtc',
-      camera9: 'http://192.168.1.251:8083/stream/041/channel/2/webrtc',
-    },
-      videoPlayerActive: true,
-      modalChooseVideoBoxShow: false,
-     
+      streamingNodes: currentStreamingNodes,
+      modalChooseVideoBoxShow: false
     },
   });
 }
+
 return (
     <>
       <Container fluid className="homeContainer bg-dark">
+        <Row className="justify-content-md-center">
+          <Col>
+              <StreamingPlayer />
+          </Col>
+        </Row>
         <Row className="justify-content-md-center">
           <Col>
             <CardGroup>
@@ -173,48 +125,18 @@ return (
               </Card>
             </CardGroup>
           </Col>
-          {state.videoPlayerActive ? (
-           
-            <Col xs={8}>
-             
-              
-
-              <StreamingPlayer />
-  
-            </Col>
-          
-       
-          ) : (
-            <></>
-          )}
         </Row>
+
         <Modal show={state.modalChooseVideoBoxShow} onHide={handleClose} dialogClassName="modal-45w">
         <Modal.Header>
-        <Modal.Title>{state.currentNodeInfo.name} </Modal.Title>
-
-
-
+        <Modal.Title>{state.selectedNodeObj ? state.selectedNodeObj.name : ""} </Modal.Title>
        
-       
-        <ButtonGroup aria-label="Basic example" >
-        <Button variant="primary" onClick={chooseRowOne}>
-        Stream To Row 1
-          </Button>
-          <Button variant="light" >
-            
-          </Button>
-          <Button variant="primary" onClick={chooseRowTwo}>
-          Stream To Row 2
-          </Button>
-          <Button variant="light" >
-            
-            </Button>
-          <Button variant="primary" onClick={chooseRowThree}>
-          Stream To Row 3
-          </Button>
-          </ButtonGroup>
+        <ButtonGroup aria-label="Basic example">
+          <Button variant="primary" onClick={addRow}> Begin Streaming </Button>
+        </ButtonGroup>
           </Modal.Header>
         <Modal.Body>
+
           <Card.Title>Download Videos</Card.Title>
 <CardGroup>
   <Card className="text-center">
