@@ -11,7 +11,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function webRTCSetup(cameraNumber, refObj, selectedNode) {
+function webRTCSetup(cameraNumber, refObj, selectedNode, channel) {
   let stream = new MediaStream();
 
   let config = {
@@ -27,12 +27,12 @@ function webRTCSetup(cameraNumber, refObj, selectedNode) {
   async function handleNegotiationNeededEvent() {
     let offer = await pc.createOffer();
     await pc.setLocalDescription(offer);
-    getRemoteSdp();
+    getRemoteSdp(channel);
   }
 
 
   let log = msg => {
-    console.log(msg);
+   
   }
 
   pc.ontrack = function(event) {
@@ -49,9 +49,8 @@ function webRTCSetup(cameraNumber, refObj, selectedNode) {
 
   let sendChannel = null;
 
-  function getRemoteSdp() {
-    var receiverUrl = "http://" + selectedNode.config.ip + ":8888/stream/receiver/Camera" + cameraNumber;
-    console.log("Fetching " + receiverUrl);
+  function getRemoteSdp(channel) {
+    var receiverUrl = "http://10.10.30.200:8083/stream/" + selectedNode.name + "/channel/" + channel + "/webrtc";
 
     fetch(receiverUrl, {
       method: 'POST', 
@@ -66,8 +65,6 @@ function webRTCSetup(cameraNumber, refObj, selectedNode) {
     .then( (data) => {
       
       data.text().then(function(blob) {
-        console.log("BLOB");
-        console.log(blob);
 
         try {
           pc.setRemoteDescription(new RTCSessionDescription({
@@ -97,12 +94,11 @@ export default function StreamingRow(props) {
 
 
   useEffect( () => { 
-    webRTCSetup(1, state.videoPlayerOneRef, props.selectedNode)
-    webRTCSetup(2, state.videoPlayerTwoRef, props.selectedNode)
-    webRTCSetup(3, state.videoPlayerThreeRef, props.selectedNode)
+    webRTCSetup(1, state.videoPlayerOneRef, props.selectedNode, 0)
+    webRTCSetup(2, state.videoPlayerTwoRef, props.selectedNode,1)
+    webRTCSetup(3, state.videoPlayerThreeRef, props.selectedNode,2)
   } );
 
-  console.log(props.selectedNode)
 
   return (
     <Container>
@@ -118,17 +114,17 @@ export default function StreamingRow(props) {
       <Row>
         <Col>
           <Card bg="dark" text="light">
-            <video width="100%" ref={state.videoPlayerOneRef} controls autoplay></video>
+            <video width="100%" ref={state.videoPlayerOneRef} controls autoPlay></video>
           </Card>
         </Col>
         <Col>
           <Card bg="dark" text="light">
-            <video width="100%" ref={state.videoPlayerTwoRef} controls autoplay></video>
+            <video width="100%" ref={state.videoPlayerTwoRef} controls autoPlay></video>
           </Card>
         </Col>
         <Col>
           <Card bg="dark" text="light">
-            <video width="100%" ref={state.videoPlayerThreeRef} controls autoplay></video>
+            <video width="100%" ref={state.videoPlayerThreeRef} controls autoPlay></video>
           </Card>
         </Col>
       </Row>

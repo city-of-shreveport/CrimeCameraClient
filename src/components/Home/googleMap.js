@@ -72,12 +72,55 @@ export default function GoogleMap() {
       const key = 'demo'
       markers.forEach((marker, i) => {
         if (marker.status === 'up') {
+          var dataPacket = {"name": marker.node,
+       "channels": {
+           "0": {
+               "name": "Camera1",
+               "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":554/cam/realmonitor?channel=1&subtype=1",
+               "on_demand": true,
+               "debug": false,
+               "status": 0
+           },
+           "1": {
+               "name": "Camera2",
+               "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":555/cam/realmonitor?channel=1&subtype=1",
+               "on_demand": true,
+               "debug": false,
+               "status": 0
+           },
+    "2": {
+               "name": "Camera3",
+               "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":556/cam/realmonitor?channel=1&subtype=1",
+               "on_demand": true,
+               "debug": false,
+               "status": 0
+           }
+       }
+
+
+
+
+
+       }
+          const requestOptions = {
+            method: 'POST',
+            withCredentials: true,
+            headers: {
+            'Content-Type': 'application/json' },
+            body: JSON.stringify(dataPacket)
+        }
           marker.addListener('click', () => {
+            fetch('http://10.10.30.200:8083/stream/'+marker.node+'/add', requestOptions)
+                       .then((response) => response.json())
+                         .then((json) => { 
+                           console.log(json)
+                         })
             for(i=0;i<cameras.length;i++){
 
               console.log(cameras[i])
               currentCamera = cameras[i];
               var payload = {
+                
                 selectedNodeObj: marker.selectedNodeObj,
                 modalChooseVideoBoxShow: true,
               }
