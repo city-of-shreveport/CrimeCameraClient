@@ -96,9 +96,9 @@ function chooseRowOne() {
     payload: {
       videoStreamingCamera1Name: state.currentNodeInfo.name,
       videoStreamingURLS: {
-      camera1: 'http://'+ state.currentNodeInfo.ip +':8090/camera1.mjpeg',
-      camera2: 'http://'+ state.currentNodeInfo.ip+':8091/camera2.mjpeg',
-      camera3: 'http://'+ state.currentNodeInfo.ip +':8092/camera3.mjpeg',
+      camera1: 'http://192.168.1.251:8083/stream/Node052/channel/0/hls/live/index.m3u8',
+      camera2: 'http://192.168.1.251:8083/stream/Node052/channel/1/hls/live/index.m3u8',
+      camera3: 'http://192.168.1.251:8083/stream/Node052/channel/2/hls/live/index.m3u8',
       camera4: state.videoStreamingURLS.camera4,
       camera5: state.videoStreamingURLS.camera5,
       camera6: state.videoStreamingURLS.camera6,
@@ -123,9 +123,9 @@ videoStreamingURLS: {
       camera1: state.videoStreamingURLS.camera1,
       camera2: state.videoStreamingURLS.camera2,
       camera3: state.videoStreamingURLS.camera3,
-      camera4: 'http://'+ state.currentNodeInfo.ip +':8090/camera1.mjpeg',
-      camera5: 'http://'+state.currentNodeInfo.ip +':8091/camera2.mjpeg',
-      camera6: 'http://'+ state.currentNodeInfo.ip +':8092/camera3.mjpeg',
+      camera4: 'http://192.168.1.251:8083/stream/068/channel/0/webrtc',
+      camera5: 'http://192.168.1.251:8083/stream/068/channel/1/webrtc',
+      camera6: 'http://192.168.1.251:8083/stream/068/channel/2/webrtc',
       camera7: state.videoStreamingURLS.camera7,
       camera8: state.videoStreamingURLS.camera8,
       camera9: state.videoStreamingURLS.camera9,
@@ -150,9 +150,9 @@ function chooseRowThree() {
       camera4: state.videoStreamingURLS.camera4,
       camera5: state.videoStreamingURLS.camera5,
       camera6: state.videoStreamingURLS.camera6,
-      camera7: 'http://'+ state.currentNodeInfo.ip +':8090/camera1.mjpeg',
-      camera8: 'http://'+ state.currentNodeInfo.ip +':8091/camera2.mjpeg',
-      camera9: 'http://'+ state.currentNodeInfo.ip +':8092/camera3.mjpeg',
+      camera7: 'http://192.168.1.251:8083/stream/041/channel/0/webrtc',
+      camera8: 'http://192.168.1.251:8083/stream/041/channel/1/webrtc',
+      camera9: 'http://192.168.1.251:8083/stream/041/channel/2/webrtc',
     },
       videoPlayerActive: true,
       modalChooseVideoBoxShow: false,
@@ -191,6 +191,8 @@ return (
         <Modal show={state.modalChooseVideoBoxShow} onHide={handleClose} dialogClassName="modal-45w">
         <Modal.Header>
         <Modal.Title>{state.currentNodeInfo.name} </Modal.Title>
+
+
 
        
        

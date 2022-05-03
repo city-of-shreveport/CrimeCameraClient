@@ -68,11 +68,54 @@ export default function GoogleMap() {
         map.fitBounds(bounds);
       }
       });
-
+      const key = 'demo'
       markers.forEach((marker, i) => {
         if (marker.status === 'up') {
           marker.addListener('click', () => {
-            
+      var dataPacket = {"name": marker.node,
+      "channels": {
+          "0": {
+              "name": "Camera1",
+              "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":554/cam/realmonitor?channel=1&subtype=1",
+              "on_demand": true,
+              "debug": false,
+              "status": 0
+          },
+          "1": {
+              "name": "Camera2",
+              "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":555/cam/realmonitor?channel=1&subtype=1",
+              "on_demand": true,
+              "debug": false,
+              "status": 0
+          },
+   "2": {
+              "name": "Camera3",
+              "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":556/cam/realmonitor?channel=1&subtype=1",
+              "on_demand": true,
+              "debug": false,
+              "status": 0
+          }
+      }
+  
+
+
+
+
+      }
+            const requestOptions = {
+              method: 'POST',
+              withCredentials: true,
+              headers: {
+              'Content-Type': 'application/json' },
+              body: JSON.stringify(dataPacket)
+          }
+          console.log(requestOptions.body)
+                      fetch('http://192.168.1.251:8083/stream/'+marker.node+'/add', requestOptions)
+                      .then((response) => response.json())
+                        .then((json) => { 
+                          console.log(json)
+                        })
+      
 
             for(i=0;i<cameras.length;i++){
               console.log(cameras[i])
@@ -87,8 +130,7 @@ export default function GoogleMap() {
                 clickedcamera2: "http://"+ marker.nodeIP  +":8091/camera1.mjpeg",
                 clickedcamera3: "http://"+ marker.nodeIP  +":8092/camera1.mjpeg"
                 }
-
-
+                
 
               fetch('http://rtcc-server.shreveport-it.org:3000/api/videos/getlatestVideos/' +  marker.node)
               .then((response) => response.json())

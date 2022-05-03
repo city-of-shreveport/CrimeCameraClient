@@ -6,12 +6,13 @@ import Image from 'react-bootstrap/Image';
 import Nav from 'react-bootstrap/Nav';
 import React, { useContext } from 'react';
 import ReactPlayer from 'react-player';
+import ReactHlsPlayer from 'react-hls-player';
 import tryValue from '../../helperFunctions';
 import { GlobalContext } from '../../contexts/globalContext';
 
 export default function StreamingPlayer() {
   const [state, dispatch] = useContext(GlobalContext);
-
+  const url = "ws://192.168.1.251:8083/stream/Node052/channel/0/mse?uuid=Node052&channel=0"
 
   return (
     <Container>
@@ -22,17 +23,12 @@ export default function StreamingPlayer() {
         <Card bg="dark" text="light">
         <h3>{state.videoStreamingCamera1Name}</h3>
             
-            <img
-              width="300"
-              height="200"
-              alt="stream"
-              src={state.videoStreamingURLS.camera1}
-            />
+        <video id="player" />
         
       </Card>
       <Card bg="dark" text="light">
           
-            <img
+            <video
             width="300"
             height="200"
               alt="stream2"
@@ -41,7 +37,7 @@ export default function StreamingPlayer() {
         
       </Card>
       <Card bg="dark" text="light">
-            <img
+            <video
                 width="300"
                 height="200"
               alt="stream3"
@@ -54,7 +50,7 @@ export default function StreamingPlayer() {
     
       <Card bg="dark" text="light">
       <h3>{state.videoStreamingCamera2Name}</h3>
-              <img
+              <video
               width="300"
               height="200"
                 alt="stream4"
@@ -64,7 +60,7 @@ export default function StreamingPlayer() {
         </Card>
         <Card bg="dark" text="light">
           
-              <img
+              <video
               width="300"
               height="200"
                 alt="stream5"
@@ -73,7 +69,7 @@ export default function StreamingPlayer() {
         
         </Card>
         <Card bg="dark" text="light">
-              <img
+              <video
                 width="300"
                 height="200"
                 alt="stream6"
@@ -86,7 +82,7 @@ export default function StreamingPlayer() {
     
       <Card bg="dark" text="light">
       <h3>{state.videoStreamingCamera3Name}</h3>
-          <img
+          <video
             width="300"
             height="200"
             alt="stream7"
@@ -96,7 +92,7 @@ export default function StreamingPlayer() {
     </Card>
     <Card bg="dark" text="light">
         
-          <img
+          <video
           width="300"
           height="200"
             alt="stream8"
@@ -105,7 +101,7 @@ export default function StreamingPlayer() {
       
     </Card>
     <Card bg="dark" text="light">
-          <img
+          <video
               width="300"
               height="200"
             alt="stream9"

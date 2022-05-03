@@ -83,7 +83,9 @@ export default function App() {
 
     // eslint-disable-next-line
     nodedata.map((nodedataitem) => {
-    
+      var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
+      nodeArray.push(nodedataitem);
+      if(difference<30){
         fetch('http://rtcc-server.shreveport-it.org:3000/api/perfmons/' + nodedataitem.name)
           .then((response) => response.json())
           // eslint-disable-next-line
@@ -102,9 +104,10 @@ export default function App() {
 
             nodeArray.push(nodeDataPerfMon);
           })
+        }
           // eslint-disable-next-line
-          .then(() => {
-            if(nodeArray.length==totalNumberOfNodes){
+       
+            if(nodeArray.length===totalNumberOfNodes){
               setSHowHome = true;
               setSHowLoading = false;
             }
@@ -118,7 +121,7 @@ export default function App() {
                 showLoading: setSHowLoading,
               },
             });
-          });
+        
      
     });
   }
