@@ -78,13 +78,15 @@ export default function App() {
   var setSHowLoading = true;
   function fetchCurrentPerfMonData(nodedata) {
     var nodeArray = [];
+    var nodeCount = 0;
     var numberOfNodesUp = 0;
+    var numberOfNodesDown = 0;
     var totalNumberOfNodes = nodedata.length;
 
     // eslint-disable-next-line
     nodedata.map((nodedataitem) => {
       var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
-      nodeArray.push(nodedataitem);
+      nodeCount++;
       if(difference<30){
         fetch('http://rtcc-server.shreveport-it.org:3000/api/perfmons/' + nodedataitem.name)
           .then((response) => response.json())
@@ -93,10 +95,10 @@ export default function App() {
             console.log(nodedataitem.name)
             let nodeDataPerfMon = nodedataitem;
             nodeDataPerfMon.perfmon = json[0];
-            var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
 
             if (difference > 15) {
               nodeDataPerfMon.nodeStatus = false;
+              numberOfNodesDown++
             } else {
               nodeDataPerfMon.nodeStatus = true;
               numberOfNodesUp++;
@@ -104,23 +106,26 @@ export default function App() {
 
             nodeArray.push(nodeDataPerfMon);
           })
+         
+        }
+        if(nodeCount===totalNumberOfNodes){
+          setSHowHome = true;
+          setSHowLoading = false;
+          dispatch({
+            type: 'setState',
+            payload: { 
+              nodes: nodeArray, 
+              numberOfNodes: totalNumberOfNodes, 
+              numberOfNodesUp: numberOfNodesUp,
+              showHome: setSHowHome,
+              showLoading: setSHowLoading,
+            },
+          });
         }
           // eslint-disable-next-line
        
-            if(nodeArray.length===totalNumberOfNodes){
-              setSHowHome = true;
-              setSHowLoading = false;
-            }
-            dispatch({
-              type: 'setState',
-              payload: { 
-                nodes: nodeArray, 
-                numberOfNodes: totalNumberOfNodes, 
-                numberOfNodesUp: numberOfNodesUp,
-                showHome: setSHowHome,
-                showLoading: setSHowLoading,
-              },
-            });
+           
+            
         
      
     });
@@ -131,6 +136,13 @@ export default function App() {
       fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes')
         .then((response) => response.json())
         .then((json) => {
+          dispatch({
+            type: 'setState',
+            payload: { 
+             
+              showLoading: false,
+            },
+          });
           fetchCurrentPerfMonData(json);
         });
     }

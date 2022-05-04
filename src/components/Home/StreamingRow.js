@@ -19,8 +19,9 @@ function webRTCSetup(cameraNumber, refObj, selectedNode) {
       urls: ["stun:stun.l.google.com:19302"]
     }]
   };
-
   let pc = new RTCPeerConnection(config);
+
+
 
   pc.onnegotiationneeded = handleNegotiationNeededEvent;
 
@@ -51,10 +52,10 @@ function webRTCSetup(cameraNumber, refObj, selectedNode) {
 
   function getRemoteSdp() {
     //TODO: Switch to this when service is stable
-    //var receiverUrl = "http://10.10.30.200:8083/stream/" + selectedNode.name + "/channel/" + (cameraNumber - 1) + "/webrtc";
+    var receiverUrl = "http://10.10.30.200:8083/stream/" + selectedNode.name + "/channel/" + (cameraNumber - 1) + "/webrtc";
 
     //TODO: Remove this from pi services
-    var receiverUrl = "http://" + selectedNode.config.ip + ":8888/stream/receiver/Camera" + cameraNumber;
+    //var receiverUrl = "http://" + selectedNode.config.ip + ":8888/stream/receiver/Camera" + cameraNumber;
 
     fetch(receiverUrl, {
       method: 'POST', 
