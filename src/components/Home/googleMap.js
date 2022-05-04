@@ -115,6 +115,10 @@ export default function GoogleMap() {
                          .then((json) => { 
                            console.log(json)
                          })
+                       .catch( (error) => { 
+                         console.log(error)
+                       });
+                       
             for(i=0;i<cameras.length;i++){
 
               console.log(cameras[i])
