@@ -5,7 +5,6 @@ import "./OnlineYesAddCamerasNo.sass";
 class OnlineYesAddCamerasNo extends React.Component {
   render() {
     console.log("Rendered Camera " + this.props.name);
-    const { addRemoveSimpleProps } = this.props;
 
     return (
       <div className="x3-column-box-simple">
@@ -31,7 +30,7 @@ class OnlineYesAddCamerasNo extends React.Component {
             <div className="x57-camera-2 opensans-bold-white-13px">90 | Camera 2</div>
           </div>
           <div className="flex-col-2">
-            <AddRemoveSimple overlapGroup={addRemoveSimpleProps.overlapGroup} vector={addRemoveSimpleProps.vector} />
+            <AddRemoveSimple  />
             <div className="overlap-group3">
               <img
                 className="arrows-fullscreen"
@@ -46,4 +45,4 @@ class OnlineYesAddCamerasNo extends React.Component {
   }
 }
 
-export default React.memo(OnlineYesAddCamerasNo);
+export default OnlineYesAddCamerasNo;

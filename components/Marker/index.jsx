@@ -4,16 +4,17 @@ import "./Marker.sass";
 
 import cameraIcon from "./cameraIcon.png"
 
-const Marker = ({ text, onClick, color }) => <div className={'mapMarker ' + color} onClick={onClick} ><img src={cameraIcon} /></div>;
+const Marker = ({ onClick, color, cameraName }) => <div data-name={cameraName} className={'mapMarker ' + color} onClick={onClick}><img src={cameraIcon} /></div>;
 
 Marker.defaultProps = {
 	color: "#FF0000",
   onClick: null,
+  cameraName: "",
 };
 
 Marker.propTypes = {
   onClick: PropTypes.func,
-  text: PropTypes.string.isRequired,
+  cameraName: PropTypes.string.isRequired
 };
 
 export default Marker;
