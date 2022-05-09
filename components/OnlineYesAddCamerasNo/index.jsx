@@ -24,7 +24,7 @@ class OnlineYesAddCamerasNo extends React.Component {
             <div className="x57-camera-2 opensans-bold-white-13px">{this.props.name} | Camera 2</div>
           </div>
           <div className="flex-col-2">
-            <AddRemoveSimple overlapGroup={this.props.addRemoveSimpleProps.overlapGroup} vector={this.props.addRemoveSimpleProps.vector} />
+            <AddRemoveSimple handleClose={this.props.handleClose} nodeName={this.props.name} />
             <div className="overlap-group3">
               <video />
             </div>

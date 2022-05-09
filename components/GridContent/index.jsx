@@ -20,6 +20,7 @@ class GridContent extends React.Component {
     this.refreshRecentlyCheckedIn()
 
     this.handleMapIconClick.bind(this)
+    this.handleCloseStreamingNode.bind(this)
   }
 
   static defaultProps = {
@@ -57,6 +58,20 @@ class GridContent extends React.Component {
     })
   }
 
+  handleCloseStreamingNode = (e) => {
+    var clickedNode = {};
+
+    clickedNode = this.state.nodes[e.target.dataset.name];
+
+    var tempStreamingNodes = this.state.streamingNodes;
+
+    delete(tempStreamingNodes[clickedNode.name])
+
+    this.setState({
+      streamingNodes: tempStreamingNodes
+    });
+  }
+
   render() {
     const { mapProps, mapProps2 } = this.props;
 
@@ -69,7 +84,7 @@ class GridContent extends React.Component {
 
           { Object.keys(this.state.streamingNodes).map( (name) => { 
             console.log(name);
-            return <OnlineYesAddCamerasNo key={name} name={name} address={"Node Address Here"} addRemoveSimpleProps={mapProps2.addRemoveSimpleProps} />
+            return <OnlineYesAddCamerasNo handleClose={this.handleCloseStreamingNode} key={name} name={name} address={"Node Address Here"} />
           } ) }
         </div>
       </div>

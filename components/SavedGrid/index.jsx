@@ -5,13 +5,11 @@ import "./SavedGrid.sass";
 
 class SavedGrid extends React.Component {
   render() {
-    const { gridContentProps } = this.props;
-
     return (
       <div className="container-center-horizontal">
         <div className="saved-grid screen">
           <Navigation />
-          <GridContent  mapProps2={gridContentProps.mapProps2} />
+          <GridContent />
         </div>
       </div>
     );
