@@ -11,7 +11,7 @@ class SavedGrid extends React.Component {
       <div className="container-center-horizontal">
         <div className="saved-grid screen">
           <Navigation />
-          <GridContent  />
+          <GridContent  mapProps2={gridContentProps.mapProps2} />
         </div>
       </div>
     );

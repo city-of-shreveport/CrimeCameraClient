@@ -69,7 +69,7 @@ class GridContent extends React.Component {
 
           { Object.keys(this.state.streamingNodes).map( (name) => { 
             console.log(name);
-            return <OnlineYesAddCamerasNo key={name} name={name} />
+            return <OnlineYesAddCamerasNo key={name} name={name} address={"Node Address Here"} addRemoveSimpleProps={mapProps2.addRemoveSimpleProps} />
           } ) }
         </div>
       </div>
