@@ -28,6 +28,14 @@ class GridContent extends React.Component {
     streamingNodes: {}
   }
 
+  addNewStreams(node) {
+
+  }
+
+  removeStreams(node) {
+
+  }
+
   refreshRecentlyCheckedIn() {
     var nodeHash = {}
 
@@ -49,10 +57,18 @@ class GridContent extends React.Component {
 
     clickedNode = this.state.nodes[e.target.dataset.name];
 
+    clickedNode.cameraReferenceOne = React.createRef();
+    clickedNode.cameraReferenceTwo = React.createRef();
+    clickedNode.cameraReferenceThree = React.createRef();
+
+    clickedNode.streamOne = new MediaStream();
+    clickedNode.streamTwo = new MediaStream(); 
+    clickedNode.streamThree = new MediaStream();
+
     var tempStreamingNodes = this.state.streamingNodes;
 
     tempStreamingNodes[clickedNode.name] = clickedNode
-
+    
     this.setState({
       streamingNodes: tempStreamingNodes
     })
@@ -72,8 +88,24 @@ class GridContent extends React.Component {
     });
   }
 
+  wireUpStreams(node) {
+    let config = {
+      iceServers: [{
+        urls: ["stun:stun.l.google.com:19302"]
+      }]
+    };
+
+    let pc = new RTCPeerConnection(config);
+
+    pc.onnegotiationneeded = () => {
+      let offer = await pc.createOffer();
+
+      await pc.setLocalDescription(offer);
+    }
+
+  }
+
   render() {
-    const { mapProps, mapProps2 } = this.props;
 
     return (
       <div className="grid-content">
@@ -83,8 +115,16 @@ class GridContent extends React.Component {
         <div className="camera-navigation">
 
           { Object.keys(this.state.streamingNodes).map( (name) => { 
-            console.log(name);
-            return <OnlineYesAddCamerasNo handleClose={this.handleCloseStreamingNode} key={name} name={name} address={"Node Address Here"} />
+            var streamingNode = this.state.nodes[name];
+
+            return <OnlineYesAddCamerasNo 
+                      cameraReferenceOne={streamingNode.cameraReferenceOne}
+                      cameraReferenceTwo={streamingNode.cameraReferenceTwo}
+                      cameraReferenceThree={streamingNode.cameraReferenceThree}
+                      handleClose={this.handleCloseStreamingNode} 
+                      key={name} 
+                      name={name} 
+                      address={"Node Address Here"} />
           } ) }
         </div>
       </div>
