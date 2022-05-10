@@ -3,6 +3,12 @@ import AddRemoveSimple from "../AddRemoveSimple";
 import "./OnlineYesAddCamerasNo.sass";
 
 class OnlineYesAddCamerasNo extends React.Component {
+  componentDidMount() {
+    this.props.wireUpStream(this.props.name, 1, this.props.cameraReferenceOne);
+    this.props.wireUpStream(this.props.name, 2, this.props.cameraReferenceTwo);
+    this.props.wireUpStream(this.props.name, 3, this.props.cameraReferenceThree);
+  }
+
   render() {
     return (
       <div className="x3-column-box-simple">

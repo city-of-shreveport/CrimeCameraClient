@@ -4,7 +4,7 @@ import "./Marker.sass";
 
 import cameraIcon from "./cameraIcon.png"
 
-const Marker = ({ onClick, color, cameraName }) => <div data-name={cameraName} className={'mapMarker ' + color} onClick={onClick}><img src={cameraIcon} /></div>;
+const Marker = ({ onClick, color, cameraName }) => <div data-name={cameraName} className={'mapMarker ' + color} onClick={onClick}>{cameraName.replace('CrimeCamera', '')}</div>;
 
 Marker.defaultProps = {
 	color: "#FF0000",

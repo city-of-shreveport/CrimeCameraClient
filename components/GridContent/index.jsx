@@ -21,19 +21,12 @@ class GridContent extends React.Component {
 
     this.handleMapIconClick.bind(this)
     this.handleCloseStreamingNode.bind(this)
+    this.wireUpStream.bind(this)
   }
 
   static defaultProps = {
     nodes: {},
     streamingNodes: {}
-  }
-
-  addNewStreams(node) {
-
-  }
-
-  removeStreams(node) {
-
   }
 
   refreshRecentlyCheckedIn() {
@@ -88,7 +81,11 @@ class GridContent extends React.Component {
     });
   }
 
-  wireUpStreams(node) {
+  wireUpStream(nodeName, streamChannel, videoElementReference) {
+    let videoPlayer = videoElementReference.current;
+
+    let stream = new MediaStream();
+
     let config = {
       iceServers: [{
         urls: ["stun:stun.l.google.com:19302"]
@@ -97,12 +94,49 @@ class GridContent extends React.Component {
 
     let pc = new RTCPeerConnection(config);
 
-    pc.onnegotiationneeded = () => {
+    pc.onnegotiationneeded = async () => {
       let offer = await pc.createOffer();
 
       await pc.setLocalDescription(offer);
+
+      let receiverUrl = `http://10.10.30.200:8083/stream/${nodeName}/channel/${streamChannel - 1}/webrtc`;
+
+      fetch(receiverUrl, {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          data: btoa(pc.localDescription.sdp)
+        })
+      })
+      .then( (data) => {
+
+        data.text().then(function(blob) {
+
+          try {
+            pc.setRemoteDescription(new RTCSessionDescription({
+              type: 'answer',
+              sdp: atob(blob)
+            }))
+          } catch (e) {
+            console.warn(e);
+          }
+
+        });
+
+      })
+      .catch(function(e) {
+        console.log(e);
+      });
     }
 
+    pc.ontrack = function(event) {
+      stream.addTrack(event.track);
+      videoPlayer.srcObject = stream;
+    }
+
+    pc.addTransceiver('video', { 'direction': 'sendrecv' })
   }
 
   render() {
@@ -121,6 +155,7 @@ class GridContent extends React.Component {
                       cameraReferenceOne={streamingNode.cameraReferenceOne}
                       cameraReferenceTwo={streamingNode.cameraReferenceTwo}
                       cameraReferenceThree={streamingNode.cameraReferenceThree}
+                      wireUpStream={this.wireUpStream}
                       handleClose={this.handleCloseStreamingNode} 
                       key={name} 
                       name={name} 
