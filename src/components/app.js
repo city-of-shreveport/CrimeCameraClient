@@ -1,10 +1,8 @@
-import Home from './Home/home';
-import Loading from './loading';
+
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NodeManager from './NodeManager/settingsNodeManager';
 import React, { useContext, useEffect } from 'react';
-import RecordingViewer from './videos/RecordingViewer';
 import SystemManager from './SystemSettings/settingsSystemManager';
 import { GlobalContext } from '../contexts/globalContext';
 import { IconContext } from 'react-icons';
@@ -15,31 +13,7 @@ export default function App() {
 
   function navigate(screen) {
     switch (screen) {
-      case 'streams':
-        dispatch({
-          type: 'setState',
-          payload: {
-            showHome: true,
-            showLoading: false,
-            showNodeManager: false,
-            showRecordingViewer: false,
-            showSystemManager: false,
-            videoPlayerActive: false,
-          },
-        });
-        break;
-      case 'videos':
-        dispatch({
-          type: 'setState',
-          payload: {
-            showHome: false,
-            showNodeManager: false,
-            showRecordingViewer: true,
-            showSystemManager: false,
-            videoPlayerActive: false,
-          },
-        });
-        break;
+      
       case 'nodes':
         dispatch({
           type: 'setState',
@@ -68,80 +42,48 @@ export default function App() {
 
         break;
     }
+    
   }
-
-  function getDifferenceInMinutes(date1, date2) {
-    const diffInMs = Math.abs(date2 - date1);
-    return diffInMs / (1000 * 60);
-  }
-  var setSHowHome = false;
-  var setSHowLoading = true;
-  function fetchCurrentPerfMonData(nodedata) {
-    var nodeArray = [];
-    var numberOfNodesUp = 0;
-    var totalNumberOfNodes = nodedata.length;
-
-    // eslint-disable-next-line
-    nodedata.map((nodedataitem) => {
-      var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
-      nodeArray.push(nodedataitem);
-      if(difference<30){
-        fetch('http://rtcc-server.shreveport-it.org:3000/api/perfmons/' + nodedataitem.name)
-          .then((response) => response.json())
-          // eslint-disable-next-line
-          .then((json) => {
-            console.log(nodedataitem.name)
-            let nodeDataPerfMon = nodedataitem;
-            nodeDataPerfMon.perfmon = json[0];
-            var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
-
-            if (difference > 15) {
-              nodeDataPerfMon.nodeStatus = false;
-            } else {
-              nodeDataPerfMon.nodeStatus = true;
-              numberOfNodesUp++;
-            }
-
-            nodeArray.push(nodeDataPerfMon);
-          })
-        }
-          // eslint-disable-next-line
-       
-            if(nodeArray.length===totalNumberOfNodes){
-              setSHowHome = true;
-              setSHowLoading = false;
-            }
-            dispatch({
-              type: 'setState',
-              payload: { 
-                nodes: nodeArray, 
-                numberOfNodes: totalNumberOfNodes, 
-                numberOfNodesUp: numberOfNodesUp,
-                showHome: setSHowHome,
-                showLoading: setSHowLoading,
-              },
-            });
-        
-     
+  function getServers(){
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/servers')
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json)
+      dispatch({
+        type: 'setState',
+        payload: { servers: json },
+      });
+   
     });
+    
+
+
   }
+  function getNodes(){
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes')
+    .then((response) => response.json())
+    .then((json) => {
+      
+      dispatch({
+        type: 'setState',
+        payload: { nodes: json },
+      });
+      console.log(state.nodes)
+    });
+
+
+
+  }
+  
 
   useEffect(() => {
-    function refreshData() {
-      fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes')
-        .then((response) => response.json())
-        .then((json) => {
-          fetchCurrentPerfMonData(json);
-        });
-    }
-
     setInterval(() => {
-      refreshData();
-    }, 300000);
-
-    refreshData();
-
+      getServers();
+      getNodes();
+    }, 15000);
     // eslint-disable-next-line
+    getServers();
+    getNodes();
   }, []);
 
   return (
@@ -154,8 +96,7 @@ export default function App() {
           Shreveport Crime Cameras
         </Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link onClick={() => navigate('streams')}>Streams</Nav.Link>
-          <Nav.Link onClick={() => navigate('videos')}>Videos</Nav.Link>
+
           <Nav.Link onClick={() => navigate('nodes')}>Nodes</Nav.Link>
           <Nav.Link onClick={() => navigate('system')}>System</Nav.Link>
         </Nav>
@@ -165,9 +106,7 @@ export default function App() {
         </Navbar.Collapse>
       </Navbar>
       
-      {state.showLoading && <Loading />}
-      {state.showHome && <Home />}
-      {state.showRecordingViewer && <RecordingViewer />}
+
       {state.showNodeManager && <NodeManager />}
       {state.showSystemManager && <SystemManager />}
     </>

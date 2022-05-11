@@ -41,6 +41,7 @@ export default function SystemManager() {
     fetch('http://rtcc-server.shreveport-it.org:3000/api/servers')
       .then((response) => response.json())
       .then((json) => {
+        console.log(json)
         dispatch({
           type: 'setState',
           payload: { servers: json },
@@ -73,6 +74,7 @@ export default function SystemManager() {
                 });
               });
           }
+        
         });
       });
   }, 15000);

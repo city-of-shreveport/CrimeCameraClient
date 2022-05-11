@@ -68,6 +68,7 @@ export default function SystemSettingsNewServerFormModal() {
                           <Form.Group controlId="exampleForm.ControlSelect2">
                             <Form.Label>Server Type</Form.Label>
                             <Form.Control as="select" onChange={(e) => handleSubmit({ service: e.target.value })}>
+                            <option></option>
                               <option>Restreamer</option>
                               <option>Client</option>
                               <option>Server</option>
