@@ -19,6 +19,7 @@ import NodeCameraSettingModal from './settingsNodeCameraSettingsModal';
 import { FiCamera } from 'react-icons/fi';
 import { FiCameraOff } from 'react-icons/fi';
 export default function Settings() {
+  //settings Test
   const [state, dispatch] = useContext(GlobalContext);
   const handleEditNodeModal = (node) => {
     upDateSelectedNode(node);
@@ -257,6 +258,8 @@ export default function Settings() {
       </div>
     );
   };
+
+  
   return (
     <Container fluid className="settingsDIV bg-dark">
       <br />
