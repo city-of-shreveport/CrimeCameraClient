@@ -38,7 +38,7 @@ export default function SystemManager() {
     );
   }
   setInterval(() => {
-    fetch('http://rtcc-server.shreveport-it.org:3000/api/servers')
+    fetch('http://127.0.0.1:3000/api/servers')
       .then((response) => response.json())
       .then((json) => {
         console.log(json)
@@ -46,38 +46,9 @@ export default function SystemManager() {
           type: 'setState',
           payload: { servers: json },
         });
-        json.map((server, i) => {
-          if (server.service === 'Restreamer') {
-            fetch('http://' + server.zeroTierIP + ':8000/api/streams')
-              .then((response) => response.json())
-              .then((json) => {
-                for (i = 0; i < Object.keys(json).length; i++) {
-                  nodestreams.push(json[Object.keys(json)[i]]);
-                }
-              })
-              .then(() => {
-                nodestreams.map((stream, i) => {
-                  streams.push(stream.camera1);
-                  streams.push(stream.camera2);
-                  streams.push(stream.camera3);
-                });
-              });
-
-            fetch('http://' + server.zeroTierIP + ':8000/api/server')
-              .then((response) => response.json())
-              .then((json) => {
-                console.log(json);
-                console.log(streams);
-                dispatch({
-                  type: 'setState',
-                  payload: { restreamerServerStats: json },
-                });
-              });
-          }
-        
-        });
+       
       });
-  }, 15000);
+  }, 150000);
   const handleAddServer = () =>
     dispatch({
       type: 'setState',

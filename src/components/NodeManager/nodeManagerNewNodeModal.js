@@ -14,6 +14,7 @@ export default function NodeManagerNewNodeModal() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const handleSubmit = (event) => {
+    console.log(event)
     let objectKey = Object.keys(event);
     let objectVal = Object.values(event);
     formDataObject[objectKey[0]] = objectVal[0];
@@ -25,7 +26,7 @@ export default function NodeManagerNewNodeModal() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch('http://10.10.200.10:3001/api/nodes', requestOptions)
+    fetch('http://127.0.0.1:3000/api/nodes', requestOptions)
       .then((response) => response.json())
       .then((data) => {});
   };

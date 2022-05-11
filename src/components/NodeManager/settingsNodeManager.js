@@ -32,7 +32,7 @@ export default function Settings() {
     let cameras = ['camera1', 'camera2', 'camera3'];
     console.log('Network');
     cameras.map((camera, i) =>
-      fetch('http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/networkSettings/' + param + '/' + camera)
+      fetch('http://127.0.0.1:3000/api/cameraConfig/networkSettings/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -59,7 +59,7 @@ export default function Settings() {
     let cameras = ['camera1', 'camera2', 'camera3'];
     console.log('Settings');
     cameras.map((camera, i) =>
-      fetch('http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/settings/' + param + '/' + camera)
+      fetch('http://127.0.0.1:3000/api/cameraConfig/settings/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -86,7 +86,7 @@ export default function Settings() {
     let cameras = ['camera1', 'camera2', 'camera3'];
     console.log('TIME');
     cameras.map((camera, i) =>
-      fetch('http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/time/' + param + '/' + camera)
+      fetch('http://127.0.0.1:3000/api/cameraConfig/time/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -115,7 +115,7 @@ export default function Settings() {
     let cameraConfigs = [];
     // eslint-disable-next-line
     cameras.map((camera, i) => {
-      fetch('http://rtcc-server.shreveport-it.org:3000/api/cameraConfig/videoColorConfig/' + param + '/' + camera)
+      fetch('http://127.0.0.1:3000/api/cameraConfig/videoColorConfig/' + param + '/' + camera)
         .then((response) => response.json())
         .then((json) => {
           console.log(json);
@@ -162,7 +162,7 @@ export default function Settings() {
   let perfMonTimerJob = null;
   let perfMonChartTimerJob = null;
   const getSinglePerfmonData = (node) =>
-    fetch('http://rtcc-server.shreveport-it.org:3000/api/perfmons/' + node)
+    fetch('http://127.0.0.1:3000/api/perfmons/' + node)
       .then((response) => response.json())
       .then((json) => {
         const rowLen = json.length;
@@ -179,13 +179,14 @@ export default function Settings() {
       });
   function fetchCurrentNodePerfMon(node) {
     fetch(
-      'http://rtcc-server.shreveport-it.org:3000/api/perfmons/' +
+      'http://127.0.0.1:3000/api/perfmons/' +
         tryValue(() => {
           return node;
         })
     )
       .then((response) => response.json())
       .then((json) => {
+
         dispatch({
           type: 'setState',
           payload: { currentNodePerfmon: json },
@@ -194,7 +195,7 @@ export default function Settings() {
   }
 
   const getNodeInfo = (node) => {
-    fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes/' + node)
+    fetch('http://127.0.0.1:3000/api/nodes/' + node)
       .then((response) => response.json())
       .then((json) => {
         dispatch({

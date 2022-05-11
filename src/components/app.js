@@ -44,8 +44,9 @@ export default function App() {
     }
     
   }
+  useEffect(() => {
   function getServers(){
-    fetch('http://rtcc-server.shreveport-it.org:3000/api/servers')
+    fetch('http://127.0.0.1:3000/api/servers')
     .then((response) => response.json())
     .then((json) => {
       console.log(json)
@@ -59,31 +60,80 @@ export default function App() {
 
 
   }
-  function getNodes(){
-    fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes')
-    .then((response) => response.json())
-    .then((json) => {
-      
-      dispatch({
-        type: 'setState',
-        payload: { nodes: json },
-      });
-      console.log(state.nodes)
-    });
-
-
-
+  function getDifferenceInMinutes(date1, date2) {
+    const diffInMs = Math.abs(date2 - date1);
+    return diffInMs / (1000 * 60);
   }
+  function fetchCurrentPerfMonData(nodedata) {
+    var nodeArray = [];
+    var numberOfNodesUp = 0;
+    var totalNumberOfNodes = nodedata.length;
+
+    // eslint-disable-next-line
+    nodedata.map((nodedataitem) => {
+      console.log(nodedataitem.lastCheckIn)
+      var difference = getDifferenceInMinutes(new Date(nodedataitem.lastCheckIn), new Date());
+      if(difference < 43800){
+        fetch('http://127.0.0.1:3000/api/perfmons/' + nodedataitem.name)
+          .then((response) => response.json())
+          // eslint-disable-next-line
+          .then((json) => {
+            console.log(nodedataitem.name)
+            let nodeDataPerfMon = nodedataitem;
+            nodeDataPerfMon.perfmon = json[0];
+
+            if (difference > 1440) {
+              nodeDataPerfMon.nodeStatus = false;
+            } else {
+              nodeDataPerfMon.nodeStatus = true;
+              numberOfNodesUp++;
+              console.log(numberOfNodesUp)
+            }
+
+            nodeArray.push(nodeDataPerfMon);
+            dispatch({
+              type: 'setState',
+              payload: { 
+                nodes: nodeArray, 
+                numberOfNodes: totalNumberOfNodes, 
+                numberOfNodesUp: numberOfNodesUp,
+             
+              },
+            });
+          })
+        }
+          // eslint-disable-next-line
+       
+         
+            
+        
+     
+    });
+  }
+  function refreshData() {
+    fetch('http://127.0.0.1:3000/api/nodes')
+      .then((response) => response.json())
+      .then((json) => {
+        fetchCurrentPerfMonData(json);
+        navigate('nodes')
+      });
+  }
+
+   
+
+
+
+   
+
   
 
-  useEffect(() => {
     setInterval(() => {
-      getServers();
-      getNodes();
-    }, 15000);
+      refreshData();
+    }, 300000);
+ 
     // eslint-disable-next-line
     getServers();
-    getNodes();
+    refreshData();
   }, []);
 
   return (

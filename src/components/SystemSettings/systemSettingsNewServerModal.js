@@ -15,20 +15,22 @@ export default function SystemSettingsNewServerFormModal() {
   const [state, dispatch] = useContext(GlobalContext);
 
   const handleSubmit = (event) => {
+    console.log(event)
     let objectKey = Object.keys(event);
     let objectVal = Object.values(event);
     formDataObject[objectKey[0]] = objectVal[0];
   };
 
   const UpDateFormState = () => {
+    console.log("form submiting")
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-    fetch('http://rtcc-server.shreveport-it.org:3000/api/servers', requestOptions)
-      .then((response) => response.json())
-      .then((data) => {});
+    fetch('http://127.0.0.1:3000/api/servers', requestOptions)
+      .then((response) => console.log(response.json))
+      .then((data) => {console.log(data)});
   };
 
   
