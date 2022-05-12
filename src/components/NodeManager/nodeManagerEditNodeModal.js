@@ -26,8 +26,8 @@ export default function NodeManagerEditNodeModal() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formDataObject),
     };
-
-    fetch('http://10.10.200.10:3001/api/nodes/' + state.currentNodeInfo.name, requestOptions)
+    console.log(formDataObject)
+    fetch('http://127.0.0.1:3000/api/nodes/updateNode/' + state.currentNodeInfo.name, requestOptions)
       .then((response) => response.json())
       .then((data) => handleEditNodeModalClose());
   };
