@@ -72,36 +72,45 @@ export default function GoogleMap() {
       const key = 'demo'
       markers.forEach((marker, i) => {
         if (marker.status === 'up') {
-          var dataPacket = {"name": marker.node,
-       "channels": {
-           "0": {
-               "name": "Camera1",
-               "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":554/cam/realmonitor?channel=1&subtype=1",
-               "on_demand": true,
-               "debug": false,
-               "status": 0
-           },
-           "1": {
-               "name": "Camera2",
-               "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":555/cam/realmonitor?channel=1&subtype=1",
-               "on_demand": true,
-               "debug": false,
-               "status": 0
-           },
-    "2": {
-               "name": "Camera3",
-               "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":556/cam/realmonitor?channel=1&subtype=1",
-               "on_demand": true,
-               "debug": false,
-               "status": 0
-           }
-       }
-
-
-
-
-
-       }
+          let streamName = marker.node + "Camera1"
+          let streamName2 = marker.node + "Camera2"
+          let streamName3 = marker.node + "Camera3"
+          var dataPacket = {"name": streamName,
+            "channels": {
+              "0": {
+                "name": "Camera1",
+                "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":554/cam/realmonitor?channel=1&subtype=1",
+                "on_demand": true,
+                "debug": false,
+                "status": 0
+              }
+           
+            }
+          }
+          var dataPacket2 = {"name": streamName2,
+            "channels": {
+              "0": {
+                "name": "Camera2",
+                "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":554/cam/realmonitor?channel=1&subtype=1",
+                "on_demand": true,
+                "debug": false,
+                "status": 0
+              }
+           
+            }
+          }
+          var dataPacket3 = {"name": streamName3,
+            "channels": {
+              "0": {
+                "name": "Camera3",
+                "url": "rtsp://admin:UUnv9njxg123@" +marker.nodeIP+ ":554/cam/realmonitor?channel=1&subtype=1",
+                "on_demand": true,
+                "debug": false,
+                "status": 0
+              }
+           
+            }
+          }
           const requestOptions = {
             method: 'POST',
             withCredentials: true,
@@ -109,6 +118,20 @@ export default function GoogleMap() {
             'Content-Type': 'application/json' },
             body: JSON.stringify(dataPacket)
         }
+          const requestOptions2 = {
+            method: 'POST',
+            withCredentials: true,
+            headers: {
+            'Content-Type': 'application/json' },
+            body: JSON.stringify(dataPacket2)
+        }
+        const requestOptions3 = {
+          method: 'POST',
+          withCredentials: true,
+          headers: {
+          'Content-Type': 'application/json' },
+          body: JSON.stringify(dataPacket3)
+      }
           marker.addListener('click', () => {
             fetch('http://10.10.30.200:8083/stream/'+marker.node+'/add', requestOptions)
                        .then((response) => response.json())
@@ -118,7 +141,22 @@ export default function GoogleMap() {
                        .catch( (error) => { 
                          console.log(error)
                        });
-                       
+            fetch('http://10.10.30.200:8083/stream/'+marker.node+'/add', requestOptions2)
+                       .then((response) => response.json())
+                         .then((json) => { 
+                           console.log(json)
+                         })
+                       .catch( (error) => { 
+                         console.log(error)
+                       });
+            fetch('http://10.10.30.200:8083/stream/'+marker.node+'/add', requestOptions3)
+                       .then((response) => response.json())
+                         .then((json) => { 
+                           console.log(json)
+                         })
+                       .catch( (error) => { 
+                         console.log(error)
+                       });                      
             for(i=0;i<cameras.length;i++){
 
               console.log(cameras[i])
