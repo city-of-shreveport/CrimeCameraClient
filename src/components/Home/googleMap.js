@@ -133,7 +133,7 @@ export default function GoogleMap() {
           body: JSON.stringify(dataPacket3)
       }
           marker.addListener('click', () => {
-            fetch('http://10.10.30.200:8083/stream/'+marker.node+'/add', requestOptions)
+            fetch('http://10.10.30.200:8083/stream/'+streamName+'/add', requestOptions)
                        .then((response) => response.json())
                          .then((json) => { 
                            console.log(json)
@@ -141,7 +141,7 @@ export default function GoogleMap() {
                        .catch( (error) => { 
                          console.log(error)
                        });
-            fetch('http://10.10.30.200:8083/stream/'+marker.node+'/add', requestOptions2)
+            fetch('http://10.10.30.200:8083/stream/'+streamName2+'/add', requestOptions2)
                        .then((response) => response.json())
                          .then((json) => { 
                            console.log(json)
@@ -149,7 +149,7 @@ export default function GoogleMap() {
                        .catch( (error) => { 
                          console.log(error)
                        });
-            fetch('http://10.10.30.200:8083/stream/'+marker.node+'/add', requestOptions3)
+            fetch('http://10.10.30.200:8083/stream/'+streamName3+'/add', requestOptions3)
                        .then((response) => response.json())
                          .then((json) => { 
                            console.log(json)
