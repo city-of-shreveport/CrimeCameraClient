@@ -186,7 +186,7 @@ export default function Settings() {
     )
       .then((response) => response.json())
       .then((json) => {
-
+        console.log(json)
         dispatch({
           type: 'setState',
           payload: { currentNodePerfmon: json },
@@ -214,18 +214,22 @@ export default function Settings() {
     getCameraNetworkSettings(node);
     getCameraTimes(node);
     getCameraSettings(node);
-    perfMonTimerJob = setInterval(() => {
-      getSinglePerfmonData(node);
-    }, 60000);
+
   };
+
+  const removeLogs = (param) => {
+    fetch('http://127.0.0.1:3000/api/perfMons/removeLogs/')
+      .then((response) => {console.log(response.json())}
+        
+        )
+
+  }
 
   const handleNodeChartModal = (param) => {
     clearInterval(perfMonChartTimerJob);
     getNodeInfo(param);
     fetchCurrentNodePerfMon(param);
-    perfMonChartTimerJob = setInterval(() => {
-      fetchCurrentNodePerfMon(state.currentNodeInfo.name);
-    }, 20000);
+    
     dispatch({
       type: 'setState',
       payload: { nodeSettingsChartPerfMonModal: true },
@@ -269,6 +273,7 @@ export default function Settings() {
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link onClick={() => handleNewNodeModalOpen()}>Add Node</Nav.Link>
+            <Nav.Link onClick={() => removeLogs()}>Clean Up Logs</Nav.Link>
             <Nav.Link>UpDate Nodes</Nav.Link>
             <Nav.Link>Reboot Nodes</Nav.Link>
           </Nav>

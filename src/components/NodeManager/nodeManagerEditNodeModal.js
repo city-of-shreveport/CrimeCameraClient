@@ -19,7 +19,18 @@ export default function NodeManagerEditNodeModal() {
     let objectVal = Object.values(event);
     formDataObject[objectKey[0]] = objectVal[0];
   };
-
+  
+  const findAbuddy = () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: '',
+    };
+    console.log(formDataObject)
+    fetch('http://127.0.0.1:3000/api/nodes/configureBuddies/' + state.currentNodeInfo.name, requestOptions)
+      .then((response) => response.json())
+      .then((data) => handleEditNodeModalClose());
+  };
   const UpDateFormState = () => {
     const requestOptions = {
       method: 'POST',
@@ -135,6 +146,24 @@ export default function NodeManagerEditNodeModal() {
                             />
                           </Form.Group>
                         </Row>
+
+                        <Row>
+                          <Form.Group as={Col} controlId="formGridNodeLat">
+                            <Form.Label>Current Buddy</Form.Label>
+                            <Form.Control
+                              placeholder={tryValue(() => {
+                                return state.currentNodeInfo.currentBuddy;
+                              })}
+                              type="text"
+                              
+                            />
+                          </Form.Group>
+                          <Button onClick={findAbuddy}>Find A Buddy</Button>
+                        </Row>
+
+
+
+
                       </Card.Body>
                     </Card>
                   </CardGroup>

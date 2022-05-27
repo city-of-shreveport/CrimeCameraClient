@@ -24,8 +24,20 @@ export default function NodeManagerSystemInfoModal() {
     });
 
   // eslint-disable-next-line
+
+    var nodeArray = [];
+
+
+    // eslint-disable-next-line
+ 
+
+
+       
+
+
+
   state.currentNodePerfmon.map((currentNodeStat, i) => {
-    let createdTime = moment(currentNodeStat.createdAt).format('HH:mm');
+    let createdTime = moment(currentNodeStat.createdAt).format('HH:mm:ss');
     currentLoad.push(currentNodeStat.currentLoad.currentLoad.toFixed(2));
     mem.push((currentNodeStat.mem.used / currentNodeStat.mem.total).toFixed(2) * 100);
     fsSize.push((currentNodeStat.fsSize[0].used / currentNodeStat.fsSize[0].size).toFixed(2) * 100);
