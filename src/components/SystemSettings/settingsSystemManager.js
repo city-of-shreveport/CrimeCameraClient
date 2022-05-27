@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import LineChart from './SystemLineChart';
 import Moment from 'react-moment';
 import NewServerModal from './systemSettingsNewServerModal';
+import EditServerModal from './systemSettingsEditServerModal';
 import React, { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import ServerLineChart from './SystemServerLineChart';
@@ -49,12 +50,68 @@ export default function SystemManager() {
        
       });
   }, 150000);
-  const handleAddServer = () =>
+  const handleAddServer = () =>{
     dispatch({
       type: 'setState',
       payload: { systemSettingsNewServerFormModal: true },
     });
+  }
 
+  
+  const handleStatsServer = (serverName) =>{
+    fetch('http://127.0.0.1:3000/api/servers/' + serverName)
+    .then((response) => response.json())
+    .then((json) => {
+      dispatch({
+        type: 'setState',
+        payload: {
+          previousNode: tryValue(() => {
+            return state.currentServerInfo.name;
+          }),
+          currentServerInfo: json,
+        },
+      });
+      fetch('http://'+json.zeroTierIP +':8083/streams')
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json.payload)
+        let data = json.payload
+        let streamNames = Object.keys(data)
+        streamNames.map((streamName) => {
+          streams.push(data[streamName]);
+          console.log(streams);
+          dispatch({
+            type: 'setState',
+            payload: {
+              currentServerstreams: streams,
+            },
+          });
+      })
+        
+      });
+    });
+ 
+}
+
+
+
+    const handleConfigServer = (serverName) =>{
+      fetch('http://127.0.0.1:3000/api/servers/' + serverName)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: 'setState',
+          payload: {
+            previousNode: tryValue(() => {
+              return state.currentServerInfo.name;
+            }),
+            currentServerInfo: json,
+            systemSettingsEditServerFormModal: true,
+          },
+        });
+      });
+   
+  }
   return (
     <Container className="settingsDIV">
       <br />
@@ -150,11 +207,11 @@ export default function SystemManager() {
               <tbody>
                 {Restreamers.map((server) => (
                   <tr>
-                    <td>{server.name}</td>
+                    <td onClick={() => handleStatsServer(server.name)}>{server.name}</td>
                     <td>
                       <Badge variant="danger">Danger</Badge>{' '}
                     </td>
-                    <td>Configure</td>
+                    <td onClick={() => handleConfigServer(server.name)}>Configure</td>
                   </tr>
                 ))}
               </tbody>
@@ -187,13 +244,11 @@ export default function SystemManager() {
                 </tr>
               </thead>
               <tbody>
-                {tryValue(() => {
-                  streams.map((stream) => (
+                {
+                  state.currentServerstreams.map((stream) => (
                     <tr>
                       <td>
-                        {tryValue(() => {
-                          return stream.publisher.stream;
-                        })}
+                        {stream.name}
                       </td>
                       <td>
                         {tryValue(() => {
@@ -225,8 +280,8 @@ export default function SystemManager() {
                         </Moment>
                       </td>
                     </tr>
-                  ));
-                })}
+                
+                ))}
               </tbody>
             </Table>
           </Card>
@@ -308,6 +363,7 @@ export default function SystemManager() {
         </Col>
       </Row>
       <NewServerModal />
+      <EditServerModal />
     </Container>
   );
 }
