@@ -90,6 +90,14 @@ export default function SettingsSysInfoCard() {
                 </td>
               </tr>
               <tr>
+                <td>Current Buddy</td>
+                <td>
+                  {tryValue(() => {
+                    return state.currentNodeInfo.config.currentBuddy;
+                  })}
+                </td>
+              </tr>
+              <tr>
                 <td>Buddy 1</td>
                 <td>
                   {tryValue(() => {

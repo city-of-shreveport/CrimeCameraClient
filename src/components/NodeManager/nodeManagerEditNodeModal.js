@@ -28,8 +28,15 @@ export default function NodeManagerEditNodeModal() {
     };
     console.log(formDataObject)
     fetch('http://127.0.0.1:3000/api/nodes/configureBuddies/' + state.currentNodeInfo.name, requestOptions)
-      .then((response) => response.json())
-      .then((data) => handleEditNodeModalClose());
+      .then((response) => {
+        handleEditNodeModalClose()
+        dispatch({
+          type: 'setState',
+          payload: { buddyInfoNodeModal: true },
+        });
+        
+      })
+     
   };
   const UpDateFormState = () => {
     const requestOptions = {
@@ -152,7 +159,7 @@ export default function NodeManagerEditNodeModal() {
                             <Form.Label>Current Buddy</Form.Label>
                             <Form.Control
                               placeholder={tryValue(() => {
-                                return state.currentNodeInfo.currentBuddy;
+                                return state.currentNodeInfo.config.currentBuddy;
                               })}
                               type="text"
                               

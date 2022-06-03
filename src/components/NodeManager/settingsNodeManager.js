@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Moment from 'react-moment';
+import Modal from 'react-bootstrap/Modal';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NodeManagerEditNodeModal from './nodeManagerEditNodeModal';
@@ -21,6 +22,11 @@ import { FiCameraOff } from 'react-icons/fi';
 export default function Settings() {
   //settings Test
   const [state, dispatch] = useContext(GlobalContext);
+  const handlebuddyInfoNodeModalClose = () =>
+  dispatch({
+    type: 'setState',
+    payload: { buddyInfoNodeModal: false },
+  });
   const handleEditNodeModal = (node) => {
     upDateSelectedNode(node);
     dispatch({
@@ -533,6 +539,24 @@ export default function Settings() {
       <NodeManagerEditNodeModal />
       <NodeChartModal />
       <NodeCameraSettingModal />
+      <Modal
+      dialogClassName="customModalEditNode"
+      show={state.buddyInfoNodeModal}
+      onHide={() => handlebuddyInfoNodeModalClose()}
+      centered
+      size="lg"
+    >
+      <div class="card">
+        <div class="card-body">
+          Now you need to make sure ssh keys are installed on the buddy.
+          Ssh into this node and run this customd
+
+          ssh-copy-id pi@BUDDYNODEIP
+        </div>
+      </div>
+
+    </Modal>
     </Container>
+    
   );
 }
