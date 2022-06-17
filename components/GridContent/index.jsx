@@ -32,7 +32,7 @@ class GridContent extends React.Component {
   refreshRecentlyCheckedIn() {
     var nodeHash = {}
 
-    fetch('http://localhost:3000/api/nodes/recentlyCheckedIn')
+    fetch('http://rtcc-server.shreveport-it.org:3000/api/nodes/recentlyCheckedIn')
       .then((response) => response.json())
       .then( (json) => {
         json.forEach(node => {
