@@ -4,6 +4,10 @@ import "./OnlineYesAddCamerasNo.sass";
 
 class OnlineYesAddCamerasNo extends React.Component {
   componentDidMount() {
+    console.log(this.props.name);
+
+    this.props.addStream(this.props.name);
+
     this.props.wireUpStream(this.props.name, 1, this.props.cameraReferenceOne);
     this.props.wireUpStream(this.props.name, 2, this.props.cameraReferenceTwo);
     this.props.wireUpStream(this.props.name, 3, this.props.cameraReferenceThree);
