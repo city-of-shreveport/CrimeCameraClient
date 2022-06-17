@@ -19,6 +19,9 @@ class Map extends React.Component {
   render() {
     return (
       <div className="map">
+        <div className="multiview">
+          <a target="_blank" href="http://rtcc-restreamer.shreveport-it.org/pages/multiview/full?controls">[Click Here for Multiview]</a>
+        </div>
 				<GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyAxgBe1BLPLfPIPwK0ucb6-SeqkZdckChI' }}
           defaultCenter={this.props.center} defaultZoom={this.props.zoom}>	

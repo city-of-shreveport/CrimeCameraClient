@@ -17,8 +17,6 @@ class OnlineYesAddCamerasNo extends React.Component {
     return (
       <div className="x3-column-box-simple">
         <div className="flex-col">
-          <div className="x57-camera-system valign-text-middle opensans-bold-white-13px">{this.props.name}</div>
-
           <div className="x52-common-street opensans-normal-lochmara-10px">{this.props.address}</div>
 
           <div className="overlap-group1">

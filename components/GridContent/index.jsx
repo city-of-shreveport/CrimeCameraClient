@@ -180,7 +180,7 @@ class GridContent extends React.Component {
 
         <div className="camera-navigation">
 
-          { Object.keys(this.state.streamingNodes).map( (name) => { 
+          { Object.keys(this.state.streamingNodes).reverse().map( (name) => { 
             var streamingNode = this.state.nodes[name];
 
             return <OnlineYesAddCamerasNo 
