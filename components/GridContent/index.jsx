@@ -75,6 +75,7 @@ class GridContent extends React.Component {
 
   handleMapIconClick = (e) => {
     var clickedNode = {};
+    console.log(this.state.nodes);
 
     clickedNode = this.state.nodes[e.target.dataset.name];
 
@@ -182,6 +183,8 @@ class GridContent extends React.Component {
 
           { Object.keys(this.state.streamingNodes).reverse().map( (name) => { 
             var streamingNode = this.state.nodes[name];
+            console.log(streamingNode.config.ip);
+
 
             return <OnlineYesAddCamerasNo 
                       cameraReferenceOne={streamingNode.cameraReferenceOne}
@@ -192,7 +195,9 @@ class GridContent extends React.Component {
                       handleClose={this.handleCloseStreamingNode} 
                       key={name} 
                       name={name} 
-                      address={"Node Address Here"} />
+                      address={"Node Address Here"} 
+                      nvrAddress={`http://${streamingNode.config.ip}:7878/`}
+                      nvrEnabled={streamingNode.config.nvrEnabled ? true : false}/>
           } ) }
         </div>
       </div>
