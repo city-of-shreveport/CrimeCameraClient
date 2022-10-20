@@ -50,8 +50,7 @@ class GridContent extends React.Component {
                     "url": `rtsp://${node.config.cameras["camera"+i].username}:${node.config.cameras["camera"+i].password}@${node.config.ip}:${553 + i}/cam/realmonitor?channel=1&subtype=1`,
                     "on_demand": true,
                     "debug": false,
-                    "status": 0,
-                    "testing": "Whee"
+                    "status": 0
                   }
                 }
             };
